@@ -16,6 +16,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/components/ui/use-toast"
 import { zodiac } from "@/lib/zodiac-utils"
 import { BookOpen, Loader2, ArrowRight, ArrowLeft, CheckCircle2, Sparkles, GraduationCap } from "lucide-react"
+import { CreditCardForm, type PaymentDetails } from "@/components/payment/credit-card-form"
+import { EduCoinOverview } from "@/components/educoin/educoin-overview"
 
 // Animation variants
 const fadeIn = {
@@ -59,6 +61,12 @@ interface RegistrationData {
   targetScore: string
   testDate: string
   previousExperience: string
+
+  // Stage 5: Payment
+  paymentDetails?: PaymentDetails
+
+  // Stage 6: EduCoin Overview
+  eduCoinOverviewCompleted: boolean
 }
 
 export function MultiStepRegistration() {
@@ -84,13 +92,14 @@ export function MultiStepRegistration() {
     targetScore: "",
     testDate: "",
     previousExperience: "",
+    eduCoinOverviewCompleted: false,
   })
 
   const [suggestedCourses, setSuggestedCourses] = useState<any[]>([])
   const [selectedCourses, setSelectedCourses] = useState<string[]>([])
 
   // Update form data
-  const updateFormData = (field: keyof RegistrationData, value: string) => {
+  const updateFormData = (field: keyof RegistrationData, value: string | PaymentDetails | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
@@ -168,6 +177,18 @@ export function MultiStepRegistration() {
   // Toggle course selection
   const toggleCourseSelection = (courseId: string) => {
     setSelectedCourses((prev) => (prev.includes(courseId) ? prev.filter((id) => id !== courseId) : [...prev, courseId]))
+  }
+
+  // Handle payment success
+  const handlePaymentSuccess = (paymentDetails: PaymentDetails) => {
+    updateFormData("paymentDetails", paymentDetails)
+    setStage((prev) => prev + 1)
+  }
+
+  // Handle EduCoin overview completion
+  const handleEduCoinOverviewComplete = () => {
+    updateFormData("eduCoinOverviewCompleted", true)
+    setStage((prev) => prev + 1)
   }
 
   // Generate course recommendations based on zodiac sign, learning style, and target education
@@ -368,6 +389,8 @@ export function MultiStepRegistration() {
         targetScore: formData.targetScore,
         testDate: formData.testDate,
         previousExperience: formData.previousExperience,
+        paymentVerified: true,
+        paymentDate: new Date().toISOString(),
         createdAt: new Date().toISOString(),
         role: "student",
       })
@@ -405,13 +428,28 @@ export function MultiStepRegistration() {
         createdAt: new Date().toISOString(),
       })
 
+      // 9. Store payment details
+      if (formData.paymentDetails) {
+        const paymentDocRef = firestoreService.doc("users", user.uid, "payment", "details")
+        await firestoreService.setDoc(paymentDocRef, {
+          // Store only last 4 digits of card number for security
+          lastFourDigits: formData.paymentDetails.cardNumber.replace(/\s/g, "").slice(-4),
+          cardholderName: formData.paymentDetails.cardholderName,
+          expiryDate: formData.paymentDetails.expiryDate,
+          isVerified: true,
+          trialStartDate: new Date().toISOString(),
+          trialEndDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // 1 day later
+          updatedAt: new Date().toISOString(),
+        })
+      }
+
       toast({
         title: "Registration successful!",
         description: "Your account has been created and you've received 500 EduCoins as a welcome bonus.",
       })
 
-      // Redirect to dashboard
-      router.push("/dashboard")
+      // Redirect to personalized dashboard
+      router.push("/dashboard/personalized")
     } catch (error: any) {
       console.error("Registration error:", error)
 
@@ -470,7 +508,7 @@ ${currentDate}
   const renderProgress = () => {
     return (
       <div className="mb-8 flex justify-between">
-        {[1, 2, 3, 4].map((stageNumber) => (
+        {[1, 2, 3, 4, 5, 6].map((stageNumber) => (
           <div
             key={stageNumber}
             className={`flex flex-col items-center ${
@@ -495,7 +533,11 @@ ${currentDate}
                   ? "Additional Info"
                   : stageNumber === 3
                     ? "Preferences"
-                    : "Confirmation"}
+                    : stageNumber === 4
+                      ? "Course Selection"
+                      : stageNumber === 5
+                        ? "Payment"
+                        : "EduCoins"}
             </span>
           </div>
         ))}
@@ -556,6 +598,12 @@ ${currentDate}
                   <p className="text-xs text-muted-foreground">Password must be at least 6 characters long</p>
                 </div>
               </CardContent>
+              <CardFooter>
+                <Button onClick={handleNextStage} className="ml-auto">
+                  Continue
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardFooter>
             </motion.div>
           )}
 
@@ -646,6 +694,16 @@ ${currentDate}
                   </Select>
                 </div>
               </CardContent>
+              <CardFooter className="flex justify-between">
+                <Button variant="outline" onClick={handlePreviousStage}>
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Back
+                </Button>
+                <Button onClick={handleNextStage}>
+                  Continue
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardFooter>
             </motion.div>
           )}
 
@@ -785,13 +843,23 @@ ${currentDate}
                   />
                 </div>
               </CardContent>
+              <CardFooter className="flex justify-between">
+                <Button variant="outline" onClick={handlePreviousStage}>
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Back
+                </Button>
+                <Button onClick={handleNextStage}>
+                  Continue
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardFooter>
             </motion.div>
           )}
 
           {stage === 4 && (
             <motion.div key="stage-4" variants={fadeIn} initial="hidden" animate="visible" exit="exit">
               <CardHeader>
-                <CardTitle>Course Recommendations & Confirmation</CardTitle>
+                <CardTitle>Course Recommendations</CardTitle>
                 <CardDescription>
                   Based on your preferences, we've selected these courses for you. You can customize your selection.
                 </CardDescription>
@@ -852,12 +920,65 @@ ${currentDate}
                     ))}
                   </div>
                 </div>
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                <Button variant="outline" onClick={handlePreviousStage}>
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Back
+                </Button>
+                <Button onClick={handleNextStage}>
+                  Continue to Payment
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardFooter>
+            </motion.div>
+          )}
 
-                <Separator className="my-4" />
+          {stage === 5 && (
+            <motion.div key="stage-5" variants={fadeIn} initial="hidden" animate="visible" exit="exit">
+              <CardHeader>
+                <CardTitle>Payment Information</CardTitle>
+                <CardDescription>
+                  Enter your payment details to activate your 1-day free trial. No charges will be made during the trial
+                  period.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CreditCardForm onSuccess={handlePaymentSuccess} onCancel={handlePreviousStage} isLoading={loading} />
+              </CardContent>
+            </motion.div>
+          )}
 
-                <div className="space-y-2">
-                  <h3 className="font-medium">Account Summary</h3>
-                  <div className="bg-secondary p-4 rounded-lg space-y-2">
+          {stage === 6 && (
+            <motion.div key="stage-6" variants={fadeIn} initial="hidden" animate="visible" exit="exit">
+              <EduCoinOverview onContinue={handleEduCoinOverviewComplete} onBack={handlePreviousStage} />
+            </motion.div>
+          )}
+
+          {stage === 7 && (
+            <motion.div key="stage-7" variants={fadeIn} initial="hidden" animate="visible" exit="exit">
+              <CardHeader>
+                <CardTitle>Registration Complete!</CardTitle>
+                <CardDescription>
+                  Your account has been created and your 1-day free trial has been activated.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="bg-success/10 p-4 rounded-lg flex items-start gap-3">
+                  <div className="mt-1">
+                    <GraduationCap className="h-5 w-5 text-success" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-success">Welcome to Dunamis Tutors!</h4>
+                    <p className="text-sm">
+                      Your account has been created successfully. You've received 500 EduCoins as a welcome bonus.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-muted p-4 rounded-lg">
+                  <h3 className="font-medium mb-2">Account Summary</h3>
+                  <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-sm">Name:</span>
                       <span className="text-sm font-medium">{formData.name}</span>
@@ -867,16 +988,12 @@ ${currentDate}
                       <span className="text-sm font-medium">{formData.email}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm">Current Level:</span>
-                      <span className="text-sm font-medium">{formData.currentEducation}</span>
+                      <span className="text-sm">Free Trial:</span>
+                      <span className="text-sm font-medium">1 day</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm">Goal:</span>
-                      <span className="text-sm font-medium">{formData.targetEducation}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-sm">Target IELTS Score:</span>
-                      <span className="text-sm font-medium">{formData.targetScore}</span>
+                      <span className="text-sm">EduCoins:</span>
+                      <span className="text-sm font-medium">500</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm">Selected Courses:</span>
@@ -884,54 +1001,25 @@ ${currentDate}
                     </div>
                   </div>
                 </div>
-
-                <div className="bg-success/10 p-4 rounded-lg flex items-start gap-3">
-                  <div className="mt-1">
-                    <GraduationCap className="h-5 w-5 text-success" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-success">Welcome Bonus</h4>
-                    <p className="text-sm">
-                      Upon registration, you'll receive 500 EduCoins to get started with premium content and features.
-                    </p>
-                  </div>
-                </div>
               </CardContent>
+              <CardFooter>
+                <Button onClick={handleSubmit} disabled={loading} className="w-full">
+                  {loading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Processing...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="mr-2 h-4 w-4" />
+                      Go to Dashboard
+                    </>
+                  )}
+                </Button>
+              </CardFooter>
             </motion.div>
           )}
         </AnimatePresence>
-
-        <CardFooter className="flex justify-between">
-          {stage > 1 ? (
-            <Button variant="outline" onClick={handlePreviousStage} disabled={loading}>
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back
-            </Button>
-          ) : (
-            <div></div>
-          )}
-
-          {stage < 4 ? (
-            <Button onClick={handleNextStage}>
-              Continue
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          ) : (
-            <Button onClick={handleSubmit} disabled={loading}>
-              {loading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Processing...
-                </>
-              ) : (
-                <>
-                  <Sparkles className="mr-2 h-4 w-4" />
-                  Complete Registration
-                </>
-              )}
-            </Button>
-          )}
-        </CardFooter>
       </Card>
     </div>
   )

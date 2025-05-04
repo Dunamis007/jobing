@@ -5,20 +5,35 @@ import { DashboardHeader } from "@/components/dashboard/dashboard-header"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
-import { BookOpen, Brain, Calendar, Clock, Target, Trophy, Sparkles, School, PenTool, Award, Users } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import {
+  BookOpen,
+  Brain,
+  Calendar,
+  Clock,
+  Target,
+  Trophy,
+  Sparkles,
+  School,
+  PenTool,
+  Award,
+  Users,
+  User,
+} from "lucide-react"
 import { LearningProgressChart } from "@/components/dashboard/learning-progress-chart"
 import { UpcomingAssignmentsList } from "@/components/dashboard/upcoming-assignments-list"
 import { RecommendedCoursesList } from "@/components/dashboard/recommended-courses-list"
 import { StudyPlanList } from "@/components/dashboard/study-plan-list"
 import { AcademicLevelSelector } from "@/components/dashboard/academic-level-selector"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useAcademicLevel } from "@/components/dashboard/academic-level-context"
 import { motion } from "framer-motion"
+import { useRouter } from "next/navigation"
 
 export default function DashboardPage() {
   const { user } = useAuth()
   const { academicLevel } = useAcademicLevel()
+  const router = useRouter()
 
   // Animation variants
   const containerVariants = {
@@ -44,11 +59,21 @@ export default function DashboardPage() {
     },
   }
 
+  const handleGoToPersonalizedDashboard = () => {
+    router.push("/dashboard/personalized")
+  }
+
   return (
     <motion.div className="flex flex-col gap-6" variants={containerVariants} initial="hidden" animate="visible">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <DashboardHeader heading="Dashboard" text={`Welcome back, ${user?.displayName || "Student"}!`} />
-        <AcademicLevelSelector />
+        <div className="flex flex-col sm:flex-row gap-2">
+          <Button variant="outline" onClick={handleGoToPersonalizedDashboard} className="flex items-center gap-2">
+            <User className="h-4 w-4" />
+            <span>Personalized Dashboard</span>
+          </Button>
+          <AcademicLevelSelector />
+        </div>
       </div>
 
       <motion.div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" variants={itemVariants}>
