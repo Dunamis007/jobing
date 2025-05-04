@@ -24,6 +24,18 @@ export class MockGoogleProvider {
   providerId = "google.com"
 }
 
+// Check if localStorage is available (will be false on server)
+const isLocalStorageAvailable = () => {
+  if (typeof window === "undefined") return false
+  try {
+    window.localStorage.setItem("test", "test")
+    window.localStorage.removeItem("test")
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 // Main Mock Auth class
 class MockAuth extends EventEmitter {
   private currentUser: MockUser | null = null
@@ -38,6 +50,8 @@ class MockAuth extends EventEmitter {
   // Load saved users and auth state from localStorage
   private loadFromLocalStorage() {
     try {
+      if (!isLocalStorageAvailable()) return
+
       const savedUsers = localStorage.getItem("mock_auth_users")
       if (savedUsers) {
         this.users = JSON.parse(savedUsers)
@@ -58,6 +72,8 @@ class MockAuth extends EventEmitter {
   // Save current state to localStorage
   private saveToLocalStorage() {
     try {
+      if (!isLocalStorageAvailable()) return
+
       localStorage.setItem("mock_auth_users", JSON.stringify(this.users))
       localStorage.setItem("mock_auth_current_user", this.currentUser ? JSON.stringify(this.currentUser) : "")
     } catch (error) {

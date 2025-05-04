@@ -15,6 +15,18 @@ interface MockCollectionReference {
   docs: Record<string, MockDocumentReference>
 }
 
+// Check if localStorage is available (will be false on server)
+const isLocalStorageAvailable = () => {
+  if (typeof window === "undefined") return false
+  try {
+    window.localStorage.setItem("test", "test")
+    window.localStorage.removeItem("test")
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 class MockFirestore {
   private collections: Record<string, MockCollectionReference> = {}
 
@@ -25,6 +37,8 @@ class MockFirestore {
   // Load data from localStorage
   private loadFromLocalStorage() {
     try {
+      if (!isLocalStorageAvailable()) return
+
       const savedData = localStorage.getItem("mock_firestore_data")
       if (savedData) {
         this.collections = JSON.parse(savedData)
@@ -37,6 +51,8 @@ class MockFirestore {
   // Save data to localStorage
   private saveToLocalStorage() {
     try {
+      if (!isLocalStorageAvailable()) return
+
       localStorage.setItem("mock_firestore_data", JSON.stringify(this.collections))
     } catch (error) {
       console.error("Error saving mock firestore data:", error)
@@ -55,15 +71,18 @@ class MockFirestore {
   }
 
   // Get a document reference
-  doc(collectionPath: string, docId: string): MockDocumentReference {
+  doc(collectionPath: string, docId: string, ...pathSegments: string[]) {
+    const path = [collectionPath, docId, ...pathSegments].join("/")
     const collection = this.getCollection(collectionPath)
+
     if (!collection.docs[docId]) {
       collection.docs[docId] = {
         id: docId,
-        path: `${collectionPath}/${docId}`,
+        path: path,
         data: null,
       }
     }
+
     return collection.docs[docId]
   }
 

@@ -18,6 +18,7 @@ import {
   Pencil,
   MessageSquare,
   Coins,
+  Trophy,
 } from "lucide-react"
 
 export interface NavItem {

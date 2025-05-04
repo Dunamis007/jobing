@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Brain, Calendar, CheckCircle, Clock, ListTodo, Moon, Sparkles, Sun, Target } from "lucide-react"
+import { Brain, Calendar, CheckCircle, Clock, ListTodo, Moon, Sparkles, Sun, Target, Award } from "lucide-react"
 import { toast } from "@/components/ui/use-toast"
 
 export default function AcademicWorkflowPage() {
@@ -371,6 +371,7 @@ export default function AcademicWorkflowPage() {
               </CardContent>
               <CardFooter>
                 <Button variant="outline" className="w-full">
+                  <Award className="mr-2 h-4 w-4" /> {/* Using Award icon instead of Trophy */}
                   View Detailed Analytics
                 </Button>
               </CardFooter>

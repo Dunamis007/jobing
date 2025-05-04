@@ -179,9 +179,9 @@ export function MultiStepForm() {
         lastUpdated: new Date().toISOString(),
       })
 
-      // 5. Create first transaction record
-      const transactionsCollectionRef = firestoreService.collection("users", user.uid, "transactions")
-      await firestoreService.addDoc(transactionsCollectionRef, {
+      // 5. Create first transaction record - using doc and setDoc instead of collection and addDoc
+      const transactionDocRef = firestoreService.doc("users", user.uid, "transactions", "welcome-bonus")
+      await firestoreService.setDoc(transactionDocRef, {
         amount: 500,
         type: "credit",
         description: "Welcome bonus",

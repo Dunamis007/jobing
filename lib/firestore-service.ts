@@ -8,11 +8,17 @@ const USE_MOCK_FIRESTORE = authService.isMockAuth
 
 export const firestoreService = {
   // Create a document reference
-  doc: (collection: string, id: string) => {
+  doc: (collection: string, id: string, ...pathSegments: string[]) => {
     if (USE_MOCK_FIRESTORE) {
-      return mockFirestore.doc(collection, id)
+      return mockFirestore.doc(collection, id, ...pathSegments)
     } else {
-      return firestoreDoc(db, collection, id)
+      if (pathSegments.length === 0) {
+        return firestoreDoc(db, collection, id)
+      } else {
+        // Handle nested paths
+        const path = [collection, id, ...pathSegments].join("/")
+        return firestoreDoc(db, path)
+      }
     }
   },
 
