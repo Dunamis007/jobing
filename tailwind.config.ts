@@ -53,6 +53,12 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Custom colors based on the specified palette
+        dunamis: {
+          primary: "#003049",
+          secondary: "#669bbc",
+          light: "#e5e5e5",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

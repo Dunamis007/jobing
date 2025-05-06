@@ -13,6 +13,7 @@ export function SiteHeader() {
   const programs = [
     { name: "IJMB Programs", href: "/programs/ijmb", icon: GraduationCap },
     { name: "JUPEB Programs", href: "/programs/jupeb", icon: BookOpen },
+    { name: "JAMB Programs", href: "/programs/jamb", icon: GraduationCap },
     { name: "IELTS", href: "/programs/ielts", icon: BookOpen },
     { name: "Digital Marketing", href: "/programs/digital-marketing", icon: LineChart },
     { name: "Coding", href: "/programs/coding", icon: Code },
@@ -25,13 +26,13 @@ export function SiteHeader() {
           <Link href="/">
             <div className="flex items-center gap-2">
               <Image
-                src="/placeholder.svg?height=32&width=32&text=DT"
+                src="https://i.ibb.co/gLBYv3wv/04369-B17-59-A4-47-CE-B625-5-DB36-C766-F54.jpg"
                 alt="Dunamis Tutors Logo"
                 width={32}
                 height={32}
-                className="h-8 w-8"
+                className="h-8 w-8 rounded-full object-cover"
               />
-              <span className="text-xl font-bold text-[#0e3b62]">Dunamis Tutors</span>
+              <span className="text-xl font-bold text-dunamis-primary">Dunamis Tutors</span>
             </div>
           </Link>
         </div>
@@ -40,18 +41,18 @@ export function SiteHeader() {
             <Link
               key={program.name}
               href={program.href}
-              className="text-sm font-medium text-[#0e3b62] hover:text-[#1a5c96] transition-colors"
+              className="text-sm font-medium text-dunamis-primary hover:text-dunamis-secondary transition-colors"
             >
               {program.name}
             </Link>
           ))}
           <Link
             href="/programs/travel-abroad"
-            className="flex items-center gap-1 text-sm font-medium text-[#0e3b62] hover:text-[#1a5c96] transition-colors"
+            className="flex items-center gap-1 text-sm font-medium text-dunamis-primary hover:text-dunamis-secondary transition-colors"
           >
             <PlaneTakeoff className="h-4 w-4" />
             <span>Travel Abroad</span>
-            <Badge className="ml-1 bg-[#0e3b62] hover:bg-[#1a5c96]">Popular</Badge>
+            <Badge className="ml-1 bg-dunamis-primary hover:bg-dunamis-secondary">Popular</Badge>
           </Link>
         </nav>
         <div className="flex items-center gap-4">
@@ -62,12 +63,12 @@ export function SiteHeader() {
           </div>
           <div className="hidden md:flex items-center gap-4">
             <Link href="/login">
-              <Button variant="ghost" size="sm" className="text-[#0e3b62]">
+              <Button variant="ghost" size="sm" className="text-dunamis-primary">
                 Login
               </Button>
             </Link>
             <Link href="/register">
-              <Button size="sm" className="bg-[#0e3b62] hover:bg-[#1a5c96]">
+              <Button size="sm" className="bg-dunamis-primary hover:bg-dunamis-secondary text-white">
                 Get Started
               </Button>
             </Link>
@@ -84,7 +85,7 @@ export function SiteHeader() {
                 <Link
                   key={program.name}
                   href={program.href}
-                  className="text-sm font-medium text-[#0e3b62] hover:text-[#1a5c96] transition-colors flex items-center gap-2"
+                  className="text-sm font-medium text-dunamis-primary hover:text-dunamis-secondary transition-colors flex items-center gap-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <program.icon className="h-4 w-4" />
@@ -93,22 +94,22 @@ export function SiteHeader() {
               ))}
               <Link
                 href="/programs/travel-abroad"
-                className="text-sm font-medium text-[#0e3b62] hover:text-[#1a5c96] transition-colors flex items-center gap-2"
+                className="text-sm font-medium text-dunamis-primary hover:text-dunamis-secondary transition-colors flex items-center gap-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <PlaneTakeoff className="h-4 w-4" />
                 <span>Travel Abroad</span>
-                <Badge className="ml-1 bg-[#0e3b62] hover:bg-[#1a5c96]">Popular</Badge>
+                <Badge className="ml-1 bg-dunamis-primary hover:bg-dunamis-secondary">Popular</Badge>
               </Link>
             </nav>
             <div className="flex flex-col space-y-2">
               <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="ghost" className="w-full justify-start text-[#0e3b62]">
+                <Button variant="ghost" className="w-full justify-start text-dunamis-primary">
                   Login
                 </Button>
               </Link>
               <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
-                <Button className="w-full bg-[#0e3b62] hover:bg-[#1a5c96]">Get Started</Button>
+                <Button className="w-full bg-dunamis-primary hover:bg-dunamis-secondary text-white">Get Started</Button>
               </Link>
             </div>
           </div>

@@ -43,6 +43,15 @@ export default function RegisterPage() {
       keywords: "JUPEB program, university admission, preliminary examinations, fast-track degree",
     },
     {
+      id: "jamb",
+      title: "JAMB Program",
+      description:
+        "Comprehensive preparation for the Joint Admissions and Matriculation Board examination with expert guidance and practice tests.",
+      icon: GraduationCap,
+      popular: false,
+      keywords: "JAMB program, UTME preparation, university entrance exam, admission",
+    },
+    {
       id: "ielts",
       title: "IELTS Preparation",
       description: "Comprehensive preparation for IELTS examinations with personalized study plans and practice tests.",
@@ -95,13 +104,13 @@ export default function RegisterPage() {
           <Link href="/">
             <div className="flex items-center gap-2">
               <Image
-                src="/placeholder.svg?height=32&width=32&text=DT"
+                src="https://i.ibb.co/gLBYv3wv/04369-B17-59-A4-47-CE-B625-5-DB36-C766-F54.jpg"
                 alt="Dunamis Tutors Logo"
                 width={32}
                 height={32}
-                className="h-8 w-8"
+                className="h-8 w-8 rounded-full object-cover"
               />
-              <span className="text-xl font-bold text-[#0e3b62]">Dunamis Tutors</span>
+              <span className="text-xl font-bold text-dunamis-primary">Dunamis Tutors</span>
             </div>
           </Link>
           <div className="flex items-center gap-4">
@@ -114,12 +123,12 @@ export default function RegisterPage() {
         </div>
       </header>
 
-      <main className="flex-1 bg-gray-50">
+      <main className="flex-1 bg-dunamis-light">
         <div className="container py-12">
           {step === 1 ? (
             <div className="max-w-md mx-auto">
               <div className="mb-8 space-y-2 text-center">
-                <h1 className="text-3xl font-bold text-[#0e3b62]">Welcome to Dunamis Tutors</h1>
+                <h1 className="text-3xl font-bold text-dunamis-primary">Welcome to Dunamis Tutors</h1>
                 <p className="text-gray-500">
                   Let's start by understanding your current academic level to personalize your learning journey.
                 </p>
@@ -130,7 +139,7 @@ export default function RegisterPage() {
           ) : (
             <>
               <div className="mb-8 space-y-2">
-                <h1 className="text-3xl font-bold text-[#0e3b62]">Choose Your Program</h1>
+                <h1 className="text-3xl font-bold text-dunamis-primary">Choose Your Program</h1>
                 <p className="text-gray-500">
                   Select the program you're interested in to begin your personalized learning journey.
                 </p>
@@ -140,24 +149,24 @@ export default function RegisterPage() {
                 {programs.map((program) => (
                   <Card
                     key={program.id}
-                    className="border border-gray-200 hover:border-[#0e3b62] hover:shadow-md transition-all"
+                    className="border border-gray-200 hover:border-dunamis-primary hover:shadow-md transition-all"
                   >
                     <CardContent className="p-6">
                       <div className="flex items-center gap-4 mb-4">
-                        <div className="h-12 w-12 rounded-full bg-[#0e3b62]/10 flex items-center justify-center">
-                          <program.icon className="h-6 w-6 text-[#0e3b62]" />
+                        <div className="h-12 w-12 rounded-full bg-dunamis-primary/10 flex items-center justify-center">
+                          <program.icon className="h-6 w-6 text-dunamis-primary" />
                         </div>
                         <div>
                           <div className="flex items-center gap-2">
-                            <h2 className="text-xl font-bold text-[#0e3b62]">{program.title}</h2>
-                            {program.popular && <Badge className="bg-[#0e3b62]">Popular</Badge>}
+                            <h2 className="text-xl font-bold text-dunamis-primary">{program.title}</h2>
+                            {program.popular && <Badge className="bg-dunamis-primary">Popular</Badge>}
                           </div>
                           <p className="text-sm text-gray-500">Personalized learning path</p>
                         </div>
                       </div>
                       <p className="mb-6 text-gray-600">{program.description}</p>
                       <Link href={`/register/${program.id}`}>
-                        <Button className="w-full bg-[#0e3b62] hover:bg-[#1a5c96]">
+                        <Button className="w-full bg-dunamis-primary hover:bg-dunamis-secondary text-white">
                           Select {program.title}
                           <ChevronRight className="ml-2 h-4 w-4" />
                         </Button>
