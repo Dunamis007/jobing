@@ -3,14 +3,39 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { AuthProvider } from "@/components/auth-provider"
-import { AcademicLevelProvider } from "@/components/dashboard/academic-level-context"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Dunamis Tutors",
-  description: "High-impact academic support for students",
+  title: {
+    default: "Dunamis Tutors | Personalized Learning for Academic Excellence",
+    template: "%s | Dunamis Tutors",
+  },
+  description:
+    "AI-powered academic support for IJMB, JUPEB, digital marketing, and coding programs. Transform your learning experience with personalized study plans.",
+  keywords: [
+    "IJMB programs",
+    "JUPEB preparation",
+    "digital marketing courses",
+    "coding bootcamp",
+    "AI tutoring",
+    "personalized learning",
+    "academic excellence",
+    "Nigerian universities",
+    "direct entry programs",
+    "online education",
+  ],
+  authors: [{ name: "Dunamis Tutors" }],
+  creator: "Dunamis Tutors",
+  openGraph: {
+    type: "website",
+    locale: "en_NG",
+    url: "https://dunamistutors.com",
+    title: "Dunamis Tutors | Personalized Learning for Academic Excellence",
+    description:
+      "AI-powered academic support for IJMB, JUPEB, digital marketing, and coding programs. Transform your learning experience with personalized study plans.",
+    siteName: "Dunamis Tutors",
+  },
     generator: 'v0.dev'
 }
 
@@ -21,12 +46,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head />
       <body className={inter.className}>
-        <AuthProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <AcademicLevelProvider>{children}</AcademicLevelProvider>
-          </ThemeProvider>
-        </AuthProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
