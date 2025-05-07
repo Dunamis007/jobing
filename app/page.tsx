@@ -35,7 +35,7 @@ export default function Home() {
             </div>
             <div className="flex justify-center">
               <Image
-                src="https://i.ibb.co/LDXXhy2Z/image-fx.png"
+                src="/placeholder.svg?height=500&width=500"
                 alt="Dunamis Tutors"
                 width={500}
                 height={500}

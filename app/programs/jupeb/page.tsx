@@ -42,7 +42,7 @@ export default function JUPEBPage() {
               </div>
               <div className="flex justify-center">
                 <Image
-                  src="/placeholder.svg?height=400&width=400"
+                  src="https://i.ibb.co/23BMrQWD/jupeb.png"
                   alt="JUPEB Program"
                   width={400}
                   height={400}

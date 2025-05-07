@@ -51,7 +51,15 @@ export function MultiStepForm({ sections, onSubmit }: MultiStepFormProps) {
   }
 
   const handleSubmit = () => {
+    // Extract the program name from the URL
+    const pathSegments = window.location.pathname.split("/")
+    const program = pathSegments[pathSegments.length - 1]
+
+    // Call the onSubmit callback with form data
     onSubmit(formData)
+
+    // Redirect to payment page with program parameter
+    window.location.href = `/register/payment?program=${program}`
   }
 
   return (

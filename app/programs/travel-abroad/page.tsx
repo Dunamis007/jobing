@@ -3,14 +3,14 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { CheckCircle, Laptop, BarChart, Globe, Users } from "lucide-react"
+import { CheckCircle, PlaneTakeoff, GraduationCap, Globe, Users } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Digital Marketing Program | Dunamis Tutors",
-  description: "Learn about our Digital Marketing program and how it can help you build a career in the digital world",
+  title: "Travel Abroad Program | Dunamis Tutors",
+  description: "Learn about our Travel Abroad program and how it can help you study in foreign universities",
 }
 
-export default function DigitalMarketingPage() {
+export default function TravelAbroadPage() {
   return (
     <div className="flex min-h-screen flex-col bg-dunamis-light">
       <main className="flex-1">
@@ -20,14 +20,14 @@ export default function DigitalMarketingPage() {
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
               <div className="space-y-4">
                 <h1 className="text-3xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl">
-                  Digital Marketing Program
+                  Travel Abroad Program
                 </h1>
                 <p className="text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Master the art and science of digital marketing with our comprehensive program designed for beginners
-                  and professionals alike.
+                  Get comprehensive guidance for studying abroad with our travel abroad program designed to help you
+                  navigate the complex process of international education.
                 </p>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Link href="/register/digital-marketing">
+                  <Link href="/register/travel-abroad">
                     <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
                   </Link>
                   <Link href="#program-details">
@@ -42,8 +42,8 @@ export default function DigitalMarketingPage() {
               </div>
               <div className="flex justify-center">
                 <Image
-                  src="https://i.ibb.co/FLLPKtLM/digital-marketing.png"
-                  alt="Digital Marketing Program"
+                  src="https://i.ibb.co/TDkZ7TG8/travel-abroad.png"
+                  alt="Travel Abroad Program"
                   width={400}
                   height={400}
                   className="rounded-lg object-cover"
@@ -59,29 +59,29 @@ export default function DigitalMarketingPage() {
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
               <div className="space-y-4">
                 <h2 className="text-2xl font-bold tracking-tighter text-dunamis-primary sm:text-3xl">
-                  About Our Digital Marketing Program
+                  About Our Travel Abroad Program
                 </h2>
                 <p className="text-gray-700 md:text-lg/relaxed">
-                  Our Digital Marketing program is designed to equip you with the skills and knowledge needed to thrive
-                  in the ever-evolving digital landscape. From social media marketing to SEO, content creation to
-                  analytics, we cover all aspects of digital marketing.
+                  Our Travel Abroad program offers comprehensive guidance and support for students looking to study in
+                  foreign universities. We help you navigate the complex process of university selection, application,
+                  visa processing, and pre-departure preparation.
                 </p>
                 <div className="space-y-2">
                   <div className="flex items-start gap-2">
                     <CheckCircle className="h-5 w-5 text-dunamis-accent mt-0.5" />
-                    <p className="text-gray-700">Comprehensive curriculum covering all digital marketing channels</p>
+                    <p className="text-gray-700">Personalized guidance for university selection and application</p>
                   </div>
                   <div className="flex items-start gap-2">
                     <CheckCircle className="h-5 w-5 text-dunamis-accent mt-0.5" />
-                    <p className="text-gray-700">Hands-on projects and real-world case studies</p>
+                    <p className="text-gray-700">Visa application assistance and documentation support</p>
                   </div>
                   <div className="flex items-start gap-2">
                     <CheckCircle className="h-5 w-5 text-dunamis-accent mt-0.5" />
-                    <p className="text-gray-700">Industry-recognized certification upon completion</p>
+                    <p className="text-gray-700">Scholarship and funding guidance</p>
                   </div>
                   <div className="flex items-start gap-2">
                     <CheckCircle className="h-5 w-5 text-dunamis-accent mt-0.5" />
-                    <p className="text-gray-700">Career guidance and placement assistance</p>
+                    <p className="text-gray-700">Pre-departure orientation and cultural preparation</p>
                   </div>
                 </div>
               </div>
@@ -90,35 +90,35 @@ export default function DigitalMarketingPage() {
                   Program Features
                 </h2>
                 <p className="text-gray-700 md:text-lg/relaxed">
-                  Our program is designed to give you practical skills that you can immediately apply in the real world.
+                  Our program is designed to give you comprehensive support throughout your journey to studying abroad.
                 </p>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Card>
                     <CardContent className="p-4 flex flex-col items-center text-center">
-                      <Laptop className="h-8 w-8 text-dunamis-primary mb-2" />
-                      <h3 className="font-bold">Practical Training</h3>
-                      <p className="text-sm text-gray-500">Learn by doing with hands-on projects</p>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className="p-4 flex flex-col items-center text-center">
-                      <BarChart className="h-8 w-8 text-dunamis-primary mb-2" />
-                      <h3 className="font-bold">Analytics & Data</h3>
-                      <p className="text-sm text-gray-500">Master the art of data-driven marketing</p>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className="p-4 flex flex-col items-center text-center">
                       <Globe className="h-8 w-8 text-dunamis-primary mb-2" />
-                      <h3 className="font-bold">Global Perspective</h3>
-                      <p className="text-sm text-gray-500">Learn strategies that work worldwide</p>
+                      <h3 className="font-bold">Global University Network</h3>
+                      <p className="text-sm text-gray-500">Access to universities worldwide</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="p-4 flex flex-col items-center text-center">
+                      <GraduationCap className="h-8 w-8 text-dunamis-primary mb-2" />
+                      <h3 className="font-bold">Academic Counseling</h3>
+                      <p className="text-sm text-gray-500">Expert guidance on course selection</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="p-4 flex flex-col items-center text-center">
+                      <PlaneTakeoff className="h-8 w-8 text-dunamis-primary mb-2" />
+                      <h3 className="font-bold">Travel Assistance</h3>
+                      <p className="text-sm text-gray-500">Help with accommodation and travel arrangements</p>
                     </CardContent>
                   </Card>
                   <Card>
                     <CardContent className="p-4 flex flex-col items-center text-center">
                       <Users className="h-8 w-8 text-dunamis-primary mb-2" />
-                      <h3 className="font-bold">Industry Experts</h3>
-                      <p className="text-sm text-gray-500">Learn from experienced professionals</p>
+                      <h3 className="font-bold">Alumni Network</h3>
+                      <p className="text-sm text-gray-500">Connect with students already studying abroad</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -131,13 +131,12 @@ export default function DigitalMarketingPage() {
         <section className="bg-dunamis-primary py-12">
           <div className="container px-4 md:px-6 text-center">
             <h2 className="text-2xl font-bold tracking-tighter text-white sm:text-3xl mb-4">
-              Ready to Launch Your Digital Marketing Career?
+              Ready to Start Your International Education Journey?
             </h2>
             <p className="text-gray-300 md:text-lg/relaxed max-w-2xl mx-auto mb-6">
-              Join our Digital Marketing program today and take the first step towards becoming a digital marketing
-              professional.
+              Join our Travel Abroad program today and take the first step towards studying in a foreign university.
             </p>
-            <Link href="/register/digital-marketing">
+            <Link href="/register/travel-abroad">
               <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
             </Link>
           </div>
