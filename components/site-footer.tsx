@@ -115,15 +115,15 @@ export function SiteFooter() {
             <ul className="space-y-4">
               <li className="flex items-start gap-2">
                 <MapPin className="h-5 w-5 text-gray-300" />
-                <span className="text-gray-300">123 Education Street, Lagos, Nigeria</span>
+                <span className="text-gray-300">House 1, 444 crescent citec villa gwarimpa, Abuja Nigeria</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-5 w-5 text-gray-300" />
-                <span className="text-gray-300">+234 123 456 7890</span>
+                <span className="text-gray-300">09020803096</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-5 w-5 text-gray-300" />
-                <span className="text-gray-300">info@dunamistutors.com</span>
+                <span className="text-gray-300">dunamistutors@graduate.org</span>
               </li>
             </ul>
           </div>
