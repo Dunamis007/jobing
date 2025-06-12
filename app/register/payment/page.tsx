@@ -43,7 +43,7 @@ export default function PaymentPage() {
       default:
         setProgramDetails({ name: "Program Registration", amount: 100000 })
     }
-  }, [searchParams])
+  }, [searchParams.get("program")]) // Only depend on the program value, not the entire searchParams object
 
   return (
     <div className="container py-10">

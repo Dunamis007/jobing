@@ -30,6 +30,9 @@ export default function IELTSPage() {
                   <Link href="/register/ielts">
                     <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
                   </Link>
+                  <Link href="/ielts-platform">
+                    <Button className="bg-blue-600 hover:bg-blue-700 text-white">Access Platform</Button>
+                  </Link>
                   <Link href="#program-details">
                     <Button
                       variant="outline"
@@ -137,9 +140,16 @@ export default function IELTSPage() {
               Join our IELTS preparation program today and take the first step towards achieving your academic or
               immigration goals.
             </p>
-            <Link href="/register/ielts">
-              <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
-            </Link>
+            <div className="flex gap-4 justify-center">
+              <Link href="/register/ielts">
+                <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
+              </Link>
+              <Link href="/ielts-platform">
+                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-dunamis-primary">
+                  Access Platform
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
       </main>

@@ -30,12 +30,12 @@ export default function DigitalMarketingPage() {
                   <Link href="/register/digital-marketing">
                     <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
                   </Link>
-                  <Link href="#program-details">
+                  <Link href="/digital-marketing-platform">
                     <Button
                       variant="outline"
-                      className="border-white text-white hover:bg-white hover:text-dunamis-primary"
+                      className="border-dunamis-primary text-dunamis-primary hover:bg-dunamis-primary hover:text-white"
                     >
-                      Learn More
+                      Explore Platform
                     </Button>
                   </Link>
                 </div>
@@ -137,9 +137,16 @@ export default function DigitalMarketingPage() {
               Join our Digital Marketing program today and take the first step towards becoming a digital marketing
               professional.
             </p>
-            <Link href="/register/digital-marketing">
-              <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
-            </Link>
+            <div className="flex gap-4 justify-center">
+              <Link href="/register/digital-marketing">
+                <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
+              </Link>
+              <Link href="/digital-marketing-platform">
+                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-dunamis-primary">
+                  Try Platform Demo
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
       </main>

@@ -30,12 +30,12 @@ export default function CodingPage() {
                   <Link href="/register/coding">
                     <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
                   </Link>
-                  <Link href="#program-details">
+                  <Link href="/coding-platform">
                     <Button
                       variant="outline"
                       className="border-white text-white hover:bg-white hover:text-dunamis-primary"
                     >
-                      Learn More
+                      Access Learning Platform
                     </Button>
                   </Link>
                 </div>
@@ -128,17 +128,31 @@ export default function CodingPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-dunamis-primary py-12">
-          <div className="container px-4 md:px-6 text-center">
-            <h2 className="text-2xl font-bold tracking-tighter text-white sm:text-3xl mb-4">
-              Ready to Start Your Coding Journey?
-            </h2>
-            <p className="text-gray-300 md:text-lg/relaxed max-w-2xl mx-auto mb-6">
-              Join our Coding program today and take the first step towards becoming a skilled developer.
-            </p>
-            <Link href="/register/coding">
-              <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
-            </Link>
+        <section className="bg-dunamis-secondary py-12 md:py-16">
+          <div className="container px-4 md:px-6">
+            <div className="text-center space-y-4">
+              <h2 className="text-2xl font-bold tracking-tighter text-white sm:text-3xl">
+                Ready to Start Your Coding Journey?
+              </h2>
+              <p className="text-gray-300 md:text-lg/relaxed max-w-2xl mx-auto">
+                Join thousands of students who have transformed their careers through our comprehensive coding program.
+              </p>
+              <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">
+                <Link href="/register/coding">
+                  <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">
+                    Register for Coding Program
+                  </Button>
+                </Link>
+                <Link href="/coding-platform">
+                  <Button
+                    variant="outline"
+                    className="border-white text-white hover:bg-white hover:text-dunamis-primary"
+                  >
+                    Explore Learning Platform
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
       </main>

@@ -28,6 +28,14 @@ export default function JAMBPage() {
                   <Link href="/register/jamb">
                     <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
                   </Link>
+                  <Link href="/jamb-platform">
+                    <Button
+                      variant="outline"
+                      className="border-dunamis-primary text-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                    >
+                      Access Platform
+                    </Button>
+                  </Link>
                   <Link href="#program-details">
                     <Button
                       variant="outline"
@@ -134,9 +142,16 @@ export default function JAMBPage() {
             <p className="text-gray-300 md:text-lg/relaxed max-w-2xl mx-auto mb-6">
               Join our JAMB preparation program today and take the first step towards achieving your academic goals.
             </p>
-            <Link href="/register/jamb">
-              <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
-            </Link>
+            <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">
+              <Link href="/register/jamb">
+                <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
+              </Link>
+              <Link href="/jamb-platform">
+                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-dunamis-primary">
+                  Access Platform
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
       </main>
