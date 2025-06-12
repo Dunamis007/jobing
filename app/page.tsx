@@ -13,7 +13,7 @@ export default function Home() {
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
             <div className="space-y-4">
               <h1 className="text-3xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl">
-                Your Path to Academic Excellence
+                Africa's First AI-Powered Learning Platform
               </h1>
               <p className="text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Dunamis Tutors offers comprehensive educational programs to help you achieve your academic and career
@@ -51,13 +51,90 @@ export default function Home() {
         <div className="container px-4 md:px-6">
           <div className="mb-8 text-center">
             <h2 className="text-2xl font-bold tracking-tighter text-dunamis-primary sm:text-3xl md:text-4xl">
-              Our Programs
+              From Coding to Campus — Learn. Build. Launch.
             </h2>
             <p className="mx-auto mt-4 max-w-[700px] text-gray-700 md:text-lg/relaxed">
               Choose from our wide range of educational programs designed to help you succeed.
             </p>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {/* AI Tutoring - First */}
+            <Card className="overflow-hidden">
+              <div className="h-48 bg-dunamis-primary flex items-center justify-center">
+                <Brain className="h-16 w-16 text-white" />
+              </div>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold text-dunamis-primary">AI Tutoring</h3>
+                <p className="mt-2 text-gray-700">
+                  Experience personalized learning with our AI-powered tutoring program.
+                </p>
+                <div className="mt-4 flex justify-between items-center">
+                  <Link href="/programs/ai-tutoring">
+                    <Button
+                      variant="outline"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                    >
+                      Learn More
+                    </Button>
+                  </Link>
+                  <Link href="/register/ai-tutoring">
+                    <Button className="bg-dunamis-primary hover:bg-dunamis-secondary text-white">Register</Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Coding - Second */}
+            <Card className="overflow-hidden">
+              <div className="h-48 bg-dunamis-primary flex items-center justify-center">
+                <Code className="h-16 w-16 text-white" />
+              </div>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold text-dunamis-primary">Coding</h3>
+                <p className="mt-2 text-gray-700">
+                  Learn to code and build your tech career with our hands-on coding program.
+                </p>
+                <div className="mt-4 flex justify-between items-center">
+                  <Link href="/programs/coding">
+                    <Button
+                      variant="outline"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                    >
+                      Learn More
+                    </Button>
+                  </Link>
+                  <Link href="/register/coding">
+                    <Button className="bg-dunamis-primary hover:bg-dunamis-secondary text-white">Register</Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Digital Marketing - Third */}
+            <Card className="overflow-hidden">
+              <div className="h-48 bg-dunamis-primary flex items-center justify-center">
+                <BarChart className="h-16 w-16 text-white" />
+              </div>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold text-dunamis-primary">Digital Marketing</h3>
+                <p className="mt-2 text-gray-700">
+                  Master the art and science of digital marketing with our comprehensive program.
+                </p>
+                <div className="mt-4 flex justify-between items-center">
+                  <Link href="/programs/digital-marketing">
+                    <Button
+                      variant="outline"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                    >
+                      Learn More
+                    </Button>
+                  </Link>
+                  <Link href="/register/digital-marketing">
+                    <Button className="bg-dunamis-primary hover:bg-dunamis-secondary text-white">Register</Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
             <Card className="overflow-hidden">
               <div className="h-48 bg-dunamis-primary flex items-center justify-center">
                 <GraduationCap className="h-16 w-16 text-white" />
@@ -69,7 +146,10 @@ export default function Home() {
                 </p>
                 <div className="mt-4 flex justify-between items-center">
                   <Link href="/programs/ijmb">
-                    <Button variant="outline" className="text-dunamis-primary border-dunamis-primary">
+                    <Button
+                      variant="outline"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                    >
                       Learn More
                     </Button>
                   </Link>
@@ -90,7 +170,10 @@ export default function Home() {
                 </p>
                 <div className="mt-4 flex justify-between items-center">
                   <Link href="/programs/jupeb">
-                    <Button variant="outline" className="text-dunamis-primary border-dunamis-primary">
+                    <Button
+                      variant="outline"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                    >
                       Learn More
                     </Button>
                   </Link>
@@ -111,7 +194,10 @@ export default function Home() {
                 </p>
                 <div className="mt-4 flex justify-between items-center">
                   <Link href="/programs/jamb">
-                    <Button variant="outline" className="text-dunamis-primary border-dunamis-primary">
+                    <Button
+                      variant="outline"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                    >
                       Learn More
                     </Button>
                   </Link>
@@ -132,74 +218,14 @@ export default function Home() {
                 </p>
                 <div className="mt-4 flex justify-between items-center">
                   <Link href="/programs/ielts">
-                    <Button variant="outline" className="text-dunamis-primary border-dunamis-primary">
+                    <Button
+                      variant="outline"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                    >
                       Learn More
                     </Button>
                   </Link>
                   <Link href="/register/ielts">
-                    <Button className="bg-dunamis-primary hover:bg-dunamis-secondary text-white">Register</Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="overflow-hidden">
-              <div className="h-48 bg-dunamis-primary flex items-center justify-center">
-                <BarChart className="h-16 w-16 text-white" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-dunamis-primary">Digital Marketing</h3>
-                <p className="mt-2 text-gray-700">
-                  Master the art and science of digital marketing with our comprehensive program.
-                </p>
-                <div className="mt-4 flex justify-between items-center">
-                  <Link href="/programs/digital-marketing">
-                    <Button variant="outline" className="text-dunamis-primary border-dunamis-primary">
-                      Learn More
-                    </Button>
-                  </Link>
-                  <Link href="/register/digital-marketing">
-                    <Button className="bg-dunamis-primary hover:bg-dunamis-secondary text-white">Register</Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="overflow-hidden">
-              <div className="h-48 bg-dunamis-primary flex items-center justify-center">
-                <Code className="h-16 w-16 text-white" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-dunamis-primary">Coding</h3>
-                <p className="mt-2 text-gray-700">
-                  Learn to code and build your tech career with our hands-on coding program.
-                </p>
-                <div className="mt-4 flex justify-between items-center">
-                  <Link href="/programs/coding">
-                    <Button variant="outline" className="text-dunamis-primary border-dunamis-primary">
-                      Learn More
-                    </Button>
-                  </Link>
-                  <Link href="/register/coding">
-                    <Button className="bg-dunamis-primary hover:bg-dunamis-secondary text-white">Register</Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="overflow-hidden">
-              <div className="h-48 bg-dunamis-primary flex items-center justify-center">
-                <Brain className="h-16 w-16 text-white" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-dunamis-primary">AI Tutoring</h3>
-                <p className="mt-2 text-gray-700">
-                  Experience personalized learning with our AI-powered tutoring program.
-                </p>
-                <div className="mt-4 flex justify-between items-center">
-                  <Link href="/programs/ai-tutoring">
-                    <Button variant="outline" className="text-dunamis-primary border-dunamis-primary">
-                      Learn More
-                    </Button>
-                  </Link>
-                  <Link href="/register/ai-tutoring">
                     <Button className="bg-dunamis-primary hover:bg-dunamis-secondary text-white">Register</Button>
                   </Link>
                 </div>
@@ -216,7 +242,10 @@ export default function Home() {
                 </p>
                 <div className="mt-4 flex justify-between items-center">
                   <Link href="/programs/travel-abroad">
-                    <Button variant="outline" className="text-dunamis-primary border-dunamis-primary">
+                    <Button
+                      variant="outline"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                    >
                       Learn More
                     </Button>
                   </Link>
@@ -267,6 +296,52 @@ export default function Home() {
               <h3 className="text-xl font-bold text-dunamis-primary">Proven Results</h3>
               <p className="mt-2 text-gray-700">
                 Our students consistently achieve excellent results and gain admission to top universities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Difference Section */}
+      <section className="py-12 md:py-16 bg-dunamis-light">
+        <div className="container px-4 md:px-6">
+          <div className="mb-8 text-center">
+            <h2 className="text-2xl font-bold tracking-tighter text-dunamis-primary sm:text-3xl md:text-4xl">
+              Our Difference
+            </h2>
+            <p className="mx-auto mt-4 max-w-[700px] text-gray-700 md:text-lg/relaxed">
+              Experience learning like never before with our innovative approach to education.
+            </p>
+          </div>
+          <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-3">
+            <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-sm">
+              <div className="mb-4 rounded-full bg-dunamis-primary p-4">
+                <Brain className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-dunamis-primary mb-3">Personalized AI Learning</h3>
+              <p className="text-gray-700 leading-relaxed">
+                Our AI-powered platform adapts to your learning style, pace, and preferences, providing personalized
+                recommendations and real-time feedback to maximize your potential.
+              </p>
+            </div>
+            <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-sm">
+              <div className="mb-4 rounded-full bg-dunamis-primary p-4">
+                <BookOpen className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-dunamis-primary mb-3">Self-Paced Model</h3>
+              <p className="text-gray-700 leading-relaxed">
+                Learn at your own speed with flexible scheduling. Whether you're a fast learner or need more time, our
+                platform adjusts to your rhythm for optimal learning outcomes.
+              </p>
+            </div>
+            <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-sm">
+              <div className="mb-4 rounded-full bg-dunamis-primary p-4">
+                <GraduationCap className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-dunamis-primary mb-3">Google Digital Garage Curriculum</h3>
+              <p className="text-gray-700 leading-relaxed">
+                Our curriculum is modeled after Google Digital Garage standards, ensuring you receive world-class
+                education that meets global industry requirements and best practices.
               </p>
             </div>
           </div>

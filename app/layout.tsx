@@ -8,9 +8,9 @@ import { SiteFooter } from "@/components/site-footer"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Dunamis Tutors - Your Path to Academic Excellence",
+  title: "Dunamis Tutors | Learn AI, Coding & Pass IJMB Fast",
   description:
-    "Dunamis Tutors offers comprehensive educational programs including IJMB, JUPEB, JAMB, IELTS, Digital Marketing, Coding, and more.",
+    "Online tutoring built for Africa — master AI, pass university entrance exams, and upskill in tech. Powered by Dunamis Tutors.",
   icons: {
     icon: "/favicon.ico",
   },
