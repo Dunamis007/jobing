@@ -39,7 +39,17 @@ import {
   MessageCircleMore,
   ThumbsUp,
   Reply,
+  Wallet,
+  TrendingUp,
+  Gift,
+  AlertCircle,
+  Trophy,
+  Building,
+  Briefcase,
 } from "lucide-react"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 interface Module {
   id: number
@@ -54,6 +64,8 @@ interface Module {
   quizScore?: number
   badge?: string
   pdfUrl?: string
+  timeWall?: number
+  coinCost?: number
 }
 
 interface QuizQuestion {
@@ -97,6 +109,35 @@ interface CommunityPost {
   tags: string[]
 }
 
+interface Transaction {
+  id: number
+  type: "topup" | "spend" | "earn" | "decay"
+  amount: number
+  description: string
+  date: Date
+}
+
+interface LeaderboardEntry {
+  id: number
+  name: string
+  avatar: string
+  points: number
+  streak: number
+  tier: "Bronze" | "Silver" | "Gold"
+}
+
+interface PricingTier {
+  id: string
+  name: string
+  priceUSD: number
+  priceNGN: number
+  period: string
+  features: string[]
+  popular: boolean
+  color: string
+  buttonColor: string
+}
+
 export function AIPlatformClient() {
   const [activeModule, setActiveModule] = useState(1)
   const [showQuiz, setShowQuiz] = useState(false)
@@ -104,6 +145,14 @@ export function AIPlatformClient() {
   const [currentView, setCurrentView] = useState("curriculum")
   const [currency, setCurrency] = useState<"USD" | "NGN">("USD")
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
+  const [eduCoins, setEduCoins] = useState(500)
+  const [showWalletModal, setShowWalletModal] = useState(false)
+  const [topupAmount, setTopupAmount] = useState("")
+  const [showNotification, setShowNotification] = useState(false)
+  const [notificationMessage, setNotificationMessage] = useState("")
+  const [streakDays, setStreakDays] = useState(3)
+  const [showCareerGame, setShowCareerGame] = useState(false)
+  const [userTier, setUserTier] = useState<"Free" | "Bronze" | "Silver" | "Gold">("Free")
 
   const modules: Module[] = [
     {
@@ -172,6 +221,23 @@ export function AIPlatformClient() {
       timeLeft: "Locked",
       badge: "AI Ethics Champion",
       pdfUrl: "/pdfs/ai-ethics.pdf",
+      timeWall: 7,
+      coinCost: 250,
+    },
+    {
+      id: 6,
+      title: "Advanced NLP Techniques",
+      duration: "6 hours",
+      completed: false,
+      locked: true,
+      lessons: 12,
+      description: "Advanced natural language processing and transformer models",
+      progress: 0,
+      timeLeft: "Locked",
+      badge: "NLP Specialist",
+      pdfUrl: "/pdfs/advanced-nlp.pdf",
+      timeWall: 14,
+      coinCost: 350,
     },
   ]
 
@@ -302,12 +368,124 @@ export function AIPlatformClient() {
     },
   ]
 
+  const transactions: Transaction[] = [
+    {
+      id: 1,
+      type: "topup",
+      amount: 500,
+      description: "Initial balance",
+      date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+    },
+    {
+      id: 2,
+      type: "earn",
+      amount: 50,
+      description: "Quiz completion bonus",
+      date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
+    },
+    {
+      id: 3,
+      type: "earn",
+      amount: 25,
+      description: "Daily streak bonus (3 days)",
+      date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
+    },
+    {
+      id: 4,
+      type: "spend",
+      amount: -100,
+      description: "Unlocked resource: Advanced Prompt Engineering",
+      date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+    },
+    {
+      id: 5,
+      type: "decay",
+      amount: -25,
+      description: "Weekly coin decay (10%)",
+      date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+    },
+  ]
+
+  const leaderboard: LeaderboardEntry[] = [
+    {
+      id: 1,
+      name: "Chioma Eze",
+      avatar: "/placeholder.svg?height=40&width=40",
+      points: 1250,
+      streak: 14,
+      tier: "Gold",
+    },
+    {
+      id: 2,
+      name: "Tunde Bakare",
+      avatar: "/placeholder.svg?height=40&width=40",
+      points: 980,
+      streak: 10,
+      tier: "Silver",
+    },
+    {
+      id: 3,
+      name: "Amina Ibrahim",
+      avatar: "/placeholder.svg?height=40&width=40",
+      points: 875,
+      streak: 7,
+      tier: "Silver",
+    },
+    {
+      id: 4,
+      name: "David Okonkwo",
+      avatar: "/placeholder.svg?height=40&width=40",
+      points: 720,
+      streak: 5,
+      tier: "Bronze",
+    },
+    {
+      id: 5,
+      name: "Sarah Adeyemi",
+      avatar: "/placeholder.svg?height=40&width=40",
+      points: 650,
+      streak: 4,
+      tier: "Bronze",
+    },
+  ]
+
+  const hallOfFame = [
+    {
+      week: "Last Week",
+      winner: {
+        name: "Chioma Eze",
+        avatar: "/placeholder.svg?height=60&width=60",
+        project: "AI-Powered Customer Service Bot",
+        score: 98,
+      },
+    },
+    {
+      week: "Two Weeks Ago",
+      winner: {
+        name: "Tunde Bakare",
+        avatar: "/placeholder.svg?height=60&width=60",
+        project: "Sentiment Analysis Dashboard",
+        score: 95,
+      },
+    },
+    {
+      week: "Three Weeks Ago",
+      winner: {
+        name: "Amina Ibrahim",
+        avatar: "/placeholder.svg?height=60&width=60",
+        project: "Predictive Analytics Tool",
+        score: 94,
+      },
+    },
+  ]
+
   const overallProgress = (modules.filter((m) => m.completed).length / modules.length) * 100
   const currentModule = modules.find((m) => m.id === activeModule)
   const currentModuleProgress = currentModule?.progress || 0
 
-  const pricingTiers = [
+  const pricingTiers: PricingTier[] = [
     {
+      id: "free",
       name: "Free Track",
       priceUSD: 0,
       priceNGN: 0,
@@ -324,38 +502,57 @@ export function AIPlatformClient() {
       buttonColor: "bg-gray-600 hover:bg-gray-700",
     },
     {
-      name: "AI Bootcamp",
-      priceUSD: 399,
-      priceNGN: 599000,
-      period: "Lifetime Access",
+      id: "bronze",
+      name: "Bronze Tier",
+      priceUSD: 49,
+      priceNGN: 20000,
+      period: "Monthly",
       features: [
-        "All 15 modules",
-        "Live cohort sessions",
-        "1-on-1 mentorship",
-        "Industry projects",
-        "Professional certificate",
-        "Job placement support",
-        "WhatsApp community",
-        "Priority support",
+        "Access to all modules",
+        "Community forum access",
+        "All quizzes and assessments",
+        "Basic certificate",
+        "Email support",
+        "Weekly group mentorship",
       ],
-      popular: true,
-      color: "border-dunamis-primary",
-      buttonColor: "bg-dunamis-primary hover:bg-dunamis-secondary",
+      popular: false,
+      color: "border-amber-700",
+      buttonColor: "bg-amber-700 hover:bg-amber-800",
     },
     {
-      name: "AI Incubator",
-      priceUSD: 799,
-      priceNGN: 1199000,
-      period: "Team License + Incubation",
+      id: "silver",
+      name: "Silver Tier",
+      priceUSD: 89,
+      priceNGN: 35000,
+      period: "Monthly",
       features: [
-        "Everything in Bootcamp",
-        "Startup incubation program",
-        "Investor network access",
-        "Custom AI solutions",
-        "Advanced analytics",
-        "White-label option",
-        "Dedicated success manager",
-        "Revenue sharing opportunities",
+        "Everything in Bronze",
+        "Priority support",
+        "1 monthly 1-on-1 mentorship",
+        "Advanced certificate",
+        "Job placement assistance",
+        "Resume review",
+        "500 EduCoins monthly",
+      ],
+      popular: true,
+      color: "border-gray-400",
+      buttonColor: "bg-gray-500 hover:bg-gray-600",
+    },
+    {
+      id: "gold",
+      name: "Gold Tier",
+      priceUSD: 129,
+      priceNGN: 50000,
+      period: "Monthly",
+      features: [
+        "Everything in Silver",
+        "Weekly 1-on-1 mentorship",
+        "Premium certificate",
+        "Guaranteed job placement",
+        "LinkedIn profile optimization",
+        "Mock interviews",
+        "1000 EduCoins monthly",
+        "Lifetime access to updates",
       ],
       popular: false,
       color: "border-yellow-400",
@@ -434,9 +631,46 @@ export function AIPlatformClient() {
     { id: "community", label: "Community", icon: MessageCircle },
   ]
 
+  const careerGameItems = [
+    {
+      name: "Virtual Office",
+      level: 1,
+      maxLevel: 3,
+      cost: 100,
+      description: "Upgrade your virtual workspace for better productivity",
+      benefits: ["Faster module completion", "+5% quiz score boost"],
+    },
+    {
+      name: "Mentorship Access",
+      level: 0,
+      maxLevel: 2,
+      cost: 200,
+      description: "Unlock access to industry mentors",
+      benefits: ["Weekly 1-on-1 sessions", "Career guidance"],
+    },
+    {
+      name: "Learning Tools",
+      level: 1,
+      maxLevel: 3,
+      cost: 150,
+      description: "Enhance your learning with premium tools",
+      benefits: ["Advanced tutorials", "Premium resources"],
+    },
+    {
+      name: "Networking",
+      level: 0,
+      maxLevel: 2,
+      cost: 175,
+      description: "Expand your professional network",
+      benefits: ["Industry connections", "Job referrals"],
+    },
+  ]
+
   const shareToLinkedIn = (badge: string) => {
     const text = `I just earned the ${badge} badge from Dunamis Tutors AI Bootcamp! 🚀 #AI #MachineLearning #TechEducation`
-    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}&summary=${encodeURIComponent(text)}`
+    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+      window.location.href,
+    )}&summary=${encodeURIComponent(text)}`
     window.open(url, "_blank")
   }
 
@@ -446,6 +680,57 @@ export function AIPlatformClient() {
     link.href = `/badges/${badge.toLowerCase().replace(/\s+/g, "-")}.png`
     link.download = `${badge}-badge.png`
     link.click()
+  }
+
+  const handleTopup = () => {
+    const amount = Number.parseInt(topupAmount)
+    if (!isNaN(amount) && amount > 0) {
+      setEduCoins(eduCoins + amount)
+      setShowWalletModal(false)
+      setNotificationMessage(`Successfully added ${amount} EduCoins to your wallet!`)
+      setShowNotification(true)
+      setTimeout(() => setShowNotification(false), 3000)
+    }
+  }
+
+  const unlockModule = (moduleId: number) => {
+    const module = modules.find((m) => m.id === moduleId)
+    if (module && module.coinCost && eduCoins >= module.coinCost) {
+      setEduCoins(eduCoins - module.coinCost)
+      // In a real app, we would update the module's locked status in the database
+      setNotificationMessage(`Successfully unlocked ${module.title}!`)
+      setShowNotification(true)
+      setTimeout(() => setShowNotification(false), 3000)
+    } else {
+      setNotificationMessage("Not enough EduCoins to unlock this module!")
+      setShowNotification(true)
+      setTimeout(() => setShowNotification(false), 3000)
+    }
+  }
+
+  const upgradeCareerItem = (itemIndex: number) => {
+    const item = careerGameItems[itemIndex]
+    if (eduCoins >= item.cost) {
+      setEduCoins(eduCoins - item.cost)
+      // In a real app, we would update the item's level in the database
+      setNotificationMessage(`Successfully upgraded ${item.name}!`)
+      setShowNotification(true)
+      setTimeout(() => setShowNotification(false), 3000)
+    } else {
+      setNotificationMessage("Not enough EduCoins to upgrade this item!")
+      setShowNotification(true)
+      setTimeout(() => setShowNotification(false), 3000)
+    }
+  }
+
+  const upgradeTier = (tierId: string) => {
+    const tier = pricingTiers.find((t) => t.id === tierId)
+    if (tier) {
+      setUserTier(tier.name as "Free" | "Bronze" | "Silver" | "Gold")
+      setNotificationMessage(`Successfully upgraded to ${tier.name}!`)
+      setShowNotification(true)
+      setTimeout(() => setShowNotification(false), 3000)
+    }
   }
 
   const renderContent = () => {
@@ -486,6 +771,123 @@ export function AIPlatformClient() {
               </Card>
             </div>
 
+            {/* EduCoin Gamification Highlight */}
+            <Card className="border-2 border-dunamis-primary">
+              <CardHeader className="bg-dunamis-primary text-white">
+                <CardTitle className="text-center">EduCoin Gamified Learning</CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="text-center">
+                    <Wallet className="h-12 w-12 text-dunamis-primary mx-auto mb-4" />
+                    <h3 className="text-lg font-bold mb-2">Earn & Spend EduCoins</h3>
+                    <p className="text-gray-600">Complete activities to earn coins and unlock premium content</p>
+                  </div>
+                  <div className="text-center">
+                    <TrendingUp className="h-12 w-12 text-dunamis-primary mx-auto mb-4" />
+                    <h3 className="text-lg font-bold mb-2">Climb the Leaderboard</h3>
+                    <p className="text-gray-600">Compete with peers and earn a spot in our Hall of Fame</p>
+                  </div>
+                  <div className="text-center">
+                    <Gift className="h-12 w-12 text-dunamis-primary mx-auto mb-4" />
+                    <h3 className="text-lg font-bold mb-2">Unlock Rewards</h3>
+                    <p className="text-gray-600">Earn badges, certificates, and real-world opportunities</p>
+                  </div>
+                </div>
+                <div className="mt-6 flex justify-center gap-4">
+                  <Button onClick={() => setShowCareerGame(true)}>
+                    <Briefcase className="h-4 w-4 mr-2" />
+                    Career Game
+                  </Button>
+                  <Button variant="outline" onClick={() => setCurrentView("curriculum")}>
+                    <BookOpen className="h-4 w-4 mr-2" />
+                    Start Learning
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Leaderboard Preview */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Trophy className="h-5 w-5 text-yellow-500" />
+                    Top Performers
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {leaderboard.slice(0, 3).map((entry, index) => (
+                      <div key={entry.id} className="flex items-center gap-3">
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold ${
+                            index === 0
+                              ? "bg-yellow-500"
+                              : index === 1
+                                ? "bg-gray-400"
+                                : index === 2
+                                  ? "bg-amber-700"
+                                  : "bg-gray-200"
+                          }`}
+                        >
+                          {index + 1}
+                        </div>
+                        <Avatar>
+                          <AvatarFallback>{entry.name.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <p className="font-medium">{entry.name}</p>
+                          <p className="text-sm text-gray-500">{entry.points} points</p>
+                        </div>
+                        <Badge
+                          className={`${
+                            entry.tier === "Gold"
+                              ? "bg-yellow-500"
+                              : entry.tier === "Silver"
+                                ? "bg-gray-400"
+                                : "bg-amber-700"
+                          } text-white`}
+                        >
+                          {entry.tier}
+                        </Badge>
+                      </div>
+                    ))}
+                  </div>
+                  <Button variant="link" className="w-full mt-2" onClick={() => setCurrentView("community")}>
+                    View Full Leaderboard
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Award className="h-5 w-5 text-yellow-500" />
+                    Hall of Fame
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {hallOfFame.slice(0, 1).map((entry, index) => (
+                      <div key={index} className="text-center">
+                        <p className="text-sm text-gray-500 mb-2">{entry.week}</p>
+                        <Avatar className="w-16 h-16 mx-auto mb-2">
+                          <AvatarFallback>{entry.winner.name.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                        <h4 className="font-bold">{entry.winner.name}</h4>
+                        <p className="text-sm text-gray-600 mb-1">{entry.winner.project}</p>
+                        <Badge className="bg-yellow-500 text-white">Score: {entry.winner.score}/100</Badge>
+                      </div>
+                    ))}
+                  </div>
+                  <Button variant="link" className="w-full mt-2" onClick={() => setCurrentView("community")}>
+                    View All Winners
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+
             {/* Testimonial Carousel */}
             <section className="py-8">
               <h2 className="text-2xl font-bold text-center text-dunamis-primary mb-8">Success Stories</h2>
@@ -516,6 +918,23 @@ export function AIPlatformClient() {
                 ))}
               </div>
             </section>
+
+            {/* Call to Action */}
+            <div className="bg-gray-100 p-8 rounded-lg text-center">
+              <h2 className="text-2xl font-bold text-dunamis-primary mb-4">Ready to Start Your AI Journey?</h2>
+              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+                Choose the path that works best for you. Start with our free track or apply for the full bootcamp
+                experience.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Button size="lg" variant="outline">
+                  Join Free Track
+                </Button>
+                <Button size="lg" className="bg-dunamis-primary hover:bg-dunamis-secondary">
+                  Apply to Full Bootcamp
+                </Button>
+              </div>
+            </div>
           </div>
         )
 
@@ -666,7 +1085,13 @@ export function AIPlatformClient() {
                       ))}
                       <div className="flex gap-2">
                         <Button
-                          onClick={() => setShowQuiz(false)}
+                          onClick={() => {
+                            setShowQuiz(false)
+                            setEduCoins(eduCoins + 50)
+                            setNotificationMessage("Quiz completed! You earned 50 EduCoins!")
+                            setShowNotification(true)
+                            setTimeout(() => setShowNotification(false), 3000)
+                          }}
                           className="bg-dunamis-primary hover:bg-dunamis-secondary"
                         >
                           Submit Quiz
@@ -678,10 +1103,201 @@ export function AIPlatformClient() {
                     </CardContent>
                   </Card>
                 )}
+
+                {/* Locked Module Unlock */}
+                {currentModule?.locked && currentModule?.timeWall && currentModule?.coinCost && (
+                  <Card className="mt-6 border-2 border-dunamis-primary">
+                    <CardHeader className="bg-dunamis-primary/10">
+                      <CardTitle className="flex items-center gap-2">
+                        <Lock className="h-5 w-5" />
+                        Unlock This Module
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-6">
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="border rounded-lg p-4 text-center">
+                          <Clock className="h-10 w-10 text-gray-400 mx-auto mb-2" />
+                          <h3 className="font-bold mb-1">Time Wall</h3>
+                          <p className="text-sm text-gray-600 mb-3">
+                            Wait {currentModule.timeWall} days to unlock this module for free
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            Unlocks on {new Date(Date.now() + currentModule.timeWall * 86400000).toLocaleDateString()}
+                          </p>
+                        </div>
+                        <div className="border-2 border-dunamis-primary rounded-lg p-4 text-center">
+                          <Wallet className="h-10 w-10 text-dunamis-primary mx-auto mb-2" />
+                          <h3 className="font-bold mb-1">Unlock Instantly</h3>
+                          <p className="text-sm text-gray-600 mb-3">
+                            Use {currentModule.coinCost} EduCoins to unlock now
+                          </p>
+                          <Button
+                            onClick={() => unlockModule(currentModule.id)}
+                            disabled={eduCoins < currentModule.coinCost}
+                            className="bg-dunamis-primary hover:bg-dunamis-secondary"
+                          >
+                            Unlock Now
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
               </div>
 
-              {/* Enhanced Learning Track Timeline */}
               <div>
+                {/* EduWallet Summary */}
+                <Card className="mb-6 border-2 border-dunamis-primary">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <Wallet className="h-5 w-5 text-dunamis-primary" />
+                      Your EduWallet
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-center mb-4">
+                      <p className="text-3xl font-bold text-dunamis-primary">{eduCoins}</p>
+                      <p className="text-sm text-gray-500">EduCoins Available</p>
+                    </div>
+                    <div className="space-y-2">
+                      <Button
+                        className="w-full bg-dunamis-primary hover:bg-dunamis-secondary"
+                        onClick={() => setShowWalletModal(true)}
+                      >
+                        <DollarSign className="h-4 w-4 mr-2" />
+                        Top Up
+                      </Button>
+                      <Dialog open={showWalletModal} onOpenChange={setShowWalletModal}>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Top Up Your EduWallet</DialogTitle>
+                            <DialogDescription>Add EduCoins to unlock premium content and features</DialogDescription>
+                          </DialogHeader>
+                          <Tabs defaultValue="ngn">
+                            <TabsList className="grid w-full grid-cols-2">
+                              <TabsTrigger value="ngn">Naira (₦)</TabsTrigger>
+                              <TabsTrigger value="usd">USD ($)</TabsTrigger>
+                            </TabsList>
+                            <TabsContent value="ngn" className="space-y-4">
+                              <div className="grid grid-cols-3 gap-2 my-4">
+                                <Button
+                                  variant="outline"
+                                  onClick={() => setTopupAmount("500")}
+                                  className={topupAmount === "500" ? "border-dunamis-primary" : ""}
+                                >
+                                  ₦500
+                                </Button>
+                                <Button
+                                  variant="outline"
+                                  onClick={() => setTopupAmount("1000")}
+                                  className={topupAmount === "1000" ? "border-dunamis-primary" : ""}
+                                >
+                                  ₦1,000
+                                </Button>
+                                <Button
+                                  variant="outline"
+                                  onClick={() => setTopupAmount("2000")}
+                                  className={topupAmount === "2000" ? "border-dunamis-primary" : ""}
+                                >
+                                  ₦2,000
+                                </Button>
+                              </div>
+                              <div className="space-y-2">
+                                <label className="text-sm">Or enter custom amount:</label>
+                                <Input
+                                  type="number"
+                                  placeholder="Enter amount in Naira"
+                                  value={topupAmount}
+                                  onChange={(e) => setTopupAmount(e.target.value)}
+                                />
+                              </div>
+                              <Button
+                                className="w-full bg-dunamis-primary hover:bg-dunamis-secondary"
+                                onClick={handleTopup}
+                              >
+                                Pay with Paystack
+                              </Button>
+                            </TabsContent>
+                            <TabsContent value="usd" className="space-y-4">
+                              <div className="grid grid-cols-3 gap-2 my-4">
+                                <Button
+                                  variant="outline"
+                                  onClick={() => setTopupAmount("5")}
+                                  className={topupAmount === "5" ? "border-dunamis-primary" : ""}
+                                >
+                                  $5
+                                </Button>
+                                <Button
+                                  variant="outline"
+                                  onClick={() => setTopupAmount("10")}
+                                  className={topupAmount === "10" ? "border-dunamis-primary" : ""}
+                                >
+                                  $10
+                                </Button>
+                                <Button
+                                  variant="outline"
+                                  onClick={() => setTopupAmount("20")}
+                                  className={topupAmount === "20" ? "border-dunamis-primary" : ""}
+                                >
+                                  $20
+                                </Button>
+                              </div>
+                              <div className="space-y-2">
+                                <label className="text-sm">Or enter custom amount:</label>
+                                <Input
+                                  type="number"
+                                  placeholder="Enter amount in USD"
+                                  value={topupAmount}
+                                  onChange={(e) => setTopupAmount(e.target.value)}
+                                />
+                              </div>
+                              <Button
+                                className="w-full bg-dunamis-primary hover:bg-dunamis-secondary"
+                                onClick={handleTopup}
+                              >
+                                Pay with Stripe
+                              </Button>
+                            </TabsContent>
+                          </Tabs>
+                        </DialogContent>
+                      </Dialog>
+
+                      <Button variant="outline" className="w-full" onClick={() => setShowWalletModal(true)}>
+                        <Clock className="h-4 w-4 mr-2" />
+                        Transaction History
+                      </Button>
+                    </div>
+
+                    {/* Streak Bonus */}
+                    <div className="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                      <div className="flex items-center justify-between mb-2">
+                        <p className="font-medium text-sm flex items-center gap-1">
+                          <Gift className="h-4 w-4 text-yellow-500" />
+                          Daily Streak
+                        </p>
+                        <Badge variant="outline" className="text-yellow-600 border-yellow-300">
+                          {streakDays} days
+                        </Badge>
+                      </div>
+                      <Progress value={(streakDays % 7) * (100 / 7)} className="h-1 mb-2" />
+                      <p className="text-xs text-gray-500">Log in tomorrow to earn {10 + streakDays * 5} EduCoins!</p>
+                    </div>
+
+                    {/* Coin Decay Warning */}
+                    <div className="mt-4 p-3 bg-red-50 rounded-lg border border-red-200">
+                      <div className="flex items-center gap-2 text-red-600 mb-1">
+                        <AlertCircle className="h-4 w-4" />
+                        <p className="font-medium text-sm">Coin Decay Warning</p>
+                      </div>
+                      <p className="text-xs text-gray-600">
+                        Unused EduCoins decay by 10% weekly. Next decay:{" "}
+                        {new Date(Date.now() + 7 * 86400000).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Enhanced Learning Track Timeline */}
                 <Card>
                   <CardHeader>
                     <CardTitle className="text-lg">Interactive Learning Track</CardTitle>
@@ -878,10 +1494,10 @@ export function AIPlatformClient() {
                   <span className={currency === "NGN" ? "font-semibold" : "text-gray-500"}>NGN</span>
                 </div>
               </div>
-              <div className="grid md:grid-cols-3 gap-6">
-                {pricingTiers.map((tier, index) => (
+              <div className="grid md:grid-cols-4 gap-4">
+                {pricingTiers.map((tier) => (
                   <Card
-                    key={index}
+                    key={tier.id}
                     className={`relative ${tier.color} ${tier.popular ? "ring-2 ring-dunamis-primary" : ""}`}
                   >
                     {tier.popular && (
@@ -891,22 +1507,22 @@ export function AIPlatformClient() {
                     )}
                     <CardHeader className="text-center">
                       <CardTitle className="text-xl">{tier.name}</CardTitle>
-                      <div className="text-3xl font-bold text-dunamis-primary">
+                      <div className="text-3xl font-bold mt-2">
                         {currency === "USD" ? `$${tier.priceUSD}` : `₦${tier.priceNGN.toLocaleString()}`}
                         <span className="text-sm font-normal text-gray-500">/{tier.period}</span>
                       </div>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      <ul className="space-y-3">
-                        {tier.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-center gap-2">
-                            <CheckCircle className="h-4 w-4 text-green-500" />
-                            <span className="text-sm">{feature}</span>
+                      <ul className="space-y-2">
+                        {tier.features.map((feature, index) => (
+                          <li key={index} className="flex items-start gap-2 text-sm">
+                            <CheckCircle className="h-4 w-4 text-green-500 mt-0.5" />
+                            <span>{feature}</span>
                           </li>
                         ))}
                       </ul>
-                      <Button className={`w-full ${tier.buttonColor} text-white`}>
-                        {tier.priceUSD === 0 ? "Start Free" : "Get Started"}
+                      <Button className={`w-full ${tier.buttonColor}`} onClick={() => upgradeTier(tier.id)}>
+                        {tier.id === "free" ? "Start Free" : "Upgrade Now"}
                       </Button>
                     </CardContent>
                   </Card>
@@ -922,156 +1538,342 @@ export function AIPlatformClient() {
             <div className="text-center">
               <h2 className="text-3xl font-bold text-dunamis-primary mb-4">Learning Resources</h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Access curated tools, tutorials, and resources to accelerate your AI learning journey
+                Access our comprehensive collection of AI learning materials
               </p>
             </div>
 
-            <div className="grid gap-8">
+            <div className="grid md:grid-cols-2 gap-6">
               {resources.map((category, index) => (
                 <Card key={index}>
                   <CardHeader>
-                    <CardTitle className="text-xl">{category.category}</CardTitle>
+                    <CardTitle>{category.category}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid md:grid-cols-3 gap-4">
-                      {category.items.map((item, itemIndex) => (
-                        <Card
-                          key={itemIndex}
-                          className="hover:shadow-md transition-shadow cursor-pointer"
-                          onClick={() => window.open(item.url, "_blank")}
-                        >
-                          <CardContent className="p-4 flex items-center gap-3">
-                            <item.icon className="h-8 w-8 text-dunamis-primary" />
-                            <div>
-                              <h4 className="font-medium">{item.name}</h4>
-                              <ExternalLink className="h-4 w-4 text-gray-400 mt-1" />
+                    <ul className="space-y-3">
+                      {category.items.map((item, idx) => (
+                        <li key={idx}>
+                          <a
+                            href={item.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 p-3 rounded-lg border hover:border-dunamis-primary hover:bg-gray-50 transition-colors"
+                          >
+                            <div className="bg-dunamis-primary/10 p-2 rounded-full">
+                              <item.icon className="h-5 w-5 text-dunamis-primary" />
                             </div>
-                          </CardContent>
-                        </Card>
+                            <span className="flex-1">{item.name}</span>
+                            <ExternalLink className="h-4 w-4 text-gray-400" />
+                          </a>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   </CardContent>
                 </Card>
               ))}
             </div>
+          </div>
+        )
 
-            {/* Embedded Video Section */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Featured Tutorial</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                  <div className="text-center">
-                    <Play className="h-16 w-16 text-dunamis-primary mx-auto mb-4" />
-                    <p className="text-gray-600">AI Fundamentals: Getting Started</p>
-                    <p className="text-sm text-gray-500 mt-2">Introduction to artificial intelligence concepts</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+      case "about":
+        return (
+          <div className="space-y-8">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-dunamis-primary mb-4">About AI Mastery Bootcamp</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Learn how our globally competitive bootcamp is transforming careers
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xl font-bold mb-4">Our Mission</h3>
+                <p className="text-gray-700 mb-6">
+                  At Dunamis Tutors, we're committed to democratizing AI education and making it accessible to students
+                  across Nigeria and beyond. Our AI Mastery Bootcamp is designed to equip you with the skills needed to
+                  thrive in the rapidly evolving field of artificial intelligence.
+                </p>
+                <h3 className="text-xl font-bold mb-4">Our Approach</h3>
+                <p className="text-gray-700">
+                  We believe in learning by doing. Our curriculum combines theoretical foundations with hands-on
+                  projects, real-world applications, and mentorship from industry experts. The EduCoin gamified economy
+                  adds an engaging layer to your learning journey, rewarding progress and fostering healthy competition.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-4">Program Highlights</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
+                    <div>
+                      <p className="font-medium">Comprehensive Curriculum</p>
+                      <p className="text-sm text-gray-600">From AI fundamentals to advanced deep learning techniques</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
+                    <div>
+                      <p className="font-medium">Global Cohort Experience</p>
+                      <p className="text-sm text-gray-600">Learn alongside peers from Nigeria, UK, US, and beyond</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
+                    <div>
+                      <p className="font-medium">Industry Recognition</p>
+                      <p className="text-sm text-gray-600">Earn certificates and badges valued by top employers</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
+                    <div>
+                      <p className="font-medium">EduCoin Gamified Economy</p>
+                      <p className="text-sm text-gray-600">Earn and spend EduCoins to enhance your learning journey</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
+                    <div>
+                      <p className="font-medium">Career Support</p>
+                      <p className="text-sm text-gray-600">
+                        Job placement assistance, resume reviews, and interview prep
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 mt-8">
+              <Card>
+                <CardContent className="p-6 text-center">
+                  <Building className="h-12 w-12 text-dunamis-primary mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">Our Partners</h3>
+                  <p className="text-gray-600">
+                    We collaborate with leading tech companies to ensure our curriculum meets industry standards
+                  </p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-6 text-center">
+                  <Users className="h-12 w-12 text-dunamis-primary mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">Our Instructors</h3>
+                  <p className="text-gray-600">
+                    Learn from experienced AI practitioners with backgrounds at top tech companies
+                  </p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-6 text-center">
+                  <Mail className="h-12 w-12 text-dunamis-primary mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">Contact Us</h3>
+                  <p className="text-gray-600">Have questions? Reach out to our team for more information</p>
+                  <Button className="mt-4 bg-dunamis-primary hover:bg-dunamis-secondary">Get in Touch</Button>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="flex justify-center gap-4 mt-8">
+              <Button variant="outline" size="icon">
+                <Linkedin className="h-5 w-5" />
+              </Button>
+              <Button variant="outline" size="icon">
+                <Twitter className="h-5 w-5" />
+              </Button>
+              <Button variant="outline" size="icon">
+                <Youtube className="h-5 w-5" />
+              </Button>
+            </div>
           </div>
         )
 
       case "community":
         return (
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-dunamis-primary mb-4">AI Learning Community</h2>
+              <h2 className="text-3xl font-bold text-dunamis-primary mb-4">Community Hub</h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Connect with fellow learners, share projects, and get help from the community
+                Connect with fellow learners, share insights, and celebrate achievements
               </p>
             </div>
 
-            {/* Community Feed */}
             <div className="grid lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Community Feed</CardTitle>
-                    <Button className="ml-auto">
-                      <MessageCircleMore className="h-4 w-4 mr-2" />
-                      New Post
-                    </Button>
+                    <CardTitle className="flex items-center gap-2">
+                      <MessageCircleMore className="h-5 w-5" />
+                      Discussion Forum
+                    </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
+                  <CardContent className="space-y-6">
                     {communityPosts.map((post) => (
-                      <Card key={post.id} className="border-l-4 border-l-dunamis-primary">
-                        <CardContent className="p-4">
-                          <div className="flex items-start gap-3 mb-3">
-                            <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                              <Users className="h-5 w-5 text-gray-400" />
-                            </div>
-                            <div className="flex-1">
-                              <div className="flex items-center gap-2 mb-1">
-                                <span className="font-semibold">{post.author}</span>
-                                <span className="text-sm text-gray-500">{post.timestamp}</span>
-                              </div>
-                              <p className="text-gray-700 mb-3">{post.content}</p>
-                              <div className="flex flex-wrap gap-1 mb-3">
-                                {post.tags.map((tag, index) => (
-                                  <Badge key={index} variant="secondary" className="text-xs">
-                                    #{tag}
-                                  </Badge>
-                                ))}
-                              </div>
-                              <div className="flex items-center gap-4 text-sm text-gray-500">
-                                <button className="flex items-center gap-1 hover:text-dunamis-primary">
-                                  <ThumbsUp className="h-4 w-4" />
-                                  {post.likes}
-                                </button>
-                                <button className="flex items-center gap-1 hover:text-dunamis-primary">
-                                  <Reply className="h-4 w-4" />
-                                  {post.replies}
-                                </button>
-                              </div>
-                            </div>
+                      <div key={post.id} className="border rounded-lg p-4">
+                        <div className="flex items-center gap-3 mb-3">
+                          <Avatar>
+                            <AvatarFallback>{post.author.charAt(0)}</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-medium">{post.author}</p>
+                            <p className="text-xs text-gray-500">{post.timestamp}</p>
                           </div>
-                        </CardContent>
-                      </Card>
+                        </div>
+                        <p className="text-gray-700 mb-3">{post.content}</p>
+                        <div className="flex flex-wrap gap-1 mb-3">
+                          {post.tags.map((tag, idx) => (
+                            <Badge key={idx} variant="secondary" className="text-xs">
+                              #{tag}
+                            </Badge>
+                          ))}
+                        </div>
+                        <div className="flex gap-4 text-sm text-gray-500">
+                          <button className="flex items-center gap-1 hover:text-dunamis-primary">
+                            <ThumbsUp className="h-4 w-4" />
+                            {post.likes}
+                          </button>
+                          <button className="flex items-center gap-1 hover:text-dunamis-primary">
+                            <Reply className="h-4 w-4" />
+                            {post.replies}
+                          </button>
+                        </div>
+                      </div>
                     ))}
+                    <div className="flex gap-2">
+                      <Input placeholder="Share your thoughts or questions..." />
+                      <Button className="bg-dunamis-primary hover:bg-dunamis-secondary">Post</Button>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
 
-              <div>
+              <div className="space-y-6">
+                {/* Leaderboard */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>Community Stats</CardTitle>
+                    <CardTitle className="flex items-center gap-2">
+                      <Trophy className="h-5 w-5 text-yellow-500" />
+                      Leaderboard
+                    </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-dunamis-primary">2,847</div>
-                      <div className="text-sm text-gray-500">Active Learners</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-dunamis-primary">156</div>
-                      <div className="text-sm text-gray-500">Projects Shared</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-dunamis-primary">89%</div>
-                      <div className="text-sm text-gray-500">Completion Rate</div>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {leaderboard.map((entry, index) => (
+                        <div key={entry.id} className="flex items-center gap-3">
+                          <div
+                            className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold ${
+                              index === 0
+                                ? "bg-yellow-500"
+                                : index === 1
+                                  ? "bg-gray-400"
+                                  : index === 2
+                                    ? "bg-amber-700"
+                                    : "bg-gray-200"
+                            }`}
+                          >
+                            {index + 1}
+                          </div>
+                          <Avatar>
+                            <AvatarFallback>{entry.name.charAt(0)}</AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1">
+                            <p className="font-medium">{entry.name}</p>
+                            <div className="flex items-center gap-2">
+                              <p className="text-sm text-gray-500">{entry.points} points</p>
+                              <Badge
+                                className={`${
+                                  entry.tier === "Gold"
+                                    ? "bg-yellow-500"
+                                    : entry.tier === "Silver"
+                                      ? "bg-gray-400"
+                                      : "bg-amber-700"
+                                } text-white text-xs`}
+                              >
+                                {entry.tier}
+                              </Badge>
+                            </div>
+                          </div>
+                          <div className="text-xs text-gray-500 flex items-center gap-1">
+                            <Gift className="h-3 w-3" />
+                            {entry.streak}d
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="mt-6">
+                {/* Hall of Fame */}
+                <Card>
                   <CardHeader>
-                    <CardTitle>Quick Links</CardTitle>
+                    <CardTitle className="flex items-center gap-2">
+                      <Award className="h-5 w-5 text-yellow-500" />
+                      Hall of Fame
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-6">
+                      {hallOfFame.map((entry, index) => (
+                        <div key={index} className="text-center">
+                          <p className="text-sm text-gray-500 mb-2">{entry.week}</p>
+                          <Avatar className="w-16 h-16 mx-auto mb-2">
+                            <AvatarFallback>{entry.winner.name.charAt(0)}</AvatarFallback>
+                          </Avatar>
+                          <h4 className="font-bold">{entry.winner.name}</h4>
+                          <p className="text-sm text-gray-600 mb-1">{entry.winner.project}</p>
+                          <Badge className="bg-yellow-500 text-white">Score: {entry.winner.score}/100</Badge>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Peer Notifications */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Recent Activity</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    <Button variant="outline" className="w-full justify-start">
-                      <MessageSquare className="h-4 w-4 mr-2" />
-                      WhatsApp Groups
-                    </Button>
-                    <Button variant="outline" className="w-full justify-start">
-                      <Users className="h-4 w-4 mr-2" />
-                      Study Groups
-                    </Button>
-                    <Button variant="outline" className="w-full justify-start">
-                      <Code className="h-4 w-4 mr-2" />
-                      Project Gallery
-                    </Button>
+                    <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                      <div className="flex items-center gap-2">
+                        <Avatar className="h-8 w-8">
+                          <AvatarFallback>T</AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <p className="text-sm">
+                            <span className="font-medium">Tayo</span> just upgraded to{" "}
+                            <Badge className="bg-yellow-500 text-white">Gold Tier</Badge>
+                          </p>
+                          <p className="text-xs text-gray-500">2 hours ago</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                      <div className="flex items-center gap-2">
+                        <Avatar className="h-8 w-8">
+                          <AvatarFallback>A</AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <p className="text-sm">
+                            <span className="font-medium">Amina</span> earned the{" "}
+                            <Badge variant="outline">Prompt Engineer</Badge> badge
+                          </p>
+                          <p className="text-xs text-gray-500">5 hours ago</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                      <div className="flex items-center gap-2">
+                        <Avatar className="h-8 w-8">
+                          <AvatarFallback>D</AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <p className="text-sm">
+                            <span className="font-medium">David</span> is on a{" "}
+                            <Badge className="bg-green-500 text-white">7-day streak</Badge>
+                          </p>
+                          <p className="text-xs text-gray-500">1 day ago</p>
+                        </div>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
@@ -1080,214 +1882,132 @@ export function AIPlatformClient() {
         )
 
       default:
-        return (
-          <div className="text-center py-12">
-            <h2 className="text-2xl font-bold text-dunamis-primary mb-4">Coming Soon</h2>
-            <p className="text-gray-600">This section is under development</p>
-          </div>
-        )
+        return null
     }
   }
 
   return (
-    <TooltipProvider>
-      <div className="min-h-screen bg-gray-50">
-        {/* Enhanced Top Progress Bar */}
-        <div className="bg-white border-b sticky top-0 z-40">
-          <div className="container px-4 py-3">
-            <div className="flex items-center justify-between mb-2">
-              <h1 className="text-lg font-bold text-dunamis-primary">AI Mastery Bootcamp</h1>
-              <div className="flex items-center gap-4">
-                <Badge variant="secondary">Module {activeModule}</Badge>
-                <Badge className="bg-dunamis-primary text-white">{Math.round(overallProgress)}% Complete</Badge>
-              </div>
-            </div>
-            <Progress value={currentModuleProgress} className="h-2" />
-          </div>
-        </div>
-
-        <div className="flex">
-          {/* Enhanced Left Sidebar Navigation */}
-          <div className="w-64 bg-white border-r min-h-screen sticky top-16">
-            <div className="p-4">
-              <nav className="space-y-2">
-                {navigationItems.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setCurrentView(item.id)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-colors ${
-                      currentView === item.id ? "bg-dunamis-primary text-white" : "text-gray-700 hover:bg-gray-100"
-                    }`}
-                  >
-                    <item.icon className="h-5 w-5" />
-                    {item.label}
-                  </button>
-                ))}
-              </nav>
-
-              {currentView === "curriculum" && (
-                <div className="mt-8">
-                  <h3 className="font-bold text-sm text-gray-500 uppercase tracking-wide mb-3">Modules</h3>
-                  <div className="space-y-2">
-                    {modules.map((module) => (
-                      <TooltipProvider key={module.id}>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <button
-                              onClick={() => !module.locked && setActiveModule(module.id)}
-                              className={`w-full text-left p-3 rounded-lg border transition-colors ${
-                                activeModule === module.id
-                                  ? "border-dunamis-primary bg-dunamis-primary/5"
-                                  : "border-gray-200 hover:border-gray-300"
-                              } ${module.locked ? "opacity-50 cursor-not-allowed" : ""}`}
-                              disabled={module.locked}
-                            >
-                              <div className="flex items-center justify-between mb-2">
-                                <span className="font-medium text-sm">{module.title}</span>
-                                {module.completed ? (
-                                  <CheckCircle className="h-4 w-4 text-green-500" />
-                                ) : module.locked ? (
-                                  <Lock className="h-4 w-4 text-gray-400" />
-                                ) : null}
-                              </div>
-                              <div className="mb-2">
-                                <Progress value={module.progress} className="h-1" />
-                              </div>
-                              <div className="flex items-center gap-2 text-xs text-gray-500">
-                                <Clock className="h-3 w-3" />
-                                {module.timeLeft}
-                                {module.quizScore && (
-                                  <>
-                                    <span>•</span>
-                                    <span>Quiz: {module.quizScore}%</span>
-                                  </>
-                                )}
-                              </div>
-                              {module.badge && (
-                                <Badge className="mt-2 text-xs bg-yellow-100 text-yellow-800">{module.badge}</Badge>
-                              )}
-                            </button>
-                          </TooltipTrigger>
-                          <TooltipContent side="right">
-                            <p>{module.description}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
+    <div className="container mx-auto py-8">
+      {/* Career Game Modal */}
+      <Dialog open={showCareerGame} onOpenChange={setShowCareerGame}>
+        <DialogContent className="max-w-3xl">
+          <DialogHeader>
+            <DialogTitle className="text-2xl">Career Game</DialogTitle>
+            <DialogDescription>Upgrade your virtual learning environment using EduCoins</DialogDescription>
+          </DialogHeader>
+          <div className="grid md:grid-cols-2 gap-6">
+            {careerGameItems.map((item, index) => (
+              <Card key={index} className="border-2 border-gray-200">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg">{item.name}</CardTitle>
+                  <p className="text-sm text-gray-600">{item.description}</p>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium">
+                      Level {item.level}/{item.maxLevel}
+                    </span>
+                    <Badge variant="outline">{item.cost} EduCoins</Badge>
+                  </div>
+                  <Progress value={(item.level / item.maxLevel) * 100} className="h-2 mb-3" />
+                  <div className="space-y-1 mb-4">
+                    {item.benefits.map((benefit, idx) => (
+                      <div key={idx} className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-3 w-3 text-green-500" />
+                        <span>{benefit}</span>
+                      </div>
                     ))}
                   </div>
-                </div>
-              )}
+                  <Button
+                    className="w-full bg-dunamis-primary hover:bg-dunamis-secondary"
+                    disabled={item.level >= item.maxLevel || eduCoins < item.cost}
+                    onClick={() => upgradeCareerItem(index)}
+                  >
+                    {item.level >= item.maxLevel ? "Maxed Out" : "Upgrade"}
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+            <div>
+              <p className="font-medium">Your EduWallet</p>
+              <p className="text-2xl font-bold text-dunamis-primary">{eduCoins} EduCoins</p>
             </div>
+            <Button onClick={() => setShowWalletModal(true)}>Top Up</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Notification Toast */}
+      {showNotification && (
+        <div className="fixed bottom-4 right-4 bg-dunamis-primary text-white p-4 rounded-lg shadow-lg z-50 max-w-md">
+          {notificationMessage}
+        </div>
+      )}
+
+      {/* Main Layout */}
+      <div className="flex flex-col md:flex-row gap-6">
+        {/* Sidebar Navigation */}
+        <div className="md:w-64 space-y-2">
+          {navigationItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setCurrentView(item.id)}
+              className={`flex items-center gap-3 w-full p-3 rounded-lg transition-colors ${
+                currentView === item.id ? "bg-dunamis-primary text-white" : "hover:bg-gray-100 text-gray-700"
+              }`}
+            >
+              <item.icon className="h-5 w-5" />
+              <span>{item.label}</span>
+            </button>
+          ))}
+
+          {/* EduWallet Mini Display */}
+          <div className="mt-6 p-4 border rounded-lg">
+            <div className="flex items-center justify-between mb-2">
+              <p className="font-medium flex items-center gap-1">
+                <Wallet className="h-4 w-4 text-dunamis-primary" />
+                EduWallet
+              </p>
+              <Badge variant="outline" className="cursor-pointer" onClick={() => setShowWalletModal(true)}>
+                {eduCoins}
+              </Badge>
+            </div>
+            <Button
+              size="sm"
+              className="w-full bg-dunamis-primary hover:bg-dunamis-secondary"
+              onClick={() => setShowWalletModal(true)}
+            >
+              Manage
+            </Button>
           </div>
 
-          {/* Main Content */}
-          <div className="flex-1">
-            <div className="container px-6 py-8">{renderContent()}</div>
-
-            {/* Enhanced Footer */}
-            <footer className="bg-dunamis-primary text-white py-12">
-              <div className="container px-6">
-                <div className="grid md:grid-cols-4 gap-8">
-                  <div>
-                    <h3 className="text-xl font-bold mb-4">Stay Connected</h3>
-                    <p className="text-gray-300 mb-4">
-                      Get the latest updates on AI trends, new courses, and exclusive content.
-                    </p>
-                    <div className="space-y-3">
-                      <Input
-                        type="email"
-                        placeholder="Enter your email"
-                        className="bg-white/10 border-white/20 text-white placeholder:text-gray-300"
-                      />
-                      <Button className="w-full bg-dunamis-accent hover:bg-dunamis-accent/90">
-                        <Mail className="h-4 w-4 mr-2" />
-                        Subscribe
-                      </Button>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-4">Join Our Community</h3>
-                    <div className="space-y-3">
-                      <Button
-                        variant="outline"
-                        className="w-full border-white/20 text-white hover:bg-white/10"
-                        onClick={() => window.open("https://chat.whatsapp.com/dunamis-ai-community", "_blank")}
-                      >
-                        <MessageSquare className="h-4 w-4 mr-2" />
-                        WhatsApp Group
-                      </Button>
-                      <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10">
-                        <Users className="h-4 w-4 mr-2" />
-                        Discord Community
-                      </Button>
-                      <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10">
-                        <CalendarIcon className="h-4 w-4 mr-2" />
-                        Subscribe to Calendar
-                      </Button>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-4">Follow Us</h3>
-                    <div className="flex gap-4 mb-6">
-                      <Button
-                        size="icon"
-                        variant="outline"
-                        className="border-white/20 text-white hover:bg-white/10"
-                        onClick={() => window.open("https://linkedin.com/company/dunamis-tutors", "_blank")}
-                      >
-                        <Linkedin className="h-5 w-5" />
-                      </Button>
-                      <Button
-                        size="icon"
-                        variant="outline"
-                        className="border-white/20 text-white hover:bg-white/10"
-                        onClick={() => window.open("https://youtube.com/@dunamistutors", "_blank")}
-                      >
-                        <Youtube className="h-5 w-5" />
-                      </Button>
-                      <Button
-                        size="icon"
-                        variant="outline"
-                        className="border-white/20 text-white hover:bg-white/10"
-                        onClick={() => window.open("https://twitter.com/dunamistutors", "_blank")}
-                      >
-                        <Twitter className="h-5 w-5" />
-                      </Button>
-                    </div>
-                    <div className="space-y-2 text-sm text-gray-300">
-                      <p>📧 dunamistutors@graduate.org</p>
-                      <p>📱 09020803096</p>
-                      <p>📍 Abuja, Nigeria</p>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-                    <div className="space-y-2 text-sm">
-                      <a href="#" className="block text-gray-300 hover:text-white">
-                        About Us
-                      </a>
-                      <a href="#" className="block text-gray-300 hover:text-white">
-                        Privacy Policy
-                      </a>
-                      <a href="#" className="block text-gray-300 hover:text-white">
-                        Terms of Service
-                      </a>
-                      <a href="#" className="block text-gray-300 hover:text-white">
-                        Support
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-8 pt-8 border-t border-white/20 text-center">
-                  <p className="text-gray-300">
-                    © 2024 Dunamis Tutors. All rights reserved. | Powered by AI Excellence
-                  </p>
-                </div>
-              </div>
-            </footer>
+          {/* User Tier */}
+          <div className="p-4 border rounded-lg">
+            <p className="text-sm text-gray-600 mb-2">Current Plan</p>
+            <Badge
+              className={`${
+                userTier === "Gold"
+                  ? "bg-yellow-500"
+                  : userTier === "Silver"
+                    ? "bg-gray-400"
+                    : userTier === "Bronze"
+                      ? "bg-amber-700"
+                      : "bg-gray-600"
+              } text-white`}
+            >
+              {userTier} Tier
+            </Badge>
+            <Button size="sm" variant="link" className="w-full mt-2 p-0" onClick={() => setCurrentView("cohort")}>
+              Upgrade Plan
+            </Button>
           </div>
         </div>
+
+        {/* Main Content */}
+        <div className="flex-1">{renderContent()}</div>
       </div>
-    </TooltipProvider>
+    </div>
   )
 }

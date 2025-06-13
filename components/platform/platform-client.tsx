@@ -37,7 +37,6 @@ import { ModuleUnlock } from "@/components/curriculum/module-unlock"
 import { PeerNotification } from "@/components/gamification/peer-notification"
 import { StreakBonus } from "@/components/gamification/streak-bonus"
 import { CareerGame } from "@/components/gamification/career-game"
-import { NotificationSystem } from "@/components/gamification/notification-system"
 
 interface Module {
   id: number
@@ -75,180 +74,72 @@ interface CohortSession {
   whatsappLink: string
 }
 
-export function DigitalMarketingPlatformClient() {
+interface PlatformClientProps {
+  programType: "ai" | "coding" | "marketing"
+  modules: Module[]
+  cohortSessions: CohortSession[]
+}
+
+export function PlatformClient({ programType, modules, cohortSessions }: PlatformClientProps) {
   const [activeModule, setActiveModule] = useState(1)
   const [showQuiz, setShowQuiz] = useState(false)
   const [quizAnswers, setQuizAnswers] = useState<{ [key: number]: number }>({})
   const [currentView, setCurrentView] = useState("curriculum")
+  const [currency, setCurrency] = useState<"USD" | "NGN">("USD")
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
 
-  // Digital Marketing specific modules
-  const modules: Module[] = [
-    {
-      id: 1,
-      title: "Digital Marketing Fundamentals",
-      duration: "3 hours",
-      completed: true,
-      locked: false,
-      lessons: 6,
-      description:
-        "Introduction to digital marketing concepts and strategies. Learn the basics of online marketing channels and how they work together to create effective campaigns.",
-      progress: 100,
-      timeLeft: "Completed",
-      quizScore: 90,
-      badge: "Digital Marketing Fundamentals",
-      pdfUrl: "/pdfs/digital-marketing-basics.pdf",
-    },
-    {
-      id: 2,
-      title: "Social Media Marketing",
-      duration: "4 hours",
-      completed: false,
-      locked: false,
-      lessons: 8,
-      description:
-        "Master social media platforms for business growth. Learn how to create engaging content, build a following, and measure your social media marketing success.",
-      progress: 60,
-      timeLeft: "1.6 hours left",
-      badge: "Social Media Specialist",
-      pdfUrl: "/pdfs/social-media-marketing.pdf",
-    },
-    {
-      id: 3,
-      title: "Search Engine Optimization",
-      duration: "5 hours",
-      completed: false,
-      locked: false,
-      lessons: 10,
-      description:
-        "Optimize websites for better search engine rankings. Learn on-page and off-page SEO techniques to improve organic traffic.",
-      progress: 30,
-      timeLeft: "3.5 hours left",
-      badge: "SEO Specialist",
-      pdfUrl: "/pdfs/seo-guide.pdf",
-    },
-    {
-      id: 4,
-      title: "Content Marketing",
-      duration: "4 hours",
-      completed: false,
-      locked: true,
-      lessons: 8,
-      description:
-        "Create compelling content that drives engagement. Learn content strategy, creation, distribution, and measurement.",
-      progress: 0,
-      timeLeft: "Locked",
-      timeWall: 3,
-      coinCost: 200,
-      badge: "Content Marketing Specialist",
-      pdfUrl: "/pdfs/content-marketing.pdf",
-    },
-    {
-      id: 5,
-      title: "Email Marketing",
-      duration: "3 hours",
-      completed: false,
-      locked: true,
-      lessons: 6,
-      description:
-        "Build effective email campaigns and automation. Learn list building, segmentation, A/B testing, and analytics.",
-      progress: 0,
-      timeLeft: "Locked",
-      timeWall: 7,
-      coinCost: 250,
-      badge: "Email Marketing Specialist",
-      pdfUrl: "/pdfs/email-marketing.pdf",
-    },
-    {
-      id: 6,
-      title: "Digital Marketing Analytics",
-      duration: "5 hours",
-      completed: false,
-      locked: true,
-      lessons: 10,
-      description:
-        "Measure and analyze marketing performance. Learn to use Google Analytics, social media insights, and other analytics tools.",
-      progress: 0,
-      timeLeft: "Locked",
-      timeWall: 14,
-      coinCost: 350,
-      badge: "Analytics Specialist",
-      pdfUrl: "/pdfs/marketing-analytics.pdf",
-    },
-  ]
+  // Get program-specific title
+  const getProgramTitle = () => {
+    switch (programType) {
+      case "ai":
+        return "AI Mastery Bootcamp"
+      case "coding":
+        return "Coding Bootcamp"
+      case "marketing":
+        return "Digital Marketing Mastery"
+      default:
+        return "Learning Platform"
+    }
+  }
 
-  // Digital Marketing specific quiz questions
+  // Get program-specific color
+  const getProgramColor = () => {
+    switch (programType) {
+      case "ai":
+        return "text-dunamis-primary"
+      case "coding":
+        return "text-blue-600"
+      case "marketing":
+        return "text-green-600"
+      default:
+        return "text-dunamis-primary"
+    }
+  }
+
+  // Sample quiz questions
   const quizQuestions: QuizQuestion[] = [
     {
       id: 1,
-      question: "Which of the following is NOT a social media platform?",
-      options: ["Instagram", "Twitter", "Google Analytics", "LinkedIn"],
-      correctAnswer: 2,
+      question: "What is the main advantage of using AI in education?",
+      options: [
+        "Replacing teachers",
+        "Personalized learning experiences",
+        "Reducing education costs",
+        "Eliminating homework",
+      ],
+      correctAnswer: 1,
     },
     {
       id: 2,
-      question: "What does SEO stand for?",
-      options: [
-        "Search Engine Optimization",
-        "Social Engagement Opportunities",
-        "Search Engine Operations",
-        "Social Email Outreach",
-      ],
-      correctAnswer: 0,
-    },
-    {
-      id: 3,
-      question: "Which metric is most important when measuring email marketing success?",
-      options: ["Open rate", "Click-through rate", "Conversion rate", "All of the above"],
-      correctAnswer: 3,
-    },
-    {
-      id: 4,
-      question: "What is a key component of content marketing?",
-      options: [
-        "Creating content only for search engines",
-        "Focusing on quantity over quality",
-        "Creating valuable content for your target audience",
-        "Posting the same content across all platforms",
-      ],
+      question: "Which of these is NOT a common application of AI?",
+      options: ["Natural Language Processing", "Computer Vision", "Time Travel Prediction", "Recommendation Systems"],
       correctAnswer: 2,
     },
-  ]
-
-  // Digital Marketing specific cohort sessions
-  const cohortSessions: CohortSession[] = [
-    {
-      id: 1,
-      title: "Digital Marketing Fundamentals",
-      date: new Date(2024, 5, 15),
-      time: "6:00 PM - 8:00 PM",
-      timezone: "Nigeria (WAT)",
-      instructor: "Folake Adeyemi",
-      attendees: 18,
-      maxAttendees: 25,
-      whatsappLink: "https://chat.whatsapp.com/nigeria-marketing-cohort",
-    },
-    {
-      id: 2,
-      title: "Social Media Strategy Masterclass",
-      date: new Date(2024, 5, 16),
-      time: "7:00 PM - 9:00 PM",
-      timezone: "UK (GMT)",
-      instructor: "James Wilson",
-      attendees: 22,
-      maxAttendees: 30,
-      whatsappLink: "https://chat.whatsapp.com/uk-marketing-cohort",
-    },
     {
       id: 3,
-      title: "SEO Workshop",
-      date: new Date(2024, 5, 17),
-      time: "8:00 PM - 10:00 PM",
-      timezone: "US Eastern (EST)",
-      instructor: "Sarah Johnson",
-      attendees: 15,
-      maxAttendees: 20,
-      whatsappLink: "https://chat.whatsapp.com/us-marketing-cohort",
+      question: "What does ML stand for in AI?",
+      options: ["Multiple Learning", "Machine Language", "Machine Learning", "Modern Logic"],
+      correctAnswer: 2,
     },
   ]
 
@@ -259,7 +150,6 @@ export function DigitalMarketingPlatformClient() {
 
   return (
     <div className="container mx-auto p-4 md:p-6">
-      <NotificationSystem />
       <PeerNotification />
 
       <div className="flex flex-col lg:flex-row gap-6">
@@ -267,7 +157,7 @@ export function DigitalMarketingPlatformClient() {
         <div className="flex-1">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
             <div>
-              <h1 className="text-3xl font-bold">Digital Marketing Mastery</h1>
+              <h1 className="text-3xl font-bold">{getProgramTitle()}</h1>
               <p className="text-muted-foreground">Your personalized learning journey</p>
             </div>
             <div className="flex items-center gap-4 mt-4 md:mt-0">
@@ -343,7 +233,7 @@ export function DigitalMarketingPlatformClient() {
                           ) : module.locked ? (
                             <Lock className="mr-2 h-5 w-5 text-gray-400" />
                           ) : (
-                            <BookOpen className="mr-2 h-5 w-5 text-green-600" />
+                            <BookOpen className={`mr-2 h-5 w-5 ${getProgramColor()}`} />
                           )}
                           Module {module.id}
                         </CardTitle>
@@ -374,7 +264,7 @@ export function DigitalMarketingPlatformClient() {
                         <>
                           <div className="flex items-center justify-between mb-1 text-xs">
                             <span>{module.progress}% complete</span>
-                            {module.timeLeft && <span>{module.timeLeft}</span>}
+                            {module.timeLeft && <span>{module.timeLeft} left</span>}
                           </div>
                           <Progress value={module.progress} className="h-1" />
                         </>
@@ -562,7 +452,7 @@ export function DigitalMarketingPlatformClient() {
             <div className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Digital Marketing Resources</CardTitle>
+                  <CardTitle>Learning Resources</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -577,7 +467,7 @@ export function DigitalMarketingPlatformClient() {
                         <div className="flex items-center justify-between p-2 border rounded-md">
                           <div className="flex items-center">
                             <Download className="mr-2 h-4 w-4 text-blue-500" />
-                            <span>Digital Marketing Handbook.pdf</span>
+                            <span>Module 1 Handbook.pdf</span>
                           </div>
                           <Button variant="ghost" size="sm">
                             <Download className="h-4 w-4" />
@@ -586,7 +476,7 @@ export function DigitalMarketingPlatformClient() {
                         <div className="flex items-center justify-between p-2 border rounded-md">
                           <div className="flex items-center">
                             <Download className="mr-2 h-4 w-4 text-blue-500" />
-                            <span>Social Media Strategy Template.pdf</span>
+                            <span>Practice Exercises.pdf</span>
                           </div>
                           <Button variant="ghost" size="sm">
                             <Download className="h-4 w-4" />
@@ -595,7 +485,7 @@ export function DigitalMarketingPlatformClient() {
                         <div className="flex items-center justify-between p-2 border rounded-md">
                           <div className="flex items-center">
                             <Download className="mr-2 h-4 w-4 text-blue-500" />
-                            <span>SEO Checklist.pdf</span>
+                            <span>Cheat Sheet.pdf</span>
                           </div>
                           <Button variant="ghost" size="sm">
                             <Download className="h-4 w-4" />
@@ -615,7 +505,7 @@ export function DigitalMarketingPlatformClient() {
                         <div className="flex items-center justify-between p-2 border rounded-md">
                           <div className="flex items-center">
                             <Play className="mr-2 h-4 w-4 text-red-500" />
-                            <span>Introduction to Digital Marketing</span>
+                            <span>Introduction to the Course</span>
                           </div>
                           <Button variant="ghost" size="sm">
                             <ExternalLink className="h-4 w-4" />
@@ -624,7 +514,7 @@ export function DigitalMarketingPlatformClient() {
                         <div className="flex items-center justify-between p-2 border rounded-md">
                           <div className="flex items-center">
                             <Play className="mr-2 h-4 w-4 text-red-500" />
-                            <span>Social Media Marketing Masterclass</span>
+                            <span>Practical Demonstration</span>
                           </div>
                           <Button variant="ghost" size="sm">
                             <ExternalLink className="h-4 w-4" />
@@ -633,7 +523,7 @@ export function DigitalMarketingPlatformClient() {
                         <div className="flex items-center justify-between p-2 border rounded-md">
                           <div className="flex items-center">
                             <Play className="mr-2 h-4 w-4 text-red-500" />
-                            <span>SEO Techniques for 2024</span>
+                            <span>Advanced Techniques</span>
                           </div>
                           <Button variant="ghost" size="sm">
                             <ExternalLink className="h-4 w-4" />
@@ -655,7 +545,7 @@ export function DigitalMarketingPlatformClient() {
                         <div className="flex items-center justify-between p-2 border rounded-md">
                           <div className="flex items-center">
                             <ExternalLink className="mr-2 h-4 w-4 text-green-500" />
-                            <span>Google Digital Garage</span>
+                            <span>Industry Documentation</span>
                           </div>
                           <Button variant="ghost" size="sm">
                             <ExternalLink className="h-4 w-4" />
@@ -664,7 +554,7 @@ export function DigitalMarketingPlatformClient() {
                         <div className="flex items-center justify-between p-2 border rounded-md">
                           <div className="flex items-center">
                             <ExternalLink className="mr-2 h-4 w-4 text-green-500" />
-                            <span>HubSpot Academy</span>
+                            <span>Practice Playground</span>
                           </div>
                           <Button variant="ghost" size="sm">
                             <ExternalLink className="h-4 w-4" />
@@ -673,7 +563,7 @@ export function DigitalMarketingPlatformClient() {
                         <div className="flex items-center justify-between p-2 border rounded-md">
                           <div className="flex items-center">
                             <ExternalLink className="mr-2 h-4 w-4 text-green-500" />
-                            <span>Moz SEO Learning Center</span>
+                            <span>Community Forum</span>
                           </div>
                           <Button variant="ghost" size="sm">
                             <ExternalLink className="h-4 w-4" />
@@ -682,7 +572,7 @@ export function DigitalMarketingPlatformClient() {
                         <div className="flex items-center justify-between p-2 border rounded-md">
                           <div className="flex items-center">
                             <ExternalLink className="mr-2 h-4 w-4 text-green-500" />
-                            <span>Facebook Blueprint</span>
+                            <span>Additional Exercises</span>
                           </div>
                           <Button variant="ghost" size="sm">
                             <ExternalLink className="h-4 w-4" />
@@ -701,13 +591,18 @@ export function DigitalMarketingPlatformClient() {
             <div className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>About Digital Marketing Program</CardTitle>
+                  <CardTitle>About This Program</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p>
-                    This comprehensive program is designed to take you from beginner to professional in the field of
-                    Digital Marketing. Through a carefully structured curriculum, hands-on projects, and expert
-                    mentorship, you'll gain the skills and confidence needed to excel in this high-demand field.
+                    This comprehensive program is designed to take you from beginner to professional in the field of{" "}
+                    {programType === "ai"
+                      ? "Artificial Intelligence"
+                      : programType === "coding"
+                        ? "Software Development"
+                        : "Digital Marketing"}
+                    . Through a carefully structured curriculum, hands-on projects, and expert mentorship, you'll gain
+                    the skills and confidence needed to excel in this high-demand field.
                   </p>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
@@ -740,26 +635,80 @@ export function DigitalMarketingPlatformClient() {
                     <div>
                       <h3 className="text-lg font-medium mb-2">What You'll Learn</h3>
                       <ul className="space-y-2">
-                        <li className="flex items-start">
-                          <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                          <span>Digital Marketing Strategy</span>
-                        </li>
-                        <li className="flex items-start">
-                          <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                          <span>Search Engine Optimization (SEO)</span>
-                        </li>
-                        <li className="flex items-start">
-                          <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                          <span>Social Media Marketing</span>
-                        </li>
-                        <li className="flex items-start">
-                          <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                          <span>Content Marketing and Creation</span>
-                        </li>
-                        <li className="flex items-start">
-                          <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                          <span>Analytics and Performance Tracking</span>
-                        </li>
+                        {programType === "ai" && (
+                          <>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>Fundamentals of AI and Machine Learning</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>Neural Networks and Deep Learning</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>Natural Language Processing</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>Computer Vision Applications</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>AI Ethics and Responsible AI</span>
+                            </li>
+                          </>
+                        )}
+
+                        {programType === "coding" && (
+                          <>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>Programming Fundamentals</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>Web Development (Frontend & Backend)</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>Database Design and Management</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>API Development and Integration</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>DevOps and Deployment</span>
+                            </li>
+                          </>
+                        )}
+
+                        {programType === "marketing" && (
+                          <>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>Digital Marketing Strategy</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>Search Engine Optimization (SEO)</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>Social Media Marketing</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>Content Marketing and Creation</span>
+                            </li>
+                            <li className="flex items-start">
+                              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                              <span>Analytics and Performance Tracking</span>
+                            </li>
+                          </>
+                        )}
                       </ul>
                     </div>
                   </div>
@@ -769,7 +718,13 @@ export function DigitalMarketingPlatformClient() {
                     <div className="flex items-center p-4 border rounded-md bg-muted">
                       <Award className="h-12 w-12 text-yellow-500 mr-4" />
                       <div>
-                        <h4 className="font-medium">Digital Marketing Professional Certificate</h4>
+                        <h4 className="font-medium">
+                          {programType === "ai"
+                            ? "AI Mastery Certificate"
+                            : programType === "coding"
+                              ? "Professional Coding Certificate"
+                              : "Digital Marketing Professional Certificate"}
+                        </h4>
                         <p className="text-sm text-muted-foreground">
                           Complete all modules and pass the final assessment to earn your certificate. Our certificates
                           are recognized by leading companies in the industry.
@@ -801,7 +756,7 @@ export function DigitalMarketingPlatformClient() {
                   <CardTitle>Community</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p>Connect with fellow digital marketers, share your progress, and get help from the community.</p>
+                  <p>Connect with fellow learners, share your progress, and get help from the community.</p>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <Card>
@@ -864,14 +819,14 @@ export function DigitalMarketingPlatformClient() {
                       </div>
                       <div className="flex items-center justify-between p-3 border rounded-md">
                         <div>
-                          <h4 className="font-medium">Industry Expert Talk: Social Media Trends</h4>
+                          <h4 className="font-medium">Industry Expert Talk</h4>
                           <p className="text-sm text-muted-foreground">Next Tuesday, 6:00 PM WAT</p>
                         </div>
                         <Button size="sm">Register</Button>
                       </div>
                       <div className="flex items-center justify-between p-3 border rounded-md">
                         <div>
-                          <h4 className="font-medium">Campaign Showcase</h4>
+                          <h4 className="font-medium">Project Showcase</h4>
                           <p className="text-sm text-muted-foreground">Next Thursday, 5:00 PM WAT</p>
                         </div>
                         <Button size="sm">RSVP</Button>
@@ -905,13 +860,13 @@ export function DigitalMarketingPlatformClient() {
         <div className="w-full lg:w-80 space-y-6">
           <EduWallet />
 
-          <StreakBonus currentStreak={5} />
+          <StreakBonus currentStreak={12} />
 
           <HallOfFame />
 
-          <CareerGame />
+          <CareerGame variant="compact" />
 
-          <UpgradePlan />
+          <UpgradePlan variant="compact" program={programType} />
         </div>
       </div>
     </div>
