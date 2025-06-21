@@ -35,11 +35,12 @@ export default function Home() {
             </div>
             <div className="flex justify-center">
               <Image
-                src="/placeholder.svg?height=500&width=500"
-                alt="Dunamis Tutors"
+                src="https://i.ibb.co/CpdGnRzm/personal.png"
+                alt="Dunamis Tutors - Personalized Learning Experience"
                 width={500}
                 height={500}
-                className="rounded-lg object-cover"
+                className="rounded-lg object-cover shadow-lg"
+                priority
               />
             </div>
           </div>

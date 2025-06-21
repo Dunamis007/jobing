@@ -78,6 +78,13 @@ export function SiteHeader() {
           </DropdownMenu>
 
           <Link
+            href="/blog"
+            className={`text-sm font-medium ${isActive("/blog") ? "text-white" : "text-gray-300 hover:text-white"}`}
+          >
+            Blog
+          </Link>
+
+          <Link
             href="/dashboard"
             className={`text-sm font-medium ${isActive("/dashboard") ? "text-white" : "text-gray-300 hover:text-white"}`}
           >
@@ -139,6 +146,14 @@ export function SiteHeader() {
                 ))}
               </div>
             </div>
+
+            <Link
+              href="/blog"
+              className={`text-sm font-medium ${isActive("/blog") ? "text-white" : "text-gray-300"}`}
+              onClick={toggleMenu}
+            >
+              Blog
+            </Link>
 
             <Link
               href="/dashboard"
