@@ -39,8 +39,7 @@ export default function JAMBPage() {
                   <Link href="#program-details">
                     <Button
                       variant="outline"
-                      className="border-white text-white hover:bg-white hover:text-dunamis-primary"
-                    >
+                      className="border-white hover:bg-white hover:text-dunamis-primary text-black           >
                       Learn More
                     </Button>
                   </Link>

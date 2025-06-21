@@ -101,7 +101,7 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-4">
           <Link href="/login" className="hidden md:block">
-            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-dunamis-primary">
+            <Button variant="outline" className="border-white hover:bg-white hover:text-dunamis-primary">
               Login
             </Button>
           </Link>
