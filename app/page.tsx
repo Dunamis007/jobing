@@ -26,7 +26,7 @@ export default function Home() {
                 <Link href="#programs">
                   <Button
                     variant="outline"
-                    className="border-white hover:bg-white hover:text-dunamis-primarymis-primary text-black"
+                    className="border-white hover:bg-white hover:text-dunamis-primary text-black"
                   >
                     Explore Programs
                   </Button>
