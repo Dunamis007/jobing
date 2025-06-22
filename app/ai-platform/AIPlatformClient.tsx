@@ -46,7 +46,7 @@ import {
   Building,
   Briefcase,
   Lightbulb,
-  Database,
+  DatabaseIcon,
   Cpu,
   Shield,
   Rocket,
@@ -217,7 +217,7 @@ export function AIPlatformClient() {
         "Model Evaluation (Accuracy, Precision, Recall)",
         "Feature Engineering, Overfitting",
       ],
-      trackIcon: Database,
+      trackIcon: DatabaseIcon,
       trackColor: "text-blue-600",
     },
     {
