@@ -40,12 +40,16 @@ import {
   ThumbsUp,
   Reply,
   Wallet,
-  TrendingUp,
   Gift,
   AlertCircle,
   Trophy,
   Building,
   Briefcase,
+  Lightbulb,
+  Database,
+  Cpu,
+  Shield,
+  Rocket,
 } from "lucide-react"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -54,6 +58,8 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 interface Module {
   id: number
   title: string
+  track: string
+  weeks: string
   duration: string
   completed: boolean
   locked: boolean
@@ -66,6 +72,10 @@ interface Module {
   pdfUrl?: string
   timeWall?: number
   coinCost?: number
+  projects: string[]
+  keyTopics: string[]
+  trackIcon: any
+  trackColor: string
 }
 
 interface QuizQuestion {
@@ -157,106 +167,226 @@ export function AIPlatformClient() {
   const modules: Module[] = [
     {
       id: 1,
-      title: "AI Fundamentals",
-      duration: "2 hours",
+      title: "AI Literacy & Prompt Engineering",
+      track: "Track 1",
+      weeks: "Weeks 1-2",
+      duration: "2 weeks",
       completed: true,
       locked: false,
-      lessons: 5,
-      description: "Introduction to artificial intelligence and machine learning concepts",
+      lessons: 8,
+      description: "Master the fundamentals of AI and become proficient in prompt engineering with modern LLMs",
       progress: 100,
       timeLeft: "Completed",
       quizScore: 95,
-      badge: "AI Explorer",
-      pdfUrl: "/pdfs/ai-fundamentals.pdf",
+      badge: "AI Literacy Expert",
+      pdfUrl: "/pdfs/ai-literacy.pdf",
+      projects: [
+        "Design a custom AI assistant with pre-built GPTs",
+        "Generate marketing copy, ad visuals, and pitch decks",
+      ],
+      keyTopics: [
+        "What is AI? Where is it used today?",
+        "Prompt Engineering Basics – ChatGPT, Claude, Gemini",
+        "Introduction to Generative AI (text, code, image, video)",
+        "AI + Productivity: Research, Automation, Writing, Design",
+        "Introduction to AI Ethics, Hallucination, Bias",
+      ],
+      trackIcon: Lightbulb,
+      trackColor: "text-yellow-600",
     },
     {
       id: 2,
-      title: "Prompt Engineering",
-      duration: "3 hours",
+      title: "Machine Learning Fundamentals",
+      track: "Track 2",
+      weeks: "Weeks 3-6",
+      duration: "4 weeks",
       completed: true,
       locked: false,
-      lessons: 7,
-      description: "Master the art of crafting effective prompts for AI models",
+      lessons: 12,
+      description: "Build a solid foundation in machine learning algorithms and practical applications",
       progress: 100,
       timeLeft: "Completed",
       quizScore: 88,
-      badge: "Prompt Engineer",
-      pdfUrl: "/pdfs/prompt-engineering.pdf",
+      badge: "ML Practitioner",
+      pdfUrl: "/pdfs/ml-fundamentals.pdf",
+      projects: ["Predict student dropout or customer churn", "Sales forecasting or house pricing with real datasets"],
+      keyTopics: [
+        "Supervised vs Unsupervised Learning",
+        "Classification & Regression (Linear, Logistic)",
+        "Decision Trees, Random Forests",
+        "Model Evaluation (Accuracy, Precision, Recall)",
+        "Feature Engineering, Overfitting",
+      ],
+      trackIcon: Database,
+      trackColor: "text-blue-600",
     },
     {
       id: 3,
-      title: "Machine Learning Pipeline",
-      duration: "4 hours",
+      title: "Deep Learning & GenAI",
+      track: "Track 3",
+      weeks: "Weeks 7-10",
+      duration: "4 weeks",
       completed: false,
       locked: false,
-      lessons: 8,
-      description: "Build end-to-end ML pipelines and data processing workflows",
+      lessons: 15,
+      description: "Dive deep into neural networks, transformers, and generative AI technologies",
       progress: 60,
-      timeLeft: "1.5 hours left",
-      badge: "Data Strategist",
-      pdfUrl: "/pdfs/ml-pipeline.pdf",
+      timeLeft: "1.5 weeks left",
+      badge: "Deep Learning Specialist",
+      pdfUrl: "/pdfs/deep-learning.pdf",
+      projects: [
+        "Build an LLM-powered chatbot (using OpenAI or HuggingFace)",
+        "Fine-tune Stable Diffusion for branded content generation",
+      ],
+      keyTopics: [
+        "Neural Networks: Perceptron → CNN → RNN",
+        "Transformers & Attention Mechanisms",
+        "LLM Architecture Overview (GPT, LLaMA, Claude)",
+        "Diffusion models, GANs (image/video generation)",
+        "Risks: hallucination, misuse, deepfakes",
+      ],
+      trackIcon: Brain,
+      trackColor: "text-purple-600",
     },
     {
       id: 4,
-      title: "Deep Learning & Neural Networks",
-      duration: "5 hours",
+      title: "Edge AI, MLOps & Deployment",
+      track: "Track 4",
+      weeks: "Weeks 11-14",
+      duration: "4 weeks",
       completed: false,
       locked: false,
-      lessons: 10,
-      description: "Advanced neural network architectures and deep learning techniques",
+      lessons: 14,
+      description: "Learn to deploy and scale AI models in production environments",
       progress: 20,
-      timeLeft: "4 hours left",
-      badge: "Neural Network Architect",
-      pdfUrl: "/pdfs/deep-learning.pdf",
+      timeLeft: "3.2 weeks left",
+      badge: "MLOps Engineer",
+      pdfUrl: "/pdfs/mlops-deployment.pdf",
+      projects: ["Build & deploy a sentiment classifier web app", "Optimize model to run on a Raspberry Pi"],
+      keyTopics: [
+        "What is MLOps? Data versioning, pipelines, CI/CD for ML",
+        "Deploying models with FastAPI, Vercel, and Docker",
+        "Using Cursor.dev for collaborative, AI-assisted coding",
+        "Edge AI: TinyML, AI on Raspberry Pi, mobile models",
+      ],
+      trackIcon: Cpu,
+      trackColor: "text-green-600",
     },
     {
       id: 5,
-      title: "AI Ethics & Deployment",
-      duration: "2 hours",
+      title: "AI Product Development + Monetization",
+      track: "Track 5",
+      weeks: "Weeks 15-18",
+      duration: "4 weeks",
       completed: false,
       locked: true,
-      lessons: 4,
-      description: "Ethical AI development and production deployment strategies",
+      lessons: 16,
+      description: "Transform AI knowledge into profitable products and business solutions",
       progress: 0,
       timeLeft: "Locked",
-      badge: "AI Ethics Champion",
-      pdfUrl: "/pdfs/ai-ethics.pdf",
+      badge: "AI Entrepreneur",
+      pdfUrl: "/pdfs/ai-product-development.pdf",
       timeWall: 7,
       coinCost: 250,
+      projects: ["Launch a GPT-powered product on Vercel", "Sell a custom model API on RapidAPI"],
+      keyTopics: [
+        "Problem discovery → AI framing",
+        "User-centered AI product design",
+        "No-code and low-code AI toolkits (Zapier, Peltarion, etc.)",
+        "Monetization strategy: APIs, SaaS, marketplaces",
+      ],
+      trackIcon: Rocket,
+      trackColor: "text-orange-600",
     },
     {
       id: 6,
-      title: "Advanced NLP Techniques",
-      duration: "6 hours",
+      title: "AI for Good, Regulation & Leadership",
+      track: "Track 6",
+      weeks: "Weeks 19-20",
+      duration: "2 weeks",
       completed: false,
       locked: true,
-      lessons: 12,
-      description: "Advanced natural language processing and transformer models",
+      lessons: 10,
+      description: "Explore AI ethics, governance, and responsible leadership in the AI era",
       progress: 0,
       timeLeft: "Locked",
-      badge: "NLP Specialist",
-      pdfUrl: "/pdfs/advanced-nlp.pdf",
+      badge: "AI Ethics Leader",
+      pdfUrl: "/pdfs/ai-ethics-leadership.pdf",
       timeWall: 14,
       coinCost: 350,
+      projects: [
+        "Audit a public AI system for bias & privacy issues",
+        "Write a public-facing AI ethics policy for your product",
+      ],
+      keyTopics: [
+        "AI & Privacy, Surveillance, Deepfake Governance",
+        "Responsible AI: Explainability, Fairness, Consent",
+        "Open Source AI Ethics (vs proprietary China AI models)",
+        "Becoming a global AI leader from an emerging economy",
+      ],
+      trackIcon: Shield,
+      trackColor: "text-red-600",
+    },
+    {
+      id: 7,
+      title: "Capstone Project",
+      track: "Capstone",
+      weeks: "Weeks 21-24",
+      duration: "4 weeks",
+      completed: false,
+      locked: true,
+      lessons: 20,
+      description: "Build and launch a complete AI product with ethical considerations and monetization plan",
+      progress: 0,
+      timeLeft: "Locked",
+      badge: "AI Product Master",
+      pdfUrl: "/pdfs/capstone-project.pdf",
+      timeWall: 21,
+      coinCost: 500,
+      projects: [
+        "Build a full-stack AI product including trained model, backend, and frontend",
+        "Create ethical guidelines and monetization strategy",
+        "Peer-reviewed code and public product launch",
+      ],
+      keyTopics: [
+        "A trained model (NLP/CV)",
+        "A backend (Python/FastAPI)",
+        "Frontend (deployed with Vercel)",
+        "Ethical + monetization plan",
+        "Peer-reviewed code & public launch",
+      ],
+      trackIcon: Trophy,
+      trackColor: "text-gold-600",
     },
   ]
 
   const quizQuestions: QuizQuestion[] = [
     {
       id: 1,
-      question: "What is the primary goal of artificial intelligence?",
+      question: "What is the primary advantage of prompt engineering in modern AI applications?",
       options: [
-        "To replace human workers",
-        "To simulate human intelligence in machines",
-        "To create robots",
-        "To process data faster",
+        "It replaces the need for training data",
+        "It enables better control and customization of AI outputs",
+        "It reduces computational costs",
+        "It eliminates AI bias completely",
       ],
       correctAnswer: 1,
     },
     {
       id: 2,
-      question: "Which technique is most effective for prompt engineering?",
+      question: "Which technique is most effective for improving LLM responses?",
       options: ["Chain-of-thought prompting", "Random prompting", "Short prompts only", "Complex jargon"],
+      correctAnswer: 0,
+    },
+    {
+      id: 3,
+      question: "What is a key difference between supervised and unsupervised learning?",
+      options: [
+        "Supervised learning uses labeled data",
+        "Unsupervised learning is always more accurate",
+        "Supervised learning doesn't need data",
+        "They are the same thing",
+      ],
       correctAnswer: 0,
     },
   ]
@@ -264,7 +394,7 @@ export function AIPlatformClient() {
   const cohortSessions: CohortSession[] = [
     {
       id: 1,
-      title: "AI Fundamentals Workshop",
+      title: "AI Literacy & Prompt Engineering Workshop",
       date: new Date(2024, 2, 15),
       time: "6:00 PM - 8:00 PM",
       timezone: "Nigeria (WAT)",
@@ -275,7 +405,7 @@ export function AIPlatformClient() {
     },
     {
       id: 2,
-      title: "Prompt Engineering Masterclass",
+      title: "Machine Learning Fundamentals Deep Dive",
       date: new Date(2024, 2, 16),
       time: "7:00 PM - 9:00 PM",
       timezone: "UK (GMT)",
@@ -286,7 +416,7 @@ export function AIPlatformClient() {
     },
     {
       id: 3,
-      title: "ML Pipeline Deep Dive",
+      title: "Deep Learning & GenAI Masterclass",
       date: new Date(2024, 2, 17),
       time: "8:00 PM - 10:00 PM",
       timezone: "US Eastern (EST)",
@@ -304,10 +434,10 @@ export function AIPlatformClient() {
       role: "AI Engineer",
       company: "Google",
       content:
-        "This bootcamp transformed my career. The hands-on approach and expert mentorship helped me land my dream job at Google.",
+        "This bootcamp's comprehensive curriculum took me from AI novice to building production systems. The track-based approach and real projects made all the difference.",
       rating: 5,
       avatar: "/placeholder.svg?height=60&width=60",
-      badge: "AI Expert Graduate",
+      badge: "AI Product Master",
     },
     {
       id: 2,
@@ -315,20 +445,21 @@ export function AIPlatformClient() {
       role: "Data Scientist",
       company: "Microsoft",
       content:
-        "The curriculum is world-class. I went from beginner to building production AI systems in just 3 months.",
+        "The MLOps and deployment track was game-changing. I went from building models to actually shipping AI products that users love.",
       rating: 5,
       avatar: "/placeholder.svg?height=60&width=60",
-      badge: "Data Strategist",
+      badge: "MLOps Engineer",
     },
     {
       id: 3,
       name: "Fatima Al-Zahra",
-      role: "ML Engineer",
+      role: "AI Product Manager",
       company: "OpenAI",
-      content: "The prompt engineering module alone was worth the entire course fee. Now I'm working at OpenAI!",
+      content:
+        "The ethics and leadership track prepared me for real-world AI challenges. Now I'm leading responsible AI initiatives at OpenAI!",
       rating: 5,
       avatar: "/placeholder.svg?height=60&width=60",
-      badge: "Prompt Engineer",
+      badge: "AI Ethics Leader",
     },
   ]
 
@@ -338,33 +469,33 @@ export function AIPlatformClient() {
       author: "Alex Thompson",
       avatar: "/placeholder.svg?height=40&width=40",
       content:
-        "Just completed the Prompt Engineering module! The techniques for chain-of-thought prompting are game-changing. Anyone else working on the final project?",
+        "Just completed Track 3 on Deep Learning! Building my first LLM-powered chatbot was incredible. The transformer architecture finally clicked for me. Anyone else working on the Stable Diffusion project?",
       timestamp: "2 hours ago",
       likes: 12,
       replies: 5,
-      tags: ["prompt-engineering", "project"],
+      tags: ["deep-learning", "transformers", "project"],
     },
     {
       id: 2,
       author: "Priya Sharma",
       avatar: "/placeholder.svg?height=40&width=40",
       content:
-        "Sharing my ML pipeline project - built a sentiment analysis tool for customer reviews. Happy to share the code with anyone interested!",
+        "Sharing my MLOps project - deployed a sentiment classifier that's now processing 10k+ requests daily! The FastAPI + Vercel combo from Track 4 is powerful. Happy to share the deployment guide!",
       timestamp: "5 hours ago",
       likes: 24,
       replies: 8,
-      tags: ["machine-learning", "project-share"],
+      tags: ["mlops", "deployment", "project-share"],
     },
     {
       id: 3,
       author: "David Kim",
       avatar: "/placeholder.svg?height=40&width=40",
       content:
-        "The live cohort session on neural networks was incredible. Dr. Chen's explanations made complex concepts so clear. Can't wait for the next one!",
+        "The AI Ethics module in Track 6 opened my eyes to responsible AI development. Working on auditing bias in facial recognition systems for my capstone project. This is the future of AI!",
       timestamp: "1 day ago",
       likes: 18,
       replies: 3,
-      tags: ["cohort", "neural-networks"],
+      tags: ["ai-ethics", "capstone", "responsible-ai"],
     },
   ]
 
@@ -380,7 +511,7 @@ export function AIPlatformClient() {
       id: 2,
       type: "earn",
       amount: 50,
-      description: "Quiz completion bonus",
+      description: "Track 1 completion bonus",
       date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
     },
     {
@@ -393,8 +524,8 @@ export function AIPlatformClient() {
     {
       id: 4,
       type: "spend",
-      amount: -100,
-      description: "Unlocked resource: Advanced Prompt Engineering",
+      amount: -250,
+      description: "Unlocked Track 5: AI Product Development",
       date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
     },
     {
@@ -455,7 +586,7 @@ export function AIPlatformClient() {
       winner: {
         name: "Chioma Eze",
         avatar: "/placeholder.svg?height=60&width=60",
-        project: "AI-Powered Customer Service Bot",
+        project: "AI-Powered Customer Service Bot with Ethical Guidelines",
         score: 98,
       },
     },
@@ -464,7 +595,7 @@ export function AIPlatformClient() {
       winner: {
         name: "Tunde Bakare",
         avatar: "/placeholder.svg?height=60&width=60",
-        project: "Sentiment Analysis Dashboard",
+        project: "Edge AI Sentiment Analysis on Raspberry Pi",
         score: 95,
       },
     },
@@ -473,7 +604,7 @@ export function AIPlatformClient() {
       winner: {
         name: "Amina Ibrahim",
         avatar: "/placeholder.svg?height=60&width=60",
-        project: "Predictive Analytics Tool",
+        project: "Fine-tuned LLM for Nigerian Language Translation",
         score: 94,
       },
     },
@@ -491,9 +622,9 @@ export function AIPlatformClient() {
       priceNGN: 0,
       period: "Forever",
       features: [
-        "Access to 3 basic modules",
+        "Access to Track 1 & 2 (AI Literacy + ML Fundamentals)",
         "Community forum access",
-        "Basic quizzes",
+        "Basic quizzes and projects",
         "Certificate of participation",
         "Email support",
       ],
@@ -508,10 +639,10 @@ export function AIPlatformClient() {
       priceNGN: 20000,
       period: "Monthly",
       features: [
-        "Access to all modules",
+        "Access to Tracks 1-4 (up to MLOps & Deployment)",
         "Community forum access",
         "All quizzes and assessments",
-        "Basic certificate",
+        "Track completion certificates",
         "Email support",
         "Weekly group mentorship",
       ],
@@ -526,10 +657,10 @@ export function AIPlatformClient() {
       priceNGN: 35000,
       period: "Monthly",
       features: [
-        "Everything in Bronze",
+        "Access to all 6 tracks + Capstone prep",
         "Priority support",
         "1 monthly 1-on-1 mentorship",
-        "Advanced certificate",
+        "Advanced certificates",
         "Job placement assistance",
         "Resume review",
         "500 EduCoins monthly",
@@ -545,9 +676,9 @@ export function AIPlatformClient() {
       priceNGN: 50000,
       period: "Monthly",
       features: [
-        "Everything in Silver",
+        "Full 24-week program access",
         "Weekly 1-on-1 mentorship",
-        "Premium certificate",
+        "Premium capstone project support",
         "Guaranteed job placement",
         "LinkedIn profile optimization",
         "Mock interviews",
@@ -561,30 +692,55 @@ export function AIPlatformClient() {
   ]
 
   const learningTrack = [
-    { phase: "Foundation", weeks: "1-2", status: "completed", color: "bg-green-500", modules: ["AI Fundamentals"] },
     {
-      phase: "Core Skills",
+      phase: "AI Literacy",
+      weeks: "1-2",
+      status: "completed",
+      color: "bg-green-500",
+      modules: ["Prompt Engineering", "Generative AI"],
+    },
+    {
+      phase: "ML Fundamentals",
       weeks: "3-6",
+      status: "completed",
+      color: "bg-green-500",
+      modules: ["Supervised Learning", "Model Evaluation"],
+    },
+    {
+      phase: "Deep Learning & GenAI",
+      weeks: "7-10",
       status: "current",
       color: "bg-dunamis-primary",
-      modules: ["Prompt Engineering", "ML Pipeline"],
+      modules: ["Neural Networks", "Transformers", "LLMs"],
     },
     {
-      phase: "Advanced Topics",
-      weeks: "7-10",
+      phase: "MLOps & Deployment",
+      weeks: "11-14",
       status: "upcoming",
       color: "bg-gray-300",
-      modules: ["Deep Learning", "Neural Networks"],
+      modules: ["CI/CD for ML", "Edge AI"],
     },
     {
-      phase: "Specialization",
-      weeks: "11-12",
+      phase: "Product Development",
+      weeks: "15-18",
       status: "upcoming",
       color: "bg-gray-300",
-      modules: ["AI Ethics", "Deployment"],
+      modules: ["AI Products", "Monetization"],
     },
-    { phase: "Capstone Project", weeks: "13-14", status: "upcoming", color: "bg-gray-300", modules: ["Final Project"] },
-    { phase: "Certification", weeks: "15", status: "upcoming", color: "bg-gray-300", modules: ["Certificate Exam"] },
+    {
+      phase: "Ethics & Leadership",
+      weeks: "19-20",
+      status: "upcoming",
+      color: "bg-gray-300",
+      modules: ["AI Ethics", "Governance"],
+    },
+    {
+      phase: "Capstone Project",
+      weeks: "21-24",
+      status: "upcoming",
+      color: "bg-gray-300",
+      modules: ["Full-Stack AI Product"],
+    },
   ]
 
   const resources = [
@@ -594,22 +750,25 @@ export function AIPlatformClient() {
         { name: "OpenAI Playground", url: "https://platform.openai.com/playground", icon: Brain },
         { name: "Google Colab", url: "https://colab.research.google.com", icon: Code },
         { name: "Hugging Face Spaces", url: "https://huggingface.co/spaces", icon: Zap },
+        { name: "Cursor.dev IDE", url: "https://cursor.dev", icon: Code },
       ],
     },
     {
       category: "Video Tutorials",
       items: [
-        { name: "AI Fundamentals Series", url: "#", icon: Play },
-        { name: "Prompt Engineering Masterclass", url: "#", icon: Play },
-        { name: "ML Pipeline Workshop", url: "#", icon: Play },
+        { name: "AI Literacy & Prompt Engineering Series", url: "#", icon: Play },
+        { name: "Machine Learning Fundamentals", url: "#", icon: Play },
+        { name: "Deep Learning & GenAI Workshop", url: "#", icon: Play },
+        { name: "MLOps Deployment Masterclass", url: "#", icon: Play },
       ],
     },
     {
       category: "Cheat Sheets & PDFs",
       items: [
-        { name: "AI Terminology Guide", url: "/pdfs/ai-terminology.pdf", icon: FileText },
         { name: "Prompt Engineering Cheat Sheet", url: "/pdfs/prompt-cheatsheet.pdf", icon: FileText },
         { name: "ML Algorithms Quick Reference", url: "/pdfs/ml-algorithms.pdf", icon: FileText },
+        { name: "Transformer Architecture Guide", url: "/pdfs/transformer-guide.pdf", icon: FileText },
+        { name: "MLOps Best Practices", url: "/pdfs/mlops-practices.pdf", icon: FileText },
       ],
     },
     {
@@ -618,6 +777,7 @@ export function AIPlatformClient() {
         { name: "AI Project Templates", url: "https://github.com/dunamis-ai/templates", icon: Code },
         { name: "Prompt Engineering Examples", url: "https://github.com/dunamis-ai/prompts", icon: Code },
         { name: "ML Pipeline Boilerplate", url: "https://github.com/dunamis-ai/ml-pipeline", icon: Code },
+        { name: "Capstone Project Starters", url: "https://github.com/dunamis-ai/capstone", icon: Code },
       ],
     },
   ]
@@ -633,41 +793,41 @@ export function AIPlatformClient() {
 
   const careerGameItems = [
     {
-      name: "Virtual Office",
+      name: "Virtual AI Lab",
       level: 1,
       maxLevel: 3,
       cost: 100,
-      description: "Upgrade your virtual workspace for better productivity",
-      benefits: ["Faster module completion", "+5% quiz score boost"],
+      description: "Upgrade your virtual AI workspace with premium tools and resources",
+      benefits: ["Access to premium AI models", "+10% project completion speed"],
     },
     {
       name: "Mentorship Access",
       level: 0,
       maxLevel: 2,
       cost: 200,
-      description: "Unlock access to industry mentors",
-      benefits: ["Weekly 1-on-1 sessions", "Career guidance"],
+      description: "Unlock access to industry AI experts and researchers",
+      benefits: ["Weekly 1-on-1 sessions", "Career guidance", "Project reviews"],
     },
     {
-      name: "Learning Tools",
+      name: "Advanced Learning Tools",
       level: 1,
       maxLevel: 3,
       cost: 150,
-      description: "Enhance your learning with premium tools",
-      benefits: ["Advanced tutorials", "Premium resources"],
+      description: "Enhance your learning with cutting-edge AI development tools",
+      benefits: ["Cursor.dev Pro access", "Premium datasets", "Advanced tutorials"],
     },
     {
-      name: "Networking",
+      name: "AI Community Network",
       level: 0,
       maxLevel: 2,
       cost: 175,
-      description: "Expand your professional network",
-      benefits: ["Industry connections", "Job referrals"],
+      description: "Expand your professional AI network globally",
+      benefits: ["Industry connections", "Job referrals", "Collaboration opportunities"],
     },
   ]
 
   const shareToLinkedIn = (badge: string) => {
-    const text = `I just earned the ${badge} badge from Dunamis Tutors AI Bootcamp! 🚀 #AI #MachineLearning #TechEducation`
+    const text = `I just earned the ${badge} badge from Dunamis Tutors AI Bootcamp! 🚀 #AI #MachineLearning #TechEducation #AIEthics`
     const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
       window.location.href,
     )}&summary=${encodeURIComponent(text)}`
@@ -741,58 +901,64 @@ export function AIPlatformClient() {
             <div className="text-center">
               <h1 className="text-4xl font-bold text-dunamis-primary mb-4">Welcome to AI Mastery Bootcamp</h1>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Master artificial intelligence with our globally competitive bootcamp modeled after Google Digital
-                Garage
+                Master artificial intelligence with our comprehensive 24-week program designed to compete globally
               </p>
             </div>
 
-            {/* Key Features */}
+            {/* Program Overview */}
             <div className="grid md:grid-cols-3 gap-6">
               <Card>
                 <CardContent className="p-6 text-center">
-                  <Target className="h-12 w-12 text-dunamis-primary mx-auto mb-4" />
-                  <h3 className="text-xl font-bold mb-2">Personalized AI Learning</h3>
-                  <p className="text-gray-600">AI-powered curriculum that adapts to your pace and learning style</p>
+                  <Lightbulb className="h-12 w-12 text-yellow-600 mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">6 Comprehensive Tracks</h3>
+                  <p className="text-gray-600">From AI literacy to product development and ethics leadership</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="p-6 text-center">
-                  <Users className="h-12 w-12 text-dunamis-primary mx-auto mb-4" />
-                  <h3 className="text-xl font-bold mb-2">Global Live Cohorts</h3>
-                  <p className="text-gray-600">Join live sessions across Nigeria, UK, and US timezones</p>
+                  <Rocket className="h-12 w-12 text-orange-600 mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">Real-World Projects</h3>
+                  <p className="text-gray-600">Build and deploy actual AI products that solve real problems</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="p-6 text-center">
-                  <Award className="h-12 w-12 text-dunamis-primary mx-auto mb-4" />
-                  <h3 className="text-xl font-bold mb-2">Industry Recognition</h3>
-                  <p className="text-gray-600">Earn certificates and badges recognized by leading tech companies</p>
+                  <Shield className="h-12 w-12 text-red-600 mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">Ethics & Leadership</h3>
+                  <p className="text-gray-600">Learn responsible AI development and global leadership</p>
                 </CardContent>
               </Card>
             </div>
 
-            {/* EduCoin Gamification Highlight */}
+            {/* Track Overview */}
             <Card className="border-2 border-dunamis-primary">
               <CardHeader className="bg-dunamis-primary text-white">
-                <CardTitle className="text-center">EduCoin Gamified Learning</CardTitle>
+                <CardTitle className="text-center">24-Week Comprehensive AI Program</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div className="text-center">
-                    <Wallet className="h-12 w-12 text-dunamis-primary mx-auto mb-4" />
-                    <h3 className="text-lg font-bold mb-2">Earn & Spend EduCoins</h3>
-                    <p className="text-gray-600">Complete activities to earn coins and unlock premium content</p>
-                  </div>
-                  <div className="text-center">
-                    <TrendingUp className="h-12 w-12 text-dunamis-primary mx-auto mb-4" />
-                    <h3 className="text-lg font-bold mb-2">Climb the Leaderboard</h3>
-                    <p className="text-gray-600">Compete with peers and earn a spot in our Hall of Fame</p>
-                  </div>
-                  <div className="text-center">
-                    <Gift className="h-12 w-12 text-dunamis-primary mx-auto mb-4" />
-                    <h3 className="text-lg font-bold mb-2">Unlock Rewards</h3>
-                    <p className="text-gray-600">Earn badges, certificates, and real-world opportunities</p>
-                  </div>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {modules.slice(0, 6).map((module) => {
+                    const IconComponent = module.trackIcon
+                    return (
+                      <div
+                        key={module.id}
+                        className="p-4 border rounded-lg hover:border-dunamis-primary transition-colors"
+                      >
+                        <div className="flex items-center gap-3 mb-2">
+                          <IconComponent className={`h-6 w-6 ${module.trackColor}`} />
+                          <div>
+                            <h4 className="font-bold text-sm">{module.track}</h4>
+                            <p className="text-xs text-gray-500">{module.weeks}</p>
+                          </div>
+                        </div>
+                        <h5 className="font-medium mb-1">{module.title}</h5>
+                        <p className="text-xs text-gray-600 mb-2">{module.description}</p>
+                        <Badge variant="outline" className="text-xs">
+                          {module.lessons} lessons
+                        </Badge>
+                      </div>
+                    )
+                  })}
                 </div>
                 <div className="mt-6 flex justify-center gap-4">
                   <Button onClick={() => setShowCareerGame(true)}>
@@ -923,8 +1089,7 @@ export function AIPlatformClient() {
             <div className="bg-gray-100 p-8 rounded-lg text-center">
               <h2 className="text-2xl font-bold text-dunamis-primary mb-4">Ready to Start Your AI Journey?</h2>
               <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                Choose the path that works best for you. Start with our free track or apply for the full bootcamp
-                experience.
+                Join our comprehensive 24-week program and become a globally competitive AI professional
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button size="lg" variant="outline">
@@ -942,207 +1107,304 @@ export function AIPlatformClient() {
         return (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-dunamis-primary">AI Curriculum</h2>
+              <h2 className="text-2xl font-bold text-dunamis-primary">AI Mastery Curriculum</h2>
               <Badge variant="secondary" className="text-sm">
-                {modules.filter((m) => m.completed).length} of {modules.length} modules completed
+                {modules.filter((m) => m.completed).length} of {modules.length} tracks completed
               </Badge>
             </div>
 
-            {/* Enhanced Module Content */}
-            <div className="grid lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2">
-                <Card>
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <CardTitle className="flex items-center gap-2">
-                        <Play className="h-5 w-5" />
-                        {currentModule?.title}
-                      </CardTitle>
-                      <div className="flex items-center gap-2">
-                        {currentModule?.badge && (
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <Badge
-                                  className="bg-yellow-500 text-white cursor-pointer"
-                                  onClick={() => currentModule.badge && shareToLinkedIn(currentModule.badge)}
-                                >
-                                  <Award className="h-3 w-3 mr-1" />
-                                  {currentModule.badge}
+            {/* Enhanced Module Grid */}
+            <div className="grid lg:grid-cols-4 gap-6">
+              <div className="lg:col-span-3">
+                <div className="grid gap-4">
+                  {modules.map((module) => {
+                    const IconComponent = module.trackIcon
+                    return (
+                      <Card
+                        key={module.id}
+                        className={`cursor-pointer transition-all ${
+                          activeModule === module.id ? "border-dunamis-primary ring-2 ring-dunamis-primary/20" : ""
+                        }`}
+                        onClick={() => !module.locked && setActiveModule(module.id)}
+                      >
+                        <CardHeader className="pb-3">
+                          <div className="flex justify-between items-start">
+                            <div className="flex items-center gap-3">
+                              <div className={`p-2 rounded-lg bg-gray-100`}>
+                                <IconComponent className={`h-6 w-6 ${module.trackColor}`} />
+                              </div>
+                              <div>
+                                <CardTitle className="text-lg flex items-center gap-2">
+                                  {module.completed ? (
+                                    <CheckCircle className="h-5 w-5 text-green-500" />
+                                  ) : module.locked ? (
+                                    <Lock className="h-5 w-5 text-gray-400" />
+                                  ) : (
+                                    <BookOpen className="h-5 w-5 text-dunamis-primary" />
+                                  )}
+                                  {module.track}
+                                </CardTitle>
+                                <p className="text-sm text-gray-500">{module.weeks}</p>
+                              </div>
+                            </div>
+                            {module.locked && module.timeWall !== undefined && (
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  unlockModule(module.id)
+                                }}
+                                disabled={eduCoins < (module.coinCost || 0)}
+                              >
+                                Unlock ({module.coinCost} coins)
+                              </Button>
+                            )}
+                          </div>
+                        </CardHeader>
+                        <CardContent>
+                          <h3 className="font-bold mb-2">{module.title}</h3>
+                          <p className="text-sm text-gray-600 mb-3">{module.description}</p>
+
+                          <div className="flex items-center justify-between text-sm text-muted-foreground mb-3">
+                            <span className="flex items-center">
+                              <Clock className="mr-1 h-3 w-3" />
+                              {module.duration}
+                            </span>
+                            <span className="flex items-center">
+                              <BookOpen className="mr-1 h-3 w-3" />
+                              {module.lessons} lessons
+                            </span>
+                          </div>
+
+                          {!module.locked && (
+                            <>
+                              <div className="flex items-center justify-between mb-1 text-xs">
+                                <span>{module.progress}% complete</span>
+                                {module.timeLeft && <span>{module.timeLeft}</span>}
+                              </div>
+                              <Progress value={module.progress} className="h-2 mb-3" />
+                            </>
+                          )}
+
+                          {/* Key Topics */}
+                          <div className="mb-3">
+                            <p className="text-xs font-medium text-gray-700 mb-1">Key Topics:</p>
+                            <div className="flex flex-wrap gap-1">
+                              {module.keyTopics.slice(0, 3).map((topic, idx) => (
+                                <Badge key={idx} variant="secondary" className="text-xs">
+                                  {topic.split(" ").slice(0, 2).join(" ")}
                                 </Badge>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Click to share on LinkedIn</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
-                        )}
-                        {currentModule?.pdfUrl && (
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => window.open(currentModule.pdfUrl, "_blank")}
-                          >
-                            <Download className="h-4 w-4 mr-1" />
-                            PDF
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4 text-sm text-gray-600">
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger className="flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            {currentModule?.timeLeft}
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>Estimated time to completion</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                      <span className="flex items-center gap-1">
-                        <BookOpen className="h-4 w-4" />
-                        {currentModule?.lessons} lessons
-                      </span>
-                      {currentModule?.quizScore && (
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger className="flex items-center gap-1">
-                              <Target className="h-4 w-4" />
-                              Quiz: {currentModule.quizScore}%
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Your quiz score for this module</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      )}
-                    </div>
-                    <div className="mt-3">
-                      <div className="flex items-center justify-between text-sm mb-1">
-                        <span>Progress</span>
-                        <span>{currentModuleProgress}%</span>
-                      </div>
-                      <Progress value={currentModuleProgress} className="h-2" />
-                    </div>
+                              ))}
+                              {module.keyTopics.length > 3 && (
+                                <Badge variant="secondary" className="text-xs">
+                                  +{module.keyTopics.length - 3} more
+                                </Badge>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Projects */}
+                          <div className="mb-3">
+                            <p className="text-xs font-medium text-gray-700 mb-1">Projects:</p>
+                            <div className="space-y-1">
+                              {module.projects.map((project, idx) => (
+                                <p key={idx} className="text-xs text-gray-600">
+                                  • {project}
+                                </p>
+                              ))}
+                            </div>
+                          </div>
+
+                          {module.quizScore !== undefined && (
+                            <div className="flex items-center mb-2">
+                              <TooltipProvider>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <div className="flex items-center text-xs">
+                                      <Target className="mr-1 h-3 w-3 text-orange-500" />
+                                      Quiz Score: {module.quizScore}%
+                                    </div>
+                                  </TooltipTrigger>
+                                  <TooltipContent>
+                                    <p>You scored {module.quizScore}% on this track's assessment</p>
+                                  </TooltipContent>
+                                </Tooltip>
+                              </TooltipProvider>
+                            </div>
+                          )}
+
+                          {module.badge && (
+                            <div className="mt-2">
+                              <Badge variant="outline" className="text-xs">
+                                <Award className="mr-1 h-3 w-3 text-yellow-500" />
+                                {module.badge}
+                              </Badge>
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    )
+                  })}
+                </div>
+
+                {/* Active Module Details */}
+                <Card className="mt-6">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Play className="h-5 w-5" />
+                      {currentModule?.title}
+                    </CardTitle>
+                    <p className="text-sm text-gray-600">
+                      {currentModule?.track} • {currentModule?.weeks}
+                    </p>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                      <div className="text-center">
-                        <Play className="h-16 w-16 text-dunamis-primary mx-auto mb-4" />
-                        <p className="text-gray-600">Video content for {currentModule?.title}</p>
-                      </div>
+                    <p>{currentModule?.description}</p>
+
+                    {/* Detailed Topics */}
+                    <div>
+                      <h4 className="font-medium mb-2">What You'll Learn:</h4>
+                      <ul className="space-y-1">
+                        {currentModule?.keyTopics.map((topic, idx) => (
+                          <li key={idx} className="text-sm text-gray-600 flex items-start">
+                            <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                            {topic}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <p className="text-gray-700">{currentModule?.description}</p>
-                    <div className="flex gap-2">
-                      <Button
-                        onClick={() => setShowQuiz(true)}
-                        className="bg-dunamis-primary hover:bg-dunamis-secondary"
-                      >
-                        Take Quiz
+
+                    {/* Projects */}
+                    <div>
+                      <h4 className="font-medium mb-2">Hands-on Projects:</h4>
+                      <ul className="space-y-1">
+                        {currentModule?.projects.map((project, idx) => (
+                          <li key={idx} className="text-sm text-gray-600 flex items-start">
+                            <Rocket className="h-4 w-4 text-orange-500 mr-2 mt-0.5 flex-shrink-0" />
+                            {project}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      <Button className="gap-2">
+                        <Play className="h-4 w-4" />
+                        Start Learning
                       </Button>
-                      <Button variant="outline">Download Resources</Button>
+                      {currentModule?.pdfUrl && (
+                        <Button variant="outline" className="gap-2">
+                          <Download className="h-4 w-4" />
+                          Download Materials
+                        </Button>
+                      )}
+                      <Button variant="outline" onClick={() => setShowQuiz(true)} className="gap-2">
+                        <Target className="h-4 w-4" />
+                        Take Assessment
+                      </Button>
                       {currentModule?.badge && (
                         <Button
                           variant="outline"
-                          onClick={() => currentModule.badge && downloadBadge(currentModule.badge)}
+                          onClick={() => currentModule.badge && shareToLinkedIn(currentModule.badge)}
+                          className="gap-2"
                         >
-                          <Download className="h-4 w-4 mr-1" />
-                          Badge
+                          <Share2 className="h-4 w-4" />
+                          Share Badge
                         </Button>
                       )}
                     </div>
+
+                    {/* Quiz Section */}
+                    {showQuiz && (
+                      <Card className="mt-4 border-dashed">
+                        <CardHeader>
+                          <CardTitle className="text-lg">Track Assessment</CardTitle>
+                          <p className="text-sm text-gray-600">Test your knowledge and earn your track badge</p>
+                        </CardHeader>
+                        <CardContent className="space-y-6">
+                          {quizQuestions.map((question) => (
+                            <div key={question.id} className="space-y-3">
+                              <h4 className="font-medium">{question.question}</h4>
+                              <div className="space-y-2">
+                                {question.options.map((option, index) => (
+                                  <label key={index} className="flex items-center space-x-2 cursor-pointer">
+                                    <input
+                                      type="radio"
+                                      name={`question-${question.id}`}
+                                      value={index}
+                                      onChange={() => setQuizAnswers({ ...quizAnswers, [question.id]: index })}
+                                      className="text-dunamis-primary"
+                                    />
+                                    <span>{option}</span>
+                                  </label>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                          <div className="flex gap-2">
+                            <Button
+                              onClick={() => {
+                                setShowQuiz(false)
+                                setEduCoins(eduCoins + 100)
+                                setNotificationMessage("Assessment completed! You earned 100 EduCoins!")
+                                setShowNotification(true)
+                                setTimeout(() => setShowNotification(false), 3000)
+                              }}
+                              className="bg-dunamis-primary hover:bg-dunamis-secondary"
+                            >
+                              Submit Assessment
+                            </Button>
+                            <Button variant="outline" onClick={() => setShowQuiz(false)}>
+                              Cancel
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )}
+
+                    {/* Locked Module Unlock */}
+                    {currentModule?.locked && currentModule?.timeWall && currentModule?.coinCost && (
+                      <Card className="mt-6 border-2 border-dunamis-primary">
+                        <CardHeader className="bg-dunamis-primary/10">
+                          <CardTitle className="flex items-center gap-2">
+                            <Lock className="h-5 w-5" />
+                            Unlock This Track
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="p-6">
+                          <div className="grid md:grid-cols-2 gap-6">
+                            <div className="border rounded-lg p-4 text-center">
+                              <Clock className="h-10 w-10 text-gray-400 mx-auto mb-2" />
+                              <h3 className="font-bold mb-1">Time Wall</h3>
+                              <p className="text-sm text-gray-600 mb-3">
+                                Wait {currentModule.timeWall} days to unlock this track for free
+                              </p>
+                              <p className="text-xs text-gray-500">
+                                Unlocks on{" "}
+                                {new Date(Date.now() + currentModule.timeWall * 86400000).toLocaleDateString()}
+                              </p>
+                            </div>
+                            <div className="border-2 border-dunamis-primary rounded-lg p-4 text-center">
+                              <Wallet className="h-10 w-10 text-dunamis-primary mx-auto mb-2" />
+                              <h3 className="font-bold mb-1">Unlock Instantly</h3>
+                              <p className="text-sm text-gray-600 mb-3">
+                                Use {currentModule.coinCost} EduCoins to unlock now
+                              </p>
+                              <Button
+                                onClick={() => unlockModule(currentModule.id)}
+                                disabled={eduCoins < currentModule.coinCost}
+                                className="bg-dunamis-primary hover:bg-dunamis-secondary"
+                              >
+                                Unlock Now
+                              </Button>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )}
                   </CardContent>
                 </Card>
-
-                {/* Enhanced Quiz Section */}
-                {showQuiz && (
-                  <Card className="mt-6">
-                    <CardHeader>
-                      <CardTitle>Module Quiz</CardTitle>
-                      <p className="text-sm text-gray-600">Test your knowledge and earn your badge</p>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                      {quizQuestions.map((question) => (
-                        <div key={question.id} className="space-y-3">
-                          <h4 className="font-medium">{question.question}</h4>
-                          <div className="space-y-2">
-                            {question.options.map((option, index) => (
-                              <label key={index} className="flex items-center space-x-2 cursor-pointer">
-                                <input
-                                  type="radio"
-                                  name={`question-${question.id}`}
-                                  value={index}
-                                  onChange={() => setQuizAnswers({ ...quizAnswers, [question.id]: index })}
-                                  className="text-dunamis-primary"
-                                />
-                                <span>{option}</span>
-                              </label>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                      <div className="flex gap-2">
-                        <Button
-                          onClick={() => {
-                            setShowQuiz(false)
-                            setEduCoins(eduCoins + 50)
-                            setNotificationMessage("Quiz completed! You earned 50 EduCoins!")
-                            setShowNotification(true)
-                            setTimeout(() => setShowNotification(false), 3000)
-                          }}
-                          className="bg-dunamis-primary hover:bg-dunamis-secondary"
-                        >
-                          Submit Quiz
-                        </Button>
-                        <Button variant="outline" onClick={() => setShowQuiz(false)}>
-                          Cancel
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
-
-                {/* Locked Module Unlock */}
-                {currentModule?.locked && currentModule?.timeWall && currentModule?.coinCost && (
-                  <Card className="mt-6 border-2 border-dunamis-primary">
-                    <CardHeader className="bg-dunamis-primary/10">
-                      <CardTitle className="flex items-center gap-2">
-                        <Lock className="h-5 w-5" />
-                        Unlock This Module
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-6">
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div className="border rounded-lg p-4 text-center">
-                          <Clock className="h-10 w-10 text-gray-400 mx-auto mb-2" />
-                          <h3 className="font-bold mb-1">Time Wall</h3>
-                          <p className="text-sm text-gray-600 mb-3">
-                            Wait {currentModule.timeWall} days to unlock this module for free
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            Unlocks on {new Date(Date.now() + currentModule.timeWall * 86400000).toLocaleDateString()}
-                          </p>
-                        </div>
-                        <div className="border-2 border-dunamis-primary rounded-lg p-4 text-center">
-                          <Wallet className="h-10 w-10 text-dunamis-primary mx-auto mb-2" />
-                          <h3 className="font-bold mb-1">Unlock Instantly</h3>
-                          <p className="text-sm text-gray-600 mb-3">
-                            Use {currentModule.coinCost} EduCoins to unlock now
-                          </p>
-                          <Button
-                            onClick={() => unlockModule(currentModule.id)}
-                            disabled={eduCoins < currentModule.coinCost}
-                            className="bg-dunamis-primary hover:bg-dunamis-secondary"
-                          >
-                            Unlock Now
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
               </div>
 
               <div>
@@ -1171,7 +1433,7 @@ export function AIPlatformClient() {
                         <DialogContent>
                           <DialogHeader>
                             <DialogTitle>Top Up Your EduWallet</DialogTitle>
-                            <DialogDescription>Add EduCoins to unlock premium content and features</DialogDescription>
+                            <DialogDescription>Add EduCoins to unlock premium tracks and features</DialogDescription>
                           </DialogHeader>
                           <Tabs defaultValue="ngn">
                             <TabsList className="grid w-full grid-cols-2">
@@ -1300,8 +1562,8 @@ export function AIPlatformClient() {
                 {/* Enhanced Learning Track Timeline */}
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-lg">Interactive Learning Track</CardTitle>
-                    <p className="text-sm text-gray-600">Click milestones to explore</p>
+                    <CardTitle className="text-lg">24-Week Learning Journey</CardTitle>
+                    <p className="text-sm text-gray-600">Click phases to explore details</p>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {learningTrack.map((phase, index) => (
@@ -1336,7 +1598,9 @@ export function AIPlatformClient() {
                   <CardContent className="p-6 text-center">
                     <Award className="h-16 w-16 text-yellow-500 mx-auto mb-4" />
                     <h3 className="font-bold mb-2">AI Mastery Certificate</h3>
-                    <p className="text-sm text-gray-600 mb-4">Complete all modules to earn your certificate</p>
+                    <p className="text-sm text-gray-600 mb-4">
+                      Complete all 6 tracks + capstone to earn your certificate
+                    </p>
                     <Progress value={overallProgress} className="mb-2" />
                     <p className="text-xs text-gray-500 mb-4">{Math.round(overallProgress)}% Complete</p>
                     <div className="space-y-2">
@@ -1538,7 +1802,7 @@ export function AIPlatformClient() {
             <div className="text-center">
               <h2 className="text-3xl font-bold text-dunamis-primary mb-4">Learning Resources</h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Access our comprehensive collection of AI learning materials
+                Access our comprehensive collection of AI learning materials and tools
               </p>
             </div>
 
@@ -1580,7 +1844,7 @@ export function AIPlatformClient() {
             <div className="text-center">
               <h2 className="text-3xl font-bold text-dunamis-primary mb-4">About AI Mastery Bootcamp</h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Learn how our globally competitive bootcamp is transforming careers
+                Learn how our globally competitive 24-week program is transforming careers
               </p>
             </div>
 
@@ -1589,14 +1853,14 @@ export function AIPlatformClient() {
                 <h3 className="text-xl font-bold mb-4">Our Mission</h3>
                 <p className="text-gray-700 mb-6">
                   At Dunamis Tutors, we're committed to democratizing AI education and making it accessible to students
-                  across Nigeria and beyond. Our AI Mastery Bootcamp is designed to equip you with the skills needed to
-                  thrive in the rapidly evolving field of artificial intelligence.
+                  across Nigeria and beyond. Our comprehensive 24-week AI Mastery Bootcamp is designed to equip you with
+                  globally competitive skills in artificial intelligence.
                 </p>
                 <h3 className="text-xl font-bold mb-4">Our Approach</h3>
                 <p className="text-gray-700">
-                  We believe in learning by doing. Our curriculum combines theoretical foundations with hands-on
-                  projects, real-world applications, and mentorship from industry experts. The EduCoin gamified economy
-                  adds an engaging layer to your learning journey, rewarding progress and fostering healthy competition.
+                  We believe in learning by doing. Our track-based curriculum combines theoretical foundations with
+                  hands-on projects, real-world applications, and mentorship from industry experts. The EduCoin gamified
+                  economy adds an engaging layer to your learning journey.
                 </p>
               </div>
               <div>
@@ -1605,8 +1869,10 @@ export function AIPlatformClient() {
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
                     <div>
-                      <p className="font-medium">Comprehensive Curriculum</p>
-                      <p className="text-sm text-gray-600">From AI fundamentals to advanced deep learning techniques</p>
+                      <p className="font-medium">6 Comprehensive Tracks</p>
+                      <p className="text-sm text-gray-600">
+                        From AI literacy to ethics leadership and product development
+                      </p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
@@ -1619,23 +1885,23 @@ export function AIPlatformClient() {
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
                     <div>
-                      <p className="font-medium">Industry Recognition</p>
-                      <p className="text-sm text-gray-600">Earn certificates and badges valued by top employers</p>
+                      <p className="font-medium">Real-World Projects</p>
+                      <p className="text-sm text-gray-600">Build actual AI products and deploy them to production</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
                     <div>
-                      <p className="font-medium">EduCoin Gamified Economy</p>
-                      <p className="text-sm text-gray-600">Earn and spend EduCoins to enhance your learning journey</p>
+                      <p className="font-medium">Ethics & Leadership Focus</p>
+                      <p className="text-sm text-gray-600">Learn responsible AI development and global leadership</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
                     <div>
-                      <p className="font-medium">Career Support</p>
+                      <p className="font-medium">Capstone Project</p>
                       <p className="text-sm text-gray-600">
-                        Job placement assistance, resume reviews, and interview prep
+                        Build and launch a complete AI product with ethical considerations
                       </p>
                     </div>
                   </li>
@@ -1649,7 +1915,7 @@ export function AIPlatformClient() {
                   <Building className="h-12 w-12 text-dunamis-primary mx-auto mb-4" />
                   <h3 className="text-xl font-bold mb-2">Our Partners</h3>
                   <p className="text-gray-600">
-                    We collaborate with leading tech companies to ensure our curriculum meets industry standards
+                    We collaborate with leading tech companies to ensure our curriculum meets global standards
                   </p>
                 </CardContent>
               </Card>
@@ -1839,8 +2105,8 @@ export function AIPlatformClient() {
                         </Avatar>
                         <div>
                           <p className="text-sm">
-                            <span className="font-medium">Tayo</span> just upgraded to{" "}
-                            <Badge className="bg-yellow-500 text-white">Gold Tier</Badge>
+                            <span className="font-medium">Tayo</span> just completed{" "}
+                            <Badge className="bg-purple-500 text-white">Track 3: Deep Learning</Badge>
                           </p>
                           <p className="text-xs text-gray-500">2 hours ago</p>
                         </div>
@@ -1854,7 +2120,7 @@ export function AIPlatformClient() {
                         <div>
                           <p className="text-sm">
                             <span className="font-medium">Amina</span> earned the{" "}
-                            <Badge variant="outline">Prompt Engineer</Badge> badge
+                            <Badge variant="outline">MLOps Engineer</Badge> badge
                           </p>
                           <p className="text-xs text-gray-500">5 hours ago</p>
                         </div>
@@ -1893,7 +2159,7 @@ export function AIPlatformClient() {
         <DialogContent className="max-w-3xl">
           <DialogHeader>
             <DialogTitle className="text-2xl">Career Game</DialogTitle>
-            <DialogDescription>Upgrade your virtual learning environment using EduCoins</DialogDescription>
+            <DialogDescription>Upgrade your virtual AI learning environment using EduCoins</DialogDescription>
           </DialogHeader>
           <div className="grid md:grid-cols-2 gap-6">
             {careerGameItems.map((item, index) => (
