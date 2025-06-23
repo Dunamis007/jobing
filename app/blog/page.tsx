@@ -8,17 +8,79 @@ import { CalendarDays, Clock, User, ArrowRight } from "lucide-react"
 
 export default function BlogPage() {
   const featuredPost = {
-    title: "The Future of AI in African Education: Transforming Learning Experiences",
+    title: "Ultimate Guide to Coding for Beginners: From Scratch to Success 🚀",
     excerpt:
-      "Discover how artificial intelligence is revolutionizing education across Africa, making quality learning accessible to millions of students.",
-    author: "Dr. Adebayo Ogundimu",
-    date: "December 15, 2024",
-    readTime: "8 min read",
-    category: "AI & Education",
-    image: "https://i.ibb.co/CpdGnRzm/personal.png",
+      "Are you curious about coding but not sure where to start? Whether you're a student, a parent looking for coding for kids, or someone asking 'coding kaise sikhe?', this guide is for you. At Dunamis Tutors, we make learning coding for beginners simple, fun, and practical — no prior experience needed!",
+    author: "Dunamis Tutors Team",
+    date: "December 22, 2024",
+    readTime: "12 min read",
+    category: "Coding",
+    image: "/placeholder.svg?height=400&width=600",
+    fullContent: `
+🧠 What is Coding? (Coding Kya Hai)
+Coding is the process of writing instructions that a computer can understand. These instructions are written in programming languages like Python, HTML, and JavaScript. You use coding to create websites, apps, games, and even music!
+
+🎯 Why Learn Coding in 2025?
+• High demand for developers in AI, tech, and even healthcare (think medical coding and medical billing and coding jobs).
+• You can build your own coding websites or even work remotely.
+• Coding salary packages are competitive globally and growing locally in Nigeria.
+
+🧒 Coding for Kids
+Coding is no longer just for adults. Platforms like Scratch coding and vibe coding allow kids to build games while learning logic. At Dunamis Tutors, we offer structured coding courses for kids to make learning playful and productive.
+
+🧩 Coding Decoding Reasoning: Trick for Exam Prep
+Preparing for government or competitive exams? We also cover coding decoding reasoning tricks and questions to help with aptitude tests. These techniques are commonly used in logic-based exams like SSC, Bank PO, and other government job prep.
+
+If you're following guides like Coding Decoding by Piyush Varshney, we simplify it even further in our lessons.
+
+🎵 Coding Music & Creativity
+Did you know you can make music with code? Tools like Sonic Pi and live-coding platforms allow students to mix creativity with programming. It's one of the most fun ways to fall in love with Python coding.
+
+📚 Popular Coding Languages You Can Learn
+Here are some beginner-friendly options we offer:
+• Python – Great for data science, AI, and automation
+• HTML/CSS – Core for websites
+• JavaScript – Web interactivity
+• Scratch – Best for kids and new learners
+• SQL – Databases and data management
+
+📱 Coding Apps & Websites to Try
+Alongside our full coding bootcamp, here are some tools and apps to get started:
+• Scratch
+• Code.org
+• dp coding school
+• Coding Ninjas
+• Replit for real-time collaboration
+
+👩‍⚕️ What About Medical Coding?
+Medical coding is different from programming. It involves translating healthcare procedures into codes for billing. You can explore our medical coding course, learn about medical billing and coding salaries, and explore medical coding jobs globally.
+
+📅 How Many Hours Does Coding Take?
+We suggest starting with 1–2 hours daily. Our courses are structured with clear modules, exercises, and real projects. Even with limited coding hours, you can make progress quickly — especially with the support of our instructors.
+
+🧭 How to Get Started – Coding Kaise Sikhe?
+Whether you're searching for "coding kaise sikhe in Hindi" or prefer English, we have beginner modules for every language background. Start small, stay consistent, and choose a clear path (like web development or AI).
+
+🧑‍💻 Ready to Begin Your Journey?
+From coding AI, games, and apps to medical coding, the future is built by those who code. Join our beginner-friendly coding course today and unlock a world of opportunity.
+
+👉 Join Dunamis Tutors Coding Bootcamp Now!
+👉 Download our Syllabus (PDF)
+  `,
   }
 
   const blogPosts = [
+    {
+      title: "The Ultimate Guide to the Best Free AI Image Enhancers Online in 2025",
+      excerpt:
+        "Discover the top AI image enhancers that can transform your low-resolution pictures into 4K masterpieces. From Vance AI to Leonardo AI, explore the best free tools available online.",
+      author: "Dunamis Tutors Team",
+      date: "December 20, 2024",
+      readTime: "10 min read",
+      category: "AI & Technology",
+      image: "/placeholder.svg?height=200&width=300",
+      slug: "ultimate-guide-best-free-ai-image-enhancers-online-2025",
+    },
     {
       title: "5 Essential Study Tips for JAMB Success",
       excerpt:
@@ -28,6 +90,7 @@ export default function BlogPage() {
       readTime: "5 min read",
       category: "JAMB Prep",
       image: "/placeholder.svg?height=200&width=300",
+      slug: "5-essential-study-tips-jamb-success",
     },
     {
       title: "Digital Marketing Trends in Nigeria for 2025",
@@ -38,6 +101,7 @@ export default function BlogPage() {
       readTime: "7 min read",
       category: "Digital Marketing",
       image: "/placeholder.svg?height=200&width=300",
+      slug: "digital-marketing-trends-nigeria-2025",
     },
     {
       title: "IELTS Speaking Test: Common Mistakes to Avoid",
@@ -48,6 +112,7 @@ export default function BlogPage() {
       readTime: "6 min read",
       category: "IELTS",
       image: "/placeholder.svg?height=200&width=300",
+      slug: "ielts-speaking-test-common-mistakes-avoid",
     },
     {
       title: "Coding Bootcamp vs University: Which Path is Right for You?",
@@ -58,6 +123,7 @@ export default function BlogPage() {
       readTime: "9 min read",
       category: "Coding",
       image: "/placeholder.svg?height=200&width=300",
+      slug: "coding-bootcamp-vs-university-which-path-right",
     },
     {
       title: "Study Abroad Guide: Top Universities in Canada for Nigerian Students",
@@ -68,6 +134,7 @@ export default function BlogPage() {
       readTime: "12 min read",
       category: "Study Abroad",
       image: "/placeholder.svg?height=200&width=300",
+      slug: "study-abroad-guide-top-universities-canada",
     },
     {
       title: "IJMB vs JUPEB: Which Direct Entry Program Should You Choose?",
@@ -78,6 +145,7 @@ export default function BlogPage() {
       readTime: "8 min read",
       category: "Direct Entry",
       image: "/placeholder.svg?height=200&width=300",
+      slug: "ijmb-vs-jupeb-which-direct-entry-program",
     },
   ]
 
@@ -175,7 +243,7 @@ export default function BlogPage() {
                 <CardHeader>
                   <Badge className="w-fit mb-2 bg-dunamis-primary">{post.category}</Badge>
                   <CardTitle className="text-lg text-dunamis-primary hover:text-dunamis-secondary transition-colors">
-                    <Link href={`/blog/${post.title.toLowerCase().replace(/\s+/g, "-")}`}>{post.title}</Link>
+                    <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>

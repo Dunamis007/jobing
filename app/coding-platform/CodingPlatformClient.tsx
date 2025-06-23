@@ -60,6 +60,7 @@ import {
   Bell,
   X,
   ArrowUp,
+  Flame,
 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -160,6 +161,18 @@ interface PeerNotification {
   }
   message: string
   timestamp: Date
+}
+
+interface PricingTier {
+  id: string
+  name: string
+  priceUSD: number
+  priceNGN: number
+  period: string
+  features: string[]
+  popular: boolean
+  color: string
+  buttonColor: string
 }
 
 export function CodingPlatformClient() {
@@ -1969,6 +1982,52 @@ export function CodingPlatformClient() {
 
   return (
     <div className="container mx-auto py-8 px-4">
+      {/* Enhanced Header with EduWallet */}
+      <div className="flex justify-between items-center mb-6 bg-white p-4 rounded-lg shadow-sm border">
+        <div>
+          <h1 className="text-3xl font-bold text-blue-600">Coding Bootcamp</h1>
+          <p className="text-gray-600">Master full-stack development with EduCoins</p>
+        </div>
+        <div className="flex items-center gap-4">
+          {/* Streak Counter */}
+          <div className="flex items-center gap-2 px-3 py-2 bg-orange-50 rounded-lg border border-orange-200">
+            <Flame className="h-5 w-5 text-orange-500" />
+            <span className="font-bold text-orange-700">{streakDays}</span>
+            <span className="text-sm text-orange-600">day streak</span>
+          </div>
+
+          {/* EduWallet */}
+          <div className="flex items-center gap-2 px-4 py-2 bg-yellow-50 rounded-lg border-2 border-yellow-300">
+            <Wallet className="h-5 w-5 text-yellow-600" />
+            <div className="text-right">
+              <div className="flex items-center gap-1">
+                <CoinsIcon className="h-4 w-4 text-yellow-500" />
+                <span className="font-bold text-lg">{eduCoins}</span>
+              </div>
+              <p className="text-xs text-gray-500">EduCoins</p>
+            </div>
+            <Button size="sm" onClick={() => setShowWalletModal(true)} className="bg-yellow-500 hover:bg-yellow-600">
+              <DollarSign className="h-4 w-4" />
+            </Button>
+          </div>
+
+          {/* Tier Badge */}
+          <Badge
+            className={`${
+              userTier === "Gold"
+                ? "bg-yellow-500"
+                : userTier === "Silver"
+                  ? "bg-gray-400"
+                  : userTier === "Bronze"
+                    ? "bg-amber-700"
+                    : "bg-gray-500"
+            } text-white px-3 py-1`}
+          >
+            {userTier} Developer
+          </Badge>
+        </div>
+      </div>
+
       {/* Navigation */}
       <div className="flex flex-col md:flex-row gap-8 mb-8">
         <div className="md:w-64 space-y-1">
