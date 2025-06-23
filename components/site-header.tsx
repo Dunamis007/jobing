@@ -63,14 +63,13 @@ export function SiteHeader() {
                 Programs <ChevronDown className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56 bg-white border-gray-200 shadow-lg">
+            <DropdownMenuContent align="end" className="w-56 bg-dunamis-primary border-dunamis-dark">
               {programLinks.map((program) => (
                 <DropdownMenuItem
                   key={program.href}
-                  className="text-gray-700 hover:text-dunamis-primary hover:bg-gray-50 focus:bg-gray-50 focus:text-dunamis-primary cursor-pointer"
-                  asChild
+                  className="text-gray-300 hover:text-white hover:bg-dunamis-dark focus:bg-dunamis-dark focus:text-white"
                 >
-                  <Link href={program.href} className="w-full block px-2 py-1">
+                  <Link href={program.href} className="w-full">
                     {program.name}
                   </Link>
                 </DropdownMenuItem>
@@ -139,7 +138,7 @@ export function SiteHeader() {
                   <Link
                     key={program.href}
                     href={program.href}
-                    className="block text-sm text-gray-300 hover:text-white transition-colors"
+                    className="block text-sm text-gray-300 hover:text-white"
                     onClick={toggleMenu}
                   >
                     {program.name}

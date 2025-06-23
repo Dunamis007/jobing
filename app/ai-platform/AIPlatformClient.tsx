@@ -134,8 +134,6 @@ interface LeaderboardEntry {
   points: number
   streak: number
   tier: "Bronze" | "Silver" | "Gold"
-  weeklyRank?: number
-  badges?: string[]
 }
 
 interface PricingTier {
@@ -148,17 +146,6 @@ interface PricingTier {
   popular: boolean
   color: string
   buttonColor: string
-}
-
-interface CareerRPGItem {
-  id: string
-  name: string
-  level: number
-  maxLevel: number
-  cost: number
-  description: string
-  realWorldBenefit: string
-  icon: any
 }
 
 export function AIPlatformClient() {
@@ -627,6 +614,83 @@ export function AIPlatformClient() {
   const currentModule = modules.find((m) => m.id === activeModule)
   const currentModuleProgress = currentModule?.progress || 0
 
+  const pricingTiers: PricingTier[] = [
+    {
+      id: "free",
+      name: "Free Track",
+      priceUSD: 0,
+      priceNGN: 0,
+      period: "Forever",
+      features: [
+        "Access to Track 1 & 2 (AI Literacy + ML Fundamentals)",
+        "Community forum access",
+        "Basic quizzes and projects",
+        "Certificate of participation",
+        "Email support",
+      ],
+      popular: false,
+      color: "border-gray-200",
+      buttonColor: "bg-gray-600 hover:bg-gray-700",
+    },
+    {
+      id: "bronze",
+      name: "Bronze Tier",
+      priceUSD: 49,
+      priceNGN: 20000,
+      period: "Monthly",
+      features: [
+        "Access to Tracks 1-4 (up to MLOps & Deployment)",
+        "Community forum access",
+        "All quizzes and assessments",
+        "Track completion certificates",
+        "Email support",
+        "Weekly group mentorship",
+      ],
+      popular: false,
+      color: "border-amber-700",
+      buttonColor: "bg-amber-700 hover:bg-amber-800",
+    },
+    {
+      id: "silver",
+      name: "Silver Tier",
+      priceUSD: 89,
+      priceNGN: 35000,
+      period: "Monthly",
+      features: [
+        "Access to all 6 tracks + Capstone prep",
+        "Priority support",
+        "1 monthly 1-on-1 mentorship",
+        "Advanced certificates",
+        "Job placement assistance",
+        "Resume review",
+        "500 EduCoins monthly",
+      ],
+      popular: true,
+      color: "border-gray-400",
+      buttonColor: "bg-gray-500 hover:bg-gray-600",
+    },
+    {
+      id: "gold",
+      name: "Gold Tier",
+      priceUSD: 129,
+      priceNGN: 50000,
+      period: "Monthly",
+      features: [
+        "Full 24-week program access",
+        "Weekly 1-on-1 mentorship",
+        "Premium capstone project support",
+        "Guaranteed job placement",
+        "LinkedIn profile optimization",
+        "Mock interviews",
+        "1000 EduCoins monthly",
+        "Lifetime access to updates",
+      ],
+      popular: false,
+      color: "border-yellow-400",
+      buttonColor: "bg-yellow-600 hover:bg-yellow-700",
+    },
+  ]
+
   const learningTrack = [
     {
       phase: "AI Literacy",
@@ -759,68 +823,6 @@ export function AIPlatformClient() {
       cost: 175,
       description: "Expand your professional AI network globally",
       benefits: ["Industry connections", "Job referrals", "Collaboration opportunities"],
-    },
-  ]
-
-  const pricingTiers: PricingTier[] = [
-    {
-      id: "free",
-      name: "Free",
-      priceUSD: 0,
-      priceNGN: 0,
-      period: "month",
-      features: ["Access to basic AI literacy modules", "Community forum access", "Limited project support"],
-      popular: false,
-      color: "border-gray-200",
-      buttonColor: "bg-gray-500 hover:bg-gray-700",
-    },
-    {
-      id: "bronze",
-      name: "Bronze",
-      priceUSD: 19,
-      priceNGN: 15000,
-      period: "month",
-      features: [
-        "All free features",
-        "Access to ML fundamentals modules",
-        "Priority project support",
-        "Weekly live Q&A sessions",
-      ],
-      popular: false,
-      color: "border-amber-500",
-      buttonColor: "bg-amber-500 hover:bg-amber-700",
-    },
-    {
-      id: "silver",
-      name: "Silver",
-      priceUSD: 49,
-      priceNGN: 40000,
-      period: "month",
-      features: [
-        "All bronze features",
-        "Access to deep learning & GenAI modules",
-        "1-on-1 mentorship sessions",
-        "Access to premium AI tools",
-      ],
-      popular: true,
-      color: "border-gray-400",
-      buttonColor: "bg-dunamis-primary hover:bg-dunamis-secondary",
-    },
-    {
-      id: "gold",
-      name: "Gold",
-      priceUSD: 99,
-      priceNGN: 80000,
-      period: "month",
-      features: [
-        "All silver features",
-        "Access to all modules",
-        "Dedicated AI career coach",
-        "Exclusive networking events",
-      ],
-      popular: false,
-      color: "border-yellow-500",
-      buttonColor: "bg-yellow-500 hover:bg-yellow-700",
     },
   ]
 
