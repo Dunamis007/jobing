@@ -26,7 +26,7 @@ export default function Home() {
                 <Link href="#programs">
                   <Button
                     variant="outline"
-                    className="border-white hover:bg-white hover:text-dunamis-primary text-black"
+                    className="border-white hover:bg-white hover:text-dunamis-primary text-black bg-transparent"
                   >
                     Explore Programs
                   </Button>
@@ -73,7 +73,7 @@ export default function Home() {
                   <Link href="/programs/ai-tutoring">
                     <Button
                       variant="outline"
-                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white bg-transparent"
                     >
                       Learn More
                     </Button>
@@ -99,7 +99,7 @@ export default function Home() {
                   <Link href="/programs/coding">
                     <Button
                       variant="outline"
-                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white bg-transparent"
                     >
                       Learn More
                     </Button>
@@ -125,7 +125,7 @@ export default function Home() {
                   <Link href="/programs/digital-marketing">
                     <Button
                       variant="outline"
-                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white bg-transparent"
                     >
                       Learn More
                     </Button>
@@ -149,7 +149,7 @@ export default function Home() {
                   <Link href="/programs/ijmb">
                     <Button
                       variant="outline"
-                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white bg-transparent"
                     >
                       Learn More
                     </Button>
@@ -173,7 +173,7 @@ export default function Home() {
                   <Link href="/programs/jupeb">
                     <Button
                       variant="outline"
-                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white bg-transparent"
                     >
                       Learn More
                     </Button>
@@ -197,7 +197,7 @@ export default function Home() {
                   <Link href="/programs/jamb">
                     <Button
                       variant="outline"
-                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white bg-transparent"
                     >
                       Learn More
                     </Button>
@@ -221,7 +221,7 @@ export default function Home() {
                   <Link href="/programs/ielts">
                     <Button
                       variant="outline"
-                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white bg-transparent"
                     >
                       Learn More
                     </Button>
@@ -245,7 +245,7 @@ export default function Home() {
                   <Link href="/programs/travel-abroad">
                     <Button
                       variant="outline"
-                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                      className="text-dunamis-primary border-dunamis-primary hover:bg-dunamis-primary hover:text-white bg-transparent"
                     >
                       Learn More
                     </Button>
@@ -424,7 +424,7 @@ export default function Home() {
               <Button className="bg-dunamis-primary hover:bg-dunamis-secondary text-white">Get Started</Button>
             </Link>
             <Link href="/contact">
-              <Button variant="outline" className="text-dunamis-primary border-dunamis-primary">
+              <Button variant="outline" className="text-dunamis-primary border-dunamis-primary bg-transparent">
                 Contact Us
               </Button>
             </Link>
