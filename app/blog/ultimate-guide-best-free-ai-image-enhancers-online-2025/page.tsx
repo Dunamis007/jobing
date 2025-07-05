@@ -8,22 +8,7 @@ import { generateSEO } from "@/lib/seo"
 export const metadata: Metadata = generateSEO({
   title: "The Ultimate Guide to the Best Free AI Image Enhancers Online in 2025",
   description:
-    "Discover the top free AI image enhancers of 2025. Transform low-resolution photos into 4K masterpieces with these powerful online tools.",
-  keywords: [
-    "AI image enhancer",
-    "free image upscaler",
-    "photo quality enhancer",
-    "AI photo enhancer 4K",
-    "image enhancement tools",
-    "online image enhancer",
-    "AI image upscaler free",
-  ],
-  canonical: "/blog/ultimate-guide-best-free-ai-image-enhancers-online-2025",
-  type: "article",
-  publishedTime: "2024-12-23T00:00:00.000Z",
-  modifiedTime: "2024-12-23T00:00:00.000Z",
-  authors: ["Dunamis Tutors"],
-  section: "Technology",
+    "Discover the best free AI image enhancers online to transform your low-resolution pictures into 4K masterpieces.",
 })
 
 export default function AIImageEnhancerBlogPost() {
@@ -69,21 +54,20 @@ export default function AIImageEnhancerBlogPost() {
 
             <p className="text-xl text-gray-700 leading-relaxed">
               Transform your low-resolution images into stunning 4K masterpieces with these powerful AI-driven tools.
-              Discover the best free options available in 2025.
+              Discover the best free options available online.
             </p>
           </header>
 
           {/* YouTube Video Embed */}
           <div className="mb-8">
-            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+            <div className="aspect-w-16 aspect-h-9 mb-6">
               <iframe
-                className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
-                src="https://www.youtube.com/embed/KaxP4to5szQ"
-                title="AI Image Enhancer Tutorial - Best Free Tools 2025"
+                src="https://www.youtube.com/embed/KaxP4to5szQ?si=z1if-apCiYUddN4J"
+                title="YouTube video player"
                 frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
-              />
+              ></iframe>
             </div>
             <p className="text-center text-sm text-gray-600 mt-2">
               Watch: Complete tutorial on using AI image enhancers effectively
@@ -95,8 +79,8 @@ export default function AIImageEnhancerBlogPost() {
             <p className="text-lg leading-relaxed mb-6">
               In today's digital world, high-quality images are more than just visuals—they're a language. Whether
               you're a content creator, designer, marketer, or student, having access to a powerful AI image enhancer
-              online free can instantly transform your low-resolution pictures into 4K masterpieces. If you're searching
-              for the best free AI image enhancer, you've come to the right place.
+              online can instantly transform your low-resolution pictures into 4K masterpieces. If you're searching for
+              the best free AI image enhancer, you've come to the right place.
             </p>
 
             <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-4">What Is an AI Image Enhancer? 🤖</h2>
@@ -115,13 +99,13 @@ export default function AIImageEnhancerBlogPost() {
             </ul>
 
             <p className="mb-6">
-              Whether you're using a photo quality enhancer online free or a premium tool, the technology is rapidly
-              evolving to give you professional-level results in seconds. Some of these tools also support integration
-              with Photoshop or are available as dedicated AI image enhancer apps.
+              Whether you're using a photo quality enhancer online or a premium tool, the technology is rapidly evolving
+              to give you professional-level results in seconds. Some of these tools also support integration with
+              Photoshop or are available as dedicated AI image enhancer apps.
             </p>
 
             <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-4">
-              Top Benefits of Using AI Image Enhancer Online Free 🌟
+              Top Benefits of Using AI Image Enhancer Online 🌟
             </h2>
 
             <div className="grid md:grid-cols-2 gap-6 mb-6">
@@ -143,9 +127,7 @@ export default function AIImageEnhancerBlogPost() {
               </div>
             </div>
 
-            <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-4">
-              Top Tools for AI Image Enhancement in 2025 🏆
-            </h2>
+            <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-4">Top Tools for AI Image Enhancement 🏆</h2>
 
             <p className="mb-6">
               Let's explore the top-performing tools that dominate the world of AI image upscalers and photo enhancers:

@@ -8,21 +8,7 @@ import { generateSEO } from "@/lib/seo"
 export const metadata: Metadata = generateSEO({
   title: "The Ultimate Guide to Coding for Beginners: From Scratch to Success",
   description:
-    "Complete beginner's guide to coding. Learn programming fundamentals, choose your first language, build projects, and start your tech career journey.",
-  keywords: [
-    "coding for beginners",
-    "learn programming",
-    "coding tutorial",
-    "programming guide Nigeria",
-    "how to start coding",
-    "beginner programming course",
-  ],
-  canonical: "/blog/ultimate-guide-to-coding-for-beginners-from-scratch-to-success",
-  type: "article",
-  publishedTime: "2024-12-23T00:00:00.000Z",
-  modifiedTime: "2024-12-23T00:00:00.000Z",
-  authors: ["Dunamis Tutors"],
-  section: "Programming",
+    "A comprehensive guide for beginners to start their coding journey, covering essential concepts, languages, and resources.",
 })
 
 export default function CodingGuideBlogPost() {
@@ -71,15 +57,14 @@ export default function CodingGuideBlogPost() {
 
           {/* YouTube Video Embed */}
           <div className="mb-8">
-            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+            <div className="aspect-w-16 aspect-h-9 mb-6">
               <iframe
-                className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
-                src="https://www.youtube.com/embed/EFmxPMdBqmU"
-                title="Animation vs. Coding - Learn Programming Fundamentals"
+                src="https://www.youtube.com/embed/EFmxPMdBqmU?si=OS9maGLUzThB2cj2"
+                title="YouTube video player"
                 frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
-              />
+              ></iframe>
             </div>
             <p className="text-center text-sm text-gray-600 mt-2">
               Watch: Animation vs. Coding - A fun introduction to programming concepts
@@ -219,7 +204,7 @@ export default function CodingGuideBlogPost() {
                 <p className="text-gray-600">Combine HTML, CSS, and JavaScript</p>
               </div>
               <div className="border-l-4 border-red-500 pl-4">
-                <h4 className="font-semibent">4. Weather App</h4>
+                <h4 className="font-semibold">4. Weather App</h4>
                 <p className="text-gray-600">Work with APIs and external data</p>
               </div>
             </div>
