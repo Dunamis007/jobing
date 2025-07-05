@@ -1,0 +1,430 @@
+app/ai-platform/AIPlatformClient.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/ai-platform/page.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/coding-platform/CodingPlatformClient.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/coding-platform/page.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/digital-marketing-platform/DigitalMarketingPlatformClient.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/digital-marketing-platform/page.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/ielts-platform/IELTSPlatformClient.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/ielts-platform/page.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/ijmb-platform/IJMBPlatformClient.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/ijmb-platform/page.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/jamb-platform/JAMBPlatformClient.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/jamb-platform/page.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/jupeb-platform/JUPEBPlatformClient.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/jupeb-platform/page.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/travel-abroad-platform/TravelAbroadPlatformClient.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/travel-abroad-platform/page.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/dashboard/DashboardClient.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/dashboard/page.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/dashboard/ai-tutoring/client.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/dashboard/ai-tutoring/page.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/dashboard/coding/client.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/dashboard/coding/page.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/dashboard/digital-marketing/client.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/dashboard/digital-marketing/page.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/dashboard/gamification/client.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/dashboard/gamification/page.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
+
+\`\`\`xml
+app/dashboard/instructions/page.tsx:
+\`\`\`tsx
+// @ts-nocheck
+'use client'
+
+/**
+ * Placeholder stub.
+ * Real implementation will be added later.
+ * Having a valid component prevents JSX-parser build errors.
+ */
+export default function Stub() {
+  return null
+}
+\`\`\`
