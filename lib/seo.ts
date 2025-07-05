@@ -1,76 +1,62 @@
 import type { Metadata } from "next"
 
-type SeoProps = {
+interface SEOProps {
   title?: string
   description?: string
-  image?: string
   canonicalUrl?: string
+  keywords?: string[]
+  ogImage?: string
 }
 
-const defaultSEO: Metadata = {
-  title: "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
-  description:
-    "Join Dunamis Tutors for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
-  openGraph: {
-    type: "website",
-    locale: "en_NG",
-    url: "https://dunamistutors.com",
-    title: "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
-    description:
-      "Join Dunamis Tutors for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
-    siteName: "Dunamis Tutors",
-    images: [
-      {
-        url: "/placeholder-logo.png",
-        width: 800,
-        height: 600,
-        alt: "Dunamis Tutors Logo",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
-    description:
-      "Join Dunamis Tutors for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
-    images: ["/placeholder-logo.png"],
-    creator: "@dunamistutors",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+export function generateSEO({
+  title = "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
+  description = "Join Dunamis Tutors for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
+  canonicalUrl = "https://dunamistutors.com/",
+  keywords = ["AI tutoring", "coding courses", "IELTS preparation", "JUPEB", "online learning", "Nigeria education"],
+  ogImage = "/placeholder.jpg",
+}: SEOProps): Metadata {
+  return {
+    title,
+    description,
+    keywords: keywords.join(", "),
+    authors: [{ name: "Dunamis Tutors" }],
+    creator: "Dunamis Tutors",
+    publisher: "Dunamis Tutors",
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: "Dunamis Tutors",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+      locale: "en_NG",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": "large",
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
-  },
-  metadataBase: new URL("https://dunamistutors.com"),
-  alternates: {
-    canonical: "https://dunamistutors.com",
-    languages: {
-      "en-NG": "https://dunamistutors.com",
-    },
-  },
-  verification: {
-    google: "google",
-    yandex: "yandex",
-  },
-}
-
-export function generateSEO({ title, description, image, canonicalUrl }: SeoProps): Metadata {
-  const seo: Metadata = {
-    ...defaultSEO,
-    ...(title ? { title } : {}),
-    ...(description ? { description } : {}),
-    ...(image ? { openGraph: { images: [{ url: image }] }, twitter: { images: [image] } } : {}),
-    ...(canonicalUrl ? { alternates: { canonical: canonicalUrl } } : {}),
   }
-
-  // Use a template for the title
-  seo.title = seo.title
-
-  return seo
 }
