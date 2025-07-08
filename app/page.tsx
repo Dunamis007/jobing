@@ -16,8 +16,7 @@ export default function Home() {
                 Africa's First AI-Powered Learning Platform
               </h1>
               <p className="text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Dunamis Tutors offers comprehensive educational programs to help you achieve your academic and career
-                goals. From IJMB and JUPEB to IELTS and Digital Marketing, we've got you covered.
+                Dunamis Tutors is an AI-powered online institution offering in-demand digital skills like AI, Digital Marketing, and Freelancing—alongside IJMB, JUPEB, and IELTS—through a gamified, presentation-based system that guarantees employment and global readiness
               </p>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <Link href="/register">
