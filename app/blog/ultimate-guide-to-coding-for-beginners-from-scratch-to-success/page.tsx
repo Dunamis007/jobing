@@ -1,346 +1,137 @@
 import type { Metadata } from "next"
-import Link from "next/link"
-import { ArrowLeft, Calendar, Clock, User, Tag } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
+import { Youtube } from "lucide-react"
 
+/**
+ * SEO -------------------------------------------------------------------------
+ */
 export const metadata: Metadata = {
-  title: "The Ultimate Guide to Coding for Beginners: From Scratch to Success",
+  title: "The Ultimate Guide to Coding for Beginners – From Scratch to Success",
   description:
-    "Complete beginner's guide to coding. Learn programming fundamentals, choose your first language, build projects, and start your tech career journey.",
-  keywords: [
-    "coding for beginners",
-    "learn programming",
-    "coding tutorial",
-    "programming guide Nigeria",
-    "how to start coding",
-    "beginner programming course",
-  ],
+    "New to programming? Learn the fundamentals, pick the right language, and build real-world projects with this step-by-step coding guide for beginners.",
   alternates: {
-    canonical: "https://dunamistutors.com/blog/ultimate-guide-to-coding-for-beginners-from-scratch-to-success/",
-  },
-  openGraph: {
-    type: "article",
-    publishedTime: "2024-12-23T00:00:00.000Z",
-    modifiedTime: "2024-12-23T00:00:00.000Z",
-    authors: ["Dunamis Tutors"],
-    section: "Programming",
+    canonical: "https://dunamistutors.com/blog/ultimate-guide-to-coding-for-beginners-from-scratch-to-success",
   },
 }
 
-export default function CodingGuideBlogPost() {
+/**
+ * Article Page ----------------------------------------------------------------
+ */
+export default function CodingBeginnersGuide() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-4 py-8">
-        {/* Navigation */}
-        <div className="mb-8">
-          <Link href="/blog" className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Blog
-          </Link>
+    <article className="mx-auto max-w-3xl px-4 py-10">
+      {/* Header */}
+      <header className="space-y-4 text-center">
+        <h1 className="text-3xl font-extrabold leading-tight md:text-4xl">
+          The Ultimate Guide&nbsp;to&nbsp;Coding for Beginners – From Scratch to Success
+        </h1>
+        <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
+          <Badge variant="secondary">Coding</Badge>
+          <span>•</span>
+          <time dateTime="2025-06-15">15&nbsp;June&nbsp;2025</time>
+          <span>•</span>
+          <span>12&nbsp;min read</span>
+        </div>
+      </header>
+
+      <Separator className="my-8" />
+
+      {/* Cover Image */}
+      <Image
+        src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80"
+        alt="Person typing code on a laptop"
+        width={1200}
+        height={630}
+        priority
+        className="rounded-lg object-cover"
+      />
+
+      {/* Body */}
+      <div className="prose prose-zinc mx-auto mt-8 dark:prose-invert">
+        <p>
+          Learning to code can feel intimidating, but it doesn’t have to be. In this guide you’ll discover practical
+          steps, curated resources, and expert tips that take you from complete novice to building your very first
+          production-ready application.
+        </p>
+
+        <h2>1. Understand the Fundamentals</h2>
+        <p>
+          Before you install frameworks or chase the latest trends, make sure you grasp core concepts like variables,
+          data types, control flow, and functions. These ideas are language-agnostic and form the backbone of every
+          modern technology stack.
+        </p>
+
+        <h2>2. Choose the Right First Language</h2>
+        <ul>
+          <li>
+            <strong>JavaScript</strong> – Perfect for immediate, visual results on the web.
+          </li>
+          <li>
+            <strong>Python</strong> – Clean syntax and a huge ecosystem for data, AI, and automation.
+          </li>
+          <li>
+            <strong>Go / Rust</strong> – Great if you’re interested in back-end services or systems programming.
+          </li>
+        </ul>
+
+        <h2>3. Build, Break, Repeat</h2>
+        <p>
+          The fastest way to learn is by making real projects. Start small (a to-do list or quiz app) and gradually
+          iterate. Each bug you fix cements a concept in your long-term memory.
+        </p>
+
+        <h2>4. Join a Community</h2>
+        <p>
+          Whether it’s&nbsp;
+          <a href="https://discord.gg" target="_blank" rel="noopener noreferrer">
+            Discord
+          </a>
+          , StackOverflow, or our own Dunamis Tutors forum, surrounding yourself with like-minded learners accelerates
+          growth and keeps you motivated.
+        </p>
+
+        {/* Embedded YouTube Video */}
+        <div className="not-prose my-8 overflow-hidden rounded-lg">
+          <iframe
+            title="Top 10 Tips for Learning Programming Fast"
+            src="https://www.youtube.com/embed/EFmxPMdBqmU"
+            className="aspect-video w-full"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
         </div>
 
-        {/* Article Header */}
-        <article className="max-w-4xl mx-auto">
-          <header className="mb-8">
-            <div className="flex flex-wrap items-center gap-4 mb-4">
-              <Badge variant="secondary" className="bg-blue-100 text-blue-800">
-                <Tag className="mr-1 h-3 w-3" />
-                Programming
-              </Badge>
-              <div className="flex items-center text-gray-600 text-sm">
-                <Calendar className="mr-1 h-4 w-4" />
-                December 23, 2024
-              </div>
-              <div className="flex items-center text-gray-600 text-sm">
-                <Clock className="mr-1 h-4 w-4" />
-                15 min read
-              </div>
-              <div className="flex items-center text-gray-600 text-sm">
-                <User className="mr-1 h-4 w-4" />
-                Dunamis Tutors
-              </div>
-            </div>
+        <h2>5. Roadmap &amp; Next Steps</h2>
+        <ol>
+          <li>Finish the free JavaScript basics track on our platform.</li>
+          <li>Clone the starter repo and complete the “Notes” mini-project.</li>
+          <li>Share your progress in the community and request a code review.</li>
+        </ol>
 
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              The Ultimate Guide to Coding for Beginners: From Scratch to Success 🚀
-            </h1>
+        <blockquote>
+          “The best error message is the one that never shows up, because you thought through the problem first.” –
+          Unknown
+        </blockquote>
 
-            <p className="text-xl text-gray-700 leading-relaxed">
-              Ready to start your coding journey? This comprehensive guide will take you from complete beginner to
-              confident programmer, with practical steps and real-world advice.
-            </p>
-          </header>
-
-          {/* YouTube Video Embed */}
-          <div className="mb-8">
-            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-              <iframe
-                className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
-                src="https://www.youtube.com/embed/EFmxPMdBqmU?si=OS9maGLUzThB2cj2"
-                title="Animation vs. Coding - Learn Programming Fundamentals"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-            <p className="text-center text-sm text-gray-600 mt-2">
-              Watch: Animation vs. Coding - A fun introduction to programming concepts
-            </p>
-          </div>
-
-          {/* Article Content */}
-          <div className="prose prose-lg max-w-none">
-            <p className="text-lg leading-relaxed mb-6">
-              In today's digital world, coding isn't just for computer scientists—it's a superpower that opens doors to
-              countless opportunities. Whether you're a student, career changer, or curious learner, this guide will
-              help you start your programming journey with confidence.
-            </p>
-
-            <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-4">Why Learn to Code? 🤔</h2>
-
-            <p className="mb-4">
-              Before diving into the technical aspects, let's understand why coding is one of the most valuable skills
-              you can learn:
-            </p>
-
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li>
-                <strong>High Demand:</strong> Tech jobs are growing faster than any other industry
-              </li>
-              <li>
-                <strong>Great Pay:</strong> Software developers earn competitive salaries globally
-              </li>
-              <li>
-                <strong>Flexibility:</strong> Work remotely, freelance, or start your own company
-              </li>
-              <li>
-                <strong>Problem Solving:</strong> Develop logical thinking and analytical skills
-              </li>
-              <li>
-                <strong>Creativity:</strong> Build apps, websites, and solutions that impact millions
-              </li>
-            </ul>
-
-            <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-4">
-              Step 1: Choose Your First Programming Language 💻
-            </h2>
-
-            <p className="mb-4">
-              The most common question beginners ask is: "Which programming language should I learn first?" Here are the
-              top recommendations:
-            </p>
-
-            <div className="bg-blue-50 p-6 rounded-lg mb-6">
-              <h3 className="text-xl font-semibold text-blue-900 mb-3">🐍 Python - Best for Beginners</h3>
-              <p className="text-blue-800 mb-2">
-                Python's simple syntax makes it perfect for beginners. It's used in web development, data science, AI,
-                and automation.
-              </p>
-              <p className="text-sm text-blue-700">
-                <strong>Career paths:</strong> Web Developer, Data Scientist, AI Engineer, Automation Specialist
-              </p>
-            </div>
-
-            <div className="bg-yellow-50 p-6 rounded-lg mb-6">
-              <h3 className="text-xl font-semibold text-yellow-900 mb-3">🌐 JavaScript - For Web Development</h3>
-              <p className="text-yellow-800 mb-2">
-                JavaScript powers the web. Learn it to build interactive websites and web applications.
-              </p>
-              <p className="text-sm text-yellow-700">
-                <strong>Career paths:</strong> Frontend Developer, Full-Stack Developer, Mobile App Developer
-              </p>
-            </div>
-
-            <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-4">
-              Step 2: Set Up Your Development Environment 🛠️
-            </h2>
-
-            <p className="mb-4">Getting started is easier than you think. Here's what you need:</p>
-
-            <ol className="list-decimal pl-6 mb-6 space-y-3">
-              <li>
-                <strong>Choose a Code Editor:</strong>
-                <ul className="list-disc pl-6 mt-2 space-y-1">
-                  <li>Visual Studio Code (Free, highly recommended)</li>
-                  <li>Sublime Text</li>
-                  <li>Atom</li>
-                </ul>
-              </li>
-              <li>
-                <strong>Install Python or Node.js:</strong>
-                <ul className="list-disc pl-6 mt-2 space-y-1">
-                  <li>Python: Download from python.org</li>
-                  <li>JavaScript: Install Node.js from nodejs.org</li>
-                </ul>
-              </li>
-              <li>
-                <strong>Create Your First Project Folder</strong>
-              </li>
-            </ol>
-
-            <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-4">Step 3: Learn the Fundamentals 📚</h2>
-
-            <p className="mb-4">Every programming language shares these core concepts:</p>
-
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h4 className="font-semibold text-lg mb-2">Variables & Data Types</h4>
-                <p className="text-gray-600">Store and manipulate different types of information</p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h4 className="font-semibold text-lg mb-2">Control Structures</h4>
-                <p className="text-gray-600">If statements, loops, and decision-making logic</p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h4 className="font-semibold text-lg mb-2">Functions</h4>
-                <p className="text-gray-600">Reusable blocks of code that perform specific tasks</p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h4 className="font-semibold text-lg mb-2">Data Structures</h4>
-                <p className="text-gray-600">Arrays, lists, and objects to organize information</p>
-              </div>
-            </div>
-
-            <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-4">Step 4: Build Your First Projects 🏗️</h2>
-
-            <p className="mb-4">
-              Theory is important, but practice makes perfect. Start with these beginner-friendly projects:
-            </p>
-
-            <div className="space-y-4 mb-6">
-              <div className="border-l-4 border-green-500 pl-4">
-                <h4 className="font-semibold">1. Calculator App</h4>
-                <p className="text-gray-600">Practice basic operations and user input</p>
-              </div>
-              <div className="border-l-4 border-blue-500 pl-4">
-                <h4 className="font-semibold">2. To-Do List</h4>
-                <p className="text-gray-600">Learn about data storage and manipulation</p>
-              </div>
-              <div className="border-l-4 border-purple-500 pl-4">
-                <h4 className="font-semibold">3. Personal Website</h4>
-                <p className="text-gray-600">Combine HTML, CSS, and JavaScript</p>
-              </div>
-              <div className="border-l-4 border-red-500 pl-4">
-                <h4 className="font-semibold">4. Weather App</h4>
-                <p className="text-gray-600">Work with APIs and external data</p>
-              </div>
-            </div>
-
-            <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-4">Step 5: Join the Community 👥</h2>
-
-            <p className="mb-4">Programming is more fun and effective when you're part of a community:</p>
-
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li>
-                <strong>GitHub:</strong> Share your code and collaborate with others
-              </li>
-              <li>
-                <strong>Stack Overflow:</strong> Get help when you're stuck
-              </li>
-              <li>
-                <strong>Reddit:</strong> Join programming subreddits for discussions
-              </li>
-              <li>
-                <strong>Local Meetups:</strong> Connect with developers in your area
-              </li>
-              <li>
-                <strong>Discord/Slack:</strong> Join programming communities for real-time chat
-              </li>
-            </ul>
-
-            <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-4">Common Beginner Mistakes to Avoid ⚠️</h2>
-
-            <div className="bg-red-50 p-6 rounded-lg mb-6">
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <span className="text-red-500 mr-2">❌</span>
-                  <div>
-                    <strong>Trying to learn everything at once</strong>
-                    <p className="text-red-700 text-sm">Focus on one language and master the basics first</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-red-500 mr-2">❌</span>
-                  <div>
-                    <strong>Not practicing regularly</strong>
-                    <p className="text-red-700 text-sm">Code every day, even if it's just for 30 minutes</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-red-500 mr-2">❌</span>
-                  <div>
-                    <strong>Giving up when stuck</strong>
-                    <p className="text-red-700 text-sm">Debugging is part of programming - embrace the challenge!</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-4">Your Learning Path Forward 🛤️</h2>
-
-            <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-lg mb-6">
-              <h3 className="text-xl font-semibold mb-3">Ready to Start Your Coding Journey?</h3>
-              <p className="mb-4">
-                Join thousands of students who have transformed their careers through our comprehensive coding program.
-              </p>
-              <div className="space-y-2">
-                <p>✅ Expert-led instruction</p>
-                <p>✅ Hands-on projects</p>
-                <p>✅ Career guidance</p>
-                <p>✅ Community support</p>
-              </div>
-            </div>
-
-            <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-4">Conclusion 🎯</h2>
-
-            <p className="mb-4">
-              Learning to code is a journey, not a destination. Start with the basics, practice consistently, and don't
-              be afraid to make mistakes. Every expert programmer started exactly where you are now.
-            </p>
-
-            <p className="mb-6">
-              Remember: the best time to start coding was yesterday, the second-best time is now. Take that first step,
-              write your first "Hello, World!" program, and begin your transformation into a confident programmer.
-            </p>
-
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <p className="text-center text-gray-700 mb-4">
-                <strong>Ready to turn your coding dreams into reality?</strong>
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700">
-                  <Link href="/register/coding">Start Your Coding Journey</Link>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link href="/programs/coding">Learn More About Our Program</Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Tags */}
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <div className="flex flex-wrap gap-2">
-              <span className="text-sm text-gray-600 mr-2">Tags:</span>
-              {[
-                "Coding for Beginners",
-                "Programming Tutorial",
-                "Learn to Code",
-                "Web Development",
-                "Python",
-                "JavaScript",
-                "Career Change",
-                "Tech Skills",
-              ].map((tag) => (
-                <Badge key={tag} variant="secondary" className="text-xs">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-          </div>
-        </article>
+        <p>
+          Ready to dive deeper? Explore our full <a href="/coding-platform">Coding Bootcamp</a> and unlock guided
+          mentorship, weekly challenges, and a gamified EduCoin economy.
+        </p>
       </div>
-    </div>
+
+      {/* Footer Call-to-Action */}
+      <footer className="mt-12 flex flex-col items-center gap-4">
+        <a
+          href="/register/coding"
+          className="inline-flex items-center gap-2 rounded-md bg-dunamis-primary px-6 py-3 text-white hover:bg-dunamis-secondary"
+        >
+          <Youtube className="h-4 w-4" />
+          Start Your Coding Journey
+        </a>
+        <p className="text-sm text-muted-foreground">© 2025 Dunamis Tutors</p>
+      </footer>
+    </article>
   )
 }
