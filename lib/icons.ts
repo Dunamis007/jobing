@@ -1,24 +1,45 @@
 import {
   Brain,
   Code,
-  BarChart,
+  TrendingUp,
+  Globe,
   GraduationCap,
   BookOpen,
-  PlaneTakeoff,
+  User,
+  Users,
+  Clock,
+  Briefcase,
+  Award,
+  MessageCircle,
+  Zap,
+  Star,
+  Target,
+  Infinity,
+  ArrowRight,
   CheckCircle,
-  type LucideIcon,
+  Play,
 } from "lucide-react"
 
-export const iconMap: Record<string, LucideIcon> = {
+export const iconMap = {
   Brain,
   Code,
-  BarChart,
+  TrendingUp,
+  Globe,
   GraduationCap,
   BookOpen,
-  PlaneTakeoff,
+  User,
+  Users,
+  Clock,
+  Briefcase,
+  Award,
+  MessageCircle,
+  Zap,
+  Star,
+  Target,
+  Infinity,
+  ArrowRight,
   CheckCircle,
+  Play,
 }
 
-export const getIcon = (iconName: string): LucideIcon => {
-  return iconMap[iconName] || BookOpen
-}
+export type IconName = keyof typeof iconMap

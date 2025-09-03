@@ -2,7 +2,8 @@
 
 import React from "react"
 import { Button } from "@/components/ui/button"
-import { AlertTriangle } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { AlertTriangle, RefreshCw } from "lucide-react"
 
 interface ErrorBoundaryState {
   hasError: boolean
@@ -26,7 +27,6 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error("Error caught by boundary:", error, errorInfo)
-    // Here you could send error to monitoring service
   }
 
   resetError = () => {
@@ -41,13 +41,22 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
       }
 
       return (
-        <div className="flex min-h-[400px] flex-col items-center justify-center p-8 text-center">
-          <AlertTriangle className="h-12 w-12 text-red-500 mb-4" />
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Something went wrong</h2>
-          <p className="text-gray-600 mb-4">We apologize for the inconvenience. Please try refreshing the page.</p>
-          <Button onClick={this.resetError} variant="outline">
-            Try Again
-          </Button>
+        <div className="min-h-screen flex items-center justify-center p-4">
+          <Card className="max-w-md w-full">
+            <CardHeader className="text-center">
+              <div className="mx-auto mb-4 p-3 bg-red-100 rounded-full w-fit">
+                <AlertTriangle className="h-6 w-6 text-red-600" />
+              </div>
+              <CardTitle className="text-red-600">Something went wrong</CardTitle>
+              <CardDescription>We apologize for the inconvenience. Please try refreshing the page.</CardDescription>
+            </CardHeader>
+            <CardContent className="text-center">
+              <Button onClick={this.resetError} className="w-full">
+                <RefreshCw className="mr-2 h-4 w-4" />
+                Try Again
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       )
     }

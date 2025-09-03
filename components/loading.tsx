@@ -1,27 +1,36 @@
-import { Skeleton } from "@/components/ui/skeleton"
+"use client"
 
-export function LoadingSection() {
+import { motion } from "framer-motion"
+import { Loader2 } from "lucide-react"
+
+interface LoadingProps {
+  message?: string
+  size?: "sm" | "md" | "lg"
+}
+
+export function Loading({ message = "Loading...", size = "md" }: LoadingProps) {
+  const sizeClasses = {
+    sm: "h-4 w-4",
+    md: "h-8 w-8",
+    lg: "h-12 w-12",
+  }
+
   return (
-    <div className="py-12 md:py-16">
-      <div className="container px-4 md:px-6">
-        <div className="mb-8 text-center">
-          <Skeleton className="h-8 w-64 mx-auto mb-4" />
-          <Skeleton className="h-4 w-96 mx-auto" />
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="space-y-4">
-              <Skeleton className="h-48 w-full" />
-              <Skeleton className="h-6 w-3/4" />
-              <Skeleton className="h-4 w-full" />
-              <div className="flex gap-2">
-                <Skeleton className="h-10 w-24" />
-                <Skeleton className="h-10 w-20" />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className="flex flex-col items-center justify-center p-8">
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+      >
+        <Loader2 className={`${sizeClasses[size]} text-dunamis-primary`} />
+      </motion.div>
+      <motion.p
+        className="mt-4 text-gray-600"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        {message}
+      </motion.p>
     </div>
   )
 }

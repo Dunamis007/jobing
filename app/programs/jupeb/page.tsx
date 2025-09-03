@@ -37,7 +37,8 @@ export default function JUPEBPage() {
                   <Link href="/register/jupeb">
                     <Button
                       variant="outline"
-                      className="border-white text-white hover:bg-white hover:text-dunamis-primary                 >
+                      className="border-white text-white hover:bg-white hover:text-dunamis-primary bg-transparent"
+                    >
                       Register Now
                     </Button>
                   </Link>
@@ -242,7 +243,10 @@ export default function JUPEBPage() {
                 </Button>
               </Link>
               <Link href="/register/jupeb">
-                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-dunamis-primary">
+                <Button
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-dunamis-primary bg-transparent"
+                >
                   Register Now
                 </Button>
               </Link>

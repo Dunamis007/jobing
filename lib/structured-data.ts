@@ -1,49 +1,31 @@
-export function generateOrganizationStructuredData() {
+export function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
+    "@type": "Organization",
     name: "Dunamis Tutors",
     description:
-      "Africa's First AI-Powered Learning Platform offering expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more.",
+      "Expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place.",
     url: "https://dunamistutors.com",
-    logo: "https://dunamistutors.com/placeholder-logo.png",
+    logo: "https://dunamistutors.com/logo.png",
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+234-XXX-XXX-XXXX",
+      contactType: "customer service",
+      availableLanguage: "English",
+    },
     sameAs: [
       "https://facebook.com/dunamistutors",
       "https://twitter.com/dunamistutors",
-      "https://instagram.com/dunamistutors",
-      "https://youtube.com/dunamistutors",
+      "https://linkedin.com/company/dunamistutors",
     ],
     address: {
       "@type": "PostalAddress",
-      streetAddress: "House 1, 444 crescent citec villa gwarimpa",
-      addressLocality: "Abuja",
       addressCountry: "Nigeria",
-    },
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+234-902-080-3096",
-      contactType: "customer service",
-      email: "dunamistutors@graduate.org",
-    },
-    offers: {
-      "@type": "AggregateOffer",
-      offerCount: "8",
-      offers: [
-        {
-          "@type": "Course",
-          name: "AI Tutoring Program",
-          description: "Experience personalized learning with our AI-powered tutoring program.",
-          provider: {
-            "@type": "EducationalOrganization",
-            name: "Dunamis Tutors",
-          },
-        },
-      ],
     },
   }
 }
 
-export function generateWebsiteStructuredData() {
+export function generateWebsiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -54,5 +36,37 @@ export function generateWebsiteStructuredData() {
       target: "https://dunamistutors.com/search?q={search_term_string}",
       "query-input": "required name=search_term_string",
     },
+  }
+}
+
+export function generateEducationalOrganizationSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    name: "Dunamis Tutors",
+    description:
+      "Online learning platform offering courses in AI, Coding, Digital Marketing, IELTS, JUPEB, and JAMB preparation",
+    url: "https://dunamistutors.com",
+    hasCredential: "Certified Online Education Provider",
+    offers: [
+      {
+        "@type": "Course",
+        name: "AI Tutoring Program",
+        description: "Master artificial intelligence with personalized AI-powered learning experiences",
+        provider: {
+          "@type": "Organization",
+          name: "Dunamis Tutors",
+        },
+      },
+      {
+        "@type": "Course",
+        name: "Coding Bootcamp",
+        description: "Learn programming from scratch to advanced with hands-on projects",
+        provider: {
+          "@type": "Organization",
+          name: "Dunamis Tutors",
+        },
+      },
+    ],
   }
 }

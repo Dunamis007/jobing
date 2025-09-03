@@ -1,46 +1,50 @@
 "use client"
 
-import type { DifferencePoint } from "@/types"
-import { getIcon } from "@/lib/icons"
 import { motion } from "framer-motion"
+import { Card, CardContent } from "@/components/ui/card"
+import { differences } from "@/data/homepage"
+import { iconMap, type IconName } from "@/lib/icons"
 
-interface DifferenceSectionProps {
-  title: string
-  description: string
-  points: DifferencePoint[]
-}
-
-export function DifferenceSection({ title, description, points }: DifferenceSectionProps) {
+export function DifferenceSection() {
   return (
-    <section className="py-12 md:py-16 bg-dunamis-light" role="complementary">
+    <section className="py-20 bg-dunamis-primary text-white">
       <div className="container px-4 md:px-6">
         <motion.div
-          className="mb-8 text-center"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-2xl font-bold tracking-tighter text-dunamis-primary sm:text-3xl md:text-4xl">{title}</h2>
-          <p className="mx-auto mt-4 max-w-[700px] text-gray-700 md:text-lg/relaxed">{description}</p>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">The Dunamis Difference</h2>
+          <p className="text-xl text-gray-200 max-w-3xl mx-auto">
+            What sets us apart from other online learning platforms
+          </p>
         </motion.div>
-        <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-3">
-          {points.map((point, index) => {
-            const IconComponent = getIcon(point.icon)
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {differences.map((difference, index) => {
+            const Icon = iconMap[difference.icon as IconName]
+
             return (
               <motion.div
-                key={point.id}
-                className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
-                initial={{ opacity: 0, y: 50 }}
+                key={difference.id}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="mb-4 rounded-full bg-dunamis-primary p-4 transition-transform duration-300 hover:scale-110">
-                  <IconComponent className="h-8 w-8 text-white" aria-hidden="true" />
-                </div>
-                <h3 className="text-xl font-bold text-dunamis-primary mb-3">{point.title}</h3>
-                <p className="text-gray-700 leading-relaxed">{point.description}</p>
+                <Card className="h-full bg-white/10 border-white/20 text-white hover:bg-white/20 transition-colors duration-300 group">
+                  <CardContent className="p-6 text-center">
+                    <div className="mb-4">
+                      <div className="inline-flex p-3 bg-dunamis-accent rounded-full group-hover:scale-110 transition-transform duration-300">
+                        <Icon className="h-6 w-6 text-white" />
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-bold mb-3">{difference.title}</h3>
+                    <p className="text-gray-200 text-sm leading-relaxed">{difference.description}</p>
+                  </CardContent>
+                </Card>
               </motion.div>
             )
           })}

@@ -1,12 +1,12 @@
 export interface Program {
   id: string
-  name: string
   title: string
   description: string
   icon: string
   href: string
-  registerHref: string
-  featured?: boolean
+  color: string
+  features: string[]
+  price?: string
 }
 
 export interface Feature {
@@ -21,10 +21,11 @@ export interface Testimonial {
   name: string
   role: string
   content: string
-  avatar?: string
+  avatar: string
+  rating: number
 }
 
-export interface DifferencePoint {
+export interface Difference {
   id: string
   title: string
   description: string
@@ -35,7 +36,6 @@ export interface SEOData {
   title: string
   description: string
   keywords: string[]
-  canonicalUrl: string
-  ogImage: string
-  structuredData?: any
+  ogImage?: string
+  canonicalUrl?: string
 }

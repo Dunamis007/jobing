@@ -31,7 +31,7 @@ export default function JAMBPage() {
                   <Link href="/jamb-platform">
                     <Button
                       variant="outline"
-                      className="border-dunamis-primary text-dunamis-primary hover:bg-dunamis-primary hover:text-white"
+                      className="border-dunamis-primary text-dunamis-primary hover:bg-dunamis-primary hover:text-white bg-transparent"
                     >
                       Access Platform
                     </Button>
@@ -39,7 +39,8 @@ export default function JAMBPage() {
                   <Link href="#program-details">
                     <Button
                       variant="outline"
-                      className="border-white hover:bg-white hover:text-dunamis-primary text-black           >
+                      className="border-white hover:bg-white hover:text-dunamis-primary text-white bg-transparent"
+                    >
                       Learn More
                     </Button>
                   </Link>
@@ -146,7 +147,10 @@ export default function JAMBPage() {
                 <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
               </Link>
               <Link href="/jamb-platform">
-                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-dunamis-primary">
+                <Button
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-dunamis-primary bg-transparent"
+                >
                   Access Platform
                 </Button>
               </Link>

@@ -1,54 +1,60 @@
 import { Suspense } from "react"
 import type { Metadata } from "next"
-import Script from "next/script"
 import { ErrorBoundary } from "@/components/error-boundary"
-import { LoadingSection } from "@/components/loading"
+import { Loading } from "@/components/loading"
 import { HeroSection } from "@/components/sections/hero-section"
 import { ProgramsSection } from "@/components/sections/programs-section"
 import { FeaturesSection } from "@/components/sections/features-section"
 import { DifferenceSection } from "@/components/sections/difference-section"
 import { TestimonialsSection } from "@/components/sections/testimonials-section"
 import { CTASection } from "@/components/sections/cta-section"
-import { programs, features, differencePoints, testimonials } from "@/data/homepage"
-import { generateOrganizationStructuredData, generateWebsiteStructuredData } from "@/lib/structured-data"
+import {
+  generateOrganizationSchema,
+  generateWebsiteSchema,
+  generateEducationalOrganizationSchema,
+} from "@/lib/structured-data"
 
 export const metadata: Metadata = {
   title: "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
   description:
     "Join Dunamis Tutors for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
   keywords: [
-    "AI tutoring Nigeria",
-    "coding courses online",
-    "IELTS preparation",
-    "JUPEB classes",
-    "digital marketing training",
-    "online education Nigeria",
-    "IJMB program",
+    "online learning Nigeria",
+    "AI courses Nigeria",
+    "coding bootcamp Nigeria",
+    "IELTS preparation Nigeria",
+    "JUPEB program Nigeria",
     "JAMB preparation",
-    "travel abroad guidance",
+    "digital marketing courses",
+    "online tutoring Nigeria",
   ],
   authors: [{ name: "Dunamis Tutors" }],
   creator: "Dunamis Tutors",
   publisher: "Dunamis Tutors",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   metadataBase: new URL("https://dunamistutors.com"),
   alternates: {
-    canonical: "https://dunamistutors.com/",
+    canonical: "https://dunamistutors.com",
   },
   openGraph: {
     title: "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
     description:
       "Join Dunamis Tutors for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
-    url: "https://dunamistutors.com/",
+    url: "https://dunamistutors.com",
     siteName: "Dunamis Tutors",
     images: [
       {
-        url: "/placeholder-logo.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Dunamis Tutors - Africa's First AI-Powered Learning Platform",
+        alt: "Dunamis Tutors - Online Learning Platform",
       },
     ],
-    locale: "en_NG",
+    locale: "en_US",
     type: "website",
   },
   twitter: {
@@ -56,7 +62,7 @@ export const metadata: Metadata = {
     title: "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
     description:
       "Join Dunamis Tutors for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
-    images: ["/placeholder-logo.png"],
+    images: ["/og-image.jpg"],
     creator: "@dunamistutors",
   },
   robots: {
@@ -72,110 +78,53 @@ export const metadata: Metadata = {
   },
   verification: {
     google: "your-google-verification-code",
+    yandex: "your-yandex-verification-code",
+    yahoo: "your-yahoo-verification-code",
   },
 }
 
 export default function HomePage() {
-  const organizationData = generateOrganizationStructuredData()
-  const websiteData = generateWebsiteStructuredData()
+  const organizationSchema = generateOrganizationSchema()
+  const websiteSchema = generateWebsiteSchema()
+  const educationalSchema = generateEducationalOrganizationSchema()
 
   return (
     <>
       {/* Structured Data */}
-      <Script
-        id="organization-structured-data"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationData),
-        }}
-      />
-      <Script
-        id="website-structured-data"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(websiteData),
+          __html: JSON.stringify([organizationSchema, websiteSchema, educationalSchema]),
         }}
       />
 
-      <div className="flex min-h-screen flex-col">
-        <ErrorBoundary>
-          <Suspense fallback={<LoadingSection />}>
-            <HeroSection
-              title="Africa's First AI-Powered Learning Platform"
-              description="Dunamis Tutors is an AI-powered online institution offering in-demand digital skills like AI, Digital Marketing, and Freelancing—alongside IJMB, JUPEB, and IELTS—through a gamified, presentation-based system that guarantees employment and global readiness"
-              primaryCTA={{
-                text: "Get Started",
-                href: "/register",
-              }}
-              secondaryCTA={{
-                text: "Explore Programs",
-                href: "#programs",
-              }}
-              heroImage={{
-                src: "https://i.ibb.co/CpdGnRzm/personal.png",
-                alt: "Dunamis Tutors - Personalized Learning Experience",
-              }}
-            />
+      <ErrorBoundary>
+        <main className="min-h-screen">
+          <Suspense fallback={<Loading message="Loading homepage..." />}>
+            <HeroSection />
           </Suspense>
-        </ErrorBoundary>
 
-        <ErrorBoundary>
-          <Suspense fallback={<LoadingSection />}>
-            <ProgramsSection
-              title="From Coding to Campus — Learn. Build. Launch."
-              description="Choose from our wide range of educational programs designed to help you succeed."
-              programs={programs}
-            />
+          <Suspense fallback={<Loading message="Loading programs..." />}>
+            <ProgramsSection />
           </Suspense>
-        </ErrorBoundary>
 
-        <ErrorBoundary>
-          <Suspense fallback={<LoadingSection />}>
-            <FeaturesSection
-              title="Why Choose Dunamis Tutors?"
-              description="We are committed to providing quality education and personalized guidance to help you succeed."
-              features={features}
-            />
+          <Suspense fallback={<Loading message="Loading features..." />}>
+            <FeaturesSection />
           </Suspense>
-        </ErrorBoundary>
 
-        <ErrorBoundary>
-          <Suspense fallback={<LoadingSection />}>
-            <DifferenceSection
-              title="Our Difference"
-              description="Experience learning like never before with our innovative approach to education."
-              points={differencePoints}
-            />
+          <Suspense fallback={<Loading message="Loading content..." />}>
+            <DifferenceSection />
           </Suspense>
-        </ErrorBoundary>
 
-        <ErrorBoundary>
-          <Suspense fallback={<LoadingSection />}>
-            <TestimonialsSection
-              title="What Our Students Say"
-              description="Hear from our students about their experience with Dunamis Tutors."
-              testimonials={testimonials}
-            />
+          <Suspense fallback={<Loading message="Loading testimonials..." />}>
+            <TestimonialsSection />
           </Suspense>
-        </ErrorBoundary>
 
-        <ErrorBoundary>
-          <Suspense fallback={<LoadingSection />}>
-            <CTASection
-              title="Ready to Start Your Learning Journey?"
-              description="Join Dunamis Tutors today and take the first step towards achieving your academic and career goals."
-              primaryCTA={{
-                text: "Get Started",
-                href: "/register",
-              }}
-              secondaryCTA={{
-                text: "Contact Us",
-                href: "/contact",
-              }}
-            />
+          <Suspense fallback={<Loading message="Loading final section..." />}>
+            <CTASection />
           </Suspense>
-        </ErrorBoundary>
-      </div>
+        </main>
+      </ErrorBoundary>
     </>
   )
 }
