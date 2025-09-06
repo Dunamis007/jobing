@@ -4,24 +4,13 @@ import { useEffect } from "react"
 import { usePerformance } from "@/hooks/use-performance"
 
 export function PerformanceMonitor() {
-  const { trackPageView, trackUserInteraction, trackError } = usePerformance()
+  const { trackPageView, trackError } = usePerformance()
 
   useEffect(() => {
-    // Track initial page load
+    // Track page view
     trackPageView(window.location.pathname)
 
-    // Track Core Web Vitals
-    if (typeof window !== "undefined" && "web-vital" in window) {
-      import("web-vitals").then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-        getCLS(console.log)
-        getFID(console.log)
-        getFCP(console.log)
-        getLCP(console.log)
-        getTTFB(console.log)
-      })
-    }
-
-    // Global error handler
+    // Track unhandled errors
     const handleError = (event: ErrorEvent) => {
       trackError(event.error || new Error(event.message))
     }
@@ -37,7 +26,7 @@ export function PerformanceMonitor() {
       window.removeEventListener("error", handleError)
       window.removeEventListener("unhandledrejection", handleUnhandledRejection)
     }
-  }, [trackPageView, trackUserInteraction, trackError])
+  }, [trackPageView, trackError])
 
   return null
 }

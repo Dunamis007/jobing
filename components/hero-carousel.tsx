@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -36,50 +37,44 @@ export function HeroCarousel() {
   }
 
   return (
-    <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-lg">
-      {/* Images */}
-      <div className="relative w-full h-full">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-500 ${
-              index === currentIndex ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <img
-              src={image || "/placeholder.svg"}
-              alt={`Dunamis Edtech slide ${index + 1}`}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ))}
+    <div className="relative w-full max-w-2xl mx-auto">
+      <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
+        <Image
+          src={images[currentIndex] || "/placeholder.svg"}
+          alt={`Dunamis Edtech Learning Platform ${currentIndex + 1}`}
+          fill
+          className="object-cover transition-opacity duration-500"
+          priority
+        />
+
+        {/* Navigation Arrows */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white"
+          onClick={goToPrevious}
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </Button>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white"
+          onClick={goToNext}
+        >
+          <ChevronRight className="h-6 w-6" />
+        </Button>
       </div>
 
-      {/* Navigation Arrows */}
-      <Button
-        variant="outline"
-        size="icon"
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white"
-        onClick={goToPrevious}
-      >
-        <ChevronLeft className="h-4 w-4" />
-      </Button>
-
-      <Button
-        variant="outline"
-        size="icon"
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white"
-        onClick={goToNext}
-      >
-        <ChevronRight className="h-4 w-4" />
-      </Button>
-
-      {/* Dots Indicator */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      {/* Dot Indicators */}
+      <div className="flex justify-center space-x-2 mt-4">
         {images.map((_, index) => (
           <button
             key={index}
-            className={`w-3 h-3 rounded-full transition-colors ${index === currentIndex ? "bg-white" : "bg-white/50"}`}
+            className={`w-3 h-3 rounded-full transition-colors ${
+              index === currentIndex ? "bg-orange-500" : "bg-gray-300"
+            }`}
             onClick={() => goToSlide(index)}
           />
         ))}

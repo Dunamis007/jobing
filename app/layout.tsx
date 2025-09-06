@@ -16,14 +16,16 @@ export const metadata: Metadata = {
   description:
     "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
   keywords: [
-    "AI tutoring",
-    "coding courses",
-    "digital marketing",
-    "IELTS preparation",
-    "JUPEB",
-    "IJMB",
-    "JAMB",
+    "AI tutoring Nigeria",
+    "coding courses Nigeria",
+    "digital marketing Nigeria",
+    "IELTS preparation Nigeria",
+    "JUPEB program Nigeria",
+    "IJMB program Nigeria",
+    "JAMB preparation Nigeria",
     "online education Nigeria",
+    "tech skills Nigeria",
+    "career development Nigeria",
   ],
   authors: [{ name: "Dunamis Edtech" }],
   creator: "Dunamis Edtech",
@@ -33,33 +35,34 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://dunamisedtech.com"),
+  metadataBase: new URL("https://dunamistutors.com"),
   alternates: {
-    canonical: "https://dunamisedtech.com",
+    canonical: "https://dunamistutors.com/",
   },
   openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://dunamistutors.com",
+    siteName: "Dunamis Edtech",
     title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
     description:
       "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
-    url: "https://dunamisedtech.com",
-    siteName: "Dunamis Edtech",
     images: [
       {
-        url: "https://i.imgur.com/VR3UwFi.jpeg",
+        url: "https://i.imgur.com/ayuLxTm.jpeg",
         width: 1200,
         height: 630,
         alt: "Dunamis Edtech - Online Learning Platform",
       },
     ],
-    locale: "en_US",
-    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
     description:
       "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
-    images: ["https://i.imgur.com/VR3UwFi.jpeg"],
+    images: ["https://i.imgur.com/ayuLxTm.jpeg"],
+    creator: "@dunamistutors",
   },
   robots: {
     index: true,
@@ -72,9 +75,12 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
+  icons: {
+    icon: "https://i.imgur.com/ayuLxTm.jpeg",
+    shortcut: "https://i.imgur.com/ayuLxTm.jpeg",
+    apple: "https://i.imgur.com/ayuLxTm.jpeg",
   },
+  manifest: "/site.webmanifest",
     generator: 'v0.app'
 }
 
@@ -86,12 +92,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="canonical" href="https://dunamisedtech.com/" />
-        <link rel="icon" href="https://i.imgur.com/VR3UwFi.jpeg" />
+        <link rel="canonical" href="https://dunamistutors.com/" />
+        <link rel="icon" href="https://i.imgur.com/ayuLxTm.jpeg" />
+        <link rel="apple-touch-icon" href="https://i.imgur.com/ayuLxTm.jpeg" />
       </head>
       <body className={inter.className}>
         <ErrorBoundary>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
               <main className="flex-1">{children}</main>

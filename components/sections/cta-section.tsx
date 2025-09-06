@@ -7,22 +7,22 @@ import { ArrowRight } from "lucide-react"
 
 export function CTASection() {
   return (
-    <section className="py-20 bg-gradient-to-r from-dunamis-primary to-blue-800 text-white">
+    <section className="py-20 bg-gradient-to-r from-[#002B5B] to-[#1E3A8A]">
       <div className="container px-4 md:px-6">
         <motion.div
-          className="text-center space-y-8"
+          className="text-center space-y-8 max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <div className="space-y-4">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-white">
               Ready to Transform Your Future?
             </h2>
-            <p className="text-xl text-gray-200 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
               Join thousands of students who have already started their careers with Dunamis Edtech. Start your learning
-              journey today!
+              journey today and unlock your potential!
             </p>
           </div>
 
@@ -30,7 +30,7 @@ export function CTASection() {
             <Link href="/register">
               <Button
                 size="lg"
-                className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white font-semibold px-8 py-4 text-lg group"
+                className="bg-[#FF9800] hover:bg-[#F57C00] text-white font-semibold px-8 py-4 text-lg group rounded-lg shadow-lg"
               >
                 Get Started Now
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -40,7 +40,7 @@ export function CTASection() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-dunamis-primary font-semibold px-8 py-4 text-lg bg-transparent"
+                className="border-2 border-white text-white hover:bg-white hover:text-[#002B5B] font-semibold px-8 py-4 text-lg bg-transparent rounded-lg"
               >
                 Explore Programs
               </Button>

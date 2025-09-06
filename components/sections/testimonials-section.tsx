@@ -12,7 +12,7 @@ const testimonials = [
     company: "TechCorp",
     image: "/placeholder-user.jpg",
     content:
-      "The AI Tutoring program gave me the skills I needed to land my dream job. The instructors were amazing and the curriculum was spot-on.",
+      "The AI Tutoring program gave me the skills I needed to land my dream job. The instructors were amazing and the curriculum was comprehensive and up-to-date.",
     rating: 5,
   },
   {
@@ -21,7 +21,7 @@ const testimonials = [
     company: "StartupXYZ",
     image: "/placeholder-user.jpg",
     content:
-      "I went from zero coding experience to building full-stack applications in just 4 months. The support from instructors was incredible.",
+      "I went from zero coding experience to building full-stack applications in just 4 months. The support from instructors and community was incredible throughout the journey.",
     rating: 5,
   },
   {
@@ -30,14 +30,14 @@ const testimonials = [
     company: "MarketPro",
     image: "/placeholder-user.jpg",
     content:
-      "The Digital Marketing course transformed my career. I now manage campaigns for major brands and increased my salary by 150%.",
+      "The Digital Marketing course transformed my career completely. I now manage campaigns for major brands and increased my salary by 150% within 6 months.",
     rating: 5,
   },
 ]
 
 export function TestimonialsSection() {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-white">
       <div className="container px-4 md:px-6">
         <motion.div
           className="text-center space-y-4 mb-16"
@@ -46,10 +46,10 @@ export function TestimonialsSection() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-[#333333]">
             What Our Students Say
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-[#666666] max-w-3xl mx-auto">
             Real success stories from our amazing community of learners
           </p>
         </motion.div>
@@ -63,19 +63,19 @@ export function TestimonialsSection() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="h-full">
-                <CardContent className="p-6">
-                  <div className="space-y-4">
+              <Card className="h-full bg-white border-0 shadow-sm hover:shadow-md transition-shadow rounded-xl">
+                <CardContent className="p-8">
+                  <div className="space-y-6">
                     <div className="flex items-center space-x-1">
                       {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                        <Star key={i} className="h-5 w-5 fill-[#FF9800] text-[#FF9800]" />
                       ))}
                     </div>
-                    <p className="text-gray-600 leading-relaxed">"{testimonial.content}"</p>
-                    <div className="flex items-center space-x-3">
-                      <Avatar>
+                    <p className="text-[#666666] leading-relaxed italic">"{testimonial.content}"</p>
+                    <div className="flex items-center space-x-4">
+                      <Avatar className="h-12 w-12">
                         <AvatarImage src={testimonial.image || "/placeholder.svg"} alt={testimonial.name} />
-                        <AvatarFallback>
+                        <AvatarFallback className="bg-gradient-to-br from-[#002B5B] to-[#1E3A8A] text-white">
                           {testimonial.name
                             .split(" ")
                             .map((n) => n[0])
@@ -83,8 +83,8 @@ export function TestimonialsSection() {
                         </AvatarFallback>
                       </Avatar>
                       <div>
-                        <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                        <p className="text-sm text-gray-600">
+                        <p className="font-semibold text-[#333333]">{testimonial.name}</p>
+                        <p className="text-sm text-[#999999]">
                           {testimonial.role} at {testimonial.company}
                         </p>
                       </div>

@@ -1,44 +1,35 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Progress } from "@/components/ui/progress"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Check } from "lucide-react"
 
-interface FormField {
-  name: string
-  label: string
-  type: string
-  required: boolean
-  options?: { value: string; label: string }[]
-}
-
-interface FormSection {
+interface Step {
+  id: string
   title: string
-  fields: FormField[]
+  description: string
+  component: React.ReactNode
 }
 
 interface MultiStepFormProps {
-  sections: FormSection[]
-  onSubmit: (data: Record<string, any>) => void
+  steps: Step[]
+  onComplete: (data: any) => void
 }
 
-export function MultiStepForm({ sections, onSubmit }: MultiStepFormProps) {
+export function MultiStepForm({ steps, onComplete }: MultiStepFormProps) {
   const [currentStep, setCurrentStep] = useState(0)
-  const [formData, setFormData] = useState<Record<string, any>>({})
+  const [formData, setFormData] = useState({})
+  const [completedSteps, setCompletedSteps] = useState<number[]>([])
 
-  const handleInputChange = (name: string, value: any) => {
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const progress = ((currentStep + 1) / steps.length) * 100
 
   const handleNext = () => {
-    if (currentStep < sections.length - 1) {
+    if (currentStep < steps.length - 1) {
+      setCompletedSteps((prev) => [...prev, currentStep])
       setCurrentStep(currentStep + 1)
     }
   }
@@ -49,126 +40,89 @@ export function MultiStepForm({ sections, onSubmit }: MultiStepFormProps) {
     }
   }
 
-  const handleSubmit = () => {
-    onSubmit(formData)
+  const handleComplete = () => {
+    onComplete(formData)
   }
 
-  const progress = ((currentStep + 1) / sections.length) * 100
-
-  const renderField = (field: FormField) => {
-    const value = formData[field.name] || ""
-
-    switch (field.type) {
-      case "text":
-      case "email":
-      case "tel":
-      case "date":
-        return (
-          <div key={field.name} className="space-y-2">
-            <Label htmlFor={field.name}>
-              {field.label} {field.required && <span className="text-red-500">*</span>}
-            </Label>
-            <Input
-              id={field.name}
-              type={field.type}
-              value={value}
-              onChange={(e) => handleInputChange(field.name, e.target.value)}
-              required={field.required}
-            />
-          </div>
-        )
-
-      case "select":
-        return (
-          <div key={field.name} className="space-y-2">
-            <Label htmlFor={field.name}>
-              {field.label} {field.required && <span className="text-red-500">*</span>}
-            </Label>
-            <Select value={value} onValueChange={(val) => handleInputChange(field.name, val)}>
-              <SelectTrigger>
-                <SelectValue placeholder={`Select ${field.label}`} />
-              </SelectTrigger>
-              <SelectContent>
-                {field.options?.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        )
-
-      case "textarea":
-        return (
-          <div key={field.name} className="space-y-2">
-            <Label htmlFor={field.name}>
-              {field.label} {field.required && <span className="text-red-500">*</span>}
-            </Label>
-            <Textarea
-              id={field.name}
-              value={value}
-              onChange={(e) => handleInputChange(field.name, e.target.value)}
-              required={field.required}
-              rows={3}
-            />
-          </div>
-        )
-
-      case "checkbox":
-        return (
-          <div key={field.name} className="flex items-center space-x-2">
-            <Checkbox
-              id={field.name}
-              checked={value}
-              onCheckedChange={(checked) => handleInputChange(field.name, checked)}
-              required={field.required}
-            />
-            <Label htmlFor={field.name} className="text-sm">
-              {field.label} {field.required && <span className="text-red-500">*</span>}
-            </Label>
-          </div>
-        )
-
-      default:
-        return null
-    }
-  }
-
-  const currentSection = sections[currentStep]
+  const isLastStep = currentStep === steps.length - 1
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
-      <div className="mb-6">
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium">
-            Step {currentStep + 1} of {sections.length}
-          </span>
-          <span className="text-sm text-muted-foreground">{Math.round(progress)}% Complete</span>
-        </div>
-        <Progress value={progress} className="w-full" />
-      </div>
-
-      <Card>
+    <div className="max-w-4xl mx-auto">
+      {/* Progress Header */}
+      <Card className="mb-8">
         <CardHeader>
-          <CardTitle>{currentSection.title}</CardTitle>
-          <CardDescription>Please fill in the required information for this step.</CardDescription>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <CardTitle className="text-[#333333]">Registration Progress</CardTitle>
+              <CardDescription className="text-[#666666]">
+                Step {currentStep + 1} of {steps.length}: {steps[currentStep].title}
+              </CardDescription>
+            </div>
+            <div className="text-right">
+              <div className="text-2xl font-bold text-[#FF9800]">{Math.round(progress)}%</div>
+              <div className="text-sm text-[#666666]">Complete</div>
+            </div>
+          </div>
+          <Progress value={progress} className="h-2" />
         </CardHeader>
-        <CardContent className="space-y-4">{currentSection.fields.map(renderField)}</CardContent>
       </Card>
 
-      <div className="flex justify-between mt-6">
-        <Button variant="outline" onClick={handlePrevious} disabled={currentStep === 0}>
-          <ChevronLeft className="w-4 h-4 mr-2" />
+      {/* Step Indicators */}
+      <div className="flex items-center justify-center mb-8">
+        {steps.map((step, index) => (
+          <div key={step.id} className="flex items-center">
+            <div
+              className={`flex items-center justify-center w-10 h-10 rounded-full border-2 ${
+                completedSteps.includes(index)
+                  ? "bg-green-500 border-green-500 text-white"
+                  : index === currentStep
+                    ? "bg-[#FF9800] border-[#FF9800] text-white"
+                    : "bg-white border-gray-300 text-gray-400"
+              }`}
+            >
+              {completedSteps.includes(index) ? (
+                <Check className="h-5 w-5" />
+              ) : (
+                <span className="text-sm font-medium">{index + 1}</span>
+              )}
+            </div>
+            {index < steps.length - 1 && (
+              <div className={`w-16 h-0.5 mx-2 ${completedSteps.includes(index) ? "bg-green-500" : "bg-gray-300"}`} />
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Current Step Content */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-[#333333]">{steps[currentStep].title}</CardTitle>
+          <CardDescription className="text-[#666666]">{steps[currentStep].description}</CardDescription>
+        </CardHeader>
+        <CardContent>{steps[currentStep].component}</CardContent>
+      </Card>
+
+      {/* Navigation */}
+      <div className="flex items-center justify-between mt-8">
+        <Button
+          variant="outline"
+          onClick={handlePrevious}
+          disabled={currentStep === 0}
+          className="flex items-center bg-transparent"
+        >
+          <ChevronLeft className="h-4 w-4 mr-2" />
           Previous
         </Button>
 
-        {currentStep === sections.length - 1 ? (
-          <Button onClick={handleSubmit}>Submit Registration</Button>
+        {isLastStep ? (
+          <Button onClick={handleComplete} className="bg-[#FF9800] hover:bg-[#F57C00] text-white flex items-center">
+            Complete Registration
+            <Check className="h-4 w-4 ml-2" />
+          </Button>
         ) : (
-          <Button onClick={handleNext}>
-            Next
-            <ChevronRight className="w-4 h-4 ml-2" />
+          <Button onClick={handleNext} className="bg-[#FF9800] hover:bg-[#F57C00] text-white flex items-center">
+            Next Step
+            <ChevronRight className="h-4 w-4 ml-2" />
           </Button>
         )}
       </div>
