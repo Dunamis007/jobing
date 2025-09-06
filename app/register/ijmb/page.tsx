@@ -1,9 +1,11 @@
 import type { Metadata } from "next"
-import IJMBRegistrationClient from "./IJMBRegistrationClient"
+import { IJMBRegistrationClient } from "./IJMBRegistrationClient"
 
 export const metadata: Metadata = {
-  title: "IJMB Registration | Dunamis Tutors",
-  description: "Register for IJMB program at Dunamis Tutors",
+  title: "IJMB Program Registration | Dunamis Edtech",
+  description:
+    "Register for our Interim Joint Matriculation Board (IJMB) program. In-person classes for university preparation with expert guidance.",
+  keywords: ["IJMB registration", "university preparation", "direct entry", "Nigeria education", "in-person classes"],
 }
 
 export default function IJMBRegistrationPage() {

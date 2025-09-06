@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Play, CheckCircle } from "lucide-react"
+import { ArrowRight, Play, Users, Award, GraduationCap } from "lucide-react"
 
 export function HeroSection() {
   return (
@@ -27,10 +27,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                Learn AI, Coding & More with{" "}
-                <span className="bg-gradient-to-r from-dunamis-accent to-yellow-400 bg-clip-text text-transparent">
-                  Expert Tutors
-                </span>
+                Learn AI, Coding & <span className="text-dunamis-accent">More with Expert Tutors</span>
               </motion.h1>
               <motion.p
                 className="text-xl text-gray-200 md:text-2xl max-w-2xl"
@@ -75,15 +72,15 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-dunamis-accent" />
+                <Users className="h-5 w-5 text-dunamis-accent" />
                 <span>10,000+ Students</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-dunamis-accent" />
+                <Award className="h-5 w-5 text-dunamis-accent" />
                 <span>95% Success Rate</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-dunamis-accent" />
+                <GraduationCap className="h-5 w-5 text-dunamis-accent" />
                 <span>Expert Instructors</span>
               </div>
             </motion.div>
@@ -98,11 +95,11 @@ export function HeroSection() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-dunamis-accent to-yellow-400 rounded-2xl blur-2xl opacity-20 animate-pulse" />
               <Image
-                src="/placeholder.svg?height=600&width=600&text=Hero+Image"
+                src="https://i.imgur.com/yhOy5P3.jpeg"
                 alt="Dunamis Tutors Learning Platform"
                 width={600}
                 height={600}
-                className="relative rounded-2xl shadow-2xl"
+                className="relative rounded-2xl shadow-2xl object-cover"
                 priority
               />
             </div>

@@ -1,9 +1,9 @@
 "use client"
 
 import React from "react"
+import { AlertTriangle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { AlertTriangle, RefreshCw } from "lucide-react"
 
 interface ErrorBoundaryState {
   hasError: boolean
@@ -41,20 +41,27 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
       }
 
       return (
-        <div className="min-h-screen flex items-center justify-center p-4">
-          <Card className="max-w-md w-full">
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+          <Card className="w-full max-w-md">
             <CardHeader className="text-center">
-              <div className="mx-auto mb-4 p-3 bg-red-100 rounded-full w-fit">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
                 <AlertTriangle className="h-6 w-6 text-red-600" />
               </div>
-              <CardTitle className="text-red-600">Something went wrong</CardTitle>
-              <CardDescription>We apologize for the inconvenience. Please try refreshing the page.</CardDescription>
+              <CardTitle className="text-xl font-semibold text-gray-900">Something went wrong</CardTitle>
+              <CardDescription className="text-gray-600">
+                We encountered an unexpected error. Please try again.
+              </CardDescription>
             </CardHeader>
             <CardContent className="text-center">
               <Button onClick={this.resetError} className="w-full">
-                <RefreshCw className="mr-2 h-4 w-4" />
                 Try Again
               </Button>
+              {process.env.NODE_ENV === "development" && this.state.error && (
+                <details className="mt-4 text-left">
+                  <summary className="cursor-pointer text-sm text-gray-500">Error Details</summary>
+                  <pre className="mt-2 text-xs text-red-600 overflow-auto">{this.state.error.stack}</pre>
+                </details>
+              )}
             </CardContent>
           </Card>
         </div>

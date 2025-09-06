@@ -3,184 +3,191 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { usePathname } from "next/navigation"
-import { Menu, X, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu"
+import { Menu } from "lucide-react"
 
 export function SiteHeader() {
-  const pathname = usePathname()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
-
-  const isActive = (path: string) => {
-    return pathname === path
-  }
-
-  const programLinks = [
-    { name: "IJMB", href: "/programs/ijmb" },
-    { name: "JUPEB", href: "/programs/jupeb" },
-    { name: "JAMB", href: "/programs/jamb" },
-    { name: "IELTS", href: "/programs/ielts" },
-    { name: "Digital Marketing", href: "/programs/digital-marketing" },
-    { name: "Coding", href: "/programs/coding" },
-    { name: "AI Tutoring", href: "/programs/ai-tutoring" },
-    { name: "Travel Abroad", href: "/programs/travel-abroad" },
-  ]
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-dunamis-primary">
+    <header className="sticky top-0 z-50 w-full border-b bg-dunamis-primary">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center space-x-2">
           <Image
-            src="https://i.ibb.co/gLBYv3wv/04369-B17-59-A4-47-CE-B625-5-DB36-C766-F54.jpg"
-            alt="Dunamis Tutors Logo"
-            width={32}
-            height={32}
-            className="h-8 w-8 rounded-full object-cover"
+            src="https://i.imgur.com/ayuLxTm.jpeg"
+            alt="Dunamis Tutors"
+            width={40}
+            height={40}
+            className="rounded-lg"
           />
           <span className="text-xl font-bold text-white">Dunamis Tutors</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          <Link
-            href="/"
-            className={`text-sm font-medium ${isActive("/") ? "text-white" : "text-gray-300 hover:text-white"}`}
-          >
-            Home
-          </Link>
+        <NavigationMenu className="hidden md:flex">
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <Link href="/" legacyBehavior passHref>
+                <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+                  Home
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="link"
-                className="text-sm font-medium text-gray-300 hover:text-white flex items-center gap-1 p-0"
-              >
-                Programs <ChevronDown className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56 bg-dunamis-primary border-dunamis-dark">
-              {programLinks.map((program) => (
-                <DropdownMenuItem
-                  key={program.href}
-                  className="text-gray-300 hover:text-white hover:bg-dunamis-dark focus:bg-dunamis-dark focus:text-white"
-                >
-                  <Link href={program.href} className="w-full">
-                    {program.name}
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger className="bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white">
+                Programs
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <div className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                  <div className="row-span-3">
+                    <NavigationMenuLink asChild>
+                      <Link
+                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                        href="/programs"
+                      >
+                        <div className="mb-2 mt-4 text-lg font-medium">All Programs</div>
+                        <p className="text-sm leading-tight text-muted-foreground">
+                          Explore our comprehensive range of programs designed to advance your career.
+                        </p>
+                      </Link>
+                    </NavigationMenuLink>
+                  </div>
+                  <div className="grid gap-2">
+                    <Link
+                      href="/programs/ai-tutoring"
+                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
+                      <div className="text-sm font-medium leading-none">AI Tutoring</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        Master artificial intelligence and machine learning
+                      </p>
+                    </Link>
+                    <Link
+                      href="/programs/coding"
+                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
+                      <div className="text-sm font-medium leading-none">Coding Bootcamp</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        Full-stack development with modern technologies
+                      </p>
+                    </Link>
+                    <Link
+                      href="/programs/digital-marketing"
+                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
+                      <div className="text-sm font-medium leading-none">Digital Marketing</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        Master online marketing strategies
+                      </p>
+                    </Link>
+                  </div>
+                </div>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
 
-          <Link
-            href="/blog"
-            className={`text-sm font-medium ${isActive("/blog") ? "text-white" : "text-gray-300 hover:text-white"}`}
-          >
-            Blog
-          </Link>
+            <NavigationMenuItem>
+              <Link href="/blog" legacyBehavior passHref>
+                <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+                  Blog
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
 
-          <Link
-            href="/dashboard"
-            className={`text-sm font-medium ${isActive("/dashboard") ? "text-white" : "text-gray-300 hover:text-white"}`}
-          >
-            Dashboard
-          </Link>
+            <NavigationMenuItem>
+              <Link href="/dashboard" legacyBehavior passHref>
+                <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+                  Dashboard
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
 
-          <Link
-            href="/register"
-            className={`text-sm font-medium ${isActive("/register") ? "text-white" : "text-gray-300 hover:text-white"}`}
-          >
-            Register
-          </Link>
-        </nav>
+            <NavigationMenuItem>
+              <Link href="/register" legacyBehavior passHref>
+                <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+                  Register
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
 
-        <div className="flex items-center gap-4">
-          <Link href="/login" className="hidden md:block">
-            <Button variant="outline" className="border-white hover:bg-white hover:text-dunamis-primary">
+        <div className="flex items-center space-x-4">
+          <Link href="/login" className="hidden md:inline-flex">
+            <Button
+              variant="outline"
+              className="border-white text-white hover:bg-white hover:text-dunamis-primary bg-transparent"
+            >
               Login
             </Button>
           </Link>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden text-white"
-            onClick={toggleMenu}
-            aria-label="Toggle Menu"
-          >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
+          {/* Mobile Navigation */}
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <div className="flex flex-col space-y-4 mt-8">
+                <Link
+                  href="/"
+                  className="text-lg font-medium hover:text-dunamis-primary transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/programs"
+                  className="text-lg font-medium hover:text-dunamis-primary transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Programs
+                </Link>
+                <Link
+                  href="/blog"
+                  className="text-lg font-medium hover:text-dunamis-primary transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/dashboard"
+                  className="text-lg font-medium hover:text-dunamis-primary transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  href="/register"
+                  className="text-lg font-medium hover:text-dunamis-primary transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Register
+                </Link>
+                <Link
+                  href="/login"
+                  className="text-lg font-medium hover:text-dunamis-primary transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Login
+                </Link>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
-
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-dunamis-primary border-t border-dunamis-dark">
-          <div className="container px-4 py-4 flex flex-col space-y-4">
-            <Link
-              href="/"
-              className={`text-sm font-medium ${isActive("/") ? "text-white" : "text-gray-300"}`}
-              onClick={toggleMenu}
-            >
-              Home
-            </Link>
-
-            <div className="space-y-2">
-              <p className="text-sm font-medium text-white">Programs</p>
-              <div className="pl-4 space-y-2">
-                {programLinks.map((program) => (
-                  <Link
-                    key={program.href}
-                    href={program.href}
-                    className="block text-sm text-gray-300 hover:text-white"
-                    onClick={toggleMenu}
-                  >
-                    {program.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <Link
-              href="/blog"
-              className={`text-sm font-medium ${isActive("/blog") ? "text-white" : "text-gray-300"}`}
-              onClick={toggleMenu}
-            >
-              Blog
-            </Link>
-
-            <Link
-              href="/dashboard"
-              className={`text-sm font-medium ${isActive("/dashboard") ? "text-white" : "text-gray-300"}`}
-              onClick={toggleMenu}
-            >
-              Dashboard
-            </Link>
-
-            <Link
-              href="/register"
-              className={`text-sm font-medium ${isActive("/register") ? "text-white" : "text-gray-300"}`}
-              onClick={toggleMenu}
-            >
-              Register
-            </Link>
-
-            <Link
-              href="/login"
-              className={`text-sm font-medium ${isActive("/login") ? "text-white" : "text-gray-300"}`}
-              onClick={toggleMenu}
-            >
-              Login
-            </Link>
-          </div>
-        </div>
-      )}
     </header>
   )
 }

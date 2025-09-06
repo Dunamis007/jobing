@@ -6,10 +6,18 @@ export interface Program {
   href: string
   color: string
   features: string[]
-  price?: string
+  price: string
+  type: "online" | "in-person"
 }
 
 export interface Feature {
+  id: string
+  title: string
+  description: string
+  icon: string
+}
+
+export interface Difference {
   id: string
   title: string
   description: string
@@ -25,11 +33,42 @@ export interface Testimonial {
   rating: number
 }
 
-export interface Difference {
+export interface User {
+  id: string
+  email: string
+  name: string
+  avatar?: string
+  enrolledPrograms: string[]
+  progress: Record<string, number>
+  createdAt: Date
+}
+
+export interface Course {
   id: string
   title: string
   description: string
-  icon: string
+  modules: Module[]
+  duration: string
+  level: "beginner" | "intermediate" | "advanced"
+  price: string
+}
+
+export interface Module {
+  id: string
+  title: string
+  description: string
+  lessons: Lesson[]
+  duration: string
+  isLocked: boolean
+}
+
+export interface Lesson {
+  id: string
+  title: string
+  content: string
+  type: "video" | "text" | "quiz" | "assignment"
+  duration: string
+  isCompleted: boolean
 }
 
 export interface SEOData {

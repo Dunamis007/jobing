@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react"
 
 export function CTASection() {
   return (
-    <section className="py-20 bg-gradient-to-r from-dunamis-primary to-blue-800 text-white">
+    <section className="py-20 bg-gradient-to-br from-dunamis-primary via-dunamis-primary to-blue-800 text-white">
       <div className="container px-4 md:px-6">
         <motion.div
           className="text-center max-w-4xl mx-auto"
@@ -20,7 +20,7 @@ export function CTASection() {
             Ready to Transform Your Future?
           </h2>
           <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
-            Join thousands of successful students who have advanced their careers with Dunamis Tutors. Start your
+            Join thousands of students who have successfully launched their careers with Dunamis Tutors. Start your
             learning journey today!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -33,7 +33,7 @@ export function CTASection() {
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Link href="/programs">
+            <Link href="#programs">
               <Button
                 size="lg"
                 variant="outline"

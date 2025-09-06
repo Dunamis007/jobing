@@ -1,18 +1,11 @@
-import { Suspense } from "react"
 import type { Metadata } from "next"
 import { ErrorBoundary } from "@/components/error-boundary"
-import { Loading } from "@/components/loading"
 import { HeroSection } from "@/components/sections/hero-section"
 import { ProgramsSection } from "@/components/sections/programs-section"
 import { FeaturesSection } from "@/components/sections/features-section"
 import { DifferenceSection } from "@/components/sections/difference-section"
 import { TestimonialsSection } from "@/components/sections/testimonials-section"
 import { CTASection } from "@/components/sections/cta-section"
-import {
-  generateOrganizationSchema,
-  generateWebsiteSchema,
-  generateEducationalOrganizationSchema,
-} from "@/lib/structured-data"
 
 export const metadata: Metadata = {
   title: "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
@@ -76,55 +69,19 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
-    yahoo: "your-yahoo-verification-code",
-  },
 }
 
 export default function HomePage() {
-  const organizationSchema = generateOrganizationSchema()
-  const websiteSchema = generateWebsiteSchema()
-  const educationalSchema = generateEducationalOrganizationSchema()
-
   return (
-    <>
-      {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify([organizationSchema, websiteSchema, educationalSchema]),
-        }}
-      />
-
-      <ErrorBoundary>
-        <main className="min-h-screen">
-          <Suspense fallback={<Loading message="Loading homepage..." />}>
-            <HeroSection />
-          </Suspense>
-
-          <Suspense fallback={<Loading message="Loading programs..." />}>
-            <ProgramsSection />
-          </Suspense>
-
-          <Suspense fallback={<Loading message="Loading features..." />}>
-            <FeaturesSection />
-          </Suspense>
-
-          <Suspense fallback={<Loading message="Loading content..." />}>
-            <DifferenceSection />
-          </Suspense>
-
-          <Suspense fallback={<Loading message="Loading testimonials..." />}>
-            <TestimonialsSection />
-          </Suspense>
-
-          <Suspense fallback={<Loading message="Loading final section..." />}>
-            <CTASection />
-          </Suspense>
-        </main>
-      </ErrorBoundary>
-    </>
+    <ErrorBoundary>
+      <div className="flex flex-col min-h-screen">
+        <HeroSection />
+        <ProgramsSection />
+        <FeaturesSection />
+        <DifferenceSection />
+        <TestimonialsSection />
+        <CTASection />
+      </div>
+    </ErrorBoundary>
   )
 }

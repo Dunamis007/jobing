@@ -5,61 +5,78 @@ export const programs: Program[] = [
     id: "ai-tutoring",
     title: "AI Tutoring",
     description: "Master artificial intelligence with personalized AI-powered learning experiences",
-    icon: "Brain",
+    icon: "brain",
     href: "/programs/ai-tutoring",
     color: "bg-blue-500",
     features: ["Machine Learning", "Deep Learning", "Neural Networks", "AI Ethics"],
     price: "₦50,000",
+    type: "online",
   },
   {
     id: "coding",
     title: "Coding Bootcamp",
     description: "Learn programming from scratch to advanced with hands-on projects",
-    icon: "Code",
+    icon: "code",
     href: "/programs/coding",
     color: "bg-green-500",
     features: ["Web Development", "Mobile Apps", "Backend Systems", "DevOps"],
     price: "₦75,000",
+    type: "online",
   },
   {
     id: "digital-marketing",
     title: "Digital Marketing",
     description: "Master online marketing strategies and grow your digital presence",
-    icon: "TrendingUp",
+    icon: "trending-up",
     href: "/programs/digital-marketing",
     color: "bg-purple-500",
     features: ["SEO/SEM", "Social Media", "Content Marketing", "Analytics"],
     price: "₦40,000",
+    type: "online",
   },
   {
     id: "ielts",
     title: "IELTS Preparation",
     description: "Achieve your target IELTS score with expert guidance and practice",
-    icon: "Globe",
+    icon: "globe",
     href: "/programs/ielts",
     color: "bg-red-500",
     features: ["Speaking", "Writing", "Reading", "Listening"],
     price: "₦35,000",
+    type: "online",
+  },
+  {
+    id: "ijmb",
+    title: "IJMB Program",
+    description: "Interim Joint Matriculation Board examination preparation - In-person classes",
+    icon: "graduation-cap",
+    href: "/programs/ijmb",
+    color: "bg-yellow-500",
+    features: ["In-Person Classes", "University Preparation", "Subject Specialization", "Exam Success"],
+    price: "₦15,000",
+    type: "in-person",
   },
   {
     id: "jupeb",
     title: "JUPEB Program",
-    description: "Direct entry preparation for Nigerian universities",
-    icon: "GraduationCap",
+    description: "Joint Universities Preliminary Examinations Board preparation - In-person classes",
+    icon: "book-open",
     href: "/programs/jupeb",
-    color: "bg-yellow-500",
-    features: ["Literature", "Government", "Economics", "CRS"],
-    price: "₦179,000",
+    color: "bg-indigo-500",
+    features: ["In-Person Classes", "University Entry", "Academic Excellence", "Mentorship"],
+    price: "₦15,000",
+    type: "in-person",
   },
   {
-    id: "jamb",
-    title: "JAMB Preparation",
-    description: "Excel in your UTME examinations with comprehensive preparation",
-    icon: "BookOpen",
-    href: "/programs/jamb",
-    color: "bg-indigo-500",
-    features: ["Mathematics", "English", "Physics", "Chemistry"],
+    id: "travel-abroad",
+    title: "Travel Abroad",
+    description: "Complete guidance for studying and working abroad with visa assistance",
+    icon: "plane",
+    href: "/programs/travel-abroad",
+    color: "bg-teal-500",
+    features: ["Visa Assistance", "University Applications", "Document Prep", "Interview Training"],
     price: "₦25,000",
+    type: "online",
   },
 ]
 
@@ -68,37 +85,37 @@ export const features: Feature[] = [
     id: "personalized-learning",
     title: "Personalized Learning",
     description: "AI-powered adaptive learning paths tailored to your pace and style",
-    icon: "User",
+    icon: "user",
   },
   {
     id: "expert-instructors",
     title: "Expert Instructors",
     description: "Learn from industry professionals with years of experience",
-    icon: "Users",
+    icon: "users",
   },
   {
     id: "flexible-schedule",
     title: "Flexible Schedule",
     description: "Study at your own pace with 24/7 access to course materials",
-    icon: "Clock",
+    icon: "clock",
   },
   {
     id: "practical-projects",
     title: "Practical Projects",
     description: "Build real-world projects to showcase your skills to employers",
-    icon: "Briefcase",
+    icon: "briefcase",
   },
   {
     id: "certification",
     title: "Industry Certification",
     description: "Earn recognized certificates upon successful completion",
-    icon: "Award",
+    icon: "award",
   },
   {
     id: "community-support",
     title: "Community Support",
     description: "Join a vibrant community of learners and mentors",
-    icon: "MessageCircle",
+    icon: "message-circle",
   },
 ]
 
@@ -109,7 +126,7 @@ export const testimonials: Testimonial[] = [
     role: "Software Developer",
     content:
       "Dunamis Tutors transformed my career. The AI tutoring program gave me the skills I needed to land my dream job in tech.",
-    avatar: "/placeholder.svg?height=60&width=60",
+    avatar: "/placeholder-user.jpg",
     rating: 5,
   },
   {
@@ -118,7 +135,7 @@ export const testimonials: Testimonial[] = [
     role: "Digital Marketing Manager",
     content:
       "The digital marketing course was comprehensive and practical. I increased my company's online revenue by 300% using what I learned.",
-    avatar: "/placeholder.svg?height=60&width=60",
+    avatar: "/placeholder-user.jpg",
     rating: 5,
   },
   {
@@ -127,34 +144,61 @@ export const testimonials: Testimonial[] = [
     role: "University Student",
     content:
       "Thanks to the JUPEB program, I gained direct entry into my dream university. The tutors were exceptional and supportive.",
-    avatar: "/placeholder.svg?height=60&width=60",
+    avatar: "/placeholder-user.jpg",
     rating: 5,
   },
 ]
 
-export const differences: Difference[] = [
+export const differencePoints: Difference[] = [
   {
     id: "ai-powered",
     title: "AI-Powered Learning",
     description: "Our proprietary AI technology adapts to your learning style and pace",
-    icon: "Zap",
+    icon: "zap",
   },
   {
     id: "industry-experts",
     title: "Industry Experts",
     description: "Learn from professionals currently working in top companies",
-    icon: "Star",
+    icon: "star",
   },
   {
     id: "job-guarantee",
     title: "Job Placement Support",
     description: "We help you land your first job with our extensive network",
-    icon: "Target",
+    icon: "target",
   },
   {
     id: "lifetime-access",
     title: "Lifetime Access",
     description: "Once enrolled, you have lifetime access to course updates",
-    icon: "Infinity",
+    icon: "infinity",
   },
+]
+
+export const heroContent = {
+  title: "Learn AI, Coding & More with Expert Tutors",
+  subtitle:
+    "Transform your career with our comprehensive online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and JAMB preparation.",
+  primaryCTA: "Start Learning Today",
+  secondaryCTA: "Watch Demo",
+  heroImage: "https://i.imgur.com/yhOy5P3.jpeg",
+}
+
+export const companyInfo = {
+  name: "Dunamis Edtech",
+  logo: "https://i.imgur.com/ayuLxTm.jpeg",
+  phone: "07032090178",
+  email: "info@dunamistutors.com",
+  address: "Lagos, Nigeria",
+  website: "https://dunamistutors.com",
+  description:
+    "Leading online education platform in Nigeria. Master AI, Coding, Digital Marketing, IELTS, JUPEB, and more with expert tutors and personalized learning paths.",
+}
+
+export const stats = [
+  { label: "Students", value: "10,000+" },
+  { label: "Success Rate", value: "95%" },
+  { label: "Expert Instructors", value: "50+" },
+  { label: "Countries", value: "15+" },
 ]

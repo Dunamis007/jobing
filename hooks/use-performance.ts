@@ -1,49 +1,96 @@
 "use client"
 
-import { useEffect } from "react"
+import { useCallback } from "react"
 
-export function usePerformanceMonitoring() {
-  useEffect(() => {
-    // Monitor Core Web Vitals
-    if (typeof window !== "undefined" && "performance" in window) {
-      // First Contentful Paint
-      const observer = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          if (entry.entryType === "paint" && entry.name === "first-contentful-paint") {
-            console.log("FCP:", entry.startTime)
-          }
-        }
-      })
+interface PerformanceMetrics {
+  pageLoadTime?: number
+  timeToFirstByte?: number
+  domContentLoaded?: number
+  firstContentfulPaint?: number
+}
 
-      observer.observe({ entryTypes: ["paint"] })
+interface UserInteractionData {
+  element: string
+  text: string
+  href?: string
+}
 
-      // Largest Contentful Paint
-      const lcpObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries()
-        const lastEntry = entries[entries.length - 1]
-        console.log("LCP:", lastEntry.startTime)
-      })
+export function usePerformance() {
+  const trackPageView = useCallback((path: string) => {
+    if (typeof window === "undefined") return
 
-      lcpObserver.observe({ entryTypes: ["largest-contentful-paint"] })
+    const navigationTiming = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming
 
-      // Cumulative Layout Shift
-      const clsObserver = new PerformanceObserver((list) => {
-        let clsValue = 0
-        for (const entry of list.getEntries()) {
-          if (!entry.hadRecentInput) {
-            clsValue += (entry as any).value
-          }
-        }
-        console.log("CLS:", clsValue)
-      })
-
-      clsObserver.observe({ entryTypes: ["layout-shift"] })
-
-      return () => {
-        observer.disconnect()
-        lcpObserver.disconnect()
-        clsObserver.disconnect()
+    if (navigationTiming) {
+      const metrics: PerformanceMetrics = {
+        pageLoadTime: navigationTiming.loadEventEnd - navigationTiming.loadEventStart,
+        timeToFirstByte: navigationTiming.responseStart - navigationTiming.requestStart,
+        domContentLoaded: navigationTiming.domContentLoadedEventEnd - navigationTiming.domContentLoadedEventStart,
       }
+
+      // Get First Contentful Paint if available
+      const paintEntries = performance.getEntriesByType("paint")
+      const fcpEntry = paintEntries.find((entry) => entry.name === "first-contentful-paint")
+      if (fcpEntry) {
+        metrics.firstContentfulPaint = fcpEntry.startTime
+      }
+
+      console.log("Page Performance Metrics:", {
+        path,
+        ...metrics,
+      })
+
+      // Here you would typically send this data to your analytics service
+      // Example: analytics.track('page_view', { path, ...metrics })
     }
   }, [])
+
+  const trackUserInteraction = useCallback((action: string, data: UserInteractionData) => {
+    console.log("User Interaction:", {
+      action,
+      timestamp: Date.now(),
+      ...data,
+    })
+
+    // Here you would typically send this data to your analytics service
+    // Example: analytics.track('user_interaction', { action, ...data })
+  }, [])
+
+  const trackError = useCallback((error: Error, errorInfo?: any) => {
+    console.error("Application Error:", {
+      message: error.message,
+      stack: error.stack,
+      errorInfo,
+      timestamp: Date.now(),
+      userAgent: navigator.userAgent,
+      url: window.location.href,
+    })
+
+    // Here you would typically send this data to your error tracking service
+    // Example: errorTracking.captureException(error, { extra: errorInfo })
+  }, [])
+
+  const measurePerformance = useCallback((name: string, fn: () => void | Promise<void>) => {
+    const startTime = performance.now()
+
+    const result = fn()
+
+    if (result instanceof Promise) {
+      return result.finally(() => {
+        const endTime = performance.now()
+        console.log(`Performance: ${name} took ${endTime - startTime} milliseconds`)
+      })
+    } else {
+      const endTime = performance.now()
+      console.log(`Performance: ${name} took ${endTime - startTime} milliseconds`)
+      return result
+    }
+  }, [])
+
+  return {
+    trackPageView,
+    trackUserInteraction,
+    trackError,
+    measurePerformance,
+  }
 }

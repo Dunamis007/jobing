@@ -1,9 +1,28 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
-import { features } from "@/data/homepage"
-import { iconMap, type IconName } from "@/lib/icons"
+import { User, Users, Clock } from "lucide-react"
+
+const features = [
+  {
+    id: "personalized-learning",
+    title: "Personalized Learning",
+    description: "AI-powered adaptive learning paths tailored to your pace and style",
+    icon: User,
+  },
+  {
+    id: "expert-instructors",
+    title: "Expert Instructors",
+    description: "Learn from industry professionals with years of experience",
+    icon: Users,
+  },
+  {
+    id: "flexible-schedule",
+    title: "Flexible Schedule",
+    description: "Study at your own pace with 24/7 access to course materials",
+    icon: Clock,
+  },
+]
 
 export function FeaturesSection() {
   return (
@@ -16,7 +35,7 @@ export function FeaturesSection() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold tracking-tighter text-dunamis-primary sm:text-4xl md:text-5xl mb-4">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900 mb-4">
             Why Choose Dunamis Tutors?
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -24,34 +43,23 @@ export function FeaturesSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => {
-            const Icon = iconMap[feature.icon as IconName]
-
-            return (
-              <motion.div
-                key={feature.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="h-full text-center hover:shadow-lg transition-shadow duration-300 group">
-                  <CardContent className="p-8">
-                    <div className="mb-6">
-                      <div className="inline-flex p-4 bg-dunamis-primary/10 rounded-full group-hover:bg-dunamis-primary group-hover:text-white transition-colors duration-300">
-                        <Icon className="h-8 w-8 text-dunamis-primary group-hover:text-white" />
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-bold mb-4 group-hover:text-dunamis-primary transition-colors">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            )
-          })}
+        <div className="grid gap-8 md:grid-cols-3">
+          {features.map((feature, index) => (
+            <motion.div
+              key={feature.id}
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-dunamis-primary/10">
+                <feature.icon className="h-8 w-8 text-dunamis-primary" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
+              <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

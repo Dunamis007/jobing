@@ -2,12 +2,15 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { CheckCircle, BookOpen, GraduationCap, Calendar, Users } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { CheckCircle, Clock, Users, BookOpen, Target, Award, ArrowRight } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "JAMB Program | Dunamis Tutors",
-  description: "Learn about our JAMB program and how it can help you excel in your UTME examinations",
+  title: "JAMB Preparation Program | Dunamis Tutors",
+  description:
+    "Excel in your UTME examinations with our comprehensive JAMB preparation program. Expert tutors, proven strategies, and guaranteed results.",
+  keywords: ["JAMB preparation", "UTME", "university entrance", "Nigeria education", "exam preparation"],
 }
 
 export default function JAMBPage() {
@@ -19,141 +22,276 @@ export default function JAMBPage() {
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
               <div className="space-y-4">
-                <h1 className="text-3xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl">JAMB Program</h1>
+                <Badge className="bg-dunamis-accent text-white">JAMB Preparation</Badge>
+                <h1 className="text-3xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl">
+                  Excel in Your JAMB UTME Examinations
+                </h1>
                 <p className="text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Our comprehensive JAMB preparation program is designed to help you achieve excellent scores in the
-                  Joint Admissions and Matriculation Board (UTME) examinations.
+                  Comprehensive preparation program designed to help you achieve excellent scores in your JAMB UTME and
+                  secure admission into your dream university.
                 </p>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Link href="/register/jamb">
-                    <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
-                  </Link>
-                  <Link href="/jamb-platform">
-                    <Button
-                      variant="outline"
-                      className="border-dunamis-primary text-dunamis-primary hover:bg-dunamis-primary hover:text-white bg-transparent"
-                    >
-                      Access Platform
+                    <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">
+                      Register Now - ₦25,000
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>
-                  <Link href="#program-details">
-                    <Button
-                      variant="outline"
-                      className="border-white hover:bg-white hover:text-dunamis-primary text-white bg-transparent"
-                    >
-                      Learn More
-                    </Button>
-                  </Link>
+                  <Button
+                    variant="outline"
+                    className="border-white text-white hover:bg-white hover:text-dunamis-primary bg-transparent"
+                  >
+                    Learn More
+                  </Button>
                 </div>
               </div>
               <div className="flex justify-center">
                 <Image
-                  src="/placeholder.svg?height=400&width=400"
-                  alt="JAMB Program"
+                  src="/placeholder.svg?height=400&width=400&text=JAMB+Preparation"
+                  alt="JAMB Preparation Program"
                   width={400}
                   height={400}
-                  className="rounded-lg object-cover"
+                  className="rounded-lg object-cover shadow-lg"
                 />
               </div>
             </div>
           </div>
         </section>
 
-        {/* Program Details */}
-        <section id="program-details" className="py-12 md:py-16">
+        {/* Program Overview */}
+        <section className="py-16 md:py-24">
           <div className="container px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-              <div className="space-y-4">
-                <h2 className="text-2xl font-bold tracking-tighter text-dunamis-primary sm:text-3xl">
-                  About Our JAMB Program
-                </h2>
-                <p className="text-gray-700 md:text-lg/relaxed">
-                  Our JAMB preparation program offers intensive coaching and practice to help students excel in their
-                  UTME examinations and secure admission into their desired universities.
-                </p>
-                <div className="space-y-2">
-                  <div className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-dunamis-accent mt-0.5" />
-                    <p className="text-gray-700">Comprehensive coverage of all JAMB subjects</p>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-dunamis-accent mt-0.5" />
-                    <p className="text-gray-700">Regular mock examinations under exam conditions</p>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-dunamis-accent mt-0.5" />
-                    <p className="text-gray-700">Personalized study plans and progress tracking</p>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-dunamis-accent mt-0.5" />
-                    <p className="text-gray-700">Expert guidance on exam techniques and time management</p>
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <h2 className="text-2xl font-bold tracking-tighter text-dunamis-primary sm:text-3xl">
-                  Program Features
-                </h2>
-                <p className="text-gray-700 md:text-lg/relaxed">
-                  Our program is designed to give you the best preparation for your JAMB examinations through a
-                  combination of expert teaching and practical exercises.
-                </p>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <Card>
-                    <CardContent className="p-4 flex flex-col items-center text-center">
-                      <BookOpen className="h-8 w-8 text-dunamis-primary mb-2" />
-                      <h3 className="font-bold">Comprehensive Study Materials</h3>
-                      <p className="text-sm text-gray-500">Access to up-to-date JAMB resources</p>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className="p-4 flex flex-col items-center text-center">
-                      <GraduationCap className="h-8 w-8 text-dunamis-primary mb-2" />
-                      <h3 className="font-bold">Expert Tutors</h3>
-                      <p className="text-sm text-gray-500">Learn from experienced JAMB instructors</p>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className="p-4 flex flex-col items-center text-center">
-                      <Calendar className="h-8 w-8 text-dunamis-primary mb-2" />
-                      <h3 className="font-bold">Flexible Schedule</h3>
-                      <p className="text-sm text-gray-500">Weekend and weekday classes available</p>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className="p-4 flex flex-col items-center text-center">
-                      <Users className="h-8 w-8 text-dunamis-primary mb-2" />
-                      <h3 className="font-bold">Small Class Size</h3>
-                      <p className="text-sm text-gray-500">Personalized attention for better results</p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Program Overview</h2>
+              <p className="text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mt-4">
+                Everything you need to excel in your JAMB UTME examinations
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              <Card>
+                <CardHeader>
+                  <Clock className="h-8 w-8 text-dunamis-primary mb-2" />
+                  <CardTitle>Duration</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">3-6 months intensive preparation</p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <Users className="h-8 w-8 text-dunamis-primary mb-2" />
+                  <CardTitle>Class Size</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">Small classes (15-20 students)</p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <BookOpen className="h-8 w-8 text-dunamis-primary mb-2" />
+                  <CardTitle>Subjects</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">All JAMB subjects covered</p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <Award className="h-8 w-8 text-dunamis-primary mb-2" />
+                  <CardTitle>Success Rate</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">95% pass rate</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Curriculum */}
+        <section className="py-16 md:py-24 bg-gray-50">
+          <div className="container px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Curriculum</h2>
+              <p className="text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mt-4">
+                Comprehensive coverage of all JAMB subjects
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Core Subjects</CardTitle>
+                  <CardDescription>Essential subjects for all candidates</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span>English Language</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span>Mathematics</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span>General Studies</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Science Subjects</CardTitle>
+                  <CardDescription>For science-oriented courses</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span>Physics</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span>Chemistry</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span>Biology</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Arts Subjects</CardTitle>
+                  <CardDescription>For arts and humanities courses</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span>Literature in English</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span>Government</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span>History</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Commercial Subjects</CardTitle>
+                  <CardDescription>For business and commercial courses</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span>Economics</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span>Commerce</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <span>Accounting</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Features */}
+        <section className="py-16 md:py-24">
+          <div className="container px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                Why Choose Our JAMB Program?
+              </h2>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-3">
+              <Card>
+                <CardHeader>
+                  <Target className="h-8 w-8 text-dunamis-primary mb-2" />
+                  <CardTitle>Targeted Preparation</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">
+                    Focused preparation based on JAMB syllabus and past questions analysis
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <Users className="h-8 w-8 text-dunamis-primary mb-2" />
+                  <CardTitle>Expert Tutors</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">
+                    Learn from experienced tutors with proven track records in JAMB preparation
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <BookOpen className="h-8 w-8 text-dunamis-primary mb-2" />
+                  <CardTitle>Practice Tests</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">
+                    Regular mock exams and practice tests to simulate the actual JAMB experience
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="bg-dunamis-primary py-12">
-          <div className="container px-4 md:px-6 text-center">
-            <h2 className="text-2xl font-bold tracking-tighter text-white sm:text-3xl mb-4">
-              Ready to Excel in Your JAMB Exams?
-            </h2>
-            <p className="text-gray-300 md:text-lg/relaxed max-w-2xl mx-auto mb-6">
-              Join our JAMB preparation program today and take the first step towards achieving your academic goals.
-            </p>
-            <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">
-              <Link href="/register/jamb">
-                <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">Register Now</Button>
-              </Link>
-              <Link href="/jamb-platform">
+        <section className="bg-dunamis-primary py-16 md:py-24">
+          <div className="container px-4 md:px-6">
+            <div className="text-center space-y-4">
+              <h2 className="text-3xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl">
+                Ready to Excel in Your JAMB?
+              </h2>
+              <p className="text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                Join thousands of successful students who achieved their university dreams with our JAMB preparation
+                program.
+              </p>
+              <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">
+                <Link href="/register/jamb">
+                  <Button className="bg-dunamis-accent hover:bg-dunamis-accent/90 text-white">
+                    Register Now - ₦25,000
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
                 <Button
                   variant="outline"
                   className="border-white text-white hover:bg-white hover:text-dunamis-primary bg-transparent"
                 >
-                  Access Platform
+                  Contact Us
                 </Button>
-              </Link>
+              </div>
             </div>
           </div>
         </section>
