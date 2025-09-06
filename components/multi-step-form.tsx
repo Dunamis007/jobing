@@ -1,175 +1,177 @@
 "use client"
 
-import { CardFooter } from "@/components/ui/card"
-
 import { useState } from "react"
-
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Progress } from "@/components/ui/progress"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+
+interface FormField {
+  name: string
+  label: string
+  type: string
+  required: boolean
+  options?: { value: string; label: string }[]
+}
 
 interface FormSection {
   title: string
   fields: FormField[]
 }
 
-interface FormField {
-  name: string
-  label: string
-  type: string
-  required?: boolean
-  options?: { value: string; label: string }[]
-}
-
 interface MultiStepFormProps {
   sections: FormSection[]
-  onSubmit: (data: any) => void
+  onSubmit: (data: Record<string, any>) => void
 }
 
 export function MultiStepForm({ sections, onSubmit }: MultiStepFormProps) {
-  const [currentSection, setCurrentSection] = useState(0)
-  const [formData, setFormData] = useState<any>({})
+  const [currentStep, setCurrentStep] = useState(0)
+  const [formData, setFormData] = useState<Record<string, any>>({})
 
-  const handleInputChange = (event: any) => {
-    const { name, value, type, checked } = event.target
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    })
+  const handleInputChange = (name: string, value: any) => {
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const nextSection = () => {
-    setCurrentSection(currentSection + 1)
+  const handleNext = () => {
+    if (currentStep < sections.length - 1) {
+      setCurrentStep(currentStep + 1)
+    }
   }
 
-  const prevSection = () => {
-    setCurrentSection(currentSection - 1)
+  const handlePrevious = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1)
+    }
   }
 
   const handleSubmit = () => {
-    // Extract the program name from the URL
-    const pathSegments = window.location.pathname.split("/")
-    const program = pathSegments[pathSegments.length - 1]
-
-    // Call the onSubmit callback with form data
     onSubmit(formData)
-
-    // Redirect to payment page with program parameter
-    window.location.href = `/register/payment?program=${program}`
   }
 
+  const progress = ((currentStep + 1) / sections.length) * 100
+
+  const renderField = (field: FormField) => {
+    const value = formData[field.name] || ""
+
+    switch (field.type) {
+      case "text":
+      case "email":
+      case "tel":
+      case "date":
+        return (
+          <div key={field.name} className="space-y-2">
+            <Label htmlFor={field.name}>
+              {field.label} {field.required && <span className="text-red-500">*</span>}
+            </Label>
+            <Input
+              id={field.name}
+              type={field.type}
+              value={value}
+              onChange={(e) => handleInputChange(field.name, e.target.value)}
+              required={field.required}
+            />
+          </div>
+        )
+
+      case "select":
+        return (
+          <div key={field.name} className="space-y-2">
+            <Label htmlFor={field.name}>
+              {field.label} {field.required && <span className="text-red-500">*</span>}
+            </Label>
+            <Select value={value} onValueChange={(val) => handleInputChange(field.name, val)}>
+              <SelectTrigger>
+                <SelectValue placeholder={`Select ${field.label}`} />
+              </SelectTrigger>
+              <SelectContent>
+                {field.options?.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )
+
+      case "textarea":
+        return (
+          <div key={field.name} className="space-y-2">
+            <Label htmlFor={field.name}>
+              {field.label} {field.required && <span className="text-red-500">*</span>}
+            </Label>
+            <Textarea
+              id={field.name}
+              value={value}
+              onChange={(e) => handleInputChange(field.name, e.target.value)}
+              required={field.required}
+              rows={3}
+            />
+          </div>
+        )
+
+      case "checkbox":
+        return (
+          <div key={field.name} className="flex items-center space-x-2">
+            <Checkbox
+              id={field.name}
+              checked={value}
+              onCheckedChange={(checked) => handleInputChange(field.name, checked)}
+              required={field.required}
+            />
+            <Label htmlFor={field.name} className="text-sm">
+              {field.label} {field.required && <span className="text-red-500">*</span>}
+            </Label>
+          </div>
+        )
+
+      default:
+        return null
+    }
+  }
+
+  const currentSection = sections[currentStep]
+
   return (
-    <div>
+    <div className="w-full max-w-2xl mx-auto">
+      <div className="mb-6">
+        <div className="flex justify-between items-center mb-2">
+          <span className="text-sm font-medium">
+            Step {currentStep + 1} of {sections.length}
+          </span>
+          <span className="text-sm text-muted-foreground">{Math.round(progress)}% Complete</span>
+        </div>
+        <Progress value={progress} className="w-full" />
+      </div>
+
       <Card>
         <CardHeader>
-          <CardTitle>{sections[currentSection].title}</CardTitle>
+          <CardTitle>{currentSection.title}</CardTitle>
+          <CardDescription>Please fill in the required information for this step.</CardDescription>
         </CardHeader>
-        <CardContent className="grid gap-4">
-          {sections[currentSection].fields.map((field) => (
-            <div key={field.name} className="grid gap-2">
-              <Label htmlFor={field.name}>{field.label}</Label>
-              {field.type === "text" && (
-                <Input
-                  type="text"
-                  id={field.name}
-                  name={field.name}
-                  value={formData[field.name] || ""}
-                  onChange={handleInputChange}
-                  required={field.required}
-                />
-              )}
-              {field.type === "email" && (
-                <Input
-                  type="email"
-                  id={field.name}
-                  name={field.name}
-                  value={formData[field.name] || ""}
-                  onChange={handleInputChange}
-                  required={field.required}
-                />
-              )}
-              {field.type === "tel" && (
-                <Input
-                  type="tel"
-                  id={field.name}
-                  name={field.name}
-                  value={formData[field.name] || ""}
-                  onChange={handleInputChange}
-                  required={field.required}
-                />
-              )}
-              {field.type === "date" && (
-                <Input
-                  type="date"
-                  id={field.name}
-                  name={field.name}
-                  value={formData[field.name] || ""}
-                  onChange={handleInputChange}
-                  required={field.required}
-                />
-              )}
-              {field.type === "textarea" && (
-                <Textarea
-                  id={field.name}
-                  name={field.name}
-                  value={formData[field.name] || ""}
-                  onChange={handleInputChange}
-                  required={field.required}
-                />
-              )}
-              {field.type === "select" && field.options && (
-                <Select onValueChange={(value) => handleInputChange({ target: { name: field.name, value } })}>
-                  <SelectTrigger>
-                    <SelectValue placeholder={field.label} defaultValue={formData[field.name] || ""} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {field.options.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )}
-              {field.type === "checkbox" && (
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id={field.name}
-                    name={field.name}
-                    checked={formData[field.name] || false}
-                    onCheckedChange={(checked) =>
-                      handleInputChange({ target: { name: field.name, type: "checkbox", checked } })
-                    }
-                    required={field.required}
-                  />
-                  <span>{field.label}</span>
-                </div>
-              )}
-            </div>
-          ))}
-        </CardContent>
-
-        <CardFooter className="flex justify-between">
-          {currentSection > 0 && (
-            <Button type="button" variant="secondary" onClick={prevSection}>
-              Previous
-            </Button>
-          )}
-          {currentSection < sections.length - 1 ? (
-            <Button type="button" onClick={nextSection}>
-              Next
-            </Button>
-          ) : (
-            <Button type="button" onClick={handleSubmit}>
-              Submit
-            </Button>
-          )}
-        </CardFooter>
+        <CardContent className="space-y-4">{currentSection.fields.map(renderField)}</CardContent>
       </Card>
+
+      <div className="flex justify-between mt-6">
+        <Button variant="outline" onClick={handlePrevious} disabled={currentStep === 0}>
+          <ChevronLeft className="w-4 h-4 mr-2" />
+          Previous
+        </Button>
+
+        {currentStep === sections.length - 1 ? (
+          <Button onClick={handleSubmit}>Submit Registration</Button>
+        ) : (
+          <Button onClick={handleNext}>
+            Next
+            <ChevronRight className="w-4 h-4 ml-2" />
+          </Button>
+        )}
+      </div>
     </div>
   )
 }

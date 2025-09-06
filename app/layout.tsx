@@ -5,55 +5,61 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
+import { ErrorBoundary } from "@/components/error-boundary"
 import { PerformanceMonitor } from "@/components/performance-monitor"
 import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: {
-    default: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
-    template: "%s | Dunamis Edtech",
-  },
+  title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
   description:
     "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
   keywords: [
-    "online learning Nigeria",
-    "AI courses Nigeria",
-    "coding bootcamp Nigeria",
-    "IELTS preparation Nigeria",
-    "JUPEB program Nigeria",
-    "JAMB preparation",
-    "digital marketing courses",
-    "online tutoring Nigeria",
+    "AI tutoring",
+    "coding courses",
+    "digital marketing",
+    "IELTS preparation",
+    "JUPEB",
+    "IJMB",
+    "JAMB",
+    "online education Nigeria",
   ],
   authors: [{ name: "Dunamis Edtech" }],
   creator: "Dunamis Edtech",
-  metadataBase: new URL("https://dunamistutors.com"),
+  publisher: "Dunamis Edtech",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://dunamisedtech.com"),
+  alternates: {
+    canonical: "https://dunamisedtech.com",
+  },
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://dunamistutors.com",
-    siteName: "Dunamis Edtech",
     title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
     description:
       "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
+    url: "https://dunamisedtech.com",
+    siteName: "Dunamis Edtech",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "https://i.imgur.com/VR3UwFi.jpeg",
         width: 1200,
         height: 630,
-        alt: "Dunamis Edtech",
+        alt: "Dunamis Edtech - Online Learning Platform",
       },
     ],
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
     description:
       "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
-    images: ["/og-image.jpg"],
-    creator: "@dunamistutors",
+    images: ["https://i.imgur.com/VR3UwFi.jpeg"],
   },
   robots: {
     index: true,
@@ -79,16 +85,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="canonical" href="https://dunamisedtech.com/" />
+        <link rel="icon" href="https://i.imgur.com/VR3UwFi.jpeg" />
+      </head>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <div className="relative flex min-h-screen flex-col">
-            <SiteHeader />
-            <main className="flex-1">{children}</main>
-            <SiteFooter />
-          </div>
-          <Toaster />
-          <PerformanceMonitor />
-        </ThemeProvider>
+        <ErrorBoundary>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <div className="relative flex min-h-screen flex-col">
+              <SiteHeader />
+              <main className="flex-1">{children}</main>
+              <SiteFooter />
+            </div>
+            <Toaster />
+            <PerformanceMonitor />
+          </ThemeProvider>
+        </ErrorBoundary>
       </body>
     </html>
   )

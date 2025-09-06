@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { MultiStepForm } from "@/components/multi-step-form"
 
-export default function IJMBRegistrationClient() {
+export function IJMBRegistrationClient() {
   const personalFields = [
     { name: "fullName", label: "Full Name", type: "text", required: true },
     { name: "email", label: "Email Address", type: "email", required: true },
@@ -183,7 +183,10 @@ export default function IJMBRegistrationClient() {
               <CardFooter>
                 <Button
                   className="w-full"
-                  onClick={() => document.querySelector('[data-value="registration"]')?.click()}
+                  onClick={() => {
+                    const registrationTab = document.querySelector('[data-value="registration"]') as HTMLElement
+                    registrationTab?.click()
+                  }}
                 >
                   Register Now <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -195,3 +198,5 @@ export default function IJMBRegistrationClient() {
     </div>
   )
 }
+
+export default IJMBRegistrationClient
