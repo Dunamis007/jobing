@@ -5,66 +5,54 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { Toaster } from "@/components/ui/toaster"
-import { ErrorBoundary } from "@/components/error-boundary"
 import { PerformanceMonitor } from "@/components/performance-monitor"
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: {
-    default: "Dunamis Tutors | Transform Your Future with Expert Learning",
-    template: "%s | Dunamis Tutors",
+    default: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
+    template: "%s | Dunamis Edtech",
   },
   description:
-    "Leading online education platform in Nigeria. Master AI, Coding, Digital Marketing, IELTS, JUPEB, and more with expert tutors and personalized learning paths.",
+    "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
   keywords: [
-    "online education Nigeria",
-    "AI courses",
-    "coding bootcamp",
-    "digital marketing",
-    "IELTS preparation",
-    "JUPEB program",
-    "IJMB program",
-    "online learning",
-    "career development",
-    "skill acquisition",
+    "online learning Nigeria",
+    "AI courses Nigeria",
+    "coding bootcamp Nigeria",
+    "IELTS preparation Nigeria",
+    "JUPEB program Nigeria",
+    "JAMB preparation",
+    "digital marketing courses",
+    "online tutoring Nigeria",
   ],
-  authors: [{ name: "Dunamis Tutors", url: "https://dunamistutors.com" }],
-  creator: "Dunamis Tutors",
-  publisher: "Dunamis Tutors",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
+  authors: [{ name: "Dunamis Edtech" }],
+  creator: "Dunamis Edtech",
   metadataBase: new URL("https://dunamistutors.com"),
-  alternates: {
-    canonical: "https://dunamistutors.com",
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://dunamistutors.com",
-    siteName: "Dunamis Tutors",
-    title: "Dunamis Tutors | Transform Your Future with Expert Learning",
+    siteName: "Dunamis Edtech",
+    title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
     description:
-      "Leading online education platform in Nigeria. Master AI, Coding, Digital Marketing, IELTS, JUPEB, and more with expert tutors and personalized learning paths.",
+      "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
     images: [
       {
-        url: "https://i.imgur.com/yhOy5P3.jpeg",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Dunamis Tutors - Online Learning Platform",
+        alt: "Dunamis Edtech",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dunamis Tutors | Transform Your Future with Expert Learning",
+    title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
     description:
-      "Leading online education platform in Nigeria. Master AI, Coding, Digital Marketing, IELTS, JUPEB, and more with expert tutors and personalized learning paths.",
-    images: ["https://i.imgur.com/yhOy5P3.jpeg"],
+      "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
+    images: ["/og-image.jpg"],
     creator: "@dunamistutors",
   },
   robots: {
@@ -78,12 +66,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: "https://i.imgur.com/ayuLxTm.jpeg",
-    shortcut: "https://i.imgur.com/ayuLxTm.jpeg",
-    apple: "https://i.imgur.com/ayuLxTm.jpeg",
+  verification: {
+    google: "your-google-verification-code",
   },
-  manifest: "/site.webmanifest",
     generator: 'v0.app'
 }
 
@@ -94,22 +79,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="https://i.imgur.com/ayuLxTm.jpeg" />
-        <link rel="apple-touch-icon" href="https://i.imgur.com/ayuLxTm.jpeg" />
-      </head>
       <body className={inter.className}>
-        <ErrorBoundary>
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
-              <main className="flex-1">{children}</main>
-              <SiteFooter />
-            </div>
-            <Toaster />
-            <PerformanceMonitor />
-          </ThemeProvider>
-        </ErrorBoundary>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <div className="relative flex min-h-screen flex-col">
+            <SiteHeader />
+            <main className="flex-1">{children}</main>
+            <SiteFooter />
+          </div>
+          <Toaster />
+          <PerformanceMonitor />
+        </ThemeProvider>
       </body>
     </html>
   )

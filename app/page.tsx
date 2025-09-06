@@ -8,9 +8,9 @@ import { TestimonialsSection } from "@/components/sections/testimonials-section"
 import { CTASection } from "@/components/sections/cta-section"
 
 export const metadata: Metadata = {
-  title: "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
+  title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
   description:
-    "Join Dunamis Tutors for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
+    "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
   keywords: [
     "online learning Nigeria",
     "AI courses Nigeria",
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     "digital marketing courses",
     "online tutoring Nigeria",
   ],
-  authors: [{ name: "Dunamis Tutors" }],
-  creator: "Dunamis Tutors",
-  publisher: "Dunamis Tutors",
+  authors: [{ name: "Dunamis Edtech" }],
+  creator: "Dunamis Edtech",
+  publisher: "Dunamis Edtech",
   formatDetection: {
     email: false,
     address: false,
@@ -34,17 +34,17 @@ export const metadata: Metadata = {
     canonical: "https://dunamistutors.com",
   },
   openGraph: {
-    title: "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
+    title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
     description:
-      "Join Dunamis Tutors for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
+      "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
     url: "https://dunamistutors.com",
-    siteName: "Dunamis Tutors",
+    siteName: "Dunamis Edtech",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Dunamis Tutors - Online Learning Platform",
+        alt: "Dunamis Edtech - Online Learning Platform",
       },
     ],
     locale: "en_US",
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
+    title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
     description:
-      "Join Dunamis Tutors for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
+      "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
     images: ["/og-image.jpg"],
     creator: "@dunamistutors",
   },

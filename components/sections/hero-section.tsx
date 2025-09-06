@@ -2,9 +2,9 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Play, Users, Award, GraduationCap } from "lucide-react"
+import { HeroCarousel } from "@/components/hero-carousel"
 
 export function HeroSection() {
   return (
@@ -92,17 +92,7 @@ export function HeroSection() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-dunamis-accent to-yellow-400 rounded-2xl blur-2xl opacity-20 animate-pulse" />
-              <Image
-                src="https://i.imgur.com/yhOy5P3.jpeg"
-                alt="Dunamis Tutors Learning Platform"
-                width={600}
-                height={600}
-                className="relative rounded-2xl shadow-2xl object-cover"
-                priority
-              />
-            </div>
+            <HeroCarousel />
           </motion.div>
         </div>
       </div>

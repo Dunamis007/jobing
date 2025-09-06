@@ -34,12 +34,12 @@ export function SiteFooter() {
             <Link href="/" className="flex items-center space-x-2">
               <Image
                 src="https://i.imgur.com/ayuLxTm.jpeg"
-                alt="Dunamis Tutors"
+                alt="Dunamis Edtech"
                 width={40}
                 height={40}
                 className="rounded-lg"
               />
-              <span className="text-xl font-bold">Dunamis Tutors</span>
+              <span className="text-xl font-bold">Dunamis Edtech</span>
             </Link>
             <p className="text-gray-300 leading-relaxed">
               Empowering students to achieve their dreams through world-class education and personalized guidance.
@@ -109,7 +109,7 @@ export function SiteFooter() {
         </div>
 
         <div className="border-t border-gray-700 mt-12 pt-8 text-center">
-          <p className="text-gray-300">© 2025 Dunamis Tutors. All rights reserved.</p>
+          <p className="text-gray-300">© 2025 Dunamis Edtech. All rights reserved.</p>
         </div>
       </div>
     </footer>

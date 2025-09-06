@@ -2,92 +2,95 @@
 
 import { useCallback } from "react"
 
-interface PerformanceMetrics {
-  pageLoadTime?: number
-  timeToFirstByte?: number
-  domContentLoaded?: number
-  firstContentfulPaint?: number
+interface PerformanceMetric {
+  name: string
+  value: number
+  timestamp: number
+  url: string
 }
 
-interface UserInteractionData {
-  element: string
-  text: string
-  href?: string
+interface UserInteraction {
+  type: string
+  target: string
+  timestamp: number
+  url: string
+}
+
+interface ErrorEvent {
+  message: string
+  stack?: string
+  timestamp: number
+  url: string
+  userAgent: string
 }
 
 export function usePerformance() {
-  const trackPageView = useCallback((path: string) => {
-    if (typeof window === "undefined") return
+  const trackMetric = useCallback((metric: PerformanceMetric) => {
+    // In a real app, you'd send this to your analytics service
+    console.log("Performance Metric:", metric)
 
-    const navigationTiming = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming
-
-    if (navigationTiming) {
-      const metrics: PerformanceMetrics = {
-        pageLoadTime: navigationTiming.loadEventEnd - navigationTiming.loadEventStart,
-        timeToFirstByte: navigationTiming.responseStart - navigationTiming.requestStart,
-        domContentLoaded: navigationTiming.domContentLoadedEventEnd - navigationTiming.domContentLoadedEventStart,
-      }
-
-      // Get First Contentful Paint if available
-      const paintEntries = performance.getEntriesByType("paint")
-      const fcpEntry = paintEntries.find((entry) => entry.name === "first-contentful-paint")
-      if (fcpEntry) {
-        metrics.firstContentfulPaint = fcpEntry.startTime
-      }
-
-      console.log("Page Performance Metrics:", {
-        path,
-        ...metrics,
-      })
-
-      // Here you would typically send this data to your analytics service
-      // Example: analytics.track('page_view', { path, ...metrics })
-    }
+    // Example: Send to analytics service
+    // analytics.track('performance_metric', metric)
   }, [])
 
-  const trackUserInteraction = useCallback((action: string, data: UserInteractionData) => {
-    console.log("User Interaction:", {
-      action,
+  const trackPageView = useCallback(
+    (path: string) => {
+      const metric: PerformanceMetric = {
+        name: "page_view",
+        value: performance.now(),
+        timestamp: Date.now(),
+        url: path,
+      }
+      trackMetric(metric)
+    },
+    [trackMetric],
+  )
+
+  const trackUserInteraction = useCallback((type: string, target: string) => {
+    const interaction: UserInteraction = {
+      type,
+      target,
       timestamp: Date.now(),
-      ...data,
-    })
+      url: window.location.pathname,
+    }
 
-    // Here you would typically send this data to your analytics service
-    // Example: analytics.track('user_interaction', { action, ...data })
+    // In a real app, you'd send this to your analytics service
+    console.log("User Interaction:", interaction)
   }, [])
 
-  const trackError = useCallback((error: Error, errorInfo?: any) => {
-    console.error("Application Error:", {
+  const trackError = useCallback((error: Error) => {
+    const errorEvent: ErrorEvent = {
       message: error.message,
       stack: error.stack,
-      errorInfo,
       timestamp: Date.now(),
+      url: window.location.pathname,
       userAgent: navigator.userAgent,
-      url: window.location.href,
-    })
-
-    // Here you would typically send this data to your error tracking service
-    // Example: errorTracking.captureException(error, { extra: errorInfo })
-  }, [])
-
-  const measurePerformance = useCallback((name: string, fn: () => void | Promise<void>) => {
-    const startTime = performance.now()
-
-    const result = fn()
-
-    if (result instanceof Promise) {
-      return result.finally(() => {
-        const endTime = performance.now()
-        console.log(`Performance: ${name} took ${endTime - startTime} milliseconds`)
-      })
-    } else {
-      const endTime = performance.now()
-      console.log(`Performance: ${name} took ${endTime - startTime} milliseconds`)
-      return result
     }
+
+    // In a real app, you'd send this to your error tracking service
+    console.error("Error tracked:", errorEvent)
   }, [])
+
+  const measurePerformance = useCallback(
+    (name: string, fn: () => void) => {
+      const start = performance.now()
+      fn()
+      const end = performance.now()
+
+      const metric: PerformanceMetric = {
+        name,
+        value: end - start,
+        timestamp: Date.now(),
+        url: window.location.pathname,
+      }
+
+      trackMetric(metric)
+    },
+    [trackMetric],
+  )
 
   return {
+    trackMetric,
     trackPageView,
     trackUserInteraction,
     trackError,
