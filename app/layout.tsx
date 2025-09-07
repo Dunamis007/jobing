@@ -3,11 +3,11 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { ErrorBoundary } from "@/components/error-boundary"
-import { PerformanceMonitor } from "@/components/performance-monitor"
 import { Toaster } from "@/components/ui/toaster"
+import SiteHeader from "@/components/site-header"
+import SiteFooter from "@/components/site-footer"
+import ErrorBoundary from "@/components/error-boundary"
+import PerformanceMonitor from "@/components/performance-monitor"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -15,18 +15,8 @@ export const metadata: Metadata = {
   title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
   description:
     "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
-  keywords: [
-    "AI tutoring Nigeria",
-    "coding courses Nigeria",
-    "digital marketing Nigeria",
-    "IELTS preparation Nigeria",
-    "JUPEB program Nigeria",
-    "IJMB program Nigeria",
-    "JAMB preparation Nigeria",
-    "online education Nigeria",
-    "tech skills Nigeria",
-    "career development Nigeria",
-  ],
+  keywords:
+    "AI tutoring, coding bootcamp, digital marketing, IELTS preparation, JUPEB, JAMB, online learning, Nigeria education, programming courses, machine learning",
   authors: [{ name: "Dunamis Edtech" }],
   creator: "Dunamis Edtech",
   publisher: "Dunamis Edtech",
@@ -37,16 +27,14 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://dunamistutors.com"),
   alternates: {
-    canonical: "https://dunamistutors.com/",
+    canonical: "https://dunamistutors.com",
   },
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://dunamistutors.com",
-    siteName: "Dunamis Edtech",
     title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
     description:
       "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
+    url: "https://dunamistutors.com",
+    siteName: "Dunamis Edtech",
     images: [
       {
         url: "https://i.imgur.com/ayuLxTm.jpeg",
@@ -55,6 +43,8 @@ export const metadata: Metadata = {
         alt: "Dunamis Edtech - Online Learning Platform",
       },
     ],
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
@@ -62,7 +52,6 @@ export const metadata: Metadata = {
     description:
       "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
     images: ["https://i.imgur.com/ayuLxTm.jpeg"],
-    creator: "@dunamistutors",
   },
   robots: {
     index: true,
@@ -76,11 +65,14 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "https://i.imgur.com/ayuLxTm.jpeg",
+    icon: [
+      { url: "https://i.imgur.com/ayuLxTm.jpeg", sizes: "32x32", type: "image/jpeg" },
+      { url: "https://i.imgur.com/ayuLxTm.jpeg", sizes: "16x16", type: "image/jpeg" },
+    ],
+    apple: [{ url: "https://i.imgur.com/ayuLxTm.jpeg", sizes: "180x180", type: "image/jpeg" }],
     shortcut: "https://i.imgur.com/ayuLxTm.jpeg",
-    apple: "https://i.imgur.com/ayuLxTm.jpeg",
   },
-  manifest: "/site.webmanifest",
+  manifest: "/manifest.json",
     generator: 'v0.app'
 }
 
@@ -93,8 +85,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="canonical" href="https://dunamistutors.com/" />
-        <link rel="icon" href="https://i.imgur.com/ayuLxTm.jpeg" />
-        <link rel="apple-touch-icon" href="https://i.imgur.com/ayuLxTm.jpeg" />
+        <meta name="google-site-verification" content="your-google-verification-code" />
       </head>
       <body className={inter.className}>
         <ErrorBoundary>

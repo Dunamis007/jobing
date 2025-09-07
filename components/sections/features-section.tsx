@@ -1,62 +1,73 @@
 "use client"
-
-import { motion } from "framer-motion"
-import { User, Users, Clock } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { PersonStanding, GraduationCap, Clock } from "lucide-react"
 
 const features = [
   {
-    icon: User,
+    icon: PersonStanding,
     title: "Personalized Learning",
-    description: "AI-powered adaptive learning paths tailored to your pace and style for maximum effectiveness.",
+    description:
+      "AI-powered learning paths tailored to your pace, learning style, and career goals for maximum effectiveness.",
+    color: "from-[#FF9800] to-[#F57C00]",
   },
   {
-    icon: Users,
+    icon: GraduationCap,
     title: "Expert Instructors",
-    description: "Learn from industry professionals with years of experience and proven track records.",
+    description: "Learn from industry professionals with years of real-world experience and proven track records.",
+    color: "from-[#002B5B] to-[#1E3A8A]",
   },
   {
     icon: Clock,
     title: "Flexible Schedule",
-    description: "Study at your own pace with 24/7 access to course materials and recorded sessions.",
+    description: "Study at your own pace with 24/7 access to course materials, live sessions, and recorded lectures.",
+    color: "from-[#1E3A8A] to-[#002B5B]",
   },
 ]
 
-export function FeaturesSection() {
+export default function FeaturesSection() {
   return (
     <section className="py-20 bg-white">
-      <div className="container px-4 md:px-6">
-        <motion.div
-          className="text-center space-y-4 mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-[#333333]">
-            Why Choose Dunamis Edtech?
-          </h2>
-          <p className="text-xl text-[#666666] max-w-3xl mx-auto">
-            We provide world-class education with cutting-edge technology and personalized support
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#333333] mb-6">Why Choose Us?</h2>
+          <p className="text-xl text-[#666666] max-w-3xl mx-auto leading-relaxed">
+            We're committed to providing the best learning experience with innovative teaching methods and comprehensive
+            support systems.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid gap-12 md:grid-cols-3">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              className="text-center space-y-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="mx-auto w-20 h-20 bg-gradient-to-br from-[#002B5B] to-[#1E3A8A] rounded-full flex items-center justify-center">
-                <feature.icon className="h-10 w-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-[#333333]">{feature.title}</h3>
-              <p className="text-[#666666] leading-relaxed max-w-sm mx-auto">{feature.description}</p>
-            </motion.div>
-          ))}
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => {
+            const IconComponent = feature.icon
+            return (
+              <Card
+                key={index}
+                className="relative bg-white border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 rounded-2xl overflow-hidden group"
+              >
+                <CardHeader className="text-center pb-4">
+                  {/* Icon with Gradient Background */}
+                  <div
+                    className={`w-20 h-20 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+                  >
+                    <IconComponent className="w-10 h-10 text-white" />
+                  </div>
+
+                  <CardTitle className="text-2xl font-bold text-[#333333] mb-4">{feature.title}</CardTitle>
+                </CardHeader>
+
+                <CardContent className="text-center">
+                  <CardDescription className="text-[#666666] text-base leading-relaxed">
+                    {feature.description}
+                  </CardDescription>
+                </CardContent>
+
+                {/* Hover Effect Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#FF9800]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              </Card>
+            )
+          })}
         </div>
       </div>
     </section>

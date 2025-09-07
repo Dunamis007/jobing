@@ -1,67 +1,71 @@
 "use client"
-
-import { motion } from "framer-motion"
-import { Brain, TrendingUp, Target, Infinity } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card"
+import { Brain, Users, Briefcase, Infinity } from "lucide-react"
 
 const differences = [
   {
     icon: Brain,
     title: "AI-Powered Learning",
-    description: "Our advanced AI system adapts to your learning style and provides personalized recommendations",
+    description: "Advanced algorithms adapt to your learning style and provide personalized recommendations.",
+    color: "text-[#FF9800]",
   },
   {
-    icon: TrendingUp,
+    icon: Users,
     title: "Industry Experts",
-    description: "Learn from professionals currently working in top companies and organizations worldwide",
+    description: "Learn directly from professionals currently working in top tech companies worldwide.",
+    color: "text-[#FF9800]",
   },
   {
-    icon: Target,
+    icon: Briefcase,
     title: "Job Placement Support",
-    description: "We help you land your dream job with our extensive network and dedicated career guidance",
+    description: "Comprehensive career services including resume review, interview prep, and job matching.",
+    color: "text-[#FF9800]",
   },
   {
     icon: Infinity,
     title: "Lifetime Access",
-    description: "Get unlimited access to all course materials and future updates for life at no extra cost",
+    description: "Once enrolled, enjoy unlimited access to course materials and future updates forever.",
+    color: "text-[#FF9800]",
   },
 ]
 
-export function DifferenceSection() {
+export default function DifferenceSection() {
   return (
-    <section className="py-20 bg-[#F5F7FA]">
-      <div className="container px-4 md:px-6">
-        <motion.div
-          className="text-center space-y-4 mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-[#333333]">
-            The Dunamis Difference
-          </h2>
-          <p className="text-xl text-[#666666] max-w-3xl mx-auto">
-            What sets us apart from other online learning platforms
+    <section className="py-20 bg-gradient-to-br from-[#F5F7FA] to-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#333333] mb-6">The Dunamis Difference</h2>
+          <p className="text-xl text-[#666666] max-w-3xl mx-auto leading-relaxed">
+            What sets us apart from other online learning platforms and makes us the preferred choice for ambitious
+            learners.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {differences.map((difference, index) => (
-            <motion.div
-              key={difference.title}
-              className="text-center space-y-4 bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <div className="mx-auto w-16 h-16 bg-[#FF9800] rounded-full flex items-center justify-center">
-                <difference.icon className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-[#333333]">{difference.title}</h3>
-              <p className="text-[#666666] leading-relaxed text-sm">{difference.description}</p>
-            </motion.div>
-          ))}
+        {/* Differences Grid - Horizontal Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {differences.map((difference, index) => {
+            const IconComponent = difference.icon
+            return (
+              <Card
+                key={index}
+                className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group hover:-translate-y-1"
+              >
+                <CardContent className="p-8 text-center">
+                  {/* Icon */}
+                  <div className="w-16 h-16 bg-gradient-to-br from-[#FF9800]/10 to-[#FF9800]/5 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <IconComponent className={`w-8 h-8 ${difference.color}`} />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-[#333333] mb-4">{difference.title}</h3>
+
+                  {/* Description */}
+                  <p className="text-[#666666] text-sm leading-relaxed">{difference.description}</p>
+                </CardContent>
+              </Card>
+            )
+          })}
         </div>
       </div>
     </section>
