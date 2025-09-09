@@ -6,8 +6,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
-import ErrorBoundary from "@/components/error-boundary"
-import PerformanceMonitor from "@/components/performance-monitor"
+import { ErrorBoundary } from "@/components/error-boundary"
+import { PerformanceMonitor } from "@/components/performance-monitor"
 
 const inter = Inter({ subsets: ["latin"] })
 

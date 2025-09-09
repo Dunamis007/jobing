@@ -1,10 +1,10 @@
 import type { Metadata } from "next"
-import { HeroSection } from "@/components/sections/hero-section"
-import { ProgramsSection } from "@/components/sections/programs-section"
-import { FeaturesSection } from "@/components/sections/features-section"
-import { DifferenceSection } from "@/components/sections/difference-section"
-import { TestimonialsSection } from "@/components/sections/testimonials-section"
-import { CTASection } from "@/components/sections/cta-section"
+import HeroSection from "@/components/sections/hero-section"
+import ProgramsSection from "@/components/sections/programs-section"
+import FeaturesSection from "@/components/sections/features-section"
+import DifferenceSection from "@/components/sections/difference-section"
+import TestimonialsSection from "@/components/sections/testimonials-section"
+import CTASection from "@/components/sections/cta-section"
 
 export const metadata: Metadata = {
   title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
