@@ -1,177 +1,286 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
-import { BookOpen, Clock, Award, TrendingUp } from "lucide-react"
-import Link from "next/link"
+import {
+  BookOpen,
+  Clock,
+  Trophy,
+  Users,
+  TrendingUp,
+  Bell,
+  Settings,
+  LogOut,
+  Brain,
+  Code,
+  Megaphone,
+  Globe,
+  GraduationCap,
+} from "lucide-react"
 
-// Mock authentication check
-function useAuth() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
-
-  useEffect(() => {
-    // Simulate auth check
-    const checkAuth = () => {
-      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"
-      setIsAuthenticated(isLoggedIn)
-    }
-
-    checkAuth()
-  }, [])
-
-  return { isAuthenticated }
+// Mock user data - in a real app, this would come from your auth system
+const mockUser = {
+  name: "John Doe",
+  email: "john@example.com",
+  enrolledPrograms: [],
+  completedCourses: 0,
+  totalHours: 0,
+  achievements: [],
 }
 
-const programs = [
+const availablePrograms = [
   {
     id: "ai-tutoring",
     title: "AI Tutoring",
-    progress: 65,
-    status: "In Progress",
-    nextLesson: "Neural Networks Fundamentals",
-    totalLessons: 24,
-    completedLessons: 16,
+    description: "Master artificial intelligence and machine learning",
+    icon: Brain,
+    color: "bg-blue-500",
+    duration: "12 weeks",
+    students: "2,500+",
+    href: "/programs/ai-tutoring",
   },
   {
     id: "coding",
     title: "Coding Bootcamp",
-    progress: 30,
-    status: "In Progress",
-    nextLesson: "React Components",
-    totalLessons: 32,
-    completedLessons: 10,
+    description: "Full-stack development with modern technologies",
+    icon: Code,
+    color: "bg-green-500",
+    duration: "16 weeks",
+    students: "3,200+",
+    href: "/programs/coding",
   },
   {
     id: "digital-marketing",
     title: "Digital Marketing",
-    progress: 100,
-    status: "Completed",
-    nextLesson: "Course Completed",
-    totalLessons: 18,
-    completedLessons: 18,
+    description: "Master online marketing strategies and tools",
+    icon: Megaphone,
+    color: "bg-purple-500",
+    duration: "10 weeks",
+    students: "1,800+",
+    href: "/programs/digital-marketing",
+  },
+  {
+    id: "ielts",
+    title: "IELTS Preparation",
+    description: "Comprehensive IELTS exam preparation",
+    icon: Globe,
+    color: "bg-orange-500",
+    duration: "8 weeks",
+    students: "1,200+",
+    href: "/programs/ielts",
+  },
+  {
+    id: "ijmb",
+    title: "IJMB Program",
+    description: "Intermediate Joint Matriculation Board preparation",
+    icon: GraduationCap,
+    color: "bg-red-500",
+    duration: "9 months",
+    students: "800+",
+    href: "/programs/ijmb",
+  },
+  {
+    id: "jupeb",
+    title: "JUPEB Program",
+    description: "Joint Universities Preliminary Examinations Board",
+    icon: GraduationCap,
+    color: "bg-indigo-500",
+    duration: "9 months",
+    students: "600+",
+    href: "/programs/jupeb",
   },
 ]
 
 export default function DashboardPage() {
-  const { isAuthenticated } = useAuth()
+  const [user, setUser] = useState(mockUser)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const router = useRouter()
 
-  if (isAuthenticated === null) {
+  useEffect(() => {
+    // Check authentication status
+    // In a real app, you'd check with your auth system
+    const checkAuth = () => {
+      const token = localStorage.getItem("auth_token")
+      if (!token) {
+        router.push("/register")
+        return
+      }
+      setIsAuthenticated(true)
+    }
+
+    checkAuth()
+  }, [router])
+
+  if (!isAuthenticated) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF9800] mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading dashboard...</p>
-        </div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <Card className="w-full max-w-md">
+          <CardHeader className="text-center">
+            <CardTitle>Access Required</CardTitle>
+            <CardDescription>Please register or log in to access your dashboard</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <Link href="/register" className="w-full">
+              <Button className="w-full bg-dunamis-primary hover:bg-dunamis-primary/90">Get Started</Button>
+            </Link>
+            <Link href="/login" className="w-full">
+              <Button variant="outline" className="w-full bg-transparent">
+                Log In
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
       </div>
     )
   }
 
-  if (!isAuthenticated) {
-    redirect("/login")
-  }
-
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[#333333] mb-2">Welcome back, Student!</h1>
-        <p className="text-[#666666]">Continue your learning journey and track your progress.</p>
-      </div>
-
-      {/* Stats Overview */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-[#666666]">Enrolled Programs</CardTitle>
-            <BookOpen className="h-4 w-4 text-[#FF9800]" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-[#333333]">3</div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-[#666666]">Hours Studied</CardTitle>
-            <Clock className="h-4 w-4 text-[#FF9800]" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-[#333333]">127</div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-[#666666]">Certificates</CardTitle>
-            <Award className="h-4 w-4 text-[#FF9800]" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-[#333333]">1</div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-[#666666]">Overall Progress</CardTitle>
-            <TrendingUp className="h-4 w-4 text-[#FF9800]" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-[#333333]">65%</div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Programs Progress */}
-      <div className="space-y-6">
-        <h2 className="text-2xl font-bold text-[#333333]">Your Programs</h2>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {programs.map((program) => (
-            <Card key={program.id} className="hover:shadow-md transition-shadow">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg text-[#333333]">{program.title}</CardTitle>
-                  <Badge
-                    variant={program.status === "Completed" ? "default" : "secondary"}
-                    className={program.status === "Completed" ? "bg-green-500" : "bg-[#FF9800]"}
-                  >
-                    {program.status}
-                  </Badge>
-                </div>
-                <CardDescription className="text-[#666666]">
-                  {program.completedLessons} of {program.totalLessons} lessons completed
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <div className="flex justify-between text-sm mb-2">
-                    <span className="text-[#666666]">Progress</span>
-                    <span className="text-[#333333] font-medium">{program.progress}%</span>
-                  </div>
-                  <Progress value={program.progress} className="h-2" />
-                </div>
-
-                <div>
-                  <p className="text-sm text-[#666666] mb-2">Next Lesson:</p>
-                  <p className="text-sm font-medium text-[#333333]">{program.nextLesson}</p>
-                </div>
-
-                <Button
-                  className="w-full bg-[#FF9800] hover:bg-[#F57C00]"
-                  asChild
-                  disabled={program.status === "Completed"}
-                >
-                  <Link href={`/dashboard/${program.id}`}>
-                    {program.status === "Completed" ? "View Certificate" : "Continue Learning"}
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">Welcome back, {user.name}!</h1>
+            <p className="text-gray-600">Continue your learning journey</p>
+          </div>
+          <div className="flex items-center space-x-4">
+            <Button variant="outline" size="icon">
+              <Bell className="h-4 w-4" />
+            </Button>
+            <Button variant="outline" size="icon">
+              <Settings className="h-4 w-4" />
+            </Button>
+            <Button variant="outline" size="icon">
+              <LogOut className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
+
+        {/* Stats Cards */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Enrolled Programs</CardTitle>
+              <BookOpen className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{user.enrolledPrograms.length}</div>
+              <p className="text-xs text-muted-foreground">
+                {user.enrolledPrograms.length === 0 ? "Start your first program" : "Active programs"}
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Completed Courses</CardTitle>
+              <Trophy className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{user.completedCourses}</div>
+              <p className="text-xs text-muted-foreground">
+                {user.completedCourses === 0 ? "Complete your first course" : "Courses finished"}
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Learning Hours</CardTitle>
+              <Clock className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{user.totalHours}</div>
+              <p className="text-xs text-muted-foreground">
+                {user.totalHours === 0 ? "Start learning today" : "Hours invested"}
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Achievements</CardTitle>
+              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{user.achievements.length}</div>
+              <p className="text-xs text-muted-foreground">
+                {user.achievements.length === 0 ? "Earn your first badge" : "Badges earned"}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Empty State - No Enrolled Programs */}
+        {user.enrolledPrograms.length === 0 && (
+          <Card className="mb-8">
+            <CardHeader className="text-center">
+              <CardTitle className="text-xl">Start Your Learning Journey</CardTitle>
+              <CardDescription>
+                You haven't enrolled in any programs yet. Choose from our world-class programs below to get started.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="text-center">
+              <div className="mb-6">
+                <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                <p className="text-gray-600 mb-4">
+                  Ready to transform your career? Our expert-led programs are designed to help you succeed.
+                </p>
+              </div>
+              <Link href="/register">
+                <Button className="bg-dunamis-primary hover:bg-dunamis-primary/90">Browse Programs</Button>
+              </Link>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Available Programs */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Users className="h-5 w-5" />
+              Available Programs
+            </CardTitle>
+            <CardDescription>
+              Explore our comprehensive range of programs designed to advance your career
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {availablePrograms.map((program) => (
+                <Card key={program.id} className="hover:shadow-md transition-shadow">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between">
+                      <div className={`p-2 rounded-lg ${program.color} text-white`}>
+                        <program.icon className="h-5 w-5" />
+                      </div>
+                      <Badge variant="secondary">{program.duration}</Badge>
+                    </div>
+                    <CardTitle className="text-lg">{program.title}</CardTitle>
+                    <CardDescription className="text-sm">{program.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
+                      <span className="flex items-center gap-1">
+                        <Users className="h-4 w-4" />
+                        {program.students}
+                      </span>
+                    </div>
+                    <Link href={program.href}>
+                      <Button className="w-full bg-transparent" variant="outline">
+                        Learn More
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

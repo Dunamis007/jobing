@@ -2,33 +2,98 @@
 
 import { useCallback } from "react"
 
-export function usePerformance() {
-  const trackPageView = useCallback((path: string) => {
-    if (typeof window !== "undefined" && "performance" in window) {
-      // Track Core Web Vitals
-      const observer = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          console.log(`${entry.name}: ${entry.value}`)
-        }
-      })
+interface PerformanceMetric {
+  name: string
+  value: number
+  timestamp: number
+  url: string
+}
 
-      observer.observe({ entryTypes: ["measure", "navigation", "paint"] })
+interface UserInteraction {
+  type: string
+  target: string
+  timestamp: number
+  url: string
+}
+
+interface ErrorEvent {
+  message: string
+  stack?: string
+  timestamp: number
+  url: string
+  userAgent: string
+}
+
+export function usePerformance() {
+  const trackMetric = useCallback((metric: PerformanceMetric) => {
+    // In a real app, you'd send this to your analytics service
+    console.log("Performance Metric:", metric)
+
+    // Example: Send to analytics service
+    // analytics.track('performance_metric', metric)
+  }, [])
+
+  const trackPageView = useCallback(
+    (path: string) => {
+      const metric: PerformanceMetric = {
+        name: "page_view",
+        value: performance.now(),
+        timestamp: Date.now(),
+        url: path,
+      }
+      trackMetric(metric)
+    },
+    [trackMetric],
+  )
+
+  const trackUserInteraction = useCallback((type: string, target: string) => {
+    const interaction: UserInteraction = {
+      type,
+      target,
+      timestamp: Date.now(),
+      url: window.location.pathname,
     }
+
+    // In a real app, you'd send this to your analytics service
+    console.log("User Interaction:", interaction)
   }, [])
 
   const trackError = useCallback((error: Error) => {
-    console.error("Performance Monitor - Error:", error)
-    // In production, send to analytics service
+    const errorEvent: ErrorEvent = {
+      message: error.message,
+      stack: error.stack,
+      timestamp: Date.now(),
+      url: window.location.pathname,
+      userAgent: navigator.userAgent,
+    }
+
+    // In a real app, you'd send this to your error tracking service
+    console.error("Error tracked:", errorEvent)
   }, [])
 
-  const trackEvent = useCallback((eventName: string, properties?: Record<string, any>) => {
-    console.log("Performance Monitor - Event:", eventName, properties)
-    // In production, send to analytics service
-  }, [])
+  const measurePerformance = useCallback(
+    (name: string, fn: () => void) => {
+      const start = performance.now()
+      fn()
+      const end = performance.now()
+
+      const metric: PerformanceMetric = {
+        name,
+        value: end - start,
+        timestamp: Date.now(),
+        url: window.location.pathname,
+      }
+
+      trackMetric(metric)
+    },
+    [trackMetric],
+  )
 
   return {
+    trackMetric,
     trackPageView,
+    trackUserInteraction,
     trackError,
-    trackEvent,
+    measurePerformance,
   }
 }

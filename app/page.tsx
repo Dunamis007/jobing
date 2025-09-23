@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { ErrorBoundary } from "@/components/error-boundary"
 import { HeroSection } from "@/components/sections/hero-section"
 import { ProgramsSection } from "@/components/sections/programs-section"
 import { FeaturesSection } from "@/components/sections/features-section"
@@ -72,13 +73,15 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <HeroSection />
-      <ProgramsSection />
-      <FeaturesSection />
-      <DifferenceSection />
-      <TestimonialsSection />
-      <CTASection />
-    </div>
+    <ErrorBoundary>
+      <div className="flex flex-col min-h-screen">
+        <HeroSection />
+        <ProgramsSection />
+        <FeaturesSection />
+        <DifferenceSection />
+        <TestimonialsSection />
+        <CTASection />
+      </div>
+    </ErrorBoundary>
   )
 }

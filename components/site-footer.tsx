@@ -1,181 +1,124 @@
-"use client"
 import Link from "next/link"
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react"
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react"
 
-const footerLinks = {
-  company: [
-    { name: "About Us", href: "/about" },
-    { name: "Our Story", href: "/story" },
-    { name: "Careers", href: "/careers" },
-    { name: "Press", href: "/press" },
-    { name: "Contact", href: "/contact" },
-  ],
-  programs: [
-    { name: "AI Tutoring", href: "/programs/ai-tutoring" },
-    { name: "Coding Bootcamp", href: "/programs/coding" },
-    { name: "Digital Marketing", href: "/programs/digital-marketing" },
-    { name: "IELTS Preparation", href: "/programs/ielts" },
-    { name: "JAMB/JUPEB", href: "/programs/jamb" },
-  ],
-  quickLinks: [
-    { name: "Dashboard", href: "/dashboard" },
-    { name: "Register", href: "/register" },
-    { name: "Blog", href: "/blog" },
-    { name: "Help Center", href: "/help" },
-    { name: "Student Portal", href: "/portal" },
-  ],
-  legal: [
-    { name: "Privacy Policy", href: "/privacy" },
-    { name: "Terms of Service", href: "/terms" },
-    { name: "Cookie Policy", href: "/cookies" },
-    { name: "Refund Policy", href: "/refund" },
-  ],
-}
-
-const socialLinks = [
-  { name: "Facebook", href: "#", icon: Facebook },
-  { name: "Twitter", href: "#", icon: Twitter },
-  { name: "Instagram", href: "#", icon: Instagram },
-  { name: "LinkedIn", href: "#", icon: Linkedin },
-  { name: "YouTube", href: "#", icon: Youtube },
-]
-
-export default function SiteFooter() {
+export function SiteFooter() {
   return (
-    <footer className="bg-[#002B5B] text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+    <footer className="bg-gray-900 text-white">
+      <div className="container px-4 py-12 md:px-6">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
-          <div className="space-y-6">
-            <div className="flex items-center space-x-3">
-              <img
-                src="https://i.imgur.com/ayuLxTm.jpeg"
-                alt="Dunamis Edtech"
-                className="h-12 w-12 rounded-lg object-cover"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement
-                  target.src = "/placeholder.svg?height=48&width=48&text=DE"
-                }}
-              />
-              <div>
-                <h3 className="text-2xl font-bold">Dunamis Edtech</h3>
-                <p className="text-gray-300 text-sm">Transforming Education</p>
-              </div>
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2">
+              <img src="https://i.imgur.com/VR3UwFi.jpeg" alt="Dunamis Edtech" className="h-8 w-8 rounded" />
+              <span className="text-xl font-bold">Dunamis Edtech</span>
             </div>
-
-            <p className="text-gray-300 leading-relaxed">
-              Empowering learners worldwide with cutting-edge technology and expert instruction. Your success is our
-              mission.
+            <p className="text-gray-300 text-sm">
+              Empowering students with cutting-edge education in AI, coding, digital marketing, and more. Your gateway
+              to a successful tech career.
             </p>
-
-            {/* Contact Info */}
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-[#FF9800]" />
-                <span className="text-gray-300">info@dunamistutors.com</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-[#FF9800]" />
-                <span className="text-gray-300">+234 (0) 123 456 7890</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-[#FF9800]" />
-                <span className="text-gray-300">Lagos, Nigeria</span>
-              </div>
+            <div className="flex space-x-4">
+              <Link href="#" className="text-gray-300 hover:text-white">
+                <Facebook className="h-5 w-5" />
+              </Link>
+              <Link href="#" className="text-gray-300 hover:text-white">
+                <Twitter className="h-5 w-5" />
+              </Link>
+              <Link href="#" className="text-gray-300 hover:text-white">
+                <Instagram className="h-5 w-5" />
+              </Link>
+              <Link href="#" className="text-gray-300 hover:text-white">
+                <Linkedin className="h-5 w-5" />
+              </Link>
             </div>
           </div>
 
-          {/* Programs */}
-          <div>
-            <h4 className="text-lg font-semibold mb-6">Programs</h4>
-            <ul className="space-y-3">
-              {footerLinks.programs.map((link) => (
-                <li key={link.name}>
-                  <Link href={link.href} className="text-gray-300 hover:text-[#FF9800] transition-colors duration-200">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+          {/* Online Programs */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Online Programs</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/programs/ai-tutoring" className="text-gray-300 hover:text-white">
+                  AI Tutoring
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs/coding" className="text-gray-300 hover:text-white">
+                  Coding
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs/digital-marketing" className="text-gray-300 hover:text-white">
+                  Digital Marketing
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs/ielts" className="text-gray-300 hover:text-white">
+                  IELTS
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs/travel-abroad" className="text-gray-300 hover:text-white">
+                  Travel Abroad
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
-            <ul className="space-y-3">
-              {footerLinks.quickLinks.map((link) => (
-                <li key={link.name}>
-                  <Link href={link.href} className="text-gray-300 hover:text-[#FF9800] transition-colors duration-200">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+          {/* In-Person Programs */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">In-Person Programs</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/programs/jamb" className="text-gray-300 hover:text-white">
+                  JAMB
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs/jupeb" className="text-gray-300 hover:text-white">
+                  JUPEB
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs/ijmb" className="text-gray-300 hover:text-white">
+                  IJMB
+                </Link>
+              </li>
             </ul>
           </div>
 
           {/* Contact Info */}
-          <div>
-            <h4 className="text-lg font-semibold mb-6">Contact Info</h4>
-            <div className="space-y-4">
-              <div>
-                <h5 className="font-medium text-white mb-2">Office Hours</h5>
-                <p className="text-gray-300 text-sm">
-                  Monday - Friday: 9:00 AM - 6:00 PM
-                  <br />
-                  Saturday: 10:00 AM - 4:00 PM
-                  <br />
-                  Sunday: Closed
-                </p>
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Contact Us</h3>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-center space-x-2">
+                <Mail className="h-4 w-4" />
+                <span className="text-gray-300">info@dunamisedtech.com</span>
               </div>
-
-              <div>
-                <h5 className="font-medium text-white mb-2">Support</h5>
-                <p className="text-gray-300 text-sm">
-                  24/7 Online Support Available
-                  <br />
-                  Response within 2 hours
-                </p>
+              <div className="flex items-center space-x-2">
+                <Phone className="h-4 w-4" />
+                <span className="text-gray-300">+234 (0) 123 456 7890</span>
               </div>
-
-              {/* Social Links */}
-              <div>
-                <h5 className="font-medium text-white mb-3">Follow Us</h5>
-                <div className="flex space-x-3">
-                  {socialLinks.map((social) => {
-                    const IconComponent = social.icon
-                    return (
-                      <Link
-                        key={social.name}
-                        href={social.href}
-                        className="w-10 h-10 bg-white/10 hover:bg-[#FF9800] rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
-                        aria-label={social.name}
-                      >
-                        <IconComponent className="w-5 h-5" />
-                      </Link>
-                    )
-                  })}
-                </div>
+              <div className="flex items-center space-x-2">
+                <MapPin className="h-4 w-4" />
+                <span className="text-gray-300">Lagos, Nigeria</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Footer */}
-        <div className="pt-8 border-t border-white/20">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-gray-300 text-sm">© 2024 Dunamis Edtech. All rights reserved.</div>
-
-            <div className="flex flex-wrap gap-6">
-              {footerLinks.legal.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-gray-300 hover:text-[#FF9800] text-sm transition-colors duration-200"
-                >
-                  {link.name}
-                </Link>
-              ))}
+        <div className="mt-8 border-t border-gray-800 pt-8">
+          <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
+            <p className="text-sm text-gray-300">© 2024 Dunamis Edtech. All rights reserved.</p>
+            <div className="flex space-x-4 text-sm">
+              <Link href="/privacy" className="text-gray-300 hover:text-white">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-gray-300 hover:text-white">
+                Terms of Service
+              </Link>
+              <Link href="/contact" className="text-gray-300 hover:text-white">
+                Contact
+              </Link>
             </div>
           </div>
         </div>
