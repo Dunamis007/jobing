@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Brain, Code, Megaphone, Globe, GraduationCap, Plane, MapPin } from "lucide-react"
+import { Brain, Code, Megaphone, Globe, GraduationCap, BookOpen, Plane } from "lucide-react"
 
 const programs = [
   {
@@ -17,7 +17,6 @@ const programs = [
     features: ["Machine Learning", "Deep Learning", "Neural Networks", "AI Ethics"],
     duration: "12 weeks",
     level: "Beginner to Advanced",
-    type: "online",
     href: "/programs/ai-tutoring",
   },
   {
@@ -29,7 +28,6 @@ const programs = [
     features: ["Web Development", "Mobile Apps", "Backend Systems", "DevOps"],
     duration: "16 weeks",
     level: "Beginner to Advanced",
-    type: "online",
     href: "/programs/coding",
   },
   {
@@ -41,7 +39,6 @@ const programs = [
     features: ["SEO/SEM", "Social Media", "Content Marketing", "Analytics"],
     duration: "10 weeks",
     level: "Beginner to Intermediate",
-    type: "online",
     href: "/programs/digital-marketing",
   },
   {
@@ -53,31 +50,28 @@ const programs = [
     features: ["Speaking", "Writing", "Reading", "Listening"],
     duration: "8 weeks",
     level: "All Levels",
-    type: "online",
     href: "/programs/ielts",
   },
   {
-    id: "ijmb",
-    title: "IJMB Program",
-    description: "Intermediate Joint Matriculation Board preparation for direct entry into 200 level.",
+    id: "jamb",
+    title: "JAMB Program",
+    description: "Joint Admissions and Matriculation Board examination preparation for university entry.",
     icon: GraduationCap,
     color: "bg-red-500",
     features: ["Mathematics", "English", "Physics", "Chemistry"],
-    duration: "9 months",
-    level: "O'Level Graduates",
-    type: "in-person",
-    href: "/programs/ijmb",
+    duration: "6 months",
+    level: "Secondary School",
+    href: "/programs/jamb",
   },
   {
     id: "jupeb",
     title: "JUPEB Program",
     description: "Joint Universities Preliminary Examinations Board for university direct entry admission.",
-    icon: GraduationCap,
+    icon: BookOpen,
     color: "bg-indigo-500",
     features: ["Core Subjects", "Electives", "Practical Labs", "Mock Exams"],
     duration: "9 months",
     level: "O'Level Graduates",
-    type: "in-person",
     href: "/programs/jupeb",
   },
   {
@@ -89,7 +83,6 @@ const programs = [
     features: ["Visa Processing", "University Applications", "Scholarship Guidance", "Pre-departure"],
     duration: "6 months",
     level: "All Levels",
-    type: "online",
     href: "/programs/travel-abroad",
   },
 ]
@@ -120,24 +113,18 @@ export function ProgramsSection() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+              <Card className="h-full hover:shadow-lg transition-shadow duration-300 border-0 shadow-md">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div className={`p-3 rounded-lg ${program.color} text-white`}>
                       <program.icon className="h-6 w-6" />
                     </div>
-                    <div className="flex gap-2">
-                      {program.type === "in-person" && (
-                        <Badge variant="secondary" className="flex items-center gap-1">
-                          <MapPin className="h-3 w-3" />
-                          In-Person
-                        </Badge>
-                      )}
-                      <Badge variant="outline">{program.level}</Badge>
-                    </div>
+                    <Badge variant="outline" className="border-dunamis-navy text-dunamis-navy">
+                      {program.level}
+                    </Badge>
                   </div>
-                  <CardTitle className="text-xl">{program.title}</CardTitle>
-                  <CardDescription className="text-base">{program.description}</CardDescription>
+                  <CardTitle className="text-xl text-gray-900">{program.title}</CardTitle>
+                  <CardDescription className="text-base text-gray-600">{program.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -145,7 +132,11 @@ export function ProgramsSection() {
                       <h4 className="font-semibold text-sm text-gray-900 mb-2">What you'll learn:</h4>
                       <div className="flex flex-wrap gap-2">
                         {program.features.map((feature) => (
-                          <Badge key={feature} variant="secondary" className="text-xs">
+                          <Badge
+                            key={feature}
+                            variant="secondary"
+                            className="text-xs bg-dunamis-light-blue text-dunamis-navy"
+                          >
                             {feature}
                           </Badge>
                         ))}
@@ -158,7 +149,7 @@ export function ProgramsSection() {
                 </CardContent>
                 <CardFooter>
                   <Link href={program.href} className="w-full">
-                    <Button className="w-full bg-dunamis-primary hover:bg-dunamis-primary/90">Learn More</Button>
+                    <Button className="w-full bg-dunamis-navy hover:bg-dunamis-blue text-white">Learn More</Button>
                   </Link>
                 </CardFooter>
               </Card>

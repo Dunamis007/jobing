@@ -65,6 +65,17 @@ export default function AITutoringRegistrationClient() {
 
   const programFields = [
     {
+      name: "studyMode",
+      label: "Preferred Study Mode",
+      type: "radio",
+      required: true,
+      options: [
+        { value: "online", label: "Online Classes" },
+        { value: "in-person", label: "In-Person Classes" },
+        { value: "hybrid", label: "Hybrid (Online + In-Person)" },
+      ],
+    },
+    {
       name: "aiTutoringLevel",
       label: "AI Tutoring Level",
       type: "select",
@@ -153,36 +164,30 @@ export default function AITutoringRegistrationClient() {
                 </div>
 
                 <div>
-                  <h3 className="font-medium">Available Tracks:</h3>
+                  <h3 className="font-medium">Available Study Modes:</h3>
                   <div className="grid gap-4 pt-2 md:grid-cols-3">
                     <Card className="border-primary/20">
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-lg">AI Fundamentals</CardTitle>
+                        <CardTitle className="text-lg">Online Classes</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-sm">
-                          Introduction to AI concepts, basic applications, and ethical considerations.
-                        </p>
+                        <p className="text-sm">Learn from anywhere with live online sessions and recorded materials.</p>
                       </CardContent>
                     </Card>
                     <Card className="border-primary/20">
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-lg">AI Applications</CardTitle>
+                        <CardTitle className="text-lg">In-Person Classes</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-sm">
-                          Learn to use AI tools for productivity, creativity, and problem-solving.
-                        </p>
+                        <p className="text-sm">Face-to-face learning experience at our Lagos center.</p>
                       </CardContent>
                     </Card>
                     <Card className="border-primary/20">
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-lg">Advanced AI</CardTitle>
+                        <CardTitle className="text-lg">Hybrid Mode</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-sm">
-                          Deep dive into AI development, machine learning, and custom AI solutions.
-                        </p>
+                        <p className="text-sm">Combination of online and in-person sessions for maximum flexibility.</p>
                       </CardContent>
                     </Card>
                   </div>
@@ -190,7 +195,7 @@ export default function AITutoringRegistrationClient() {
               </CardContent>
               <CardFooter>
                 <Button
-                  className="w-full"
+                  className="w-full bg-dunamis-navy hover:bg-dunamis-blue"
                   onClick={() => document.querySelector('[data-value="registration"]')?.click()}
                 >
                   Register Now <ArrowRight className="ml-2 h-4 w-4" />

@@ -10,7 +10,7 @@ export const programs: Program[] = [
     color: "bg-blue-500",
     features: ["Machine Learning", "Deep Learning", "Neural Networks", "AI Ethics"],
     price: "₦50,000",
-    type: "online",
+    type: "flexible", // Can be online or in-person
   },
   {
     id: "coding",
@@ -21,7 +21,7 @@ export const programs: Program[] = [
     color: "bg-green-500",
     features: ["Web Development", "Mobile Apps", "Backend Systems", "DevOps"],
     price: "₦75,000",
-    type: "online",
+    type: "flexible", // Can be online or in-person
   },
   {
     id: "digital-marketing",
@@ -32,7 +32,7 @@ export const programs: Program[] = [
     color: "bg-purple-500",
     features: ["SEO/SEM", "Social Media", "Content Marketing", "Analytics"],
     price: "₦40,000",
-    type: "online",
+    type: "flexible", // Can be online or in-person
   },
   {
     id: "ielts",
@@ -43,29 +43,40 @@ export const programs: Program[] = [
     color: "bg-red-500",
     features: ["Speaking", "Writing", "Reading", "Listening"],
     price: "₦35,000",
-    type: "online",
+    type: "flexible", // Can be online or in-person
   },
   {
-    id: "ijmb",
-    title: "IJMB Program",
-    description: "Interim Joint Matriculation Board examination preparation - In-person classes",
+    id: "jamb",
+    title: "JAMB Program",
+    description: "Joint Admissions and Matriculation Board examination preparation",
     icon: "graduation-cap",
-    href: "/programs/ijmb",
+    href: "/programs/jamb",
     color: "bg-yellow-500",
-    features: ["In-Person Classes", "University Preparation", "Subject Specialization", "Exam Success"],
+    features: ["Mathematics", "English", "Physics", "Chemistry"],
     price: "₦15,000",
-    type: "in-person",
+    type: "flexible", // Can be online or in-person
   },
   {
     id: "jupeb",
     title: "JUPEB Program",
-    description: "Joint Universities Preliminary Examinations Board preparation - In-person classes",
+    description: "Joint Universities Preliminary Examinations Board preparation",
     icon: "book-open",
     href: "/programs/jupeb",
     color: "bg-indigo-500",
-    features: ["In-Person Classes", "University Entry", "Academic Excellence", "Mentorship"],
+    features: ["Core Subjects", "Electives", "Practical Labs", "Mock Exams"],
     price: "₦15,000",
-    type: "in-person",
+    type: "flexible", // Can be online or in-person
+  },
+  {
+    id: "ijmb",
+    title: "IJMB Program",
+    description: "Interim Joint Matriculation Board examination preparation",
+    icon: "graduation-cap",
+    href: "/programs/ijmb",
+    color: "bg-yellow-500",
+    features: ["University Preparation", "Subject Specialization", "Exam Success", "Direct Entry"],
+    price: "₦15,000",
+    type: "flexible", // Can be online or in-person
   },
   {
     id: "travel-abroad",
@@ -76,7 +87,7 @@ export const programs: Program[] = [
     color: "bg-teal-500",
     features: ["Visa Assistance", "University Applications", "Document Prep", "Interview Training"],
     price: "₦25,000",
-    type: "online",
+    type: "flexible", // Can be online or in-person
   },
 ]
 
@@ -186,8 +197,8 @@ export const heroContent = {
 }
 
 export const companyInfo = {
-  name: "Dunamis Edtech",
-  logo: "https://i.imgur.com/ayuLxTm.jpeg",
+  name: "Dunamis Tutors",
+  logo: "https://i.imgur.com/dvWoOpc.jpeg",
   phone: "07032090178",
   email: "info@dunamistutors.com",
   address: "Lagos, Nigeria",

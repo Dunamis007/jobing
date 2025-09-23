@@ -12,9 +12,9 @@ import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
+  title: "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
   description:
-    "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
+    "Join Dunamis Tutors for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
   keywords: [
     "AI tutoring",
     "coding courses",
@@ -25,30 +25,30 @@ export const metadata: Metadata = {
     "JAMB",
     "online education Nigeria",
   ],
-  authors: [{ name: "Dunamis Edtech" }],
-  creator: "Dunamis Edtech",
-  publisher: "Dunamis Edtech",
+  authors: [{ name: "Dunamis Tutors" }],
+  creator: "Dunamis Tutors",
+  publisher: "Dunamis Tutors",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://dunamisedtech.com"),
+  metadataBase: new URL("https://dunamistutors.com"),
   alternates: {
-    canonical: "https://dunamisedtech.com",
+    canonical: "https://dunamistutors.com",
   },
   openGraph: {
-    title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
+    title: "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
     description:
-      "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
-    url: "https://dunamisedtech.com",
-    siteName: "Dunamis Edtech",
+      "Join Dunamis Tutors for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
+    url: "https://dunamistutors.com",
+    siteName: "Dunamis Tutors",
     images: [
       {
-        url: "https://i.imgur.com/VR3UwFi.jpeg",
+        url: "https://i.imgur.com/dvWoOpc.jpeg",
         width: 1200,
         height: 630,
-        alt: "Dunamis Edtech - Online Learning Platform",
+        alt: "Dunamis Tutors - Online Learning Platform",
       },
     ],
     locale: "en_US",
@@ -56,10 +56,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
+    title: "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
     description:
-      "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
-    images: ["https://i.imgur.com/VR3UwFi.jpeg"],
+      "Join Dunamis Tutors for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
+    images: ["https://i.imgur.com/dvWoOpc.jpeg"],
   },
   robots: {
     index: true,
@@ -86,12 +86,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="canonical" href="https://dunamisedtech.com/" />
-        <link rel="icon" href="https://i.imgur.com/VR3UwFi.jpeg" />
+        <link rel="canonical" href="https://dunamistutors.com/" />
+        <link rel="icon" href="https://i.imgur.com/dvWoOpc.jpeg" />
       </head>
       <body className={inter.className}>
         <ErrorBoundary>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
               <main className="flex-1">{children}</main>

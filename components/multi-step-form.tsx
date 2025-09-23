@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Progress } from "@/components/ui/progress"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 interface FormField {
@@ -99,6 +100,23 @@ export function MultiStepForm({ sections, onSubmit }: MultiStepFormProps) {
           </div>
         )
 
+      case "radio":
+        return (
+          <div key={field.name} className="space-y-3">
+            <Label>
+              {field.label} {field.required && <span className="text-red-500">*</span>}
+            </Label>
+            <RadioGroup value={value} onValueChange={(val) => handleInputChange(field.name, val)}>
+              {field.options?.map((option) => (
+                <div key={option.value} className="flex items-center space-x-2">
+                  <RadioGroupItem value={option.value} id={`${field.name}-${option.value}`} />
+                  <Label htmlFor={`${field.name}-${option.value}`}>{option.label}</Label>
+                </div>
+              ))}
+            </RadioGroup>
+          </div>
+        )
+
       case "textarea":
         return (
           <div key={field.name} className="space-y-2">
@@ -164,9 +182,11 @@ export function MultiStepForm({ sections, onSubmit }: MultiStepFormProps) {
         </Button>
 
         {currentStep === sections.length - 1 ? (
-          <Button onClick={handleSubmit}>Submit Registration</Button>
+          <Button onClick={handleSubmit} className="bg-dunamis-navy hover:bg-dunamis-blue">
+            Submit Registration
+          </Button>
         ) : (
-          <Button onClick={handleNext}>
+          <Button onClick={handleNext} className="bg-dunamis-navy hover:bg-dunamis-blue">
             Next
             <ChevronRight className="w-4 h-4 ml-2" />
           </Button>
