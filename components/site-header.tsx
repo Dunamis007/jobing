@@ -22,7 +22,7 @@ export function SiteHeader() {
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-dunamis-navy text-white">
+    <header className="sticky top-0 z-50 w-full bg-dunamis-navy text-white shadow-lg">
       <div className="container flex h-16 items-center">
         <div className="mr-4 hidden md:flex">
           <Link className="mr-8 flex items-center space-x-2" href="/">

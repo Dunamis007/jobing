@@ -2,12 +2,12 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
+import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/sonner"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { PerformanceMonitor } from "@/components/performance-monitor"
-import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -15,16 +15,7 @@ export const metadata: Metadata = {
   title: "Dunamis Tutors | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
   description:
     "Join Dunamis Tutors for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
-  keywords: [
-    "AI tutoring",
-    "coding courses",
-    "digital marketing",
-    "IELTS preparation",
-    "JUPEB",
-    "IJMB",
-    "JAMB",
-    "online education Nigeria",
-  ],
+  keywords: "AI tutoring, coding bootcamp, digital marketing, IELTS preparation, JUPEB, JAMB, online learning Nigeria",
   authors: [{ name: "Dunamis Tutors" }],
   creator: "Dunamis Tutors",
   publisher: "Dunamis Tutors",
@@ -72,8 +63,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
+  icons: {
+    icon: "https://i.imgur.com/dvWoOpc.jpeg",
+    shortcut: "https://i.imgur.com/dvWoOpc.jpeg",
+    apple: "https://i.imgur.com/dvWoOpc.jpeg",
   },
     generator: 'v0.app'
 }
@@ -87,11 +80,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="canonical" href="https://dunamistutors.com/" />
-        <link rel="icon" href="https://i.imgur.com/dvWoOpc.jpeg" />
       </head>
       <body className={inter.className}>
         <ErrorBoundary>
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
               <main className="flex-1">{children}</main>

@@ -7,7 +7,7 @@ import Link from "next/link"
 
 export function CTASection() {
   return (
-    <section className="py-20 bg-gradient-to-r from-dunamis-navy to-dunamis-blue text-white">
+    <section className="py-20 bg-gray-50">
       <div className="container px-4 md:px-6">
         <motion.div
           className="text-center space-y-6"
@@ -16,10 +16,10 @@ export function CTASection() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-dunamis-navy">
             Ready to Transform Your Future?
           </h2>
-          <p className="text-xl text-gray-200 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Join thousands of successful students who have advanced their careers with Dunamis Tutors. Start your
             learning journey today!
           </p>
@@ -33,7 +33,7 @@ export function CTASection() {
             <Button
               variant="outline"
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-dunamis-navy bg-transparent"
+              className="border-dunamis-navy text-dunamis-navy hover:bg-dunamis-navy hover:text-white bg-transparent"
             >
               <Link href="/programs">Explore Programs</Link>
             </Button>

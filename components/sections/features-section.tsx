@@ -5,28 +5,25 @@ import { User, Users, Clock } from "lucide-react"
 
 const features = [
   {
-    id: "personalized-learning",
-    title: "Personalized Learning",
-    description: "AI-powered adaptive learning paths tailored to your pace and style",
     icon: User,
+    title: "Personalized Learning",
+    description: "Get customized learning paths tailored to your goals and learning style for maximum effectiveness.",
   },
   {
-    id: "expert-instructors",
-    title: "Expert Instructors",
-    description: "Learn from industry professionals with years of experience",
     icon: Users,
+    title: "Expert Instructors",
+    description: "Learn from industry professionals with real-world experience and proven track records of success.",
   },
   {
-    id: "flexible-schedule",
-    title: "Flexible Schedule",
-    description: "Study at your own pace with 24/7 access to course materials",
     icon: Clock,
+    title: "Flexible Schedule",
+    description: "Study at your own pace with 24/7 access to course materials and flexible class scheduling options.",
   },
 ]
 
 export function FeaturesSection() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-gray-50">
       <div className="container px-4 md:px-6">
         <motion.div
           className="text-center space-y-4 mb-16"
@@ -35,26 +32,29 @@ export function FeaturesSection() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-gray-900">Why Choose Dunamis Tutors?</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We provide world-class education with cutting-edge technology and personalized support
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-dunamis-navy">
+            Why Choose Dunamis Tutors?
+          </h2>
+          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+            We provide world-class education with cutting-edge technology and personalized support to ensure your
+            success.
           </p>
         </motion.div>
 
         <div className="grid gap-8 md:grid-cols-3">
           {features.map((feature, index) => (
             <motion.div
-              key={feature.id}
+              key={feature.title}
               className="text-center space-y-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
             >
-              <div className="mx-auto w-16 h-16 bg-dunamis-light-blue rounded-full flex items-center justify-center">
-                <feature.icon className="h-8 w-8 text-dunamis-navy" />
+              <div className="w-16 h-16 bg-dunamis-orange rounded-full flex items-center justify-center mx-auto">
+                <feature.icon className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900">{feature.title}</h3>
+              <h3 className="text-xl font-bold text-dunamis-navy">{feature.title}</h3>
               <p className="text-gray-600">{feature.description}</p>
             </motion.div>
           ))}
