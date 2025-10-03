@@ -1,143 +1,214 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu"
+import { Menu } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, ChevronDown } from "lucide-react"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 export function SiteHeader() {
-  const [isOpen, setIsOpen] = useState(false)
-
-  const programs = [
-    { name: "AI Tutoring", href: "/programs/ai-tutoring" },
-    { name: "Coding", href: "/programs/coding" },
-    { name: "Digital Marketing", href: "/programs/digital-marketing" },
-    { name: "IELTS", href: "/programs/ielts" },
-    { name: "JAMB", href: "/programs/jamb" },
-    { name: "JUPEB", href: "/programs/jupeb" },
-    { name: "IJMB", href: "/programs/ijmb" },
-    { name: "Travel Abroad", href: "/programs/travel-abroad" },
-  ]
-
   return (
-    <header className="sticky top-0 z-50 w-full bg-dunamis-navy text-white shadow-lg">
-      <div className="container flex h-16 items-center">
-        <div className="mr-4 hidden md:flex">
-          <Link className="mr-8 flex items-center space-x-2" href="/">
-            <img src="https://i.imgur.com/dvWoOpc.jpeg" alt="Dunamis Tutors" className="h-10 w-10 rounded" />
-            <span className="hidden font-bold text-lg sm:inline-block">Dunamis Tutors</span>
-          </Link>
-          <nav className="flex items-center space-x-8 text-sm font-medium">
-            <Link className="transition-colors hover:text-dunamis-orange text-white" href="/">
-              Home
-            </Link>
+    <header className="sticky top-0 z-50 w-full border-b bg-dunamis-navy text-white">
+      <div className="container flex h-16 items-center justify-between px-4 md:px-6">
+        <Link href="/" className="flex items-center space-x-2">
+          <img src="https://i.imgur.com/dvWoOpc.jpeg" alt="Dunamis Edtech" className="h-10 w-10 rounded" />
+          <span className="font-bold text-xl">Dunamis Edtech</span>
+        </Link>
 
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center space-x-1 transition-colors hover:text-dunamis-orange text-white">
-                <span>Programs</span>
-                <ChevronDown className="h-3 w-3" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-white">
-                {programs.map((program) => (
-                  <DropdownMenuItem key={program.name} asChild>
-                    <Link href={program.href} className="text-gray-900 hover:text-dunamis-navy">
-                      {program.name}
+        {/* Desktop Navigation */}
+        <NavigationMenu className="hidden md:flex">
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <Link href="/" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>Home</NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Programs</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <div className="grid gap-3 p-6 w-[400px] md:w-[500px] lg:w-[600px] lg:grid-cols-2">
+                  <div className="space-y-3">
+                    <h4 className="font-medium leading-none text-dunamis-navy">Online Programs</h4>
+                    <Link
+                      href="/programs/ai-tutoring"
+                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
+                      <div className="text-sm font-medium leading-none text-dunamis-navy">AI Tutoring</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        Master artificial intelligence and machine learning
+                      </p>
                     </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                    <Link
+                      href="/programs/coding"
+                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
+                      <div className="text-sm font-medium leading-none text-dunamis-navy">Coding</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        Learn programming from scratch to advanced
+                      </p>
+                    </Link>
+                    <Link
+                      href="/programs/digital-marketing"
+                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
+                      <div className="text-sm font-medium leading-none text-dunamis-navy">Digital Marketing</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        Become a digital marketing expert
+                      </p>
+                    </Link>
+                    <Link
+                      href="/programs/ielts"
+                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
+                      <div className="text-sm font-medium leading-none text-dunamis-navy">IELTS</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        Prepare for IELTS with expert guidance
+                      </p>
+                    </Link>
+                    <Link
+                      href="/programs/travel-abroad"
+                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
+                      <div className="text-sm font-medium leading-none text-dunamis-navy">Travel Abroad</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        Get guidance for studying abroad
+                      </p>
+                    </Link>
+                  </div>
+                  <div className="space-y-3">
+                    <h4 className="font-medium leading-none text-dunamis-navy">In-Person Programs</h4>
+                    <Link
+                      href="/programs/jamb"
+                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
+                      <div className="text-sm font-medium leading-none text-dunamis-navy">JAMB</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        Ace your JAMB examination
+                      </p>
+                    </Link>
+                    <Link
+                      href="/programs/jupeb"
+                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
+                      <div className="text-sm font-medium leading-none text-dunamis-navy">JUPEB</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        Direct university admission program
+                      </p>
+                    </Link>
+                    <Link
+                      href="/programs/ijmb"
+                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
+                      <div className="text-sm font-medium leading-none text-dunamis-navy">IJMB</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        Interim Joint Matriculation Board program
+                      </p>
+                    </Link>
+                  </div>
+                </div>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
 
-            <Link className="transition-colors hover:text-dunamis-orange text-white" href="/blog">
-              Blog
-            </Link>
-            <Link className="transition-colors hover:text-dunamis-orange text-white" href="/dashboard">
-              Dashboard
-            </Link>
-            <Link className="transition-colors hover:text-dunamis-orange text-white" href="/contact">
-              Contact
-            </Link>
-          </nav>
+            <NavigationMenuItem>
+              <Link href="/blog" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>Blog</NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <Link href="/dashboard" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>Dashboard</NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <Link href="/contact" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>Contact</NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+
+        <div className="hidden md:flex items-center gap-4">
+          <Button asChild className="bg-dunamis-orange hover:bg-dunamis-orange/90 text-white border-0">
+            <Link href="/register">Get Started</Link>
+          </Button>
         </div>
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden text-white hover:text-dunamis-orange"
-            >
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle Menu</span>
+
+        {/* Mobile Navigation */}
+        <Sheet>
+          <SheetTrigger asChild className="md:hidden">
+            <Button variant="ghost" size="icon">
+              <Menu className="h-6 w-6" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="pr-0 bg-dunamis-navy text-white">
-            <div className="flex items-center space-x-2 pb-4">
-              <img src="https://i.imgur.com/dvWoOpc.jpeg" alt="Dunamis Tutors" className="h-8 w-8 rounded" />
-              <span className="font-bold">Dunamis Tutors</span>
-            </div>
-            <nav className="flex flex-col space-y-3">
-              <Link
-                href="/"
-                className="transition-colors hover:text-dunamis-orange text-white"
-                onClick={() => setIsOpen(false)}
-              >
+          <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+            <nav className="flex flex-col gap-4 mt-8">
+              <Link href="/" className="text-lg font-medium hover:text-dunamis-orange transition-colors">
                 Home
               </Link>
-
               <div className="space-y-2">
-                <div className="font-medium text-sm text-dunamis-orange">Programs</div>
-                <div className="pl-4 space-y-2">
-                  {programs.map((program) => (
-                    <Link
-                      key={program.name}
-                      href={program.href}
-                      className="block transition-colors hover:text-dunamis-orange text-white"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {program.name}
-                    </Link>
-                  ))}
+                <p className="text-lg font-medium">Programs</p>
+                <div className="ml-4 space-y-2">
+                  <Link
+                    href="/programs/ai-tutoring"
+                    className="block text-sm hover:text-dunamis-orange transition-colors"
+                  >
+                    AI Tutoring
+                  </Link>
+                  <Link href="/programs/coding" className="block text-sm hover:text-dunamis-orange transition-colors">
+                    Coding
+                  </Link>
+                  <Link
+                    href="/programs/digital-marketing"
+                    className="block text-sm hover:text-dunamis-orange transition-colors"
+                  >
+                    Digital Marketing
+                  </Link>
+                  <Link href="/programs/ielts" className="block text-sm hover:text-dunamis-orange transition-colors">
+                    IELTS
+                  </Link>
+                  <Link
+                    href="/programs/travel-abroad"
+                    className="block text-sm hover:text-dunamis-orange transition-colors"
+                  >
+                    Travel Abroad
+                  </Link>
+                  <Link href="/programs/jamb" className="block text-sm hover:text-dunamis-orange transition-colors">
+                    JAMB
+                  </Link>
+                  <Link href="/programs/jupeb" className="block text-sm hover:text-dunamis-orange transition-colors">
+                    JUPEB
+                  </Link>
+                  <Link href="/programs/ijmb" className="block text-sm hover:text-dunamis-orange transition-colors">
+                    IJMB
+                  </Link>
                 </div>
               </div>
-
-              <Link
-                href="/blog"
-                className="transition-colors hover:text-dunamis-orange text-white"
-                onClick={() => setIsOpen(false)}
-              >
+              <Link href="/blog" className="text-lg font-medium hover:text-dunamis-orange transition-colors">
                 Blog
               </Link>
-              <Link
-                href="/dashboard"
-                className="transition-colors hover:text-dunamis-orange text-white"
-                onClick={() => setIsOpen(false)}
-              >
+              <Link href="/dashboard" className="text-lg font-medium hover:text-dunamis-orange transition-colors">
                 Dashboard
               </Link>
-              <Link
-                href="/contact"
-                className="transition-colors hover:text-dunamis-orange text-white"
-                onClick={() => setIsOpen(false)}
-              >
+              <Link href="/contact" className="text-lg font-medium hover:text-dunamis-orange transition-colors">
                 Contact
               </Link>
+              <Button asChild className="bg-dunamis-orange hover:bg-dunamis-orange/90 text-white border-0 mt-4">
+                <Link href="/register">Get Started</Link>
+              </Button>
             </nav>
           </SheetContent>
         </Sheet>
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none">
-            <Link className="flex items-center space-x-2 md:hidden" href="/">
-              <img src="https://i.imgur.com/dvWoOpc.jpeg" alt="Dunamis Tutors" className="h-8 w-8 rounded" />
-              <span className="font-bold text-white">Dunamis Tutors</span>
-            </Link>
-          </div>
-          <nav className="flex items-center space-x-2">
-            <Button asChild className="bg-dunamis-orange hover:bg-dunamis-orange/90 text-white border-0">
-              <Link href="/register">Get Started</Link>
-            </Button>
-          </nav>
-        </div>
       </div>
     </header>
   )

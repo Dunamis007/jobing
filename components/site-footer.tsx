@@ -1,21 +1,20 @@
-"use client"
-
 import Link from "next/link"
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react"
 
 export function SiteFooter() {
   return (
     <footer className="bg-dunamis-navy text-white">
-      <div className="container px-4 md:px-6 py-12">
+      <div className="container px-4 py-12 md:px-6">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <img src="https://i.imgur.com/dvWoOpc.jpeg" alt="Dunamis Tutors" className="h-8 w-8 rounded" />
-              <span className="font-bold text-lg">Dunamis Tutors</span>
+              <img src="https://i.imgur.com/dvWoOpc.jpeg" alt="Dunamis Edtech" className="h-8 w-8 rounded" />
+              <span className="text-xl font-bold">Dunamis Edtech</span>
             </div>
             <p className="text-gray-300 text-sm">
-              Empowering students with world-class education and personalized guidance to achieve their career goals.
+              Empowering students with cutting-edge education in AI, coding, digital marketing, and more. Your gateway
+              to a successful tech career.
             </p>
             <div className="flex space-x-4">
               <Link href="#" className="text-gray-300 hover:text-dunamis-orange transition-colors">
@@ -33,78 +32,104 @@ export function SiteFooter() {
             </div>
           </div>
 
-          {/* Programs */}
+          {/* Online Programs */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-dunamis-orange">Programs</h3>
-            <div className="space-y-2 text-sm">
-              <Link href="/programs/ai-tutoring" className="block text-gray-300 hover:text-white transition-colors">
-                AI Tutoring
-              </Link>
-              <Link href="/programs/coding" className="block text-gray-300 hover:text-white transition-colors">
-                Coding Bootcamp
-              </Link>
-              <Link
-                href="/programs/digital-marketing"
-                className="block text-gray-300 hover:text-white transition-colors"
-              >
-                Digital Marketing
-              </Link>
-              <Link href="/programs/ielts" className="block text-gray-300 hover:text-white transition-colors">
-                IELTS Preparation
-              </Link>
-              <Link href="/programs/jamb" className="block text-gray-300 hover:text-white transition-colors">
-                JAMB Preparation
-              </Link>
-              <Link href="/programs/jupeb" className="block text-gray-300 hover:text-white transition-colors">
-                JUPEB Program
-              </Link>
-            </div>
+            <h3 className="text-lg font-semibold">Online Programs</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link
+                  href="/programs/ai-tutoring"
+                  className="text-gray-300 hover:text-dunamis-orange transition-colors"
+                >
+                  AI Tutoring
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs/coding" className="text-gray-300 hover:text-dunamis-orange transition-colors">
+                  Coding
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/programs/digital-marketing"
+                  className="text-gray-300 hover:text-dunamis-orange transition-colors"
+                >
+                  Digital Marketing
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs/ielts" className="text-gray-300 hover:text-dunamis-orange transition-colors">
+                  IELTS
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/programs/travel-abroad"
+                  className="text-gray-300 hover:text-dunamis-orange transition-colors"
+                >
+                  Travel Abroad
+                </Link>
+              </li>
+            </ul>
           </div>
 
-          {/* Quick Links */}
+          {/* In-Person Programs */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-dunamis-orange">Quick Links</h3>
-            <div className="space-y-2 text-sm">
-              <Link href="/" className="block text-gray-300 hover:text-white transition-colors">
-                Home
-              </Link>
-              <Link href="/blog" className="block text-gray-300 hover:text-white transition-colors">
-                Blog
-              </Link>
-              <Link href="/dashboard" className="block text-gray-300 hover:text-white transition-colors">
-                Dashboard
-              </Link>
-              <Link href="/register" className="block text-gray-300 hover:text-white transition-colors">
-                Register
-              </Link>
-              <Link href="/contact" className="block text-gray-300 hover:text-white transition-colors">
-                Contact Us
-              </Link>
-            </div>
+            <h3 className="text-lg font-semibold">In-Person Programs</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/programs/jamb" className="text-gray-300 hover:text-dunamis-orange transition-colors">
+                  JAMB
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs/jupeb" className="text-gray-300 hover:text-dunamis-orange transition-colors">
+                  JUPEB
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs/ijmb" className="text-gray-300 hover:text-dunamis-orange transition-colors">
+                  IJMB
+                </Link>
+              </li>
+            </ul>
           </div>
 
           {/* Contact Info */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-dunamis-orange">Contact Us</h3>
-            <div className="space-y-3 text-sm">
-              <div className="flex items-center space-x-2 text-gray-300">
-                <Phone className="h-4 w-4" />
-                <span>07032090178</span>
-              </div>
-              <div className="flex items-center space-x-2 text-gray-300">
+            <h3 className="text-lg font-semibold">Contact Us</h3>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
-                <span>info@dunamistutors.com</span>
+                <span className="text-gray-300">info@dunamisedtech.com</span>
               </div>
-              <div className="flex items-center space-x-2 text-gray-300">
+              <div className="flex items-center space-x-2">
+                <Phone className="h-4 w-4" />
+                <span className="text-gray-300">07032090178</span>
+              </div>
+              <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
-                <span>Lagos, Nigeria</span>
+                <span className="text-gray-300">Lagos, Nigeria</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-300">
-          <p>&copy; 2025 Dunamis Tutors. All rights reserved.</p>
+        <div className="mt-8 border-t border-gray-800 pt-8">
+          <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
+            <p className="text-sm text-gray-300">© 2025 Dunamis Edtech. All rights reserved.</p>
+            <div className="flex space-x-4 text-sm">
+              <Link href="/privacy" className="text-gray-300 hover:text-dunamis-orange transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-gray-300 hover:text-dunamis-orange transition-colors">
+                Terms of Service
+              </Link>
+              <Link href="/contact" className="text-gray-300 hover:text-dunamis-orange transition-colors">
+                Contact
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
