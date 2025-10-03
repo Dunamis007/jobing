@@ -1,133 +1,117 @@
-"use client"
-
-import { motion } from "framer-motion"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Brain, Code, Megaphone, Globe, GraduationCap, Plane, BookOpen, Users } from "lucide-react"
+import { Brain, Code, TrendingUp, Globe, GraduationCap, BookOpen, Plane } from "lucide-react"
 import Link from "next/link"
 
 const programs = [
   {
     title: "AI Tutoring",
-    description: "Master artificial intelligence and machine learning with hands-on projects and expert guidance.",
+    description: "Master artificial intelligence with personalized guidance from industry experts.",
     icon: Brain,
-    color: "bg-blue-100 text-blue-600",
+    color: "bg-blue-500",
     features: ["Machine Learning", "Deep Learning", "Neural Networks"],
     href: "/programs/ai-tutoring",
   },
   {
     title: "Coding Bootcamp",
-    description: "Learn programming from scratch with our comprehensive coding curriculum.",
+    description: "Learn full-stack development with hands-on projects and real-world applications.",
     icon: Code,
-    color: "bg-green-100 text-green-600",
+    color: "bg-green-500",
     features: ["Web Development", "Mobile Apps", "Backend Systems"],
     href: "/programs/coding",
   },
   {
     title: "Digital Marketing",
-    description: "Master digital marketing strategies and grow your online presence effectively.",
-    icon: Megaphone,
-    color: "bg-purple-100 text-purple-600",
-    features: ["SEO/SEM", "Social Media", "Content Marketing"],
+    description: "Become a digital marketing expert with cutting-edge strategies and tools.",
+    icon: TrendingUp,
+    color: "bg-purple-500",
+    features: ["SEO & SEM", "Social Media", "Analytics"],
     href: "/programs/digital-marketing",
   },
   {
-    title: "IELTS Preparation",
-    description: "Achieve your target IELTS score with our proven preparation methods.",
+    title: "IELTS",
+    description: "Prepare for IELTS with expert instructors and comprehensive study materials.",
     icon: Globe,
-    color: "bg-orange-100 text-orange-600",
+    color: "bg-red-500",
     features: ["Speaking", "Writing", "Reading & Listening"],
     href: "/programs/ielts",
   },
   {
-    title: "JAMB Preparation",
-    description: "Excel in your JAMB exams with comprehensive study materials and practice tests.",
+    title: "JAMB",
+    description: "Ace your JAMB examination with our proven preparation methodology.",
     icon: BookOpen,
-    color: "bg-red-100 text-red-600",
-    features: ["All Subjects", "Practice Tests", "Expert Guidance"],
+    color: "bg-yellow-500",
+    features: ["Use of English", "Mathematics", "Science Subjects"],
     href: "/programs/jamb",
   },
   {
-    title: "JUPEB Program",
-    description: "Joint Universities Preliminary Examinations Board preparation for university admission.",
+    title: "JUPEB",
+    description: "Direct university admission program with comprehensive subject coverage.",
     icon: GraduationCap,
-    color: "bg-indigo-100 text-indigo-600",
-    features: ["Science Subjects", "Arts Subjects", "Commercial Subjects"],
+    color: "bg-indigo-500",
+    features: ["A-Level Subjects", "University Direct Entry", "Intensive Coaching"],
     href: "/programs/jupeb",
   },
   {
-    title: "IJMB Program",
-    description: "Interim Joint Matriculation Board examination preparation for direct entry admission.",
-    icon: Users,
-    color: "bg-teal-100 text-teal-600",
-    features: ["Direct Entry", "University Admission", "Subject Combinations"],
+    title: "IJMB",
+    description: "Interim Joint Matriculation Board program for direct entry into 200 level.",
+    icon: GraduationCap,
+    color: "bg-pink-500",
+    features: ["A-Level Equivalent", "Direct Entry", "Fast Track"],
     href: "/programs/ijmb",
   },
   {
     title: "Travel Abroad",
-    description: "Complete guidance for studying and working abroad with visa assistance.",
+    description: "Get expert guidance for studying and working abroad opportunities.",
     icon: Plane,
-    color: "bg-pink-100 text-pink-600",
-    features: ["Visa Assistance", "University Applications", "Career Guidance"],
+    color: "bg-orange-500",
+    features: ["Study Abroad", "Visa Processing", "Scholarship Guidance"],
     href: "/programs/travel-abroad",
   },
 ]
 
 export function ProgramsSection() {
   return (
-    <section className="py-20 bg-white">
-      <div className="container px-4 md:px-6">
-        <motion.div
-          className="text-center space-y-4 mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-dunamis-navy">
-            Our Programs
-          </h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            Accelerate your career with our comprehensive range of programs designed to meet the demands of today's
-            digital world and educational requirements.
+    <section className="py-20 px-4 md:px-6 lg:px-8 bg-gray-50">
+      <div className="container mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900">Our Programs</h2>
+          <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+            Accelerate your career with our comprehensive range of programs designed to meet your unique learning
+            journey, from beginner to advanced level.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {programs.map((program, index) => (
-            <motion.div
-              key={program.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300 border-gray-200">
-                <CardHeader className="text-center pb-4">
-                  <div
-                    className={`w-16 h-16 rounded-full ${program.color} flex items-center justify-center mx-auto mb-4`}
-                  >
-                    <program.icon className="h-8 w-8" />
+          {programs.map((program) => {
+            const Icon = program.icon
+            return (
+              <Card key={program.title} className="flex flex-col hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className={`${program.color} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
+                    <Icon className="h-6 w-6 text-white" />
                   </div>
-                  <CardTitle className="text-xl font-bold text-dunamis-navy">{program.title}</CardTitle>
-                  <CardDescription className="text-gray-600">{program.description}</CardDescription>
+                  <CardTitle className="text-xl">{program.title}</CardTitle>
+                  <CardDescription>{program.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="space-y-3 mb-6">
+                <CardContent className="flex-1">
+                  <ul className="space-y-2">
                     {program.features.map((feature) => (
-                      <div key={feature} className="flex items-center text-sm text-gray-600">
-                        <div className="w-2 h-2 bg-dunamis-orange rounded-full mr-3" />
+                      <li key={feature} className="flex items-center text-sm text-gray-600">
+                        <span className="mr-2">•</span>
                         {feature}
-                      </div>
+                      </li>
                     ))}
-                  </div>
-                  <Button asChild className="w-full bg-dunamis-navy hover:bg-dunamis-navy/90 text-white">
+                  </ul>
+                </CardContent>
+                <CardFooter>
+                  <Button asChild className="w-full bg-dunamis-navy hover:bg-dunamis-navy/90">
                     <Link href={program.href}>Learn More</Link>
                   </Button>
-                </CardContent>
+                </CardFooter>
               </Card>
-            </motion.div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

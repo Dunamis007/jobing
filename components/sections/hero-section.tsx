@@ -1,89 +1,96 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Play } from "lucide-react"
 import Link from "next/link"
-import Script from "next/script"
+import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
+import { useEffect } from "react"
 
 export function HeroSection() {
+  useEffect(() => {
+    // Load Vimeo player script
+    const script = document.createElement("script")
+    script.src = "https://player.vimeo.com/api/player.js"
+    script.async = true
+    document.body.appendChild(script)
+
+    return () => {
+      document.body.removeChild(script)
+    }
+  }, [])
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-dunamis-navy to-dunamis-blue">
-      <div className="container px-4 md:px-6">
-        <div className="grid gap-6 lg:grid-cols-[1fr_500px] lg:gap-12 xl:grid-cols-[1fr_600px] items-center">
-          <div className="flex flex-col justify-center space-y-6 text-white">
+    <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-950 py-20 px-4 md:px-6 lg:px-8">
+      <div className="container mx-auto">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
+          {/* Left Content */}
+          <div className="flex flex-col justify-center space-y-8">
             <div className="space-y-4">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl xl:text-6xl/none leading-tight">
-                Learn AI, Coding &<br />
-                More with{" "}
-                <span className="text-dunamis-orange">
-                  Expert
-                  <br />
-                  Tutors
-                </span>
+              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-white">
+                Learn AI, Coding & More with <span className="text-dunamis-orange">Expert Tutors</span>
               </h1>
-              <p className="max-w-[600px] text-gray-200 text-lg leading-relaxed">
+              <p className="max-w-[600px] text-gray-200 md:text-xl">
                 Transform your career with our comprehensive online programs in AI, Coding, Digital Marketing, IELTS,
                 JUPEB, and JAMB preparation.
               </p>
             </div>
-            <div className="flex flex-col gap-3 min-[400px]:flex-row">
-              <Button
-                asChild
-                size="lg"
-                className="bg-dunamis-orange hover:bg-dunamis-orange/90 text-white border-0 font-semibold"
-              >
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <Button asChild size="lg" className="bg-dunamis-orange hover:bg-dunamis-orange/90 text-white border-0">
                 <Link href="/register">
                   Start Learning Today
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
               <Button
-                variant="outline"
+                asChild
                 size="lg"
-                className="border-2 border-white text-white hover:bg-white hover:text-dunamis-navy bg-transparent font-semibold"
+                variant="outline"
+                className="border-2 border-white text-white hover:bg-white/10 bg-transparent"
               >
-                <Play className="mr-2 h-4 w-4" />
-                Watch Demo
+                <Link href="#demo">Watch Demo</Link>
               </Button>
             </div>
-            <div className="flex items-center space-x-6 text-sm text-gray-300 pt-4">
-              <div className="flex items-center space-x-1">
-                <span className="font-bold text-white text-lg">10,000+</span>
-                <span className="ml-1">Students</span>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4 pt-8">
+              <div className="space-y-2">
+                <p className="text-3xl font-bold text-white">10,000+</p>
+                <p className="text-sm text-gray-300">Students</p>
               </div>
-              <div className="flex items-center space-x-1">
-                <span className="font-bold text-white text-lg">95%</span>
-                <span className="ml-1">Success Rate</span>
+              <div className="space-y-2">
+                <p className="text-3xl font-bold text-white">95%</p>
+                <p className="text-sm text-gray-300">Success Rate</p>
               </div>
-              <div className="flex items-center space-x-1">
-                <span className="font-bold text-white text-lg">50+</span>
-                <span className="ml-1">Expert Instructors</span>
+              <div className="space-y-2">
+                <p className="text-3xl font-bold text-white">50+</p>
+                <p className="text-sm text-gray-300">Expert Instructors</p>
               </div>
             </div>
           </div>
+
+          {/* Right Content - Video */}
           <div className="flex items-center justify-center lg:justify-end">
-            <div className="w-full max-w-[500px] rounded-2xl overflow-hidden shadow-2xl bg-gray-200">
-              <div style={{ padding: "177.78% 0 0 0", position: "relative" }}>
-                <iframe
-                  src="https://player.vimeo.com/video/1124197925?badge=0&autopause=0&autoplay=1&muted=1&player_id=0&app_id=58479"
-                  frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                  }}
-                  title="Dunamis Edtech Introduction"
-                />
+            <div className="w-full max-w-lg">
+              <div
+                className="relative rounded-2xl overflow-hidden shadow-2xl bg-gray-100"
+                style={{ paddingTop: "177.78%" }}
+              >
+                <div className="absolute inset-0">
+                  <iframe
+                    src="https://player.vimeo.com/video/1124197925?badge=0&autopause=0&autoplay=1&muted=1&loop=1&player_id=0&app_id=58479"
+                    className="absolute top-0 left-0 w-full h-full"
+                    frameBorder="0"
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    title="Dunamis Edtech Introduction"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Script src="https://player.vimeo.com/api/player.js" strategy="lazyOnload" />
     </section>
   )
 }

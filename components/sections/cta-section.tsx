@@ -1,44 +1,36 @@
-"use client"
-
-import { motion } from "framer-motion"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
-import Link from "next/link"
 
 export function CTASection() {
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container px-4 md:px-6">
-        <motion.div
-          className="text-center space-y-6"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-dunamis-navy">
+    <section className="py-20 px-4 md:px-6 lg:px-8 bg-gray-50">
+      <div className="container mx-auto">
+        <div className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-950 rounded-3xl p-12 md:p-16 text-center">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white mb-4">
             Ready to Transform Your Future?
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Join thousands of successful students who have advanced their careers with Dunamis Tutors. Start your
+          <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-8">
+            Join thousands of successful students who have advanced their careers with Dunamis Edtech. Start your
             learning journey today!
           </p>
-          <div className="flex flex-col gap-4 min-[400px]:flex-row justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-dunamis-orange hover:bg-dunamis-orange/90 text-white border-0">
               <Link href="/register">
-                Start Learning Today
-                <ArrowRight className="ml-2 h-4 w-4" />
+                Get Started Now
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
             <Button
-              variant="outline"
+              asChild
               size="lg"
-              className="border-dunamis-navy text-dunamis-navy hover:bg-dunamis-navy hover:text-white bg-transparent"
+              variant="outline"
+              className="border-2 border-white text-white hover:bg-white/10 bg-transparent"
             >
-              <Link href="/programs">Explore Programs</Link>
+              <Link href="/programs/ai-tutoring">Explore Programs</Link>
             </Button>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

@@ -1,63 +1,49 @@
-"use client"
-
-import { motion } from "framer-motion"
-import { User, Users, Clock } from "lucide-react"
+import { Users, Award, Clock } from "lucide-react"
 
 const features = [
   {
-    icon: User,
     title: "Personalized Learning",
-    description: "Get customized learning paths tailored to your goals and learning style for maximum effectiveness.",
-  },
-  {
+    description: "AI-powered platform providing a learning experience tailored to your unique goals and pace.",
     icon: Users,
-    title: "Expert Instructors",
-    description: "Learn from industry professionals with real-world experience and proven track records of success.",
   },
   {
-    icon: Clock,
+    title: "Expert Instructors",
+    description: "Learn from industry professionals and educators with years of real-world experience.",
+    icon: Award,
+  },
+  {
     title: "Flexible Schedule",
-    description: "Study at your own pace with 24/7 access to course materials and flexible class scheduling options.",
+    description: "Study at your own convenience with 24/7 access to our platform and recorded sessions.",
+    icon: Clock,
   },
 ]
 
 export function FeaturesSection() {
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container px-4 md:px-6">
-        <motion.div
-          className="text-center space-y-4 mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-dunamis-navy">
-            Why Choose Dunamis Tutors?
+    <section className="py-20 px-4 md:px-6 lg:px-8 bg-white">
+      <div className="container mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900">
+            Why Choose Dunamis Edtech?
           </h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            We provide world-class education with cutting-edge technology and personalized support to ensure your
-            success.
+          <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+            We provide world-class education with cutting-edge technology and personalized support.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid gap-8 md:grid-cols-3">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              className="text-center space-y-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="w-16 h-16 bg-dunamis-orange rounded-full flex items-center justify-center mx-auto">
-                <feature.icon className="h-8 w-8 text-white" />
+          {features.map((feature) => {
+            const Icon = feature.icon
+            return (
+              <div key={feature.title} className="flex flex-col items-center text-center p-6">
+                <div className="mb-4 rounded-full bg-blue-100 p-4">
+                  <Icon className="h-8 w-8 text-dunamis-navy" />
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
               </div>
-              <h3 className="text-xl font-bold text-dunamis-navy">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
-            </motion.div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
