@@ -1,117 +1,193 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Brain, Code, TrendingUp, Globe, GraduationCap, BookOpen, Plane } from "lucide-react"
+"use client"
+
+import { motion } from "framer-motion"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Brain, Code, Megaphone, Globe, GraduationCap, Plane, BookOpen, Shield, BarChart } from "lucide-react"
 
 const programs = [
   {
+    id: "ai-tutoring",
     title: "AI Tutoring",
-    description: "Master artificial intelligence with personalized guidance from industry experts.",
+    description: "Master artificial intelligence and machine learning with hands-on projects and expert guidance.",
     icon: Brain,
     color: "bg-blue-500",
-    features: ["Machine Learning", "Deep Learning", "Neural Networks"],
+    features: ["Machine Learning", "Deep Learning", "Neural Networks", "AI Ethics"],
+    duration: "12 weeks",
+    level: "Beginner to Advanced",
     href: "/programs/ai-tutoring",
   },
   {
+    id: "coding",
     title: "Coding Bootcamp",
-    description: "Learn full-stack development with hands-on projects and real-world applications.",
+    description: "Full-stack development with modern technologies including React, Node.js, and cloud deployment.",
     icon: Code,
     color: "bg-green-500",
-    features: ["Web Development", "Mobile Apps", "Backend Systems"],
+    features: ["Web Development", "Mobile Apps", "Backend Systems", "DevOps"],
+    duration: "16 weeks",
+    level: "Beginner to Advanced",
     href: "/programs/coding",
   },
   {
+    id: "cybersecurity",
+    title: "Cybersecurity",
+    description: "Learn to protect systems, networks, and data from cyber threats with industry-standard practices.",
+    icon: Shield,
+    color: "bg-red-600",
+    features: ["Network Security", "Ethical Hacking", "Threat Analysis", "Security Operations"],
+    duration: "14 weeks",
+    level: "Beginner to Advanced",
+    href: "/programs/cybersecurity",
+  },
+  {
+    id: "data-analytics",
+    title: "Data Analytics",
+    description: "Transform raw data into actionable insights using advanced analytics tools and techniques.",
+    icon: BarChart,
+    color: "bg-cyan-500",
+    features: ["Data Visualization", "Statistical Analysis", "SQL & Python", "Business Intelligence"],
+    duration: "12 weeks",
+    level: "Beginner to Advanced",
+    href: "/programs/data-analytics",
+  },
+  {
+    id: "digital-marketing",
     title: "Digital Marketing",
-    description: "Become a digital marketing expert with cutting-edge strategies and tools.",
-    icon: TrendingUp,
+    description: "Master online marketing strategies, social media, SEO, and data-driven marketing campaigns.",
+    icon: Megaphone,
     color: "bg-purple-500",
-    features: ["SEO & SEM", "Social Media", "Analytics"],
+    features: ["SEO/SEM", "Social Media", "Content Marketing", "Analytics"],
+    duration: "10 weeks",
+    level: "Beginner to Intermediate",
     href: "/programs/digital-marketing",
   },
   {
-    title: "IELTS",
-    description: "Prepare for IELTS with expert instructors and comprehensive study materials.",
+    id: "ielts",
+    title: "IELTS Preparation",
+    description: "Comprehensive IELTS exam preparation with practice tests and personalized feedback.",
     icon: Globe,
-    color: "bg-red-500",
-    features: ["Speaking", "Writing", "Reading & Listening"],
+    color: "bg-orange-500",
+    features: ["Speaking", "Writing", "Reading", "Listening"],
+    duration: "8 weeks",
+    level: "All Levels",
     href: "/programs/ielts",
   },
   {
-    title: "JAMB",
-    description: "Ace your JAMB examination with our proven preparation methodology.",
-    icon: BookOpen,
-    color: "bg-yellow-500",
-    features: ["Use of English", "Mathematics", "Science Subjects"],
+    id: "jamb",
+    title: "JAMB Program",
+    description: "Joint Admissions and Matriculation Board examination preparation for university entry.",
+    icon: GraduationCap,
+    color: "bg-red-500",
+    features: ["Mathematics", "English", "Physics", "Chemistry"],
+    duration: "6 months",
+    level: "Secondary School",
     href: "/programs/jamb",
   },
   {
-    title: "JUPEB",
-    description: "Direct university admission program with comprehensive subject coverage.",
-    icon: GraduationCap,
+    id: "jupeb",
+    title: "JUPEB Program",
+    description: "Joint Universities Preliminary Examinations Board for university direct entry admission.",
+    icon: BookOpen,
     color: "bg-indigo-500",
-    features: ["A-Level Subjects", "University Direct Entry", "Intensive Coaching"],
+    features: ["Core Subjects", "Electives", "Practical Labs", "Mock Exams"],
+    duration: "9 months",
+    level: "O'Level Graduates",
     href: "/programs/jupeb",
   },
   {
-    title: "IJMB",
-    description: "Interim Joint Matriculation Board program for direct entry into 200 level.",
+    id: "ijmb",
+    title: "IJMB Program",
+    description: "Interim Joint Matriculation Board examination preparation for direct entry into 200 level.",
     icon: GraduationCap,
-    color: "bg-pink-500",
-    features: ["A-Level Equivalent", "Direct Entry", "Fast Track"],
+    color: "bg-yellow-600",
+    features: ["University Preparation", "Subject Specialization", "Exam Success", "Direct Entry"],
+    duration: "9 months",
+    level: "O'Level Graduates",
     href: "/programs/ijmb",
   },
   {
+    id: "travel-abroad",
     title: "Travel Abroad",
-    description: "Get expert guidance for studying and working abroad opportunities.",
+    description: "Complete guidance for studying abroad including visa processing and university applications.",
     icon: Plane,
-    color: "bg-orange-500",
-    features: ["Study Abroad", "Visa Processing", "Scholarship Guidance"],
+    color: "bg-teal-500",
+    features: ["Visa Processing", "University Applications", "Scholarship Guidance", "Pre-departure"],
+    duration: "6 months",
+    level: "All Levels",
     href: "/programs/travel-abroad",
   },
 ]
 
 export function ProgramsSection() {
   return (
-    <section className="py-20 px-4 md:px-6 lg:px-8 bg-gray-50">
-      <div className="container mx-auto">
-        <div className="text-center mb-12">
+    <section className="py-20 bg-gray-50">
+      <div className="container px-4 md:px-6">
+        <motion.div
+          className="text-center space-y-4 mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900">Our Programs</h2>
-          <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-            Accelerate your career with our comprehensive range of programs designed to meet your unique learning
-            journey, from beginner to advanced level.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Discover world-class learning opportunities designed to advance your career and education
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {programs.map((program) => {
-            const Icon = program.icon
-            return (
-              <Card key={program.title} className="flex flex-col hover:shadow-lg transition-shadow">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {programs.map((program, index) => (
+            <motion.div
+              key={program.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Card className="h-full hover:shadow-lg transition-shadow duration-300 border-0 shadow-md">
                 <CardHeader>
-                  <div className={`${program.color} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
-                    <Icon className="h-6 w-6 text-white" />
+                  <div className="flex items-center justify-between">
+                    <div className={`p-3 rounded-lg ${program.color} text-white`}>
+                      <program.icon className="h-6 w-6" />
+                    </div>
+                    <Badge variant="outline" className="border-dunamis-navy text-dunamis-navy">
+                      {program.level}
+                    </Badge>
                   </div>
-                  <CardTitle className="text-xl">{program.title}</CardTitle>
-                  <CardDescription>{program.description}</CardDescription>
+                  <CardTitle className="text-xl text-gray-900">{program.title}</CardTitle>
+                  <CardDescription className="text-base text-gray-600">{program.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="flex-1">
-                  <ul className="space-y-2">
-                    {program.features.map((feature) => (
-                      <li key={feature} className="flex items-center text-sm text-gray-600">
-                        <span className="mr-2">•</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-sm text-gray-900 mb-2">What you'll learn:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {program.features.map((feature) => (
+                          <Badge
+                            key={feature}
+                            variant="secondary"
+                            className="text-xs bg-dunamis-light-blue text-dunamis-navy"
+                          >
+                            {feature}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex justify-between text-sm text-gray-600">
+                      <span>Duration: {program.duration}</span>
+                    </div>
+                  </div>
                 </CardContent>
                 <CardFooter>
-                  <Button asChild className="w-full bg-dunamis-navy hover:bg-dunamis-navy/90">
-                    <Link href={program.href}>Learn More</Link>
-                  </Button>
+                  <Link href={program.href} className="w-full">
+                    <Button className="w-full bg-dunamis-navy hover:bg-dunamis-blue text-white">Learn More</Button>
+                  </Link>
                 </CardFooter>
               </Card>
-            )
-          })}
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

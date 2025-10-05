@@ -1,112 +1,100 @@
 "use client"
 
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Menu } from "lucide-react"
 import { useState } from "react"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Menu, ChevronDown } from "lucide-react"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false)
 
   const programs = [
     { name: "AI Tutoring", href: "/programs/ai-tutoring" },
-    { name: "Coding Bootcamp", href: "/programs/coding" },
+    { name: "Coding", href: "/programs/coding" },
+    { name: "Cybersecurity", href: "/programs/cybersecurity" },
+    { name: "Data Analytics", href: "/programs/data-analytics" },
     { name: "Digital Marketing", href: "/programs/digital-marketing" },
-    { name: "IELTS Preparation", href: "/programs/ielts" },
-    { name: "IJMB Program", href: "/programs/ijmb" },
-    { name: "JUPEB Program", href: "/programs/jupeb" },
-    { name: "JAMB Preparation", href: "/programs/jamb" },
-    { name: "Travel Abroad Consulting", href: "/programs/travel-abroad" },
+    { name: "IELTS", href: "/programs/ielts" },
+    { name: "JAMB", href: "/programs/jamb" },
+    { name: "JUPEB", href: "/programs/jupeb" },
+    { name: "IJMB", href: "/programs/ijmb" },
+    { name: "Travel Abroad", href: "/programs/travel-abroad" },
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-dunamis-navy border-dunamis-navy">
-      <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-        {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
-          <Image
-            src="https://i.imgur.com/dvWoOpc.jpeg"
-            alt="Dunamis Edtech Logo"
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
-          <span className="text-xl font-bold text-white">Dunamis Edtech</span>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link href="/" className="text-sm font-medium text-white hover:text-dunamis-orange transition-colors">
-            Home
+    <header className="sticky top-0 z-50 w-full bg-dunamis-navy shadow-lg">
+      <div className="container flex h-16 items-center px-4 md:px-6">
+        <div className="mr-4 hidden md:flex">
+          <Link className="mr-8 flex items-center space-x-2" href="/">
+            <img src="https://i.imgur.com/dvWoOpc.jpeg" alt="Dunamis Edtech" className="h-10 w-10 rounded" />
+            <span className="hidden font-bold text-lg text-white sm:inline-block">Dunamis Edtech</span>
           </Link>
+          <nav className="flex items-center space-x-8 text-sm font-medium">
+            <Link className="text-white transition-colors hover:text-dunamis-orange" href="/">
+              Home
+            </Link>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger className="text-sm font-medium text-white hover:text-dunamis-orange transition-colors">
-              Programs
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
-              {programs.map((program) => (
-                <DropdownMenuItem key={program.href} asChild>
-                  <Link href={program.href} className="w-full">
-                    {program.name}
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center space-x-1 text-white transition-colors hover:text-dunamis-orange focus:outline-none">
+                <span>Programs</span>
+                <ChevronDown className="h-3 w-3" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-white">
+                {programs.map((program) => (
+                  <DropdownMenuItem key={program.name} asChild>
+                    <Link href={program.href} className="text-gray-900 hover:text-dunamis-navy">
+                      {program.name}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
 
-          <Link href="/blog" className="text-sm font-medium text-white hover:text-dunamis-orange transition-colors">
-            Blog
-          </Link>
-
-          <Link
-            href="/dashboard"
-            className="text-sm font-medium text-white hover:text-dunamis-orange transition-colors"
-          >
-            Dashboard
-          </Link>
-
-          <Link href="/contact" className="text-sm font-medium text-white hover:text-dunamis-orange transition-colors">
-            Contact
-          </Link>
-        </nav>
-
-        {/* Desktop CTA Button */}
-        <div className="hidden md:block">
-          <Button asChild className="bg-dunamis-orange hover:bg-dunamis-orange/90 text-white border-0">
-            <Link href="/register">Get Started</Link>
-          </Button>
+            <Link className="text-white transition-colors hover:text-dunamis-orange" href="/blog">
+              Blog
+            </Link>
+            <Link className="text-white transition-colors hover:text-dunamis-orange" href="/dashboard">
+              Dashboard
+            </Link>
+            <Link className="text-white transition-colors hover:text-dunamis-orange" href="/contact">
+              Contact
+            </Link>
+          </nav>
         </div>
-
-        {/* Mobile Navigation */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon" className="text-white hover:text-dunamis-orange">
-              <Menu className="h-6 w-6" />
-              <span className="sr-only">Toggle menu</span>
+          <SheetTrigger asChild>
+            <Button
+              variant="ghost"
+              className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden text-white hover:text-dunamis-orange"
+            >
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-dunamis-navy border-dunamis-navy">
-            <nav className="flex flex-col space-y-4 mt-8">
+          <SheetContent side="left" className="pr-0 bg-dunamis-navy text-white">
+            <div className="flex items-center space-x-2 pb-4">
+              <img src="https://i.imgur.com/dvWoOpc.jpeg" alt="Dunamis Edtech" className="h-8 w-8 rounded" />
+              <span className="font-bold">Dunamis Edtech</span>
+            </div>
+            <nav className="flex flex-col space-y-3">
               <Link
                 href="/"
-                className="text-lg font-medium text-white hover:text-dunamis-orange transition-colors"
+                className="transition-colors hover:text-dunamis-orange text-white"
                 onClick={() => setIsOpen(false)}
               >
                 Home
               </Link>
 
               <div className="space-y-2">
-                <p className="text-lg font-medium text-white">Programs</p>
+                <div className="font-medium text-sm text-dunamis-orange">Programs</div>
                 <div className="pl-4 space-y-2">
                   {programs.map((program) => (
                     <Link
-                      key={program.href}
+                      key={program.name}
                       href={program.href}
-                      className="block text-sm text-gray-300 hover:text-dunamis-orange transition-colors"
+                      className="block transition-colors hover:text-dunamis-orange text-white"
                       onClick={() => setIsOpen(false)}
                     >
                       {program.name}
@@ -117,36 +105,41 @@ export function SiteHeader() {
 
               <Link
                 href="/blog"
-                className="text-lg font-medium text-white hover:text-dunamis-orange transition-colors"
+                className="transition-colors hover:text-dunamis-orange text-white"
                 onClick={() => setIsOpen(false)}
               >
                 Blog
               </Link>
-
               <Link
                 href="/dashboard"
-                className="text-lg font-medium text-white hover:text-dunamis-orange transition-colors"
+                className="transition-colors hover:text-dunamis-orange text-white"
                 onClick={() => setIsOpen(false)}
               >
                 Dashboard
               </Link>
-
               <Link
                 href="/contact"
-                className="text-lg font-medium text-white hover:text-dunamis-orange transition-colors"
+                className="transition-colors hover:text-dunamis-orange text-white"
                 onClick={() => setIsOpen(false)}
               >
                 Contact
               </Link>
-
-              <Button asChild className="bg-dunamis-orange hover:bg-dunamis-orange/90 text-white border-0 w-full mt-4">
-                <Link href="/register" onClick={() => setIsOpen(false)}>
-                  Get Started
-                </Link>
-              </Button>
             </nav>
           </SheetContent>
         </Sheet>
+        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+          <div className="w-full flex-1 md:w-auto md:flex-none">
+            <Link className="flex items-center space-x-2 md:hidden" href="/">
+              <img src="https://i.imgur.com/dvWoOpc.jpeg" alt="Dunamis Edtech" className="h-8 w-8 rounded" />
+              <span className="font-bold text-white">Dunamis Edtech</span>
+            </Link>
+          </div>
+          <nav className="flex items-center space-x-2">
+            <Button asChild className="bg-dunamis-orange hover:bg-dunamis-orange/90 text-white border-0">
+              <Link href="/register">Get Started</Link>
+            </Button>
+          </nav>
+        </div>
       </div>
     </header>
   )
