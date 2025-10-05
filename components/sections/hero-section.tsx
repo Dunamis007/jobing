@@ -7,14 +7,15 @@ import { useEffect } from "react"
 
 export function HeroSection() {
   useEffect(() => {
-    // Load Vimeo player script
     const script = document.createElement("script")
     script.src = "https://player.vimeo.com/api/player.js"
     script.async = true
     document.body.appendChild(script)
 
     return () => {
-      document.body.removeChild(script)
+      if (document.body.contains(script)) {
+        document.body.removeChild(script)
+      }
     }
   }, [])
 
@@ -22,19 +23,17 @@ export function HeroSection() {
     <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-950 py-20 px-4 md:px-6 lg:px-8">
       <div className="container mx-auto">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
-          {/* Left Content */}
           <div className="flex flex-col justify-center space-y-8">
             <div className="space-y-4">
-              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-white">
+              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-white leading-tight">
                 Learn AI, Coding & More with <span className="text-dunamis-orange">Expert Tutors</span>
               </h1>
-              <p className="max-w-[600px] text-gray-200 md:text-xl">
-                Transform your career with our comprehensive online programs in AI, Coding, Digital Marketing, IELTS,
-                JUPEB, and JAMB preparation.
+              <p className="max-w-[600px] text-gray-200 md:text-xl leading-relaxed">
+                Transform your career with Dunamis Edtech's comprehensive online and on-campus programs in AI,
+                Cybersecurity, Data Analysis, Coding, Digital Marketing, IELTS, JUPEB, and JAMB preparation.
               </p>
             </div>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col gap-4 sm:flex-row">
               <Button asChild size="lg" className="bg-dunamis-orange hover:bg-dunamis-orange/90 text-white border-0">
                 <Link href="/register">
@@ -52,7 +51,6 @@ export function HeroSection() {
               </Button>
             </div>
 
-            {/* Stats */}
             <div className="grid grid-cols-3 gap-4 pt-8">
               <div className="space-y-2">
                 <p className="text-3xl font-bold text-white">10,000+</p>
@@ -69,7 +67,6 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right Content - Video */}
           <div className="flex items-center justify-center lg:justify-end">
             <div className="w-full max-w-lg">
               <div
