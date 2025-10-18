@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "JUPEB Program Nigeria | Direct University Admission",
     description: "Enroll in the JUPEB program at Dunamis Edtech and secure your university admission with ease.",
     url: "https://www.dunamisedtech.com/jupeb/",
-    type: "course",
+    type: "website",
     images: [
       {
         url: "https://www.dunamisedtech.com/images/jupeb-course.jpg",
