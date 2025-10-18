@@ -8,25 +8,42 @@ import { ArrowRight, Globe, Zap, Award, Clock, Users, BookOpen, CheckCircle2 } f
 import { generateCourseSchema } from "@/lib/course-schema"
 
 export const metadata: Metadata = {
-  title: "IELTS Preparation Course | Expert English Training in Nigeria | Dunamis Edtech",
+  title: "IELTS Training in Nigeria | Online IELTS Preparation Course",
   description:
-    "Master the IELTS exam with expert preparation. Achieve your target band score with intensive training, mock exams, and personalized feedback. Expert tutors, proven results.",
-  keywords: [
-    "IELTS preparation Nigeria",
-    "IELTS course online",
-    "English proficiency training",
-    "IELTS band 7+",
-    "English certification",
-  ],
+    "Prepare for IELTS online with Dunamis Edtech. Get personalized coaching, mock tests, and proven strategies to achieve your target band score.",
+  keywords: ["IELTS training Nigeria", "IELTS online course", "IELTS preparation class", "IELTS coaching"],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  metadataBase: new URL("https://www.dunamisedtech.com"),
   alternates: {
     canonical: "https://www.dunamisedtech.com/ielts/",
   },
   openGraph: {
-    title: "IELTS Preparation Course | Expert English Training in Nigeria | Dunamis Edtech",
+    title: "IELTS Preparation Online in Nigeria",
     description:
-      "Master the IELTS exam with expert preparation. Achieve your target band score with intensive training, mock exams, and personalized feedback.",
+      "Join Dunamis Edtech for expert-led IELTS training with flexible learning options and full test prep support.",
     url: "https://www.dunamisedtech.com/ielts/",
-    type: "website",
+    type: "course",
+    images: [
+      {
+        url: "https://www.dunamisedtech.com/images/ielts-course.jpg",
+        width: 1200,
+        height: 630,
+        alt: "IELTS Training Course",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "IELTS Training Nigeria | Online IELTS Preparation",
+    description: "Boost your IELTS score with interactive online coaching and test simulations.",
+    images: ["https://www.dunamisedtech.com/images/ielts-course.jpg"],
   },
 }
 

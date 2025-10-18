@@ -8,25 +8,41 @@ import { ArrowRight, GraduationCap, Award, Clock, Users, BookOpen, CheckCircle2,
 import { generateCourseSchema } from "@/lib/course-schema"
 
 export const metadata: Metadata = {
-  title: "JUPEB Program | Direct University Entry 200 Level in Nigeria | Dunamis Edtech",
+  title: "JUPEB Program in Nigeria | Gain Direct University Admission",
   description:
-    "Skip JAMB and gain direct admission to Nigerian universities with our expert JUPEB preparation program. A-level equivalent training with 98% admission success rate.",
-  keywords: [
-    "JUPEB program Nigeria",
-    "direct university entry",
-    "A-level training",
-    "university admission",
-    "JUPEB preparation",
-  ],
+    "Register for JUPEB at Dunamis Edtech and gain direct entry into your preferred university. Enjoy quality lectures and full academic support.",
+  keywords: ["JUPEB program Nigeria", "direct entry admission", "JUPEB registration", "JUPEB online"],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  metadataBase: new URL("https://www.dunamisedtech.com"),
   alternates: {
     canonical: "https://www.dunamisedtech.com/jupeb/",
   },
   openGraph: {
-    title: "JUPEB Program | Direct University Entry 200 Level in Nigeria | Dunamis Edtech",
-    description:
-      "Skip JAMB and gain direct admission to Nigerian universities with our expert JUPEB preparation program. A-level equivalent training with 98% admission success rate.",
+    title: "JUPEB Program Nigeria | Direct University Admission",
+    description: "Enroll in the JUPEB program at Dunamis Edtech and secure your university admission with ease.",
     url: "https://www.dunamisedtech.com/jupeb/",
-    type: "website",
+    type: "course",
+    images: [
+      {
+        url: "https://www.dunamisedtech.com/images/jupeb-course.jpg",
+        width: 1200,
+        height: 630,
+        alt: "JUPEB Program Course",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "JUPEB Program | Direct Entry to University",
+    description: "Complete your JUPEB program online and qualify for direct entry admission in Nigeria.",
+    images: ["https://www.dunamisedtech.com/images/jupeb-course.jpg"],
   },
 }
 

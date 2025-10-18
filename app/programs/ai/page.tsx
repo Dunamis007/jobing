@@ -8,25 +8,46 @@ import { ArrowRight, Brain, Zap, Award, Clock, Users, BookOpen, CheckCircle2 } f
 import { generateCourseSchema } from "@/lib/course-schema"
 
 export const metadata: Metadata = {
-  title: "Artificial Intelligence Course | Expert AI Training in Nigeria | Dunamis Edtech",
+  title: "Artificial Intelligence (AI) Course in Nigeria | Learn AI & Machine Learning",
   description:
-    "Master AI and machine learning with hands-on training from industry experts. Learn neural networks, deep learning, and AI ethics. Flexible online and on-campus options available.",
+    "Master Artificial Intelligence and Machine Learning online in Nigeria. Learn Python, data analysis, and model building with expert instructors at Dunamis Edtech.",
   keywords: [
-    "AI course Nigeria",
-    "machine learning training",
-    "deep learning bootcamp",
-    "artificial intelligence online",
-    "AI certification",
+    "AI training Nigeria",
+    "artificial intelligence course online",
+    "machine learning course Nigeria",
+    "learn AI",
   ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  metadataBase: new URL("https://www.dunamisedtech.com"),
   alternates: {
     canonical: "https://www.dunamisedtech.com/ai/",
   },
   openGraph: {
-    title: "Artificial Intelligence Course | Expert AI Training in Nigeria | Dunamis Edtech",
-    description:
-      "Master AI and machine learning with hands-on training from industry experts. Learn neural networks, deep learning, and AI ethics.",
+    title: "Learn AI & Machine Learning Online in Nigeria",
+    description: "Join Dunamis Edtech to master AI and Machine Learning through hands-on training and mentorship.",
     url: "https://www.dunamisedtech.com/ai/",
-    type: "website",
+    type: "course",
+    images: [
+      {
+        url: "https://www.dunamisedtech.com/images/ai-course.jpg",
+        width: 1200,
+        height: 630,
+        alt: "AI and Machine Learning Course",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Course in Nigeria | Machine Learning Training Online",
+    description: "Learn AI and Machine Learning with real projects and expert guidance at Dunamis Edtech.",
+    images: ["https://www.dunamisedtech.com/images/ai-course.jpg"],
   },
 }
 

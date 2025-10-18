@@ -8,25 +8,42 @@ import { ArrowRight, Code, Zap, Award, Clock, Users, BookOpen, CheckCircle2 } fr
 import { generateCourseSchema } from "@/lib/course-schema"
 
 export const metadata: Metadata = {
-  title: "Web Development & Coding Bootcamp | Full-Stack Training in Nigeria | Dunamis Edtech",
+  title: "Coding Bootcamp in Nigeria | Learn Web & App Development Online",
   description:
-    "Master web development and full-stack coding with hands-on training. Learn React, Node.js, databases, and deployment. Expert-led bootcamp with job-ready skills.",
-  keywords: [
-    "coding bootcamp Nigeria",
-    "web development course",
-    "full-stack programming",
-    "React training",
-    "Node.js bootcamp",
-  ],
+    "Learn to code from scratch with Dunamis Edtech. Build websites and apps using HTML, CSS, JavaScript, and Python in our online Coding Bootcamp.",
+  keywords: ["coding bootcamp Nigeria", "web development course", "learn coding online", "programming course"],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  metadataBase: new URL("https://www.dunamisedtech.com"),
   alternates: {
     canonical: "https://www.dunamisedtech.com/coding/",
   },
   openGraph: {
-    title: "Web Development & Coding Bootcamp | Full-Stack Training in Nigeria | Dunamis Edtech",
+    title: "Coding Bootcamp Nigeria | Learn to Code Online",
     description:
-      "Master web development and full-stack coding with hands-on training. Learn React, Node.js, databases, and deployment.",
+      "Join Dunamis Edtech and become a web developer. Learn coding, front-end, and back-end development online.",
     url: "https://www.dunamisedtech.com/coding/",
-    type: "website",
+    type: "course",
+    images: [
+      {
+        url: "https://www.dunamisedtech.com/images/coding-course.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Coding Bootcamp Course",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Coding Course in Nigeria | Web Development Bootcamp",
+    description: "Master coding and web development with hands-on online training at Dunamis Edtech.",
+    images: ["https://www.dunamisedtech.com/images/coding-course.jpg"],
   },
 }
 

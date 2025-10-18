@@ -8,25 +8,42 @@ import { ArrowRight, Megaphone, Zap, Award, Clock, Users, BookOpen, CheckCircle2
 import { generateCourseSchema } from "@/lib/course-schema"
 
 export const metadata: Metadata = {
-  title: "Digital Marketing Course | SEO, Social Media & Email Marketing Training | Dunamis Edtech",
+  title: "Digital Marketing Course in Nigeria | Learn SEO, Social Media & Ads",
   description:
-    "Master digital marketing with expert training in SEO, SEM, social media, email marketing, and analytics. Build successful campaigns with proven strategies.",
-  keywords: [
-    "digital marketing course Nigeria",
-    "SEO training",
-    "social media marketing",
-    "email marketing course",
-    "digital marketing certification",
-  ],
+    "Learn Digital Marketing, SEO, Google Ads, and Social Media Strategy with Dunamis Edtech. Gain practical marketing skills and get certified online.",
+  keywords: ["digital marketing course Nigeria", "SEO training", "social media marketing", "online marketing class"],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  metadataBase: new URL("https://www.dunamisedtech.com"),
   alternates: {
     canonical: "https://www.dunamisedtech.com/digital-marketing/",
   },
   openGraph: {
-    title: "Digital Marketing Course | SEO, Social Media & Email Marketing Training | Dunamis Edtech",
+    title: "Digital Marketing Training in Nigeria",
     description:
-      "Master digital marketing with expert training in SEO, SEM, social media, email marketing, and analytics. Build successful campaigns with proven strategies.",
+      "Join Dunamis Edtech's Digital Marketing course to master SEO, Social Media Marketing, and Google Ads.",
     url: "https://www.dunamisedtech.com/digital-marketing/",
-    type: "website",
+    type: "course",
+    images: [
+      {
+        url: "https://www.dunamisedtech.com/images/digital-marketing.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Digital Marketing Course",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Digital Marketing Course | Learn SEO & Social Media",
+    description: "Get certified in Digital Marketing, SEO, and Ads Management online with Dunamis Edtech.",
+    images: ["https://www.dunamisedtech.com/images/digital-marketing.jpg"],
   },
 }
 
