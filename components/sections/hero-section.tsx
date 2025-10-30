@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Play } from "lucide-react"
 import Link from "next/link"
 import { Counter } from "@/components/counter"
-import { AnimatedText } from "@/components/animated-text"
 
 export function HeroSection() {
   const containerVariants = {
@@ -50,18 +49,12 @@ export function HeroSection() {
                 variants={itemVariants}
                 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-white"
               >
-                <AnimatedText text="Learn AI, Coding & More with " duration={1.5} delay={0} />
-                <span className="text-dunamis-orange">
-                  <AnimatedText text="Expert Tutors" duration={1.5} delay={0.8} />
-                </span>
+                Learn AI, Coding & More with <span className="text-dunamis-orange">Expert Tutors</span>
               </motion.h1>
 
               <motion.p variants={itemVariants} className="max-w-[600px] text-gray-200 md:text-xl">
-                <AnimatedText
-                  text="Transform your career with Dunamis Edtech's comprehensive online and on-campus programs in AI, Cybersecurity, Data Analysis, Coding, Digital Marketing, IELTS, JUPEB, and JAMB preparation."
-                  duration={2}
-                  delay={1.2}
-                />
+                Transform your career with Dunamis Edtech's comprehensive online and on-campus programs in AI,
+                Cybersecurity, Data Analysis, Coding, Digital Marketing, IELTS, JUPEB, and JAMB preparation.
               </motion.p>
             </motion.div>
 
