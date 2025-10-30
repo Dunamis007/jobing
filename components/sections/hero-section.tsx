@@ -13,8 +13,8 @@ export function HeroSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
+        staggerChildren: 0.15,
+        delayChildren: 0,
       },
     },
   }
@@ -25,7 +25,7 @@ export function HeroSection() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.6,
         ease: "easeOut",
       },
     },
@@ -50,17 +50,17 @@ export function HeroSection() {
                 variants={itemVariants}
                 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-white"
               >
-                <AnimatedText text="Learn AI, Coding & More with " duration={2} delay={0.2} />
+                <AnimatedText text="Learn AI, Coding & More with " duration={1.5} delay={0} />
                 <span className="text-dunamis-orange">
-                  <AnimatedText text="Expert Tutors" duration={2} delay={2.2} />
+                  <AnimatedText text="Expert Tutors" duration={1.5} delay={1.5} />
                 </span>
               </motion.h1>
 
               <motion.p variants={itemVariants} className="max-w-[600px] text-gray-200 md:text-xl">
                 <AnimatedText
                   text="Transform your career with Dunamis Edtech's comprehensive online and on-campus programs in AI, Cybersecurity, Data Analysis, Coding, Digital Marketing, IELTS, JUPEB, and JAMB preparation."
-                  duration={3}
-                  delay={4.2}
+                  duration={2}
+                  delay={3}
                 />
               </motion.p>
             </motion.div>

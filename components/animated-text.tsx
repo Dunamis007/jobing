@@ -12,18 +12,14 @@ interface AnimatedTextProps {
 export function AnimatedText({ text, duration = 2, className = "", delay = 0 }: AnimatedTextProps) {
   const [displayedText, setDisplayedText] = useState("")
   const [isAnimating, setIsAnimating] = useState(false)
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
-    // Start animation after delay
-    const delayTimer = setTimeout(() => {
-      setIsAnimating(true)
-    }, delay * 1000)
-
-    return () => clearTimeout(delayTimer)
-  }, [delay])
+    setIsClient(true)
+  }, [])
 
   useEffect(() => {
-    if (!isAnimating) return
+    if (!isClient || !isAnimating) return
 
     let startTime: number
     let animationFrameId: number
@@ -33,7 +29,6 @@ export function AnimatedText({ text, duration = 2, className = "", delay = 0 }: 
       const elapsed = currentTime - startTime
       const progress = Math.min(elapsed / (duration * 1000), 1)
 
-      // Calculate how many characters to show
       const charsToShow = Math.floor(text.length * progress)
       setDisplayedText(text.substring(0, charsToShow))
 
@@ -45,7 +40,21 @@ export function AnimatedText({ text, duration = 2, className = "", delay = 0 }: 
     animationFrameId = requestAnimationFrame(animate)
 
     return () => cancelAnimationFrame(animationFrameId)
-  }, [text, duration, isAnimating])
+  }, [text, duration, isAnimating, isClient])
+
+  useEffect(() => {
+    if (isClient) {
+      const delayTimer = setTimeout(() => {
+        setIsAnimating(true)
+      }, delay * 1000)
+
+      return () => clearTimeout(delayTimer)
+    }
+  }, [delay, isClient])
+
+  if (!isClient) {
+    return <span className={className}>{text}</span>
+  }
 
   return <span className={className}>{displayedText}</span>
 }
