@@ -52,7 +52,7 @@ export function HeroSection() {
               >
                 <AnimatedText text="Learn AI, Coding & More with " duration={1.5} delay={0} />
                 <span className="text-dunamis-orange">
-                  <AnimatedText text="Expert Tutors" duration={1.5} delay={1.5} />
+                  <AnimatedText text="Expert Tutors" duration={1.5} delay={0.8} />
                 </span>
               </motion.h1>
 
@@ -60,7 +60,7 @@ export function HeroSection() {
                 <AnimatedText
                   text="Transform your career with Dunamis Edtech's comprehensive online and on-campus programs in AI, Cybersecurity, Data Analysis, Coding, Digital Marketing, IELTS, JUPEB, and JAMB preparation."
                   duration={2}
-                  delay={3}
+                  delay={1.2}
                 />
               </motion.p>
             </motion.div>
