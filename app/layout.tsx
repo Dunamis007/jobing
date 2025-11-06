@@ -6,9 +6,6 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
-import { ErrorBoundary } from "@/components/error-boundary"
-import { PerformanceMonitor } from "@/components/performance-monitor"
-import { TikTokPixel } from "@/components/tiktok-pixel"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -83,18 +80,14 @@ export default function RootLayout({
         <link rel="canonical" href="https://dunamistutors.com/" />
       </head>
       <body className={inter.className}>
-        <ErrorBoundary>
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-            <TikTokPixel />
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
-              <main className="flex-1">{children}</main>
-              <SiteFooter />
-            </div>
-            <Toaster />
-            <PerformanceMonitor />
-          </ThemeProvider>
-        </ErrorBoundary>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <div className="relative flex min-h-screen flex-col">
+            <SiteHeader />
+            <main className="flex-1">{children}</main>
+            <SiteFooter />
+          </div>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   )
