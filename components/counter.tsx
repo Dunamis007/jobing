@@ -11,8 +11,15 @@ interface CounterProps {
 
 export function Counter({ end, duration = 2, suffix = "", prefix = "" }: CounterProps) {
   const [count, setCount] = useState(0)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
+
     let startTime: number
     let animationFrameId: number
 
@@ -31,7 +38,17 @@ export function Counter({ end, duration = 2, suffix = "", prefix = "" }: Counter
     animationFrameId = requestAnimationFrame(animate)
 
     return () => cancelAnimationFrame(animationFrameId)
-  }, [end, duration])
+  }, [end, duration, mounted])
+
+  if (!mounted) {
+    return (
+      <span>
+        {prefix}
+        {end.toLocaleString()}
+        {suffix}
+      </span>
+    )
+  }
 
   return (
     <span>

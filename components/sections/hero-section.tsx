@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Play } from "lucide-react"
+import { ArrowRight, Play } from 'lucide-react'
 import Link from "next/link"
 import { Counter } from "@/components/counter"
 
