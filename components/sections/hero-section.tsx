@@ -2,34 +2,10 @@
 
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Play } from 'lucide-react'
+import { ArrowRight, Play } from "lucide-react"
 import Link from "next/link"
-import { Counter } from "@/components/counter"
 
 export function HeroSection() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  }
-
   return (
     <section className="relative bg-gradient-to-br from-dunamis-navy via-dunamis-blue to-dunamis-navy py-20 lg:py-32 overflow-hidden">
       {/* Background Pattern */}
@@ -44,19 +20,15 @@ export function HeroSection() {
             transition={{ duration: 0.6 }}
             className="flex flex-col justify-center space-y-8"
           >
-            <motion.div className="space-y-4" variants={containerVariants} initial="hidden" animate="visible">
-              <motion.h1
-                variants={itemVariants}
-                className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-white"
-              >
+            <div className="space-y-4">
+              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-white">
                 Learn AI, Coding & More with <span className="text-dunamis-orange">Expert Tutors</span>
-              </motion.h1>
-
-              <motion.p variants={itemVariants} className="max-w-[600px] text-gray-200 md:text-xl">
+              </h1>
+              <p className="max-w-[600px] text-gray-200 md:text-xl">
                 Transform your career with Dunamis Edtech's comprehensive online and on-campus programs in AI,
                 Cybersecurity, Data Analysis, Coding, Digital Marketing, IELTS, JUPEB, and JAMB preparation.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col gap-4 sm:flex-row">
@@ -83,31 +55,21 @@ export function HeroSection() {
               </Button>
             </div>
 
-            <motion.div
-              className="grid grid-cols-3 gap-6 pt-8"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <motion.div variants={itemVariants}>
-                <div className="text-3xl font-bold text-white">
-                  <Counter end={10000} duration={2.5} suffix="+" />
-                </div>
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 pt-8">
+              <div>
+                <div className="text-3xl font-bold text-white">10,000+</div>
                 <div className="text-sm text-gray-300">Students</div>
-              </motion.div>
-              <motion.div variants={itemVariants}>
-                <div className="text-3xl font-bold text-white">
-                  <Counter end={95} duration={2.5} suffix="%" />
-                </div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white">95%</div>
                 <div className="text-sm text-gray-300">Success Rate</div>
-              </motion.div>
-              <motion.div variants={itemVariants}>
-                <div className="text-3xl font-bold text-white">
-                  <Counter end={50} duration={2.5} suffix="+" />
-                </div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white">50+</div>
                 <div className="text-sm text-gray-300">Expert Instructors</div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </motion.div>
 
           {/* Right Content - Video */}

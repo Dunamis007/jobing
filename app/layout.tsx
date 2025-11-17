@@ -1,32 +1,22 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google"
 import "./globals.css"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
-import { AnalyticsProvider } from "@/components/analytics-provider"
-import { SchemaMarkup } from "@/components/schema-markup"
-import { siteConfig, schemaOrganization } from "@/lib/seo-config"
+import { ErrorBoundary } from "@/components/error-boundary"
+import { PerformanceMonitor } from "@/components/performance-monitor"
+import { TikTokPixel } from "@/components/tiktok-pixel"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.siteUrl),
   title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
-  description: siteConfig.description,
-  keywords: [
-    "AI tutoring",
-    "coding bootcamp",
-    "digital marketing",
-    "IELTS preparation",
-    "JUPEB",
-    "JAMB",
-    "online learning Nigeria",
-    "cybersecurity training",
-    "data analytics course",
-  ],
+  description:
+    "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
+  keywords: "AI tutoring, coding bootcamp, digital marketing, IELTS preparation, JUPEB, JAMB, online learning Nigeria",
   authors: [{ name: "Dunamis Edtech" }],
   creator: "Dunamis Edtech",
   publisher: "Dunamis Edtech",
@@ -35,24 +25,26 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+  metadataBase: new URL("https://dunamistutors.com"),
   alternates: {
     canonical: "/",
   },
   icons: {
-    icon: siteConfig.logo,
-    shortcut: siteConfig.logo,
-    apple: siteConfig.logo,
+    icon: "https://i.imgur.com/dvWoOpc.jpeg",
+    shortcut: "https://i.imgur.com/dvWoOpc.jpeg",
+    apple: "https://i.imgur.com/dvWoOpc.jpeg",
   },
   openGraph: {
     title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
-    description: siteConfig.description,
-    url: siteConfig.siteUrl,
-    siteName: siteConfig.name,
+    description:
+      "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
+    url: "https://dunamistutors.com",
+    siteName: "Dunamis Edtech",
     locale: "en_NG",
     type: "website",
     images: [
       {
-        url: siteConfig.logo,
+        url: "https://i.imgur.com/dvWoOpc.jpeg",
         width: 1200,
         height: 630,
         alt: "Dunamis Edtech - Online Learning Platform",
@@ -62,8 +54,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Dunamis Edtech | Learn AI, Coding, IELTS, JUPEB & More Online in Nigeria",
-    description: siteConfig.description,
-    images: [siteConfig.logo],
+    description:
+      "Join Dunamis Edtech for expert-led online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and more. Access flexible learning, mentorship, and certification—all in one place",
+    images: ["https://i.imgur.com/dvWoOpc.jpeg"],
   },
   robots: {
     index: true,
@@ -87,22 +80,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="canonical" href={siteConfig.siteUrl} />
-        <meta name="theme-color" content="#1a3a6b" />
-        <SchemaMarkup schema={schemaOrganization} />
+        <link rel="canonical" href="https://dunamistutors.com/" />
       </head>
       <body className={inter.className}>
-        <AnalyticsProvider gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <div className="relative flex min-h-screen flex-col">
-            <SiteHeader />
-            <main className="flex-1" role="main">
-              {children}
-            </main>
-            <SiteFooter />
-          </div>
-          <Toaster />
-        </ThemeProvider>
+        <ErrorBoundary>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+            <TikTokPixel />
+            <div className="relative flex min-h-screen flex-col">
+              <SiteHeader />
+              <main className="flex-1">{children}</main>
+              <SiteFooter />
+            </div>
+            <Toaster />
+            <PerformanceMonitor />
+          </ThemeProvider>
+        </ErrorBoundary>
       </body>
     </html>
   )
