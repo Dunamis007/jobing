@@ -62,7 +62,7 @@ const initialFormData: FormData = {
   agreeToTerms: false,
 }
 
-export default function MultiStepForm({ programName, programPrice, onSubmit }: MultiStepFormProps) {
+export function MultiStepForm({ programName, programPrice, onSubmit }: MultiStepFormProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [formData, setFormData] = useState<FormData>(initialFormData)
   const [errors, setErrors] = useState<Partial<FormData>>({})
@@ -437,3 +437,5 @@ export default function MultiStepForm({ programName, programPrice, onSubmit }: M
     </div>
   )
 }
+
+export default MultiStepForm
