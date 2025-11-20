@@ -47,7 +47,7 @@ export default function TravelAbroadPage() {
               </div>
               <div className="flex justify-center">
                 <Image
-                  src="/images/design-mode/travel-abroad.png"
+                  src="https://i.ibb.co/TDkZ7TG8/travel-abroad.png"
                   alt="Travel Abroad Program"
                   width={400}
                   height={400}

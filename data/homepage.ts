@@ -10,7 +10,7 @@ export const programs: Program[] = [
     color: "bg-blue-500",
     features: ["Machine Learning", "Deep Learning", "Neural Networks", "AI Ethics"],
     price: "₦50,000",
-    type: "flexible",
+    type: "online",
   },
   {
     id: "coding",
@@ -21,29 +21,7 @@ export const programs: Program[] = [
     color: "bg-green-500",
     features: ["Web Development", "Mobile Apps", "Backend Systems", "DevOps"],
     price: "₦75,000",
-    type: "flexible",
-  },
-  {
-    id: "cybersecurity",
-    title: "Cybersecurity",
-    description: "Protect systems and networks from cyber threats with industry-standard practices",
-    icon: "shield",
-    href: "/programs/cybersecurity",
-    color: "bg-red-600",
-    features: ["Network Security", "Ethical Hacking", "Threat Analysis", "Security Operations"],
-    price: "₦80,000",
-    type: "flexible",
-  },
-  {
-    id: "data-analytics",
-    title: "Data Analytics",
-    description: "Transform raw data into actionable insights using advanced analytics tools",
-    icon: "bar-chart",
-    href: "/programs/data-analytics",
-    color: "bg-cyan-500",
-    features: ["Data Visualization", "Statistical Analysis", "SQL & Python", "Business Intelligence"],
-    price: "₦60,000",
-    type: "flexible",
+    type: "online",
   },
   {
     id: "digital-marketing",
@@ -54,7 +32,7 @@ export const programs: Program[] = [
     color: "bg-purple-500",
     features: ["SEO/SEM", "Social Media", "Content Marketing", "Analytics"],
     price: "₦40,000",
-    type: "flexible",
+    type: "online",
   },
   {
     id: "ielts",
@@ -65,40 +43,29 @@ export const programs: Program[] = [
     color: "bg-red-500",
     features: ["Speaking", "Writing", "Reading", "Listening"],
     price: "₦35,000",
-    type: "flexible",
-  },
-  {
-    id: "jamb",
-    title: "JAMB Program",
-    description: "Joint Admissions and Matriculation Board examination preparation",
-    icon: "graduation-cap",
-    href: "/programs/jamb",
-    color: "bg-yellow-500",
-    features: ["Mathematics", "English", "Physics", "Chemistry"],
-    price: "₦15,000",
-    type: "flexible",
-  },
-  {
-    id: "jupeb",
-    title: "JUPEB Program",
-    description: "Joint Universities Preliminary Examinations Board preparation",
-    icon: "book-open",
-    href: "/programs/jupeb",
-    color: "bg-indigo-500",
-    features: ["Core Subjects", "Electives", "Practical Labs", "Mock Exams"],
-    price: "₦15,000",
-    type: "flexible",
+    type: "online",
   },
   {
     id: "ijmb",
     title: "IJMB Program",
-    description: "Interim Joint Matriculation Board examination preparation",
+    description: "Interim Joint Matriculation Board examination preparation - In-person classes",
     icon: "graduation-cap",
     href: "/programs/ijmb",
-    color: "bg-yellow-600",
-    features: ["University Preparation", "Subject Specialization", "Exam Success", "Direct Entry"],
+    color: "bg-yellow-500",
+    features: ["In-Person Classes", "University Preparation", "Subject Specialization", "Exam Success"],
     price: "₦15,000",
-    type: "flexible",
+    type: "in-person",
+  },
+  {
+    id: "jupeb",
+    title: "JUPEB Program",
+    description: "Joint Universities Preliminary Examinations Board preparation - In-person classes",
+    icon: "book-open",
+    href: "/programs/jupeb",
+    color: "bg-indigo-500",
+    features: ["In-Person Classes", "University Entry", "Academic Excellence", "Mentorship"],
+    price: "₦15,000",
+    type: "in-person",
   },
   {
     id: "travel-abroad",
@@ -109,7 +76,7 @@ export const programs: Program[] = [
     color: "bg-teal-500",
     features: ["Visa Assistance", "University Applications", "Document Prep", "Interview Training"],
     price: "₦25,000",
-    type: "flexible",
+    type: "online",
   },
 ]
 
@@ -158,7 +125,7 @@ export const testimonials: Testimonial[] = [
     name: "Sarah Johnson",
     role: "Software Developer",
     content:
-      "Dunamis Edtech transformed my career. The AI tutoring program gave me the skills I needed to land my dream job in tech.",
+      "Dunamis Tutors transformed my career. The AI tutoring program gave me the skills I needed to land my dream job in tech.",
     avatar: "/placeholder-user.jpg",
     rating: 5,
   },
@@ -212,7 +179,7 @@ export const differencePoints: Difference[] = [
 export const heroContent = {
   title: "Learn AI, Coding & More with Expert Tutors",
   subtitle:
-    "Transform your career with Dunamis Edtech's comprehensive online and on-campus programs in AI, Cybersecurity, Data Analysis, Coding, Digital Marketing, IELTS, JUPEB, and JAMB preparation.",
+    "Transform your career with our comprehensive online programs in AI, Coding, Digital Marketing, IELTS, JUPEB, and JAMB preparation.",
   primaryCTA: "Start Learning Today",
   secondaryCTA: "Watch Demo",
   heroImage: "https://i.imgur.com/yhOy5P3.jpeg",
@@ -220,13 +187,13 @@ export const heroContent = {
 
 export const companyInfo = {
   name: "Dunamis Edtech",
-  logo: "https://i.imgur.com/dvWoOpc.jpeg",
+  logo: "https://i.imgur.com/ayuLxTm.jpeg",
   phone: "07032090178",
   email: "info@dunamistutors.com",
   address: "Lagos, Nigeria",
   website: "https://dunamistutors.com",
   description:
-    "Leading online education platform in Nigeria. Master AI, Cybersecurity, Data Analytics, Coding, Digital Marketing, IELTS, JUPEB, and more with expert tutors and personalized learning paths.",
+    "Leading online education platform in Nigeria. Master AI, Coding, Digital Marketing, IELTS, JUPEB, and more with expert tutors and personalized learning paths.",
 }
 
 export const stats = [

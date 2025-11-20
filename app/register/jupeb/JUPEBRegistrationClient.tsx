@@ -1,198 +1,296 @@
 "use client"
-import { ArrowRight } from "lucide-react"
+
+import type React from "react"
+
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { MultiStepForm } from "@/components/multi-step-form"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import { Checkbox } from "@/components/ui/checkbox"
+import { GraduationCap, MapPin, Clock, Users } from "lucide-react"
 
 export function JUPEBRegistrationClient() {
-  const personalFields = [
-    { name: "fullName", label: "Full Name", type: "text", required: true },
-    { name: "email", label: "Email Address", type: "email", required: true },
-    { name: "phone", label: "Phone Number", type: "tel", required: true },
-    { name: "dob", label: "Date of Birth", type: "date", required: true },
-    {
-      name: "gender",
-      label: "Gender",
-      type: "select",
-      required: true,
-      options: [
-        { value: "male", label: "Male" },
-        { value: "female", label: "Female" },
-        { value: "other", label: "Prefer not to say" },
-      ],
-    },
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    dateOfBirth: "",
+    gender: "",
+    address: "",
+    previousEducation: "",
+    subjects: [] as string[],
+    emergencyContact: "",
+    emergencyPhone: "",
+    agreeToTerms: false,
+  })
+
+  const subjects = [
+    "Mathematics",
+    "English Language",
+    "Physics",
+    "Chemistry",
+    "Biology",
+    "Economics",
+    "Government",
+    "Literature",
+    "Geography",
+    "History",
+    "Agricultural Science",
+    "Commerce",
   ]
 
-  const backgroundFields = [
-    {
-      name: "education",
-      label: "Highest Education Level",
-      type: "select",
-      required: true,
-      options: [
-        { value: "ssce", label: "SSCE/WAEC/NECO" },
-        { value: "olevel", label: "O'Level" },
-        { value: "undergraduate", label: "Undergraduate" },
-        { value: "graduate", label: "Graduate" },
-      ],
-    },
-    { name: "currentSchool", label: "Current/Previous School", type: "text", required: false },
-    { name: "oLevelResults", label: "O'Level Results (Subjects & Grades)", type: "textarea", required: true },
-    {
-      name: "preferredUniversity",
-      label: "Preferred University",
-      type: "text",
-      required: true,
-    },
-  ]
+  const handleSubjectChange = (subject: string, checked: boolean) => {
+    if (checked) {
+      setFormData((prev) => ({
+        ...prev,
+        subjects: [...prev.subjects, subject],
+      }))
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        subjects: prev.subjects.filter((s) => s !== subject),
+      }))
+    }
+  }
 
-  const programFields = [
-    {
-      name: "jupebSubjects",
-      label: "JUPEB Subjects",
-      type: "select",
-      required: true,
-      options: [
-        { value: "scienceCombo", label: "Science Combination" },
-        { value: "artsCombo", label: "Arts Combination" },
-        { value: "socialScienceCombo", label: "Social Science Combination" },
-      ],
-    },
-    {
-      name: "preferredCourse",
-      label: "Preferred University Course",
-      type: "text",
-      required: true,
-    },
-    {
-      name: "preferredSchedule",
-      label: "Preferred Schedule",
-      type: "select",
-      required: true,
-      options: [
-        { value: "weekdayMorning", label: "Weekday Mornings" },
-        { value: "weekdayEvening", label: "Weekday Evenings" },
-        { value: "weekend", label: "Weekends" },
-        { value: "flexible", label: "Flexible" },
-      ],
-    },
-    { name: "specialRequirements", label: "Special Requirements", type: "textarea", required: false },
-  ]
-
-  const paymentFields = [
-    {
-      name: "paymentMethod",
-      label: "Payment Method",
-      type: "select",
-      required: true,
-      options: [
-        { value: "card", label: "Credit/Debit Card" },
-        { value: "transfer", label: "Bank Transfer" },
-        { value: "educoins", label: "EduCoins" },
-      ],
-    },
-    { name: "promoCode", label: "Promo Code (if any)", type: "text", required: false },
-    { name: "termsAgreed", label: "I agree to the terms and conditions", type: "checkbox", required: true },
-  ]
-
-  const formSections = [
-    { title: "Personal Information", fields: personalFields },
-    { title: "Background", fields: backgroundFields },
-    { title: "Program Details", fields: programFields },
-    { title: "Payment", fields: paymentFields },
-  ]
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log("JUPEB Registration:", formData)
+    // Handle form submission
+  }
 
   return (
-    <div className="container relative flex-1 py-10">
-      <div className="mx-auto flex w-full flex-col gap-5 md:max-w-[800px]">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-bold tracking-tight">JUPEB Registration</h1>
-          <p className="text-muted-foreground">
-            Register for our JUPEB program and start your journey to gaining direct entry into universities.
+    <div className="container mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center mb-4">
+            <div className="p-3 bg-gradient-to-br from-[#002B5B] to-[#1E3A8A] rounded-full">
+              <GraduationCap className="h-8 w-8 text-white" />
+            </div>
+          </div>
+          <h1 className="text-3xl font-bold text-[#333333] mb-2">JUPEB Program Registration</h1>
+          <p className="text-[#666666] max-w-2xl mx-auto">
+            Join our Joint Universities Preliminary Examinations Board program for direct entry into university
+            education.
           </p>
         </div>
 
-        <Tabs defaultValue="registration" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="registration">Registration</TabsTrigger>
-            <TabsTrigger value="program-info">Program Information</TabsTrigger>
-          </TabsList>
+        {/* Program Info */}
+        <div className="grid gap-6 md:grid-cols-3 mb-8">
+          <Card>
+            <CardContent className="p-6 text-center">
+              <MapPin className="h-8 w-8 text-[#FF9800] mx-auto mb-2" />
+              <h3 className="font-semibold text-[#333333] mb-1">In-Person Classes</h3>
+              <p className="text-sm text-[#666666]">Physical classroom experience</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-6 text-center">
+              <Clock className="h-8 w-8 text-[#FF9800] mx-auto mb-2" />
+              <h3 className="font-semibold text-[#333333] mb-1">9 Months Duration</h3>
+              <p className="text-sm text-[#666666]">Comprehensive preparation</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-6 text-center">
+              <Users className="h-8 w-8 text-[#FF9800] mx-auto mb-2" />
+              <h3 className="font-semibold text-[#333333] mb-1">Expert Tutors</h3>
+              <p className="text-sm text-[#666666]">Experienced instructors</p>
+            </CardContent>
+          </Card>
+        </div>
 
-          <TabsContent value="registration" className="mt-6">
-            <MultiStepForm sections={formSections} onSubmit={(data) => console.log(data)} />
-          </TabsContent>
-
-          <TabsContent value="program-info">
-            <Card>
-              <CardHeader>
-                <CardTitle>JUPEB Program</CardTitle>
-                <CardDescription>
-                  Joint Universities Preliminary Examinations Board (JUPEB) program for direct entry into universities
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <h3 className="font-medium">Program Highlights:</h3>
-                  <ul className="ml-6 list-disc space-y-2 pt-2">
-                    <li>Gain direct entry into 200 level in Nigerian universities</li>
-                    <li>One-year intensive program with comprehensive curriculum</li>
-                    <li>Taught by experienced lecturers and educators</li>
-                    <li>High success rate for university admissions</li>
-                    <li>Flexible scheduling options to fit your needs</li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="font-medium">Available Subject Combinations:</h3>
-                  <div className="grid gap-4 pt-2 md:grid-cols-3">
-                    <Card className="border-primary/20">
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-lg">Science Combination</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm">
-                          Physics, Chemistry, Biology, Mathematics for science and engineering courses.
-                        </p>
-                      </CardContent>
-                    </Card>
-                    <Card className="border-primary/20">
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-lg">Arts Combination</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm">
-                          Literature, History, CRS/IRS, Government for arts and humanities courses.
-                        </p>
-                      </CardContent>
-                    </Card>
-                    <Card className="border-primary/20">
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-lg">Social Science</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm">
-                          Economics, Government, Geography, Mathematics for business and social science courses.
-                        </p>
-                      </CardContent>
-                    </Card>
+        {/* Registration Form */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-[#333333]">Registration Form</CardTitle>
+            <CardDescription className="text-[#666666]">
+              Please fill in all required information to complete your registration.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Personal Information */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-[#333333]">Personal Information</h3>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div>
+                    <Label htmlFor="firstName">First Name *</Label>
+                    <Input
+                      id="firstName"
+                      value={formData.firstName}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, firstName: e.target.value }))}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="lastName">Last Name *</Label>
+                    <Input
+                      id="lastName"
+                      value={formData.lastName}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, lastName: e.target.value }))}
+                      required
+                    />
                   </div>
                 </div>
-              </CardContent>
-              <CardFooter>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div>
+                    <Label htmlFor="email">Email Address *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="phone">Phone Number *</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div>
+                    <Label htmlFor="dateOfBirth">Date of Birth *</Label>
+                    <Input
+                      id="dateOfBirth"
+                      type="date"
+                      value={formData.dateOfBirth}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, dateOfBirth: e.target.value }))}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="gender">Gender *</Label>
+                    <Select
+                      value={formData.gender}
+                      onValueChange={(value) => setFormData((prev) => ({ ...prev, gender: value }))}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select gender" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="male">Male</SelectItem>
+                        <SelectItem value="female">Female</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="address">Address *</Label>
+                  <Textarea
+                    id="address"
+                    value={formData.address}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, address: e.target.value }))}
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Academic Information */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-[#333333]">Academic Information</h3>
+                <div>
+                  <Label htmlFor="previousEducation">Previous Education *</Label>
+                  <Textarea
+                    id="previousEducation"
+                    placeholder="Please describe your previous educational background..."
+                    value={formData.previousEducation}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, previousEducation: e.target.value }))}
+                    required
+                  />
+                </div>
+
+                <div>
+                  <Label>Subject Preferences (Select at least 4) *</Label>
+                  <div className="grid gap-3 md:grid-cols-2 mt-2">
+                    {subjects.map((subject) => (
+                      <div key={subject} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={subject}
+                          checked={formData.subjects.includes(subject)}
+                          onCheckedChange={(checked) => handleSubjectChange(subject, checked as boolean)}
+                        />
+                        <Label htmlFor={subject} className="text-sm">
+                          {subject}
+                        </Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Emergency Contact */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-[#333333]">Emergency Contact</h3>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div>
+                    <Label htmlFor="emergencyContact">Emergency Contact Name *</Label>
+                    <Input
+                      id="emergencyContact"
+                      value={formData.emergencyContact}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, emergencyContact: e.target.value }))}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="emergencyPhone">Emergency Contact Phone *</Label>
+                    <Input
+                      id="emergencyPhone"
+                      type="tel"
+                      value={formData.emergencyPhone}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, emergencyPhone: e.target.value }))}
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Terms and Conditions */}
+              <div className="space-y-4">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="terms"
+                    checked={formData.agreeToTerms}
+                    onCheckedChange={(checked) =>
+                      setFormData((prev) => ({ ...prev, agreeToTerms: checked as boolean }))
+                    }
+                    required
+                  />
+                  <Label htmlFor="terms" className="text-sm text-[#666666]">
+                    I agree to the terms and conditions and privacy policy *
+                  </Label>
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="pt-6">
                 <Button
-                  className="w-full"
-                  onClick={() => {
-                    const registrationTab = document.querySelector('[data-value="registration"]') as HTMLElement
-                    registrationTab?.click()
-                  }}
+                  type="submit"
+                  className="w-full bg-[#FF9800] hover:bg-[#F57C00] text-white font-semibold py-3"
+                  disabled={!formData.agreeToTerms || formData.subjects.length < 4}
                 >
-                  Register Now <ArrowRight className="ml-2 h-4 w-4" />
+                  Complete Registration - ₦15,000
                 </Button>
-              </CardFooter>
-            </Card>
-          </TabsContent>
-        </Tabs>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

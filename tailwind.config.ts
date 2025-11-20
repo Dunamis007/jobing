@@ -3,10 +3,9 @@ import type { Config } from "tailwindcss"
 const config: Config = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
   prefix: "",
@@ -53,12 +52,18 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Custom Dunamis colors
-        "dunamis-navy": "#1e3a8a",
-        "dunamis-blue": "#3b82f6",
-        "dunamis-orange": "#f97316",
-        "dunamis-primary": "#1e3a8a",
-        "dunamis-accent": "#f97316",
+        chart: {
+          "1": "hsl(var(--chart-1))",
+          "2": "hsl(var(--chart-2))",
+          "3": "hsl(var(--chart-3))",
+          "4": "hsl(var(--chart-4))",
+          "5": "hsl(var(--chart-5))",
+        },
+        dunamis: {
+          primary: "hsl(var(--dunamis-primary))",
+          accent: "hsl(var(--dunamis-accent))",
+          dark: "hsl(var(--dunamis-dark))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

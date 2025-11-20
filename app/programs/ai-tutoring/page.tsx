@@ -121,7 +121,7 @@ export default function AITutoringPage() {
               <div className="flex justify-center">
                 <div className="relative">
                   <Image
-                    src="/images/design-mode/Ai-tutoring.png"
+                    src="https://i.ibb.co/RnSJBND/Ai-tutoring.png"
                     alt="AI Tutoring Program"
                     width={400}
                     height={400}

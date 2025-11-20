@@ -1,53 +1,69 @@
-import { Sparkles, Users, Award, Headphones } from "lucide-react"
+"use client"
+import { Card, CardContent } from "@/components/ui/card"
+import { Brain, Users, Briefcase, Infinity } from "lucide-react"
 
 const differences = [
   {
+    icon: Brain,
     title: "AI-Powered Learning",
-    description:
-      "Our proprietary AI technology adapts to your learning style and pace, ensuring you get the most out of every session.",
-    icon: Sparkles,
+    description: "Advanced algorithms adapt to your learning style and provide personalized recommendations.",
+    color: "text-[#FF9800]",
   },
   {
-    title: "Industry Experts",
-    description: "Learn from professionals actively working in top tech companies and leading institutions worldwide.",
     icon: Users,
+    title: "Industry Experts",
+    description: "Learn directly from professionals currently working in top tech companies worldwide.",
+    color: "text-[#FF9800]",
   },
   {
-    title: "Job-Assured Support",
-    description:
-      "We help you land your dream job with our hands-on support in resume building, interview prep, and placement assistance.",
-    icon: Award,
+    icon: Briefcase,
+    title: "Job Placement Support",
+    description: "Comprehensive career services including resume review, interview prep, and job matching.",
+    color: "text-[#FF9800]",
   },
   {
+    icon: Infinity,
     title: "Lifetime Access",
-    description:
-      "Once you enroll, you gain lifetime access to our materials, community, and continuous updates to the curriculum.",
-    icon: Headphones,
+    description: "Once enrolled, enjoy unlimited access to course materials and future updates forever.",
+    color: "text-[#FF9800]",
   },
 ]
 
-export function DifferenceSection() {
+export default function DifferenceSection() {
   return (
-    <section className="py-20 px-4 md:px-6 lg:px-8 bg-dunamis-navy text-white">
-      <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">The Dunamis Difference</h2>
-          <p className="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
-            What sets us apart from other online learning platforms
+    <section className="py-20 bg-gradient-to-br from-[#F5F7FA] to-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#333333] mb-6">The Dunamis Difference</h2>
+          <p className="text-xl text-[#666666] max-w-3xl mx-auto leading-relaxed">
+            What sets us apart from other online learning platforms and makes us the preferred choice for ambitious
+            learners.
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {differences.map((difference) => {
-            const Icon = difference.icon
+        {/* Differences Grid - Horizontal Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {differences.map((difference, index) => {
+            const IconComponent = difference.icon
             return (
-              <div key={difference.title} className="flex flex-col items-center text-center p-6">
-                <div className="mb-4 rounded-full bg-dunamis-orange p-4">
-                  <Icon className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{difference.title}</h3>
-                <p className="text-gray-300">{difference.description}</p>
-              </div>
+              <Card
+                key={index}
+                className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group hover:-translate-y-1"
+              >
+                <CardContent className="p-8 text-center">
+                  {/* Icon */}
+                  <div className="w-16 h-16 bg-gradient-to-br from-[#FF9800]/10 to-[#FF9800]/5 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <IconComponent className={`w-8 h-8 ${difference.color}`} />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-[#333333] mb-4">{difference.title}</h3>
+
+                  {/* Description */}
+                  <p className="text-[#666666] text-sm leading-relaxed">{difference.description}</p>
+                </CardContent>
+              </Card>
             )
           })}
         </div>

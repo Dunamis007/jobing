@@ -21,7 +21,7 @@ export default function IJMBPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
         <div>
           <Image
-            src="/images/design-mode/Ijmb.png"
+            src="https://i.ibb.co/VWRjhxjZ/Ijmb.png"
             alt="IJMB Program"
             width={500}
             height={400}

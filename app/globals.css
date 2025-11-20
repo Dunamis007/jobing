@@ -30,12 +30,10 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
 
-    /* Dunamis Brand Colors - matching original design */
-    --dunamis-navy: 213 84% 20%;
-    --dunamis-blue: 213 84% 25%;
-    --dunamis-orange: 25 95% 53%;
-    --dunamis-light-blue: 213 50% 85%;
-    --dunamis-gray: 220 13% 91%;
+    /* Custom Dunamis Colors */
+    --dunamis-primary: 200 100% 28%;
+    --dunamis-accent: 25 95% 53%;
+    --dunamis-dark: 200 100% 20%;
   }
 
   .dark {
@@ -76,36 +74,47 @@
 }
 
 @layer utilities {
-  .bg-dunamis-navy {
-    background-color: hsl(var(--dunamis-navy));
+  .dunamis-primary {
+    @apply bg-[hsl(var(--dunamis-primary))];
   }
-  .bg-dunamis-blue {
-    background-color: hsl(var(--dunamis-blue));
+  .dunamis-accent {
+    @apply bg-[hsl(var(--dunamis-accent))];
   }
-  .bg-dunamis-orange {
-    background-color: hsl(var(--dunamis-orange));
+  .dunamis-dark {
+    @apply bg-[hsl(var(--dunamis-dark))];
   }
-  .bg-dunamis-light-blue {
-    background-color: hsl(var(--dunamis-light-blue));
+  .text-dunamis-primary {
+    @apply text-[hsl(var(--dunamis-primary))];
   }
-  .bg-dunamis-gray {
-    background-color: hsl(var(--dunamis-gray));
+  .text-dunamis-accent {
+    @apply text-[hsl(var(--dunamis-accent))];
   }
-  .text-dunamis-navy {
-    color: hsl(var(--dunamis-navy));
+  .text-dunamis-dark {
+    @apply text-[hsl(var(--dunamis-dark))];
   }
-  .text-dunamis-blue {
-    color: hsl(var(--dunamis-blue));
+  .bg-dunamis-primary {
+    @apply bg-[hsl(var(--dunamis-primary))];
   }
-  .text-dunamis-orange {
-    color: hsl(var(--dunamis-orange));
+  .bg-dunamis-accent {
+    @apply bg-[hsl(var(--dunamis-accent))];
   }
-  .border-dunamis-navy {
-    border-color: hsl(var(--dunamis-navy));
+  .bg-dunamis-dark {
+    @apply bg-[hsl(var(--dunamis-dark))];
   }
-  .border-dunamis-orange {
-    border-color: hsl(var(--dunamis-orange));
+  .border-dunamis-primary {
+    @apply border-[hsl(var(--dunamis-primary))];
   }
+  .border-dunamis-accent {
+    @apply border-[hsl(var(--dunamis-accent))];
+  }
+  .border-dunamis-dark {
+    @apply border-[hsl(var(--dunamis-dark))];
+  }
+}
+
+/* Grid pattern for hero background */
+.bg-grid-white\/\[0\.05\] {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
 }
 
 /* Smooth scrolling */
@@ -123,10 +132,10 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--dunamis-navy));
+  background: hsl(var(--dunamis-primary));
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--dunamis-blue));
+  background: hsl(var(--dunamis-dark));
 }
