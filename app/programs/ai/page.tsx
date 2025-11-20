@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: "Learn AI & Machine Learning Online in Nigeria",
     description: "Join Dunamis Edtech to master AI and Machine Learning through hands-on training and mentorship.",
     url: "https://www.dunamisedtech.com/ai/",
-    type: "course",
+    type: "website", // Changed from "course" to valid "website" type
     images: [
       {
         url: "https://www.dunamisedtech.com/images/ai-course.jpg",

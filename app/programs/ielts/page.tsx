@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description:
       "Join Dunamis Edtech for expert-led IELTS training with flexible learning options and full test prep support.",
     url: "https://www.dunamisedtech.com/ielts/",
-    type: "course",
+    type: "website", // Changed from "course" to valid "website" type
     images: [
       {
         url: "https://www.dunamisedtech.com/images/ielts-course.jpg",

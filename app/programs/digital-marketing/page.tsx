@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description:
       "Join Dunamis Edtech's Digital Marketing course to master SEO, Social Media Marketing, and Google Ads.",
     url: "https://www.dunamisedtech.com/digital-marketing/",
-    type: "course",
+    type: "website", // Changed from "course" to valid "website" type
     images: [
       {
         url: "https://www.dunamisedtech.com/images/digital-marketing.jpg",

@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description:
       "Join Dunamis Edtech and become a web developer. Learn coding, front-end, and back-end development online.",
     url: "https://www.dunamisedtech.com/coding/",
-    type: "course",
+    type: "website", // Changed from "course" to valid "website" type
     images: [
       {
         url: "https://www.dunamisedtech.com/images/coding-course.jpg",
