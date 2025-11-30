@@ -58,16 +58,16 @@ export default function TestimonialsSection() {
               </div>
 
               <CardContent className="p-8">
-                {/* Rating Stars */}
+                {/* Rating Stars - Use Array.from for better SSR compatibility */}
                 <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
+                  {Array.from({ length: testimonial.rating }, (_, i) => (
                     <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
 
                 {/* Testimonial Content */}
                 <blockquote className="text-[#666666] text-base leading-relaxed mb-6 italic">
-                  "{testimonial.content}"
+                  &ldquo;{testimonial.content}&rdquo;
                 </blockquote>
 
                 {/* Author Info */}
@@ -78,7 +78,8 @@ export default function TestimonialsSection() {
                     className="w-12 h-12 rounded-full object-cover mr-4"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement
-                      target.src = "/placeholder.svg?height=48&width=48&text=" + testimonial.name.charAt(0)
+                      target.src =
+                        "/placeholder.svg?height=48&width=48&query=" + encodeURIComponent(testimonial.name.charAt(0))
                     }}
                   />
                   <div>
